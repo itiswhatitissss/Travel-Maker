@@ -1,4 +1,4 @@
-package com.example.travelmaker;
+package org.zerock.travelmaker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.example.travelmaker;
+package org.zerock.travelmaker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
