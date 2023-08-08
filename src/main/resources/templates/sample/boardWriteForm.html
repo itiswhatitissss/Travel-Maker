@@ -1,0 +1,77 @@
+<!--게시물작성 view-->
+<!doctype html>
+<html>
+<style>
+    /* write.css */
+    body{
+        background-color: #FFF7DE;
+        vertical-align: middle;
+    }
+
+    td{
+        vertical-align: bottom;
+    }
+
+    .content-from{
+        margin-top: 160px;
+    }
+
+    .title-box{
+        margin-top: 5px;
+        width: 670px;
+        height: 50px;
+        border: 3px solid black;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    .image-btn-box{
+        margin-left: 310px;
+        background: none;
+        border: 0px;
+    }
+
+    .save-btn-box{
+        width: 220px;
+        height: 53px;
+        border: 3px solid black;
+        background-color: #FFDE82;
+        border-radius: 5px;
+    }
+
+    .content-box{
+        margin-top: 28px;
+        width: 1290px;
+        height: 450px;
+        border: 3px solid black;
+        font-size: 16px;
+    }
+</style>
+<head>
+    <title>write page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="write.css">
+</head>
+<body>
+
+<center>
+    <from action="main.php" method="post">
+        <table class="content-from">
+            <tr>
+                <td colspan="3"></a></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="title" placeholder="제목" class="title-box"></td>
+                <td><button id="image-btn" type="submit" class ="image-btn-box"><img src="images/image_btn.png"></button></td>
+                <td><button id="save-btn" class="save-btn-box">저장하기</button></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <textarea name="content" cols="105" rows="20" placeholder="내용" class="content-box"></textarea>
+                </td>
+            </tr>
+        </table>
+        </form>
+</center>
+</body>
+</html>

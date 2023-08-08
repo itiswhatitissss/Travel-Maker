@@ -1,0 +1,71 @@
+<!--로그인 view-->
+<!doctype html>
+<html>
+<style>
+    /*login.css*/
+    body{
+        background-color: #FFF7DE;
+    }
+
+    #logo {
+        border:1px dashed;
+        padding:10px;
+        width: 370.5px;
+        height: 86px;
+        margin-top: 300px; }
+
+    .img-size{
+        width: 370.5px;
+        height: 86px;
+        margin-top: 300px;
+    }
+
+    .login-form{
+        margin: 0 auto;
+    }
+
+    .input-btn{
+        background-color: white;
+        width: 460px;
+        height: 48px;
+        border: 3px solid black;
+        margin: 7px;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+
+    .login-btn{
+        background-color: #FFDE82;
+        width: 460px;
+        height: 56px;
+        border: 3px solid black;
+        margin: 7px;
+        margin-top: 11px;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+</style>
+<head>
+    <title>login page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div>
+    <center>
+        <div id="logo"> logo </div>
+        <from method="post" class="login-from" action="login.php">
+            <div>
+                <input id = "id" placeholder="ID" class="input-btn" type="text">
+            </div>
+            <div>
+                <input id = "pw" placeholder="PW" class="input-btn" type="password">
+            </div>
+            <div>
+                <input class="login-btn" value="로그인" type="submit">
+            </div>
+        </from>
+    </center>
+</div>
+</boody>
+</html>

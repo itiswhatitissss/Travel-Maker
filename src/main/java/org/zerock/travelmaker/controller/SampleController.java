@@ -23,11 +23,18 @@ public class SampleController {
     @Autowired
     private SampleMapper sampleMapper;
 
-    @GetMapping("/ex")
-    public void getBoards(Model model){
-        List<SampleDomain> list = sampleMapper.getBoards();
-        model.addAttribute("list",list);
-        }
+    @GetMapping("/main")
+    public void main() {
     }
+
+    @GetMapping("/login")
+    public void login() {}
+
+    @GetMapping("/boardWriteForm")
+    public void boardWriteForm() {}
+
+    @GetMapping("/friendSearchForm")
+    public void friendSearchForm() {}
+}
 
 
