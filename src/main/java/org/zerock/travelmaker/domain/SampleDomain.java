@@ -1,13 +1,22 @@
 package org.zerock.travelmaker.domain;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@Builder
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class SampleDomain {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bno;
-    private String name;
-    private String table1col;
-    private String email;
-    private String address;
 
+    private String name;
 }
