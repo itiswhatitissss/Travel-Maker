@@ -13,22 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 @ToString(exclude = "pno")
 public class Party{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pno")
     private Long pno;
 
-    @Column(length = 50,nullable = false)
     private String partyName;
+    private String QR;
 
-    @ManyToOne
-    @JoinColumn(name="uno")
-    private UserLogin userLogin;
-
-    @OneToMany(mappedBy = "party1")
-    private List<User> users1 = new ArrayList<>();
-
-    @OneToMany(mappedBy = "party2")
-    private List<User> users2 = new ArrayList<>();
+    @OneToMany(mappedBy = "party")
+    private List<UserParty> userParties = new ArrayList<>();
 
 }

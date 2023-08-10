@@ -3,26 +3,34 @@ package org.zerock.travelmaker.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "userPK")
+@ToString(exclude = "uno")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userPK;
+    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="uno")
+    private Long uno;
+    private String id;
+    private String name;
+    private String password;
+    private String email;
+    private String address;
+    private String phone;
 
-    @ManyToOne
-    @JoinColumn(name = "uno",referencedColumnName = "uno")
-    private Party party1;
+    @OneToMany(mappedBy = "uno")
+    private List<Friend> friends1 = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "pno",referencedColumnName = "pno")
-    private Party party2;
+    @OneToMany(mappedBy = "fno")
+    private List<Friend> friends2 = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<UserParty> userParties = new ArrayList<>();
 
 }

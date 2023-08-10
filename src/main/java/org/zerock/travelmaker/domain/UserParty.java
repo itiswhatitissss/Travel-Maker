@@ -3,24 +3,25 @@ package org.zerock.travelmaker.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "friendPK")
-public class Friend implements Serializable {
+@ToString(exclude = "userpartyPK")
+public class UserParty {
 
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long friendPK;
+    private Long userpartyPK;
 
     @ManyToOne
     @JoinColumn(name = "uno",referencedColumnName = "uno")
-    private User uno;
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "fno",referencedColumnName = "uno")
-    private User fno;
+    @JoinColumn(name = "pno",referencedColumnName = "pno")
+    private Party party;
+
+
 }
