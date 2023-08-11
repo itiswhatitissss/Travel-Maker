@@ -10,12 +10,16 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "GPlno")
-public class Gallery implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="plno")
-    private Long GPlno;
+@ToString(exclude = "galleryPK")
+public class Gallery{
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="galleryPK")
+    private Long galleryPK;
+
+    @ManyToOne
+    @JoinColumn(name = "plno")
+    private Plan plnoByGallery;
 
     private String image;
 }

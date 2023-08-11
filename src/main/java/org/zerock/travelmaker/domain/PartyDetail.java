@@ -10,16 +10,18 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "pdPno")
-public class PartyDetail implements Serializable {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "pno")
-    private Party pdPno;
+@ToString(exclude = "partyDetailPK")
+public class PartyDetail{
 
-    private String QR;
+    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long partyDetailPK;
 
     @ManyToOne
     @JoinColumn(name = "plno")
-    private Plan pdPlno;
+    private Plan plnoByPartyDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "pno")
+    private Party pnoByPartyDetail;
+
 }

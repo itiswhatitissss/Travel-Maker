@@ -21,7 +21,13 @@ public class Party{
     private String partyName;
     private String QR;
 
-    @OneToMany(mappedBy = "party")
+    @OneToMany(mappedBy = "pnoByUserParty")
     private List<UserParty> userParties = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pnoByPartyDetail")
+    private List<PartyDetail> partyDetails = new ArrayList<>();
+
+    @OneToOne(mappedBy = "pnoByVote")
+    private Vote votes;
 
 }

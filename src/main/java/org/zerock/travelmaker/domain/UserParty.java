@@ -17,11 +17,11 @@ public class UserParty {
 
     @ManyToOne
     @JoinColumn(name = "uno",referencedColumnName = "uno")
-    private User user;
+    private User unoByUserParty;
 
     @ManyToOne
     @JoinColumn(name = "pno",referencedColumnName = "pno")
-    private Party party;
+    private Party pnoByUserParty;
 
 
 }

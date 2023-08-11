@@ -17,6 +17,7 @@ public class User {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="uno")
     private Long uno;
+
     private String id;
     private String name;
     private String password;
@@ -24,13 +25,16 @@ public class User {
     private String address;
     private String phone;
 
-    @OneToMany(mappedBy = "uno")
-    private List<Friend> friends1 = new ArrayList<>();
+    @OneToMany(mappedBy = "unoByFriend")
+    private List<Friend> friendsUNO = new ArrayList<>();
 
-    @OneToMany(mappedBy = "fno")
-    private List<Friend> friends2 = new ArrayList<>();
+    @OneToMany(mappedBy = "fnoByFriend")
+    private List<Friend> friendsFNO = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "unoByUserParty")
     private List<UserParty> userParties = new ArrayList<>();
+
+    @OneToMany(mappedBy = "unoByVoteOption")
+    private List<VoteOption> voteOptions = new ArrayList<>();
 
 }
