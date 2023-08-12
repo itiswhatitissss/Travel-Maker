@@ -11,16 +11,16 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "friendPK")
-public class Friend implements Serializable {
+public class Friend{
 
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long friendPK;
 
     @ManyToOne
     @JoinColumn(name = "uno",referencedColumnName = "uno")
-    private User uno;
+    private User unoByFriend;
 
     @ManyToOne
     @JoinColumn(name = "fno",referencedColumnName = "uno")
-    private User fno;
+    private User fnoByFriend;
 }

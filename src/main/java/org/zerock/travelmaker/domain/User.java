@@ -24,13 +24,13 @@ public class User {
     private String address;
     private String phone;
 
-    @OneToMany(mappedBy = "uno")
-    private List<Friend> friends1 = new ArrayList<>();
+    @OneToMany(mappedBy = "unoByFriend")
+    private List<Friend> unofriends = new ArrayList<>();
 
-    @OneToMany(mappedBy = "fno")
-    private List<Friend> friends2 = new ArrayList<>();
+    @OneToMany(mappedBy = "fnoByFriend")
+    private List<Friend> fnofriends = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "unoByUserParty")
     private List<UserParty> userParties = new ArrayList<>();
 
 }

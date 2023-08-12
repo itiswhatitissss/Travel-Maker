@@ -10,11 +10,10 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "VoPlno")
-public class Vote implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="plno")
-    private Long VoPlno;
+@ToString(exclude = "vno")
+public class Vote{
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long vno;
 
 }
