@@ -23,6 +23,10 @@ public class SampleController {
     @Autowired
     private SampleMapper sampleMapper;
 
+    @GetMapping("/home")
+    public void home() {
+    }
+
     @GetMapping("/main")
     public void main() {
     }
