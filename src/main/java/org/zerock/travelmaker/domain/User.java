@@ -33,4 +33,7 @@ public class User {
     @OneToMany(mappedBy = "unoByUserParty")
     private List<UserParty> userParties = new ArrayList<>();
 
+    @OneToMany(mappedBy = "unoByVoteOption")
+    private List<VoteOption> voteOptions = new ArrayList<>();
+
 }

@@ -40,4 +40,7 @@ public class Plan{
 
     @OneToOne(mappedBy = "plnoByScheduler")
     private Scheduler scheduler;
+
+    @OneToOne(mappedBy = "plnoByVote")
+    private Vote vote;
 }

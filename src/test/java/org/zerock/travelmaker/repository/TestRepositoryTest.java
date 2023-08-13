@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.travelmaker.domain.*;
+import org.zerock.travelmaker.domain.VoteOption;
 
 @SpringBootTest
 @Log4j2
@@ -28,6 +29,10 @@ class TestRepositoryTest {
     private SchedulerRepositroy schedulerRepositroy;
     @Autowired
     private ScheudlerDetailRepository scheudlerDetailRepository;
+    @Autowired
+    private VoteRepository voteRepository;
+    @Autowired
+    private VoteOptionRepository voteOptionRepository;
 
     @Test
     public void test1() {
@@ -58,6 +63,12 @@ class TestRepositoryTest {
 
         SchedulerDetail schedulerDetail = SchedulerDetail.builder().snoBySchedulerDetail(scheduler).content("재밌게 놀자 !").build();
         scheudlerDetailRepository.save(schedulerDetail);
+
+        Vote vote = Vote.builder().pnoByVote(party).plnoByVote(plan).vTitle("술 몇 병 살래").vCheck(1).vComplete(1).vCount(3).build();
+        voteRepository.save(vote);
+
+        VoteOption voteOption = VoteOption.builder().vnoByVoteOption(vote).unoByVoteOption(user).voOption("띠용").build();
+        voteOptionRepository.save(voteOption);
     }
 
     @Test
