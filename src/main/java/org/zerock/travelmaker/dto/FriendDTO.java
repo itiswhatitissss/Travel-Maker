@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FriendDTO {
 
-    private Long uno;
-    private Long fno;
+    private Long friendPK;
+    private Long unoByFriend;
+    private Long fnoByFriend;
 }

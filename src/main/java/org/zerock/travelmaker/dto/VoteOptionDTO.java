@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentDTO {
-    private Long plno;
-    private int totalPrice;
-    private int member;
+public class VoteOptionDTO {
+
+    private Long voteoptionPK;
+    private Long vnoByVoteOption;
+    private Long unoByVoteOption;
+    private String voOption;
 }

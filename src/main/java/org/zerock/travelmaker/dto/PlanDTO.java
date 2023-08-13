@@ -11,8 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlanDTO {
+
     private Long plno;
-    private Long pno;
     private Date start;
     private Date end;
     private String title;

@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PartyDetailDTO {
-    private Long pno;
-    private String QR;
-    private Long plno;
+
+    private Long partydetailPK;
+    private Long pnoByPartyDetail;
+    private Long plnoByPartyDetail;
 }

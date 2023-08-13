@@ -11,7 +11,11 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SchedulerDTO {
-    private Long sno;
-    private Long plnoByScheduler;
+public class SchedulerDetailDTO {
+
+    private Long schdetailPK;
+    private Long snoBySchedulerDetail;
+    private String content;
+    private Date startTime;
+    private Date endTime;
 }
