@@ -30,4 +30,5 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error("Error fetching item details:", error);
             });
     }
+
 });
