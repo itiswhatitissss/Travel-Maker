@@ -9,5 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 @RequestMapping("/travelmaker")
 @RequiredArgsConstructor
-public class halimController {
+public class userController {
+
 }

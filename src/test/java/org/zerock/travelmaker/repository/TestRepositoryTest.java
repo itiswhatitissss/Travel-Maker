@@ -55,7 +55,7 @@ class TestRepositoryTest {
         PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(party).plnoByPartyDetail(plan).build();
         partyDetailRepository.save(partyDetail); //"해병대전우회" 파티에 강원도삼척여행 플랜 생성
 
-        Gallery gallery = Gallery.builder().image("전우회단체사진").plnoByGallery(plan).build();
+        Gallery gallery = Gallery.builder().title("전우회단체사진").plnoByGallery(plan).build();
         galleryRepository.save(gallery); //"해병대전우회" + "강원도삼척여행" 전우회단체사진 게시
 
         Scheduler scheduler = Scheduler.builder().plnoByScheduler(plan).build();

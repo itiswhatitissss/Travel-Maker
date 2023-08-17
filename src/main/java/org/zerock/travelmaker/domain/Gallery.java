@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Builder
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "galleryPK")
@@ -16,7 +16,9 @@ public class Gallery{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long galleryPK;
 
-    private String image;
+    private String title;
+    private String filename;
+    private String filepath;
 
     @ManyToOne
     @JoinColumn(name="plno")
