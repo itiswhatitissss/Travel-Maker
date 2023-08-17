@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Split Screen Example</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="split left">
+    <h2>Party List</h2>
+    <div class="scrollable">
+        <ul class="item-list">
+            <li data-id="1">Party name 1</li>
+            <li data-id="2">Party name 2</li>
+            <li data-id="3">Party name 3</li>
+            <li data-id="4">Party name 4</li>
+            <li data-id="5">Party name 5</li>
+            <li data-id="6">Party name 6</li>
+            <li data-id="7">Party name 7</li>
+        </ul>
+    </div>
+</div>
+<div class="split right">
+    <h2>Party Plan</h2>
+    <div class="scrollable" id="right-content">
+        <div class="split right" th:style="'background-image: url(' + ${backgroundImagePath} + ');'">
+            <h2>Party Plan</h2>
+            <!-- ... -->
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
