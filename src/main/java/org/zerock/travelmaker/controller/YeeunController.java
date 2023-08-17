@@ -12,7 +12,7 @@ import org.zerock.travelmaker.mapper.SampleMapper;
 @Log4j2
 @RequestMapping("/travelmaker")
 @RequiredArgsConstructor
-public class SampleController {
+public class YeeunController {
     @Autowired
     private SampleMapper sampleMapper;
 

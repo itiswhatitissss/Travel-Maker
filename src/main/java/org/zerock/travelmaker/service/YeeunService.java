@@ -4,6 +4,8 @@ import org.zerock.travelmaker.domain.SampleDomain;
 
 import java.util.List;
 
-public interface SampleService {
+public interface YeeunService {
     List<SampleDomain> getBoards();
+
+    void register();
 }

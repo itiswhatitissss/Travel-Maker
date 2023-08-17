@@ -8,11 +8,18 @@ import org.zerock.travelmaker.mapper.SampleMapper;
 import java.util.List;
 
 @Service
-public class SampleServiceImpl implements SampleService {
+public class YeeunServiceImpl implements YeeunService {
     @Autowired
     private SampleMapper sampleMapper;
     @Override
     public List<SampleDomain> getBoards() {
         return sampleMapper.getBoards();
     }
+
+    @Override
+    public void register() {
+
+    }
+
+
 }

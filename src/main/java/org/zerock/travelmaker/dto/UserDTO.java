@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.zerock.travelmaker.domain.User;
 
 @Data
 @Builder
@@ -18,4 +19,15 @@ public class UserDTO {
     private String address;
     private String phone;
 
+    public User toEntity() {
+        return User.builder()
+                .uno(uno)
+                .id(id)
+                .name(name)
+                .password(password)
+                .email(email)
+                .address(address)
+                .phone(phone)
+                .build();
+    }
 }
