@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Log4j2
-@RequestMapping("/main")
+@RequestMapping("/travelmaker/main/*")
 @RequiredArgsConstructor
 public class MainController {
 
     @GetMapping("/list")
     public void mainList(){
         //예은아 여기
+    }
+
+    @GetMapping("/galleryList")
+    public void gallery(){
+
     }
 }
