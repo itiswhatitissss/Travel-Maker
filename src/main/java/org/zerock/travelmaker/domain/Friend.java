@@ -3,7 +3,6 @@ package org.zerock.travelmaker.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Builder
@@ -18,9 +17,9 @@ public class Friend{
 
     @ManyToOne
     @JoinColumn(name = "uno",referencedColumnName = "uno")
-    private User unoByFriend;
+    private Users unoByFriend;
 
     @ManyToOne
     @JoinColumn(name = "fno",referencedColumnName = "uno")
-    private User fnoByFriend;
+    private Users fnoByFriend;
 }

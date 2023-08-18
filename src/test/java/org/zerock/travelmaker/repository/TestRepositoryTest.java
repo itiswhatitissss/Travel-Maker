@@ -37,7 +37,7 @@ class TestRepositoryTest {
     @Test
     public void test1() {
 
-        User user = User.builder().id("pkmm").name("이성진").password("1234").email("naver").address("화서동").phone("01035").build();
+        Users user = Users.builder().id("pkmm").name("이성진").password("1234").email("naver").address("화서동").phone("01035").build();
         userRepository.save(user); //이성진 회원가입
 
         Friend friend = Friend.builder().fnoByFriend(user).unoByFriend(user).build();
@@ -73,7 +73,7 @@ class TestRepositoryTest {
 
     @Test
     public void test2(){
-        User user = User.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
+        Users user = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
         userRepository.save(user); //1. 이하림 회원가입
 
         UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(1L).get()).build();
@@ -82,7 +82,7 @@ class TestRepositoryTest {
 
     @Test
     public void test3(){
-        User user = User.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
+        Users user = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
         userRepository.save(user); //1. 노에은 회원가입
 
         Party party = Party.builder().partyName("한신가실분").QR("QRcode").build();

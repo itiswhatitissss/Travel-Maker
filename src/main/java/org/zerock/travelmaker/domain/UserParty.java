@@ -17,7 +17,7 @@ public class UserParty {
 
     @ManyToOne
     @JoinColumn(name = "uno",referencedColumnName = "uno")
-    private User unoByUserParty;
+    private Users unoByUserParty;
 
     @ManyToOne
     @JoinColumn(name = "pno",referencedColumnName = "pno")

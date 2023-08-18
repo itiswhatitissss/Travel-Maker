@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.zerock.travelmaker.domain.User;
+import org.zerock.travelmaker.domain.Users;
 
 @Data
 @Builder
@@ -19,8 +19,8 @@ public class UserDTO {
     private String address;
     private String phone;
 
-    public User toEntity() {
-        return User.builder()
+    public Users toEntity() {
+        return Users.builder()
                 .uno(uno)
                 .id(id)
                 .name(name)

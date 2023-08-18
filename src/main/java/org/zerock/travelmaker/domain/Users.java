@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "uno")
-public class User {
+public class Users {
 
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="uno")

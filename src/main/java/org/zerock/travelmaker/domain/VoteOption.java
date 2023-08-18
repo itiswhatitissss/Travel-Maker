@@ -21,7 +21,7 @@ public class VoteOption {
 
     @ManyToOne
     @JoinColumn(name="uno")
-    private User unoByVoteOption;
+    private Users unoByVoteOption;
 
     private String voOption;
 
