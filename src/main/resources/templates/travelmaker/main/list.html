@@ -10,23 +10,30 @@
 <div class="split left">
     <h2>Party List</h2>
     <div class="scrollable">
-        <ul class="item-list">
-            <li data-id="1">Party name 1</li>
-            <li data-id="2">Party name 2</li>
-            <li data-id="3">Party name 3</li>
-            <li data-id="4">Party name 4</li>
-            <li data-id="5">Party name 5</li>
-            <li data-id="6">Party name 6</li>
-            <li data-id="7">Party name 7</li>
+        <ul class="item-list" th:each="party: ${party}" >
+            <li data-id="1" th:text="${party.partyname}">
+                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}"/>
+            </li>
         </ul>
     </div>
 </div>
 <div class="split right">
     <h2>Party Plan</h2>
-    <div class="scrollable" id="right-content">
-        <div class="split right" th:style="'background-image: url(' + ${backgroundImagePath} + ');'">
-            <h2>Party Plan</h2>
-            <h2>사진</h2>
+    <div class="scrollable" id="right-content" th:each="plan: ${plan}">
+        <div class="split right" th:style="'background-image: url(' + ${plan.image} + ');'">
+            <h2 th:text="${plan.title}"></h2>
+            <h2 th:text="${plan.start}"></h2>
+            <div class="slideshow-container">
+                <div class="mySlides">
+                    <img th:src="@{/images/image1.jpg}" alt="Image Description" />
+                </div>
+                <div class="mySlides">
+                    <img th:src="@{/images/image2.jpg}" alt="Image Description" />
+                </div>
+                <!-- 추가 이미지들을 동일한 방식으로 삽입 -->
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
     </div>
 </div>
@@ -35,3 +42,27 @@
 <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+    }
+</script>
