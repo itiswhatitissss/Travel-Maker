@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 // 패키지명
-@MapperScan(value = "org.zerock.travelmaker", sqlSessionFactoryRef = "SqlSessionFactory")
+@MapperScan(value = "org.zerock.travelmaker.mapper", sqlSessionFactoryRef = "SqlSessionFactory")
 public class MyBatisConfig {
 
     @Value("${spring.datasource.mapper-locations}")

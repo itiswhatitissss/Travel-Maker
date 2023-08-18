@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zerock.travelmaker.service.LoginService;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,12 @@ public class MapperTests {
 
     @Autowired
     private MybatisMapper mybatisMapper;
+
+    @Autowired
+    private SampleMapper sampleMapper;
+
+    @Autowired
+    private LoginService loginService;
 
 //    @Test
 //    public void testGetList() {
@@ -30,4 +37,11 @@ public class MapperTests {
         List<Map<String,Object>> result =mybatisMapper.getPartyList(1L);
         System.out.println(result);
     }
+
+    @Test
+    public void testGetUser(){
+        Long uno = loginService.getUno("pkmm","1234");
+        System.out.println(uno);
+    }
+
 }

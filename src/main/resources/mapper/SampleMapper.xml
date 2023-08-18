@@ -6,4 +6,8 @@
         select * from board;
     </select>
 
+<!--    <select id="findUno" resultType="org.zerock.travelmaker.domain.Users">-->
+<!--        select uno from Users where id=#{id} and password=#{password}-->
+<!--    </select>-->
+
 </mapper>

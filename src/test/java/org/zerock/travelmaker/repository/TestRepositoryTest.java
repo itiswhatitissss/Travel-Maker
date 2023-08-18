@@ -99,4 +99,10 @@ class TestRepositoryTest {
         UserParty userParty = UserParty.builder().unoByUserParty(userRepository.findById(1L).get()).pnoByUserParty(partyRepository.findById(2L).get()).build();
         userPartyRepository.save(userParty); //이성진(uno=1)이 "한신가실분" 파티(pno=2) 참가
     }
+
+    @Test
+    public void test5() {
+        Long pkmm = userRepository.findUno("pkmm", "1234");
+        log.info(pkmm);
+    }
 }
