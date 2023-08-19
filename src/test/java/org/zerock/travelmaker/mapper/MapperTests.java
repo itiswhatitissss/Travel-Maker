@@ -35,13 +35,13 @@ public class MapperTests {
     @Test
     public void testGetPartyList(){
         List<Map<String,Object>> result =mybatisMapper.getPartyList(1L);
-        System.out.println(result);
+        log.info("resutl=================>"+ result);
     }
 
     @Test
     public void testGetUser(){
-        Long uno = loginService.getUno("pkmm","1234");
-        System.out.println(uno);
+        Long result = loginService.getUno("pkmm","1234");
+        log.info("resutl=================>"+ result);
     }
 
 }

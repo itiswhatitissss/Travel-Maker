@@ -25,16 +25,15 @@ public class UserController {
 
     @GetMapping("/login")
     public void login(){
-
     }
 
     @PostMapping("/login") //로그인페이지
-    public String  login( @RequestParam String id, @RequestParam String password, RedirectAttributes rttr) {
+    public String login( @RequestParam String id, @RequestParam String password, RedirectAttributes rttr) {
 
         log.info("id : "+id);
         log.info("pw : "+password);
 
-        Long uno =loginService.getUno(id, password);
+        Long uno = loginService.getUno(id, password);
 
         log.info("uno in controller " + uno);
 //        session.setAttribute("uno", uno);

@@ -19,6 +19,8 @@
 </div>
 <div class="split right">
     <h2>Party Plan</h2>
+    <button class="buttons" type="button" onclick="location.href='/travelmaker/main/plan'">plan 추가하러가기</button>
+
     <div class="scrollable" id="right-content" th:each="plan: ${plan}">
         <div class="split right" th:style="'background-image: url(' + ${plan.image} + ');'">
             <h2 th:text="${plan.title}"></h2>

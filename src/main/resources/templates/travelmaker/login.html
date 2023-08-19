@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>TravelMaker</title>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -62,7 +62,7 @@
                     <label for=""><input type="checkbox">아이디 상태유지</label>
                     <a href="#">비밀번호 찾기</a>
                 </div>
-                <!-- test -->
+                <!-- 아이디 비번 일치/불일치 확인 -->
                 <button class="btn" onclick="test()">로그인</button>
 
                 <div class="create-account">
@@ -104,21 +104,7 @@
     </div>
 </div>
 
-<script src="/js/index.js"></script>
-<!-- test -->
-<script>
-    function test() {
-        var emailtest = document.getElementById("email").value;
-        var passwordtest = document.getElementById("password").value;
+<script src="/js/login.js"></script>
 
-        if(emailtest=='test@gmail.com' && passwordtest=='1234'){
-            alert("로그인 성공.");
-            window.location.href("../travelmaker/loginSuccess.html");
-        }
-        else {
-            alert("로그인 실패. 다시 시도해주세요");
-        }
-    }
-</script>
 </body>
 </html>

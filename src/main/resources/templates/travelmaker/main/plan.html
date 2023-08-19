@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TravelMaker</title>
+</head>
+
+<body>
+<h1> plan LIST</h1>
+<button class="add-button" type="button" onclick="click_add()">plan 추가</button>
+
+<h1>Plan Details</h1>
+<div>
+    <!-- 고쳐야댐 -->
+    <div th:if="${planDTO}">
+        <p>타이틀: <span th:text="${planDTO.title}"></span></p>
+        <p>시작 날짜: <span th:text="${#dates.format(planDTO.start, 'yyyy-MM-dd')}"></span></p>
+        <p>종료 날짜: <span th:text="${#dates.format(planDTO.end, 'yyyy-MM-dd')}"></span></p>
+    </div>
+
+<!--    <div>-->
+<!--        <h2>Title: <span id="planTitle">Loading...</span></h2>-->
+<!--        <p>Start Date: <span id="planStart">Loading...</span></p>-->
+<!--        <p>End Date: <span id="planEnd">Loading...</span></p>-->
+<!--    </div>-->
+
+<!--    <script>-->
+<!--        // JavaScript를 이용하여 세션에서 데이터를 가져와서 HTML에 추가-->
+<!--        var planTitle = document.getElementById("planTitle");-->
+<!--        var planStart = document.getElementById("planStart");-->
+<!--        var planEnd = document.getElementById("planEnd");-->
+
+<!--        planTitle.innerText = sessionStorage.getItem("planTitle") || "No Title";-->
+<!--        planStart.innerText = sessionStorage.getItem("planStart") || "No Start Date";-->
+<!--        planEnd.innerText = sessionStorage.getItem("planEnd") || "No End Date";-->
+<!--    </script>-->
+</div>
+
+</body>
+
+<script>
+    //plan추가(팝업페이지로 이동):
+    function click_add() {
+        var url = "planPopup";
+        var name = "planPopup";
+        var option = "width:=300, height=300, left=100, top=50, location=no";
+        window.open(url, name, option);
+    };
+</script>
+</html>

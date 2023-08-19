@@ -1,12 +1,16 @@
 package org.zerock.travelmaker.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,11 +27,13 @@ public class Plan{
     @Column(name="plno")
     private Long plno;
 
-    @Column(name="start", updatable = true)
-    private Date start;
+    //    @Column(name="start", updatable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private LocalDate start;
 
-    @Column(name="end", updatable = true)
-    private Date end;
+    //    @Column(name="end", updatable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private LocalDate end;
 
     @Column(length = 50, nullable = false)
     private String title;
