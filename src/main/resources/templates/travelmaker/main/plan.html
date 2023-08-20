@@ -5,7 +5,7 @@
     <title>TravelMaker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
+<div th:insert="~{header :: headerFragment}"></div> <!--헤더 가지고 온 코드 -->
 <body>
 <h1> plan LIST</h1>
 <button class="add-button" type="button" onclick="click_add()">plan 추가</button>
@@ -46,35 +46,35 @@
 </div>
 
 <!--캐러셀 시작-->
-<div id="carouselExampleCaptions" class="carousel slide">
-    <div class="carousel-indicators">
-        <!-- 캐러셀 인디케이터 동적으로 생성 -->
-        <th:block th:each="data, index : ${planDTO}">
-            <button type="button" data-bs-target="#carouselExampleCaptions" th:data-bs-slide-to="${index}" th:class="${index == 0} ? 'active' : ''"></button>
-        </th:block>
-    </div>
-    <div class="carousel-inner">
-        <!-- 캐러셀 항목 동적으로 생성 -->
-        <th:block th:each="data, index : ${planDTO}">
-            <div th:class="${index == 0 ? 'carousel-item active' : 'carousel-item'}">
+<!--<div id="carouselExampleCaptions" class="carousel slide">-->
+<!--    <div class="carousel-indicators">-->
+<!--        &lt;!&ndash; 캐러셀 인디케이터 동적으로 생성 &ndash;&gt;-->
+<!--        <th:block th:each="data, index : ${planDTO}">-->
+<!--            <button type="button" data-bs-target="#carouselExampleCaptions" th:data-bs-slide-to="${index}" th:class="${index == 0} ? 'active' : ''"></button>-->
+<!--        </th:block>-->
+<!--    </div>-->
+<!--    <div class="carousel-inner">-->
+<!--        &lt;!&ndash; 캐러셀 항목 동적으로 생성 &ndash;&gt;-->
+<!--        <th:block th:each="data, index : ${planDTO}">-->
+<!--            <div th:class="${index == 0 ? 'carousel-item active' : 'carousel-item'}">-->
 <!--                <img th:src="${data.img}" class="d-block w-100" alt="...">-->
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 th:text="${data.title}"></h5>
-                    <p th:text="${data.start}"></p>
-                    <p th:text="${data.end}"></p>
-                </div>
-            </div>
-        </th:block>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+<!--                <div class="carousel-caption d-none d-md-block">-->
+<!--                    <h5 th:text="${data.title}"></h5>-->
+<!--                    <p th:text="${data.start}"></p>-->
+<!--                    <p th:text="${data.end}"></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </th:block>-->
+<!--    </div>-->
+<!--    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">-->
+<!--        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--        <span class="visually-hidden">Previous</span>-->
+<!--    </button>-->
+<!--    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">-->
+<!--        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--        <span class="visually-hidden">Next</span>-->
+<!--    </button>-->
+<!--</div>-->
 <!--캐러셀 끝-->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
