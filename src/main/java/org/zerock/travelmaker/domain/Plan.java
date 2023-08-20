@@ -49,4 +49,7 @@ public class Plan{
 
     @OneToOne(mappedBy = "plnoByVote")
     private Vote vote;
+
+    @Column
+    private String img;
 }

@@ -53,7 +53,7 @@ class TestRepositoryTest {
         UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(party).build();
         userPartyRepository.save(userParty); // 이성진 + "해병대전우회" 파티 참가
 
-        Plan plan = Plan.builder().title("강원도삼척여행").build();
+        Plan plan = Plan.builder().title("강원도삼척여행").img("https://www.google.com/url?sa=i&url=https%3A%2F%2Fbrunch.co.kr%2F%40playwings%2F24&psig=AOvVaw1j0QHg7_wtvpOti2fQRF07&ust=1692595233921000&source=images&cd=vfe&opi=89978449&ved=0CA4QjRxqFwoTCPjci7a_6oADFQAAAAAdAAAAABAT").build();
         planRepository.save(plan); //강원도삼척여행 생성
 
         PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(party).plnoByPartyDetail(plan).build();
@@ -73,36 +73,39 @@ class TestRepositoryTest {
 
         VoteOption voteOption = VoteOption.builder().vnoByVoteOption(vote).unoByVoteOption(user).voOption("띠용").build();
         voteOptionRepository.save(voteOption);
+
+        Users user1 = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
+        userRepository.save(user1); //1. 이하림 회원가입
+
+        UserParty userParty1 = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(1L).get()).build();
+        userPartyRepository.save(userParty1); //2. 이하림 "양양가실분" 파티 합류
+
+        Users user2 = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
+        userRepository.save(user2); //1. 노에은 회원가입
+
+        Party party2 = Party.builder().partyName("한신가실분").QR("QRcode").build();
+        partyRepository.save(party2); //2. "한신가실분" 파티 생성
+
+        UserParty userParty2 = UserParty.builder().unoByUserParty(user).pnoByUserParty(party).build();
+        userPartyRepository.save(userParty2); //3. 노예은 + "한신가실분" 파티 참가
+
+        UserParty userParty3 = UserParty.builder().unoByUserParty(userRepository.findById(1L).get()).pnoByUserParty(partyRepository.findById(2L).get()).build();
+        userPartyRepository.save(userParty3); //이성진(uno=1)이 "한신가실분" 파티(pno=2) 참가
+
     }
 
     @Test
     public void test2(){
-        Users user = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
-        userRepository.save(user); //1. 이하림 회원가입
 
-        UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(1L).get()).build();
-        userPartyRepository.save(userParty); //2. 이하림 "양양가실분" 파티 합류
     }
 
     @Test
     public void test3(){
-        Users user = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
-        userRepository.save(user); //1. 노에은 회원가입
 
-        Party party = Party.builder().partyName("한신가실분").QR("QRcode").build();
-        partyRepository.save(party); //2. "한신가실분" 파티 생성
-
-        UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(party).build();
-        userPartyRepository.save(userParty); //3. 노예은 + "한신가실분" 파티 참가
-
-        Friend friend = Friend.builder().fnoByFriend(user).unoByFriend(user).build();
-        friendRepository.save(friend);
     }
     @Test
     public void test4(){
-        UserParty userParty = UserParty.builder().unoByUserParty(userRepository.findById(1L).get()).pnoByUserParty(partyRepository.findById(2L).get()).build();
-        userPartyRepository.save(userParty); //이성진(uno=1)이 "한신가실분" 파티(pno=2) 참가
-    }
+       }
 
     @Test
     public void test5() {

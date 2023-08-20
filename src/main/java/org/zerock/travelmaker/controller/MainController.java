@@ -35,7 +35,7 @@ public class MainController {
 //        model.addAttribute("party",partyList);
     }
 
-    @GetMapping("/galleryList")
+    @GetMapping("/test")
     public void gallery(){
 
     }
