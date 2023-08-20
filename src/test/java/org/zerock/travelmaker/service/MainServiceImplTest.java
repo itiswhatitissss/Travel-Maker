@@ -46,7 +46,7 @@ class MainServiceImplTest {
 
     @Test
     public void testReadOne(){
-        PlanDTO planDTO = mainService.readOne(2L);
+        PlanDTO planDTO = mainService.readOne(1L);
         log.info("planDTO : " + planDTO);
     }
 

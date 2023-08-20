@@ -11,11 +11,10 @@
 
 <h1>Plan Details</h1>
 <div>
-    <!-- 고쳐야댐 -->
     <div th:if="${planDTO}">
-        <p>타이틀: <span th:text="${planDTO.title}"></span></p>
-        <p>시작 날짜: <span th:text="${#dates.format(planDTO.start, 'yyyy-MM-dd')}"></span></p>
-        <p>종료 날짜: <span th:text="${#dates.format(planDTO.end, 'yyyy-MM-dd')}"></span></p>
+        <p>타이틀: <span th:text="${planTitle}"></span></p>
+        <p>시작 날짜: <span th:text="${planStart}"></span></p>
+        <p>종료 날짜: <span th:text="${planEnd}"></span></p>
     </div>
 
 <!--    <div>-->

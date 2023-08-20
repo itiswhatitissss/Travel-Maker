@@ -44,6 +44,9 @@ public class MainController {
     public void plan(Long plno, Model model){
         PlanDTO planDTO = mainService.readOne(plno);
         model.addAttribute("planDTO", planDTO);
+        model.addAttribute("planTitle", planDTO.getTitle());
+        model.addAttribute("planStart", planDTO.getStart());
+        model.addAttribute("planEnd", planDTO.getEnd());
     }
 
 //    @GetMapping("/plan")
