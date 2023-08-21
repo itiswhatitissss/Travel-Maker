@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.travelmaker.mapper.MybatisMapper">
 
-    <select id="getBoards" resultType="org.zerock.travelmaker.domain.SampleDomain">
-        select * from board;
-    </select>
 
     <select id="getPartyList" resultType="map" parameterType="Long">
         select party.pno, party_name from user_party join party on user_party.pno = party.pno where uno = #{uno}
     </select>
+
+    <select id="getPlanList" resultType="map" parameterType="Long">
+        select plan.plno, plan.title, plan.start, plan.end, plan.img from party join party_detail on party.pno = party_detail.pno join plan on party_detail.plno = plan.plno where party.pno= #{pno}
+    </select>
+
 
 </mapper>

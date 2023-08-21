@@ -41,13 +41,10 @@ public class MainController {
 
     }
 
-    @GetMapping("/plan") //http://localhost:8383/travelmaker/main/plan?plno=1 으로 치면 나오긴함
-    public void plan(Long plno, Model model){
-        PlanDTO planDTO = mainService.readOne(plno);
-        model.addAttribute("planDTO", planDTO);
-        model.addAttribute("planTitle", planDTO.getTitle());
-        model.addAttribute("planStart", planDTO.getStart());
-        model.addAttribute("planEnd", planDTO.getEnd());
+    @GetMapping("/plan")
+    public void plan(Long pno, Model model){
+        List<Map<String,Object>> result = mainService.getPlan(pno);
+        model.addAttribute("planDTO",result);
     }
 
 //    @GetMapping("/plan")

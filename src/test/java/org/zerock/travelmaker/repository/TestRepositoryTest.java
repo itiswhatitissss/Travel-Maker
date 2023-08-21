@@ -51,22 +51,22 @@ class TestRepositoryTest {
             Date endDate2 = new Date(dateFormat.parse("2022-09-30").getTime());
 
             Plan plan = Plan.builder()
-                    .title("해병대전우회")
+                    .title("해병대정기모임 1회")
                     .start(startDate.toLocalDate())
                     .end(endDate.toLocalDate())
-                    .img("")
+                    .img("단체사진")
                     .build();
             Plan plan1 = Plan.builder()
                     .title("308호 인계동 정모")
-                    .start(startDate.toLocalDate())
-                    .end(endDate.toLocalDate())
-                    .img("")
+                    .start(startDate1.toLocalDate())
+                    .end(endDate1.toLocalDate())
+                    .img("인생네컷")
                     .build();
             Plan plan2 = Plan.builder()
                     .title("308호 여름휴가")
-                    .start(startDate.toLocalDate())
-                    .end(endDate.toLocalDate())
-                    .img("")
+                    .start(startDate2.toLocalDate())
+                    .end(endDate2.toLocalDate())
+                    .img("러블리펜션앞에서")
                     .build();
 
             planRepository.save(plan);
@@ -112,7 +112,7 @@ class TestRepositoryTest {
         Users user1 = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
         userRepository.save(user1); //이하림 회원가입
 
-        UserParty userParty1 = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(1L).get()).build();
+        UserParty userParty1 = UserParty.builder().unoByUserParty(user1).pnoByUserParty(partyRepository.findById(1L).get()).build();
         userPartyRepository.save(userParty1); // 이하림 "해병대전우회" 파티 합류
 
         Users user2 = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
@@ -121,10 +121,10 @@ class TestRepositoryTest {
         Party party2 = Party.builder().partyName("308호 모임").QR("QRcode").build();
         partyRepository.save(party2); //"308호 모임" 파티 생성
 
-        UserParty userParty2 = UserParty.builder().unoByUserParty(user).pnoByUserParty(party2).build();
+        UserParty userParty2 = UserParty.builder().unoByUserParty(user2).pnoByUserParty(party2).build();
         userPartyRepository.save(userParty2); //노예은 + "308호 모임" 파티 참가
 
-        UserParty userParty3 = UserParty.builder().unoByUserParty(userRepository.findById(1L).get()).pnoByUserParty(partyRepository.findById(2L).get()).build();
+        UserParty userParty3 = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(2L).get()).build();
         userPartyRepository.save(userParty3); //이성진이 "308호 모임" 파티(pno=2) 참가
 
 

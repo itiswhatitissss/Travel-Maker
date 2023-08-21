@@ -33,9 +33,15 @@ public class MapperTests {
 //    }
 
     @Test
-    public void testGetPartyList(){
+    public void testGetPartyList(){ //파티 리스트
         List<Map<String,Object>> result =mybatisMapper.getPartyList(1L);
         log.info("resutl=================>"+ result);
+    }
+
+    @Test
+    public void testGetPlanList(){ //플랜 리스트
+        List<Map<String,Object>> result = mybatisMapper.getPlanList(2L);
+        log.info("result==============>"+ result);
     }
 
     @Test

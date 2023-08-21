@@ -10,4 +10,6 @@ import java.util.Map;
 @Repository
 public interface MybatisMapper {
     public List<Map<String,Object>> getPartyList(Long uno);
+    public List<Map<String,Object>> getPlanList(Long pno);
+
 }

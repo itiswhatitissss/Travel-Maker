@@ -31,6 +31,12 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
+    public List<Map<String, Object>> getPlan(Long pno) {
+        List<Map<String,Object>> result = mybatisMapper.getPlanList(pno);
+        return result;
+    }
+
+    @Override
     public Long planRegister(PlanDTO planDTO) {
         Plan plan = modelMapper.map(planDTO, Plan.class);
         Long plno = planRepository.save(plan).getPlno();

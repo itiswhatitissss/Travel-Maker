@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface MainService {
     List<Map<String,Object>> getParty(Long uno);
 
+    List<Map<String,Object>> getPlan(Long pno);
+
     //plan
     Long planRegister(PlanDTO planDTO);
 
