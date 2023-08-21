@@ -2,6 +2,7 @@ package org.zerock.travelmaker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,10 +28,10 @@ public class MainController {
 
     private final MainService mainService;
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/list")
     public void mainList(HttpSession session, Model model){
 //        Long uno = (Long) session.getAttribute("uno" );
-//        Long uno =
 //        List<Map<String,Object>> partyList = mainService.getParty(uno);
 //        model.addAttribute("party",partyList);
     }

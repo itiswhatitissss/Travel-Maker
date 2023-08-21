@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -12,9 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "uno")
-public class Users {
+public class Users{
 
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="uno")
     private Long uno;
 
@@ -37,4 +39,19 @@ public class Users {
     @OneToMany(mappedBy = "unoByVoteOption")
     private List<VoteOption> voteOptions = new ArrayList<>();
 
+    public void changePassword(String password){
+        this.password = password;
+    }
+    public void changeName(String name){
+        this.name = name;
+    }
+    public void changeEmail(String email){
+        this.email = email;
+    }
+    public void changeAddress(String address){
+        this.address = address;
+    }
+    public void changePhone(String phone){
+        this.phone = phone;
+    }
 }

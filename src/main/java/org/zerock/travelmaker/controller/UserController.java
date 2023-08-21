@@ -2,18 +2,12 @@ package org.zerock.travelmaker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.travelmaker.dto.UserDTO;
-import org.zerock.travelmaker.mapper.SampleMapper;
 import org.zerock.travelmaker.service.LoginService;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @Log4j2
@@ -23,22 +17,25 @@ public class UserController {
 
     private final LoginService loginService;
 
+//    @PreAuthorize("permitAll()")
     @GetMapping("/login")
-    public void login(){
+    public void loginGET(String error, String logout){
+        log.info("login get........");
+        log.info("logout : "+logout);
+
+        if(logout != null){
+            log.info("user logout........");
+        }
     }
 
+//    @PostAuthorize("authenticatied('USER')")
     @PostMapping("/login") //로그인페이지
-    public String login( @RequestParam String id, @RequestParam String password, RedirectAttributes rttr) {
+    public String login( @RequestParam String username, @RequestParam String password) {
 
-        log.info("id : "+id);
+        log.info("username : "+username);
         log.info("pw : "+password);
 
-        Long uno = loginService.getUno(id, password);
-
-        log.info("uno in controller " + uno);
-//        session.setAttribute("uno", uno);
-
-        rttr.addAttribute("uno",uno);
+        Long uno = loginService.getUno(username, password);
 
         return "redirect:/travelmaker/main/list";
 

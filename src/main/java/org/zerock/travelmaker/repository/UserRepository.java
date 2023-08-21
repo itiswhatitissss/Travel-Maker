@@ -1,5 +1,6 @@
 package org.zerock.travelmaker.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.zerock.travelmaker.domain.Users;
