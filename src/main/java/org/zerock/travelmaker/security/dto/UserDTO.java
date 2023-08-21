@@ -1,16 +1,14 @@
 package org.zerock.travelmaker.security.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-@Data
-@Builder
+@Getter
+@Setter
+@ToString
 public class UserDTO extends User {
     private Long uno;
     private String id;
