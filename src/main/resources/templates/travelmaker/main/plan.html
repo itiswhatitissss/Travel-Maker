@@ -1,58 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>TravelMaker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Single Image Carousel with Info</title>
+    <link rel="stylesheet" href="/css/style.css">
+<!--    <div th:insert="~{header :: headerFragment}"></div>-->
 </head>
-<div th:insert="~{header :: headerFragment}"></div> <!--헤더 가지고 온 코드 -->
 <body>
-<h1> plan LIST</h1>
+
 <button class="add-button" type="button" onclick="click_add()">plan 추가</button>
 
-<h1>Plan Details</h1>
-
-    <div th:each="data : ${planDTO}">
-        <p>타이틀: <span th:text="${data.title}"></span></p>
-        <p>시작 날짜: <span th:text="${data.start}"></span></p>
-        <p>종료 날짜: <span th:text="${data.end}"></span></p>
-        <p>사진: <span th:text="${data.img}"></span></p>
-    </div>
-
-
-
-<!--캐러셀 시작-->
-<div id="carouselExampleCaptions" class="carousel slide">
-    <div class="carousel-indicators">
-        <th:block th:each="item, index : ${planDTO}">
-            <button type="button" data-bs-target="#carouselExampleCaptions" th:data-bs-slide-to="${index}" th:classappend="${index == 0} ? 'active' : ''" aria-current="true" th:attr="aria-label=Slide${index + 1}"></button>
-        </th:block>
-    </div>
-    <div class="carousel-inner">
-        <th:block th:each="item, index : ${planDTO}">
-            <div th:classappend="${index == 0} ? 'carousel-item active' : 'carousel-item'">
-                <img th:src="${item.img}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 th:text="${item.title}"></h5>
-                    <p th:text="${item.content}"></p>
+<div class="carousel-wrapper">
+    <div class="carousel">
+        <th:block th:each="plan : ${planDTO}">
+            <div class="carousel-item">
+                <img th:src="${plan.img}" alt="" />
+                <div class="info">
+                    <p th:text="${plan.title}"></p>
+                    <p th:text="${plan.start}"></p>
+                    <p th:text="${plan.end}"></p>
                 </div>
             </div>
         </th:block>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
 </div>
-<!--캐러셀 끝-->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<button class="prev" type="button">prev</button>
+<button class="next" type="button">next</button>
+<script src="/js/index.js"></script>
 </body>
-
 <script>
     //plan추가(팝업페이지로 이동):
     function click_add() {
@@ -62,4 +37,5 @@
         window.open(url, name, option);
     };
 </script>
+
 </html>
