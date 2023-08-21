@@ -39,7 +39,44 @@ class TestRepositoryTest {
     private VoteOptionRepository voteOptionRepository;
 
     @Test
-    public void test1() {
+    public void test() { //이거 하나로 끝내자
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date startDate = new Date(dateFormat.parse("2022-08-20").getTime());
+            Date endDate = new Date(dateFormat.parse("2022-08-21").getTime());
+            Date startDate1 = new Date(dateFormat.parse("2022-07-15").getTime());
+            Date endDate1 = new Date(dateFormat.parse("2022-07-21").getTime());
+            Date startDate2 = new Date(dateFormat.parse("2022-09-29").getTime());
+            Date endDate2 = new Date(dateFormat.parse("2022-09-30").getTime());
+
+            Plan plan = Plan.builder()
+                    .title("해병대전우회")
+                    .start(startDate.toLocalDate())
+                    .end(endDate.toLocalDate())
+                    .img("")
+                    .build();
+            Plan plan1 = Plan.builder()
+                    .title("308호 인계동 정모")
+                    .start(startDate.toLocalDate())
+                    .end(endDate.toLocalDate())
+                    .img("")
+                    .build();
+            Plan plan2 = Plan.builder()
+                    .title("308호 여름휴가")
+                    .start(startDate.toLocalDate())
+                    .end(endDate.toLocalDate())
+                    .img("")
+                    .build();
+
+            planRepository.save(plan);
+            planRepository.save(plan1);
+            planRepository.save(plan2);
+
+        } catch (ParseException e) {
+            // 예외 처리
+            e.printStackTrace();
+        }
 
         Users user = Users.builder().id("pkmm").name("이성진").password("1234").email("naver").address("화서동").phone("01035").build();
         userRepository.save(user); //이성진 회원가입
@@ -53,61 +90,68 @@ class TestRepositoryTest {
         UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(party).build();
         userPartyRepository.save(userParty); // 이성진 + "해병대전우회" 파티 참가
 
-        Plan plan = Plan.builder().title("강원도삼척여행").build();
-        planRepository.save(plan); //강원도삼척여행 생성
 
-        PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(party).plnoByPartyDetail(plan).build();
-        partyDetailRepository.save(partyDetail); //"해병대전우회" 파티에 강원도삼척여행 플랜 생성
+        PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(party).plnoByPartyDetail(planRepository.findById(1L).get()).build();
+        partyDetailRepository.save(partyDetail); //"해병대전우회" 파티에 "해병대전우회 첫여행" 플랜 생성
 
-        Gallery gallery = Gallery.builder().title("전우회단체사진").plnoByGallery(plan).build();
+        Gallery gallery = Gallery.builder().title("전우회단체사진").plnoByGallery(planRepository.findById(1L).get()).build();
         galleryRepository.save(gallery); //"해병대전우회" + "강원도삼척여행" 전우회단체사진 게시
 
-        Scheduler scheduler = Scheduler.builder().plnoByScheduler(plan).build();
-        schedulerRepositroy.save(scheduler);
+        Scheduler scheduler = Scheduler.builder().plnoByScheduler(planRepository.findById(1L).get()).build();
+        schedulerRepositroy.save(scheduler); //해병대전우회 첫여행에 관한 스케줄러 생성
 
         SchedulerDetail schedulerDetail = SchedulerDetail.builder().snoBySchedulerDetail(scheduler).content("재밌게 놀자 !").build();
-        scheudlerDetailRepository.save(schedulerDetail);
+        scheudlerDetailRepository.save(schedulerDetail); //해병대전우회 첫여행 스케줄러 디테일 생성
 
-        Vote vote = Vote.builder().pnoByVote(party).plnoByVote(plan).vTitle("술 몇 병 살래").vCheck(1).vComplete(1).vCount(3).build();
-        voteRepository.save(vote);
+        Vote vote = Vote.builder().pnoByVote(party).plnoByVote(planRepository.findById(1L).get()).vTitle("술 몇 병 살래").vCheck(1).vComplete(1).vCount(3).build();
+        voteRepository.save(vote); //해병대전우회 첫여행 투표시스템 사용
 
         VoteOption voteOption = VoteOption.builder().vnoByVoteOption(vote).unoByVoteOption(user).voOption("띠용").build();
         voteOptionRepository.save(voteOption);
-    }
 
-    @Test
-    public void test2(){
-        Users user = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
-        userRepository.save(user); //1. 이하림 회원가입
+        Users user1 = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
+        userRepository.save(user1); //이하림 회원가입
 
-        UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(1L).get()).build();
-        userPartyRepository.save(userParty); //2. 이하림 "양양가실분" 파티 합류
-    }
+        UserParty userParty1 = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(1L).get()).build();
+        userPartyRepository.save(userParty1); // 이하림 "해병대전우회" 파티 합류
 
-    @Test
-    public void test3(){
-        Users user = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
-        userRepository.save(user); //1. 노에은 회원가입
+        Users user2 = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
+        userRepository.save(user2); //노에은 회원가입
 
-        Party party = Party.builder().partyName("한신가실분").QR("QRcode").build();
-        partyRepository.save(party); //2. "한신가실분" 파티 생성
+        Party party2 = Party.builder().partyName("308호 모임").QR("QRcode").build();
+        partyRepository.save(party2); //"308호 모임" 파티 생성
 
-        UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(party).build();
-        userPartyRepository.save(userParty); //3. 노예은 + "한신가실분" 파티 참가
+        UserParty userParty2 = UserParty.builder().unoByUserParty(user).pnoByUserParty(party2).build();
+        userPartyRepository.save(userParty2); //노예은 + "308호 모임" 파티 참가
 
-        Friend friend = Friend.builder().fnoByFriend(user).unoByFriend(user).build();
-        friendRepository.save(friend);
-    }
-    @Test
-    public void test4(){
-        UserParty userParty = UserParty.builder().unoByUserParty(userRepository.findById(1L).get()).pnoByUserParty(partyRepository.findById(2L).get()).build();
-        userPartyRepository.save(userParty); //이성진(uno=1)이 "한신가실분" 파티(pno=2) 참가
-    }
+        UserParty userParty3 = UserParty.builder().unoByUserParty(userRepository.findById(1L).get()).pnoByUserParty(partyRepository.findById(2L).get()).build();
+        userPartyRepository.save(userParty3); //이성진이 "308호 모임" 파티(pno=2) 참가
 
-    @Test
-    public void test5() {
-        Long pkmm = userRepository.findUno("pkmm", "1234");
-        log.info(pkmm);
+
+        PartyDetail partyDetail1 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(2L).get()).build();
+        partyDetailRepository.save(partyDetail1); //"308호 모임" 파티에 "308호 인계동 정모" 플랜 생성
+
+        Gallery gallery1 = Gallery.builder().title("인계동 단체사진").plnoByGallery(planRepository.findById(2L).get()).build();
+        galleryRepository.save(gallery1); //"308호 모임" + "인계동 정모" 단체사진 게시
+
+        Scheduler scheduler1 = Scheduler.builder().plnoByScheduler(planRepository.findById(2L).get()).build();
+        schedulerRepositroy.save(scheduler1); //"308호 모임" 첫 정모에 관한 스케줄러 생성
+
+        SchedulerDetail schedulerDetail1 = SchedulerDetail.builder().snoBySchedulerDetail(scheduler1).content("먹고죽어").build();
+        scheudlerDetailRepository.save(schedulerDetail1); //"308호 모임" 첫 정모에 관한 스케줄러 디테일 생성
+
+
+        PartyDetail partyDetail2 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(3L).get()).build();
+        partyDetailRepository.save(partyDetail2); //"308호 모임" 파티에 "308호 여름휴가" 플랜 생성
+
+        Gallery gallery2 = Gallery.builder().title("인계동 단체사진").plnoByGallery(planRepository.findById(3L).get()).build();
+        galleryRepository.save(gallery2); //"308호 모임" + "여름휴가" 단체사진 게시
+
+        Scheduler scheduler2 = Scheduler.builder().plnoByScheduler(planRepository.findById(3L).get()).build();
+        schedulerRepositroy.save(scheduler2); //"308호 모임" "여름휴가"에 관한 스케줄러 생성
+
+        SchedulerDetail schedulerDetail2 = SchedulerDetail.builder().snoBySchedulerDetail(scheduler2).content("행복한 여행 보내자").build();
+        scheudlerDetailRepository.save(schedulerDetail2); //"308호 모임" 여름휴가에 관한 스케줄러 디테일 생성
     }
 
     @Test
