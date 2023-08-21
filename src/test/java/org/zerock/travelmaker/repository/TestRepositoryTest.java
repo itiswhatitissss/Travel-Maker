@@ -81,9 +81,6 @@ class TestRepositoryTest {
         Users user = Users.builder().id("pkmm").name("이성진").password("1234").email("naver").address("화서동").phone("01035").build();
         userRepository.save(user); //이성진 회원가입
 
-        Friend friend = Friend.builder().fnoByFriend(user).unoByFriend(user).build();
-        friendRepository.save(friend); //이성진 친구목록 생성
-
         Party party = Party.builder().partyName("해병대전우회").QR("QRcode").build();
         partyRepository.save(party); // "해병대전우회" 파티 생성 (파티를 생성하면서 user값을 UserParty에 바로 넣을 수 있게 해야 될 듯?)
 
@@ -112,11 +109,17 @@ class TestRepositoryTest {
         Users user1 = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
         userRepository.save(user1); //이하림 회원가입
 
+        Friend friend = Friend.builder().fnoByFriend(user1).unoByFriend(user).build();
+        friendRepository.save(friend); //이하림을 친구로 이성진에 친구추가
+
         UserParty userParty1 = UserParty.builder().unoByUserParty(user1).pnoByUserParty(partyRepository.findById(1L).get()).build();
         userPartyRepository.save(userParty1); // 이하림 "해병대전우회" 파티 합류
 
         Users user2 = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
         userRepository.save(user2); //노에은 회원가입
+
+        Friend friend2 = Friend.builder().fnoByFriend(user1).unoByFriend(user2).build();
+        friendRepository.save(friend2); //이하림을 친구로 노예은에 친구추가
 
         Party party2 = Party.builder().partyName("308호 모임").QR("QRcode").build();
         partyRepository.save(party2); //"308호 모임" 파티 생성
@@ -126,7 +129,6 @@ class TestRepositoryTest {
 
         UserParty userParty3 = UserParty.builder().unoByUserParty(user).pnoByUserParty(partyRepository.findById(2L).get()).build();
         userPartyRepository.save(userParty3); //이성진이 "308호 모임" 파티(pno=2) 참가
-
 
         PartyDetail partyDetail1 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(2L).get()).build();
         partyDetailRepository.save(partyDetail1); //"308호 모임" 파티에 "308호 인계동 정모" 플랜 생성
