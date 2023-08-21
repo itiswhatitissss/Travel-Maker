@@ -54,19 +54,19 @@ class TestRepositoryTest {
                     .title("해병대정기모임 1회")
                     .start(startDate.toLocalDate())
                     .end(endDate.toLocalDate())
-                    .img("단체사진")
+                    .img("https://www.ilyosisa.co.kr/data/photos/201403/60777_956_2743.jpg")
                     .build();
             Plan plan1 = Plan.builder()
                     .title("308호 인계동 정모")
                     .start(startDate1.toLocalDate())
                     .end(endDate1.toLocalDate())
-                    .img("인생네컷")
+                    .img("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg")
                     .build();
             Plan plan2 = Plan.builder()
                     .title("308호 여름휴가")
                     .start(startDate2.toLocalDate())
                     .end(endDate2.toLocalDate())
-                    .img("러블리펜션앞에서")
+                    .img("https://www.kns.tv/news/photo/201812/506982_387972_2754.jpg")
                     .build();
 
             planRepository.save(plan);
