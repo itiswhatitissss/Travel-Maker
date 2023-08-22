@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Split Screen Example</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -20,8 +20,8 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-                <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
+                <li><a href="#" class="nav-link px-2 link-secondary">친구목록</a></li>
+                <li><a href="#" class="nav-link px-2 link-body-emphasis"></a></li>
                 <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
                 <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
             </ul>
@@ -51,46 +51,38 @@
 </header>
 <!--header-->
 
-<div class="split left">
-    <h2>Party List</h2>
-    <div class="scrollable">
-        <ul class="item-list" th:each="party: ${party}">
-            <li data-id="1" th:text="${party.partyname}">
-                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}"/>
+<div class="split-container">
+    <div class="split-left">
+        <ul th:each="party: ${partyDTO}">
+            <li>
+                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}" th:text="${party.party_name}"></a>
             </li>
         </ul>
     </div>
-</div>
-<div class="split right">
-    <h2>Party Plan</h2>
-    <button class="buttons" type="button" onclick="location.href='/travelmaker/main/plan'">plan 추가하러가기</button>
-
-    <div class="scrollable" id="right-content" th:each="plan: ${plan}">
-        <div class="split right" th:style="'background-image: url(' + ${plan.image} + ');'">
-            <h2 th:text="${plan.title}"></h2>
-            <h2 th:text="${plan.start}"></h2>
-            <div class="slideshow-container">
-                <div class="mySlides">
-                    <img th:src="@{/images/image1.jpg}" alt="Image Description"/>
-                </div>
-                <div class="mySlides">
-                    <img th:src="@{/images/image2.jpg}" alt="Image Description"/>
-                </div>
-                <!-- 추가 이미지들을 동일한 방식으로 삽입 -->
+    <div class="split-right">
+        <div id="carousel-wrapper">
+            <div id="carousel">
+                <th:block th:each="plan : ${planDTO}">
+                    <div id="carousel-item">
+                        <img th:src="${plan.img}" alt="" />
+                        <div id="info">
+                            <p th:text="${plan.title}"></p>
+                            <p th:text="${plan.start}"></p>
+                            <p th:text="${plan.end}"></p>
+                        </div>
+                    </div>
+                </th:block>
             </div>
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-
-        <!--carousel-->
-        <div th:insert="~{carousel :: carouselFragment}"></div>
-        <!--carousel-->
+        <button id="prev" type="button">prev</button>
+        <button id="next" type="button">next</button>
     </div>
 </div>
+
+
+<script src="/js/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<script th:src="@{/js/main.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
 <script>
     var slideIndex = 1;
     showSlides(slideIndex);

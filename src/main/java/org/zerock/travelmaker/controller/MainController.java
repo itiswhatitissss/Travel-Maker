@@ -30,7 +30,11 @@ public class MainController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/list")
-    public void mainList(HttpSession session, Model model){
+    public void mainList(HttpSession session, Model model,Long uno,Long pno){
+        List<Map<String,Object>> party =mainService.getParty(uno);
+        model.addAttribute("partyDTO",party);
+        List<Map<String,Object>> plan =mainService.getPlan(pno);
+        model.addAttribute("planDTO",plan);
 //        Long uno = (Long) session.getAttribute("uno" );
 //        List<Map<String,Object>> partyList = mainService.getParty(uno);
 //        model.addAttribute("party",partyList);
@@ -41,11 +45,11 @@ public class MainController {
 
     }
 
-    @GetMapping("/plan")
-    public void plan(Long pno, Model model){
-        List<Map<String,Object>> result = mainService.getPlan(pno);
-        model.addAttribute("planDTO",result);
-    }
+//    @GetMapping("/list")
+//    public void plan(Long pno, Model model){
+//        List<Map<String,Object>> result = mainService.getPlan(pno);
+//        model.addAttribute("planDTO",result);
+//    }
 
 //    @GetMapping("/plan")
 //    public void plan(){}
