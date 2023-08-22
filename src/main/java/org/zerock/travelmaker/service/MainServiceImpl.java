@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.dto.PlanDTO;
 import org.zerock.travelmaker.mapper.MybatisMapper;
-import org.zerock.travelmaker.repository.PlanRepository;
+import org.zerock.travelmaker.repository.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,7 +22,12 @@ public class MainServiceImpl implements MainService{
 
     private final MybatisMapper mybatisMapper;
     private final ModelMapper modelMapper;
+    private final PartyDetailRepository partyDetailRepository;
     private final PlanRepository planRepository;
+    private final GalleryRepository galleryRepository;
+    private final SchedulerRepositroy schedulerRepositroy;
+    private final VoteRepository voteRepository;
+
 
     @Override
     public List<Map<String, Object>> getParty(Long uno) {
@@ -52,9 +57,10 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
-    public Long regist(PlanDTO planDTO) {
+    public Long regist(PlanDTO planDTO, Long pno) {
         Plan plan = modelMapper.map(planDTO, Plan.class);
         Long plno = planRepository.save(plan).getPlno();
+
         return plno;
     }
 

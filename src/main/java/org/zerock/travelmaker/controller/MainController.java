@@ -41,8 +41,8 @@ public class MainController {
     }
 
     @PostMapping("/createPlan")
-    public void createPlan(PlanDTO planDTO){
-
+    public void createPlan(PlanDTO planDTO, Long pno){
+        mainService.regist(planDTO, pno);
     }
 
 //    @GetMapping("/list")
@@ -59,7 +59,7 @@ public class MainController {
     }
 
     @PostMapping("/planPopup")
-    public String planPopupPost(PlanDTO planDTO, RedirectAttributes rttr){
+    public String planPopupPost(PlanDTO planDTO, RedirectAttributes rttr, Long pno){
         log.info("planDTO=======> " + planDTO);
         long plno = mainService.planRegister(planDTO);
 

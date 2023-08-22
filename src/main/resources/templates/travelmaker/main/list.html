@@ -55,7 +55,7 @@
     <div class="split-left">
         <ul th:each="party: ${partyDTO}">
             <li>
-                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}" th:onclick="click_add(${party.pno})" th:text="${party.party_name}"></a>
+                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}" th:text="${party.party_name}"></a>
             </li>
         </ul>
     </div>
@@ -66,7 +66,8 @@
     <!--오른쪽 시작(plan)-->
 
     <div class="split-right">
-        <button class="add-button" type="button" onclick="click_add()">plan 추가</button>
+        <button class="add-button" type="button" th:each="party: ${partyDTO}"
+                th:data-pno="${party.pno}" th:onclick="click_add(this.getAttribute('data-pno'))">plan 추가</button>
         <div id="carousel-wrapper">
             <div id="carousel">
                 <th:block th:each="plan : ${planDTO}">
