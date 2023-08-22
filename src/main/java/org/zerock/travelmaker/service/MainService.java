@@ -16,4 +16,6 @@ public interface MainService {
 
     PlanDTO readOne(Long plno);
 
+    Long regist(PlanDTO planDTO);
+
 }

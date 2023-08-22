@@ -51,5 +51,12 @@ public class MainServiceImpl implements MainService{
         return planDTO;
     }
 
+    @Override
+    public Long regist(PlanDTO planDTO) {
+        Plan plan = modelMapper.map(planDTO, Plan.class);
+        Long plno = planRepository.save(plan).getPlno();
+        return plno;
+    }
+
 
 }

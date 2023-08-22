@@ -17,4 +17,5 @@ public class PlanDTO {
     private LocalDate start;
     private LocalDate end;
     private String title;
+    private String img;
 }

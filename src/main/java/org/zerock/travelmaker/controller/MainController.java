@@ -40,8 +40,8 @@ public class MainController {
 //        model.addAttribute("party",partyList);
     }
 
-    @GetMapping("/test")
-    public void gallery(){
+    @PostMapping("/createPlan")
+    public void createPlan(PlanDTO planDTO){
 
     }
 
