@@ -35,7 +35,7 @@ public class MapperTests {
     @Test
     public void testGetPartyList(){ //파티 리스트
         List<Map<String,Object>> result =mybatisMapper.getPartyList(1L);
-        log.info("resutl=================>"+ result);
+        log.info("result=================>"+ result);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class MapperTests {
 
     @Test
     public void testGetUser(){
-        Long result = loginService.getUno("pkmm","1234");
-        log.info("resutl=================>"+ result);
+        Long result = loginService.getUno("pkmm", "1234");
+        log.info("result=================>"+ result);
     }
 
 }

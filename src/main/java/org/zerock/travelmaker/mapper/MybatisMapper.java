@@ -12,4 +12,8 @@ public interface MybatisMapper {
     public List<Map<String,Object>> getPartyList(Long uno);
     public List<Map<String,Object>> getPlanList(Long pno);
 
+    Long getUno(String username, String password);
+
+
+
 }

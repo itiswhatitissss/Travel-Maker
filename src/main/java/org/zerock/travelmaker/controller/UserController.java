@@ -2,6 +2,7 @@ package org.zerock.travelmaker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,11 +30,22 @@ public class UserController {
     }
 
 //    @PostAuthorize("authenticatied('USER')")
+//    @PostMapping("/login") //로그인페이지
+//    public String login( @RequestParam String username, @RequestParam String password) {
+//
+//        log.info("username ============> " + username);
+//        log.info("password ============> " + password);
+//
+//        Long uno = loginService.getUno(username, password);
+//
+//        return "redirect:/travelmaker/main/list?uno=" + uno;
+//
+//    }
     @PostMapping("/login") //로그인페이지
-    public String login( @RequestParam String username, @RequestParam String password) {
+    public String login2( @RequestParam String username, @RequestParam String password) {
 
-        log.info("username : "+username);
-        log.info("pw : "+password);
+        log.info("username =========================================================================> " + username);
+        log.info("password =========================================================================> " + password);
 
         Long uno = loginService.getUno(username, password);
 

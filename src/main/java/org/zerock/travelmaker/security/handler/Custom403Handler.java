@@ -14,18 +14,17 @@ import java.io.IOException;
 public class Custom403Handler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        log.info("-----------------------ACCESS DENIED--------------------------");
+        log.info("================= ACCESS DENIED ====================");
 
-        response.setStatus(HttpStatus.FORBIDDEN.value());
+        response.setStatus(HttpStatus.FORBIDDEN.value()); //403 ERROR 반환
 
+        //JSON요청이었는지 확인:
         String contentType = request.getHeader("Content-Type");
+        boolean jsonRequest = contentType.startsWith("application/json");
+        log.info("======>isJson : " +jsonRequest);
 
-        boolean jsonRequest = contentType.startsWith("applycation/json");
-
-        log.info("isJson : "+jsonRequest);
-
-        if(!jsonRequest){
-            response.sendRedirect("travelmaker/login?error=ACCESS_DENIED");
-        }
+        //일반request (json Type이 아니면 실행):
+        if(!jsonRequest)
+            response.sendRedirect("/travelmaker/login?error=ACCESS_DENIED");
     }
 }

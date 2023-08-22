@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>TravelMaker</title>
-    <link rel="stylesheet" href="/css/login.css">
+<!--    <link rel="stylesheet" href="/css/login.css">-->
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -44,27 +46,29 @@
     <!-- Login Form start -->
     <div class="login-section">
         <div class="form-box login">
-            <!-- test -->
-<!--            <form action="">-->
+            <!-- logout -->
+            <th:block th:if="${param.logout != null}">
+                <h1>로그아웃...</h1>
+            </th:block>
+
             <form name="myForm" method="post" action="/travelmaker/login">
                 <h2>로그인</h2>
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-envelope'></i></span>
-                    <input type="text" required name="username">
+                    <input type="text" name="username" required>
                     <label >아이디</label>
                 </div>
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
-                    <input type="password" required name="password">
+                    <input type="password" name="password" required>
                     <label>비밀번호</label>
                 </div>
                 <div class="remember-password">
-                    <input class="form-check-input" type="checkbox" name="remember-me">
-                    <label class="form-check-label">자동 로그인</label>
+                    <label><input type="checkbox" name="remember-me">자동 로그인</label>
                     <a href="#">비밀번호 찾기</a>
                 </div>
-                <!-- 아이디 비번 일치/불일치 확인 -->
-                <button class="btn" onclick="test()">로그인</button>
+
+                <button class="btn" type="submit">로그인</button>
 
                 <div class="create-account">
                     <p>새로운 계정을 만들까요? <a href="#" class="register-link">회원가입</a></p>
