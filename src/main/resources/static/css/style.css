@@ -1,22 +1,32 @@
-.carousel-wrapper {
+/* CSS */
+#carousel-wrapper {
     position: relative;
     width: 500px;
     overflow: hidden;
 }
-.carousel {
+
+#carousel {
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
-.carousel img {
+
+#carousel img {
     width: 500px;
     height: auto;
 }
-.info {
+
+#info {
     text-align: center;
     margin-top: 10px;
     font-size: 14px;
 }
-.prev, .next {
+
+#carousel-item {
+    /* 추가 스타일을 여기에 적용할 수 있습니다. */
+}
+
+#carousel-wrapper .prev,
+#carousel-wrapper .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -25,9 +35,11 @@
     font-size: 18px;
     cursor: pointer;
 }
-.prev {
+
+#carousel-wrapper .prev {
     left: 10px;
 }
-.next {
+
+#carousel-wrapper .next {
     right: 10px;
 }

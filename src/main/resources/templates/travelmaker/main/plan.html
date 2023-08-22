@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <title>Single Image Carousel with Info</title>
     <link rel="stylesheet" href="/css/style.css">
-<!--    <div th:insert="~{header :: headerFragment}"></div>-->
 </head>
 <body>
 
 <button class="add-button" type="button" onclick="click_add()">plan 추가</button>
 
-<div class="carousel-wrapper">
-    <div class="carousel">
+<div id="carousel-wrapper">
+    <div id="carousel">
         <th:block th:each="plan : ${planDTO}">
-            <div class="carousel-item">
+            <div id="carousel-item">
                 <img th:src="${plan.img}" alt="" />
-                <div class="info">
+                <div id="info">
                     <p th:text="${plan.title}"></p>
                     <p th:text="${plan.start}"></p>
                     <p th:text="${plan.end}"></p>
@@ -24,8 +23,8 @@
         </th:block>
     </div>
 </div>
-<button class="prev" type="button">prev</button>
-<button class="next" type="button">next</button>
+<button id="prev" type="button">prev</button>
+<button id="next" type="button">next</button>
 <script src="/js/index.js"></script>
 </body>
 <script>

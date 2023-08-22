@@ -1,7 +1,7 @@
-const prevButton = document.querySelector(".prev");
-const nextButton = document.querySelector(".next");
-const carousel = document.querySelector(".carousel");
-const images = document.querySelectorAll(".carousel-item");
+const prevButton = document.querySelector("#prev");
+const nextButton = document.querySelector("#next");
+const carousel = document.querySelector("#carousel");
+const images = document.querySelectorAll("#carousel-item");
 
 let currentIndex = 0;
 
