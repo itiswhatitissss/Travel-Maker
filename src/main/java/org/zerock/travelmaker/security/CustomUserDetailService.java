@@ -38,9 +38,9 @@ public class CustomUserDetailService implements UserDetailsService {
         if(users == null)
             throw new UsernameNotFoundException(username);
 
-                UserDetails userDetails = User.builder()
+        UserDetails userDetails = User.builder()
                 .username(users.getId())
-                .password(passwordEncoder.encode(users.getPassword())) //암호화해서 넣어야함
+                .password(passwordEncoder.encode(users.getPassword()))
                 .authorities("ROLE_USER")
                 .build();
 

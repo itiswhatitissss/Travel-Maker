@@ -37,7 +37,7 @@ public class CustomSecurityConfig {
         // username or password 자체의 이름을 변경하고싶으면 여기서 변경
 
         http.formLogin().loginPage("/travelmaker/login")
-                .defaultSuccessUrl("/travelmaker/main/list", true);
+                .defaultSuccessUrl("/travelmaker/loginSuccess", true);
         http.csrf().disable(); //csrf토큰 비활성화
 
         http.rememberMe() //자동로그인

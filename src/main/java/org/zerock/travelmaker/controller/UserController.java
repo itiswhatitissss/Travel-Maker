@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,19 +38,21 @@ public class UserController {
 //        log.info("password ============> " + password);
 //
 //        Long uno = loginService.getUno(username, password);
-//
 //        return "redirect:/travelmaker/main/list?uno=" + uno;
-//
 //    }
-    @PostMapping("/login") //로그인페이지
-    public String login2( @RequestParam String username, @RequestParam String password) {
 
-        log.info("username =========================================================================> " + username);
-        log.info("password =========================================================================> " + password);
+//    @PostMapping("/login") //로그인페이지
+//    public void loginPost(Model model, String username, String password) {
+//
+//        log.info("username ================> " + username);
+//        log.info("password ================> " + password);
+//
+//        Long uno = loginService.getUno(username, password);
+//        model.addAttribute("uno", uno);
+//    }
 
-        Long uno = loginService.getUno(username, password);
-
-        return "redirect:/travelmaker/main/list";
-
+    @GetMapping("/loginSuccess")
+    public void loginSuccess(){
+//        return "redirect:/travelmaker/main/list";
     }
 }

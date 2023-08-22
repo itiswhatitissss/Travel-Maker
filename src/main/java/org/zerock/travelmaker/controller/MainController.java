@@ -30,7 +30,7 @@ public class MainController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/list")
-    public void mainList(HttpSession session, Model model,Long uno,Long pno){
+    public void mainList(HttpSession session, Model model, Long uno, Long pno){
         List<Map<String,Object>> party =mainService.getParty(uno);
         model.addAttribute("partyDTO",party);
         List<Map<String,Object>> plan =mainService.getPlan(pno);
