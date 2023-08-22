@@ -1,17 +1,18 @@
 package org.zerock.travelmaker.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class FriendDTO {
 
     private Long friendPK;
-    private Long unoByFriend;
-    private Long fnoByFriend;
+    private Long uno;
+    private Long fno;
+
+
 }

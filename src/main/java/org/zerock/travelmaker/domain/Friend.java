@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "friendPK")
@@ -22,4 +23,10 @@ public class Friend{
     @ManyToOne
     @JoinColumn(name = "fno",referencedColumnName = "uno")
     private Users fnoByFriend;
+
+    public void changeFno(Users fnoByFriend) {
+        this.fnoByFriend = fnoByFriend;
+    }
+
+
 }
