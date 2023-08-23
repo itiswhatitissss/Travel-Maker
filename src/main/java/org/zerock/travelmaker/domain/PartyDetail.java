@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Builder
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "partydetailPK")
@@ -21,7 +21,7 @@ public class PartyDetail{
     @JoinColumn(name = "pno")
     private Party pnoByPartyDetail;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "plno")
     private Plan plnoByPartyDetail;
 }

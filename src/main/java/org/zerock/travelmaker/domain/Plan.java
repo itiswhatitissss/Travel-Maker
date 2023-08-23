@@ -49,14 +49,26 @@ public class Plan{
     @OneToOne(mappedBy = "plnoByVote",cascade = CascadeType.ALL)
     private Vote vote;
 
-//    @NotNull
-//    private long planIdx;
-//
-//    @NotNull
-//    private String originalFileName;
-//
-//    @NotNull
-//    private String storedFileName;
-//
-//    private long fileSize;
+    @PrePersist
+    private void prePersist() {
+        PartyDetail partyDetail = new PartyDetail();
+        partyDetail.setPlnoByPartyDetail(this);
+
+        partyDetails.add(partyDetail);
+
+        Gallery gallery = new Gallery();
+        gallery.setPlnoByGallery(this);
+
+        galleries.add(gallery);
+
+        Scheduler scheduler = new Scheduler();
+        scheduler.setPlnoByScheduler(this);
+
+        this.scheduler = scheduler;
+
+        Vote vote = new Vote();
+        vote.setPlnoByVote(this);
+
+        this.vote = vote;
+    }
 }

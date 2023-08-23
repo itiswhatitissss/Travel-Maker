@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Builder
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "vno")
@@ -19,7 +19,7 @@ public class Vote{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vno;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="pno")
     private Party pnoByVote;
 

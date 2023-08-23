@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Builder
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "sno")
@@ -18,7 +18,7 @@ public class Scheduler{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sno;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="plno")
     private Plan plnoByScheduler;
 

@@ -20,7 +20,7 @@ public class Gallery{
     private String filename;
     private String filepath;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="plno")
     private Plan plnoByGallery;
 }
