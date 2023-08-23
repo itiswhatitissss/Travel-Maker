@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.travelmaker.domain.*;
 import org.zerock.travelmaker.domain.VoteOption;
+import org.zerock.travelmaker.mapper.MybatisMapper;
 
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @SpringBootTest
 @Log4j2
@@ -37,6 +41,8 @@ class TestRepositoryTest {
     private VoteRepository voteRepository;
     @Autowired
     private VoteOptionRepository voteOptionRepository;
+    @Autowired
+    private MybatisMapper mybatisMapper;
 
     @Test
     public void test() { //이거 하나로 끝내자
@@ -109,17 +115,11 @@ class TestRepositoryTest {
         Users user1 = Users.builder().id("leehal").name("이하림").password("1234").email("naver").address("화서동").phone("01044").build();
         userRepository.save(user1); //이하림 회원가입
 
-        Friend friend = Friend.builder().fnoByFriend(user1).unoByFriend(user).build();
-        friendRepository.save(friend); //이하림을 친구로 이성진에 친구추가
-
         UserParty userParty1 = UserParty.builder().unoByUserParty(user1).pnoByUserParty(partyRepository.findById(1L).get()).build();
         userPartyRepository.save(userParty1); // 이하림 "해병대전우회" 파티 합류
 
         Users user2 = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").address("탑동").phone("010999").build();
         userRepository.save(user2); //노에은 회원가입
-
-        Friend friend2 = Friend.builder().fnoByFriend(user1).unoByFriend(user2).build();
-        friendRepository.save(friend2); //이하림을 친구로 노예은에 친구추가
 
         Party party2 = Party.builder().partyName("308호 모임").QR("QRcode").build();
         partyRepository.save(party2); //"308호 모임" 파티 생성
@@ -185,5 +185,16 @@ class TestRepositoryTest {
             // 예외 처리
             e.printStackTrace();
         }
+    }
+    @Test
+    public void testFriendList(){
+        Optional<Users> byId = userRepository.findById(1L);
+        log.info("byId : "+byId);
+//        Users users = byId.orElseThrow();
+//        Friend friend = Friend.builder()
+//                .unoByFriend(users)
+//                .fnoByFriend(users)
+//                .build();
+//        List<Map<String ,Object>> result = mybatisMapper.selectFriendList(friend.getUnoByFriend());
     }
 }

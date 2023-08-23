@@ -10,6 +10,9 @@ import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.FriendDTO;
 import org.zerock.travelmaker.repository.FriendRepository;
 
+import java.util.List;
+import java.util.Map;
+
 @SpringBootTest
 @Slf4j
 public class FriendServiceImplTest {
@@ -18,7 +21,7 @@ public class FriendServiceImplTest {
 
 
     @Test
-    public void testRegister(){
+    public void testRegisterFriend(){
         Long uno = 2L;
         Long fno = 1L;
         FriendDTO friendDTO = FriendDTO.builder()
@@ -28,7 +31,16 @@ public class FriendServiceImplTest {
         log.info("friendDTO.getFno : {}",friendDTO.getFno());
         friendService.insertFriend(friendDTO);
 
-
     }
-
+    @Test
+    public void testDeleteFriend(){
+        Long uno = 2L;
+        Long fno = 1L;
+        friendService.deleteFriend(fno,uno);
+    }
+    @Test
+    public void testListFriend(){
+        List<Map<String, Object>> result = friendService.friendList(2L);
+        log.info("FriendList : "+result);
+    }
 }

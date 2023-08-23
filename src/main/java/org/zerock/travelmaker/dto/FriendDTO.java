@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 public class FriendDTO {
 
-    private Long friendPK;
     private Long uno;
     private Long fno;
 

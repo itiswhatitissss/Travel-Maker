@@ -4,10 +4,14 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zerock.travelmaker.domain.Friend;
+import org.zerock.travelmaker.domain.Users;
+import org.zerock.travelmaker.dto.FriendDTO;
 import org.zerock.travelmaker.service.LoginService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @SpringBootTest
 @Log4j2
@@ -35,7 +39,7 @@ public class MapperTests {
     @Test
     public void testGetPartyList(){ //파티 리스트
         List<Map<String,Object>> result =mybatisMapper.getPartyList(1L);
-        log.info("result=================>"+ result);
+        log.info("resutl=================>"+ result);
     }
 
     @Test
@@ -47,7 +51,12 @@ public class MapperTests {
     @Test
     public void testGetUser(){
         Long result = loginService.getUno("pkmm");
-        log.info("result=================>"+ result);
+        log.info("resutl=================>"+ result);
+    }
+    @Test
+    public void testFriend(){
+        List<Map<String,Object>> result = mybatisMapper.selectFriendList(1L);
+        log.info("result==============>"+ result);
     }
 
 }
