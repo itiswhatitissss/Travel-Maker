@@ -186,15 +186,4 @@ class TestRepositoryTest {
             e.printStackTrace();
         }
     }
-    @Test
-    public void testFriendList(){
-        Optional<Users> byId = userRepository.findById(1L);
-        log.info("byId : "+byId);
-//        Users users = byId.orElseThrow();
-//        Friend friend = Friend.builder()
-//                .unoByFriend(users)
-//                .fnoByFriend(users)
-//                .build();
-//        List<Map<String ,Object>> result = mybatisMapper.selectFriendList(friend.getUnoByFriend());
-    }
 }

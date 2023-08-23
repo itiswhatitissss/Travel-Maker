@@ -15,5 +15,9 @@
         select friend.uno, friend.fno, users.name from friend join users on friend.fno=users.uno where friend.uno=#{uno}
     </select>
 
+    <select id="searchFriend" resultType="map" parameterType="map">
+        select uno, name, id from users where id like CONCAT('%', #{id}, '%');
+    </select>
+
 
 </mapper>

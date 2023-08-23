@@ -43,4 +43,9 @@ public class FriendServiceImplTest {
         List<Map<String, Object>> result = friendService.friendList(2L);
         log.info("FriendList : "+result);
     }
+    @Test
+    public void testSearchFriend(){
+        List<Map<String, Object>> result = friendService.friendSearch("lee");
+        log.info("FriendList : "+result);
+    }
 }

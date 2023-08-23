@@ -54,9 +54,13 @@ public class MapperTests {
         log.info("resutl=================>"+ result);
     }
     @Test
-    public void testFriend(){
+    public void testFriendList(){
         List<Map<String,Object>> result = mybatisMapper.selectFriendList(1L);
         log.info("result==============>"+ result);
     }
-
+    @Test
+    public void testFriendSearch(){
+        List<Map<String,Object>> result = mybatisMapper.searchFriend("leehal");
+        log.info("result==============>"+ result);
+    }
 }

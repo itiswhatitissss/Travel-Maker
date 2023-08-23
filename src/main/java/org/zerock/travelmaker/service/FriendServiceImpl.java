@@ -34,6 +34,14 @@ public class FriendServiceImpl implements FriendService{
 
         return result;
     }
+
+    @Override
+    public List<Map<String, Object>> friendSearch(String id) {
+        List<Map<String, Object>> result =mybatisMapper.searchFriend(id);
+
+        return result;
+    }
+
     @Override
     public void insertFriend(FriendDTO friendDTO) {
         Optional<Users> byId = userRepository.findById(friendDTO.getUno());
