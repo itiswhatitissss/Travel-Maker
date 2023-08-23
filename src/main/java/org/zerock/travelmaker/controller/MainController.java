@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.dto.PlanDTO;
+import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.LoginService;
 import org.zerock.travelmaker.service.MainService;
 
@@ -32,7 +33,7 @@ public class MainController {
 
     private final MainService mainService;
     private final LoginService loginService;
-
+    private final FriendService friendService;
 
 
     @PreAuthorize("hasRole('USER')")
@@ -42,6 +43,8 @@ public class MainController {
         model.addAttribute("partyDTO",party);
         List<Map<String,Object>> plan =mainService.getPlan(pno);
         model.addAttribute("planDTO",plan);
+        List<Map<String,Object>> friend =friendService.friendList(uno);
+        model.addAttribute("friendDTO",friend);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
