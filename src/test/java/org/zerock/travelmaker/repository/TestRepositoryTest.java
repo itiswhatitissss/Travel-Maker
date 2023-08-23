@@ -58,20 +58,20 @@ class TestRepositoryTest {
 
             Plan plan = Plan.builder()
                     .title("해병대정기모임 1회")
-                    .start(startDate.toLocalDate())
-                    .end(endDate.toLocalDate())
+                    .start(startDate)
+                    .end(endDate)
                     .img("https://www.ilyosisa.co.kr/data/photos/201403/60777_956_2743.jpg")
                     .build();
             Plan plan1 = Plan.builder()
                     .title("308호 인계동 정모")
-                    .start(startDate1.toLocalDate())
-                    .end(endDate1.toLocalDate())
+                    .start(startDate1)
+                    .end(endDate1)
                     .img("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg")
                     .build();
             Plan plan2 = Plan.builder()
                     .title("308호 여름휴가")
-                    .start(startDate2.toLocalDate())
-                    .end(endDate2.toLocalDate())
+                    .start(startDate2)
+                    .end(endDate2)
                     .img("https://www.kns.tv/news/photo/201812/506982_387972_2754.jpg")
                     .build();
 
@@ -156,34 +156,4 @@ class TestRepositoryTest {
         scheudlerDetailRepository.save(schedulerDetail2); //"308호 모임" 여름휴가에 관한 스케줄러 디테일 생성
     }
 
-    @Test
-    public void test6() { //plan에 타이틀, 시작시간, 종료시간 넣어보기 (타입이 db에는 date, domain에는 LocalDate)
-
-//        Plan plan = Plan.builder()
-//                .title("여행2")
-//                .start(Timestamp.valueOf("2022-08-20 00:00:00"))
-//                .end(Timestamp.valueOf("2022-08-21 00:00:00"))
-//                .build();
-//        planRepository.save(plan);
-//    }
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            Date startDate = new Date(dateFormat.parse("2022-08-20").getTime());
-            Date endDate = new Date(dateFormat.parse("2022-08-21").getTime());
-
-            Plan plan = Plan.builder() //plno=1이 있다면 plno=2에 생성됨
-                    .title("새로운여행시작")
-                    .start(startDate.toLocalDate())
-                    .end(endDate.toLocalDate())
-                    .build();
-
-            planRepository.save(plan);
-
-        } catch (ParseException e) {
-            // 예외 처리
-            e.printStackTrace();
-        }
-    }
 }

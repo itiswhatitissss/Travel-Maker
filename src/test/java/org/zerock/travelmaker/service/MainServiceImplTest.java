@@ -32,10 +32,10 @@ class MainServiceImplTest {
 
             PlanDTO planDTO = PlanDTO.builder()
                     .title("새로운 여행")
-                    .start(startDate.toLocalDate())
-                    .end(endDate.toLocalDate())
+                    .start(startDate)
+                    .end(endDate)
                     .build();
-
+            Long pno = 2L;
             Long plno = mainService.planRegister(planDTO);
             log.info("plno :" + plno);
 

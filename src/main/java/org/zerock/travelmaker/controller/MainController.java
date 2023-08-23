@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.dto.PlanDTO;
+import org.zerock.travelmaker.repository.PlanRepository;
 import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.LoginService;
 import org.zerock.travelmaker.service.MainService;
@@ -36,6 +38,7 @@ public class MainController {
     private final FriendService friendService;
 
 
+
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/list")
     public void mainList(Model model, Long uno, Long pno, Authentication authentication){
@@ -52,10 +55,6 @@ public class MainController {
         model.addAttribute("uno", uno2);
     }
 
-    @PostMapping("/createPlan")
-    public void createPlan(PlanDTO planDTO, Long pno){
-        mainService.regist(planDTO, pno);
-    }
 
 //    @GetMapping("/list")
 //    public void plan(Long pno, Model model){
@@ -71,13 +70,11 @@ public class MainController {
     }
 
     @PostMapping("/planPopup")
-    public String planPopupPost(PlanDTO planDTO, RedirectAttributes rttr, Long pno){
+    public void planPopupPost(PlanDTO planDTO, @RequestParam("pno") Long pno){
         log.info("planDTO=======> " + planDTO);
-        long plno = mainService.planRegister(planDTO);
-
-        rttr.addFlashAttribute("plno", plno);
-
-        return "redirect:/travelmaker/main/plan";
+        log.info("pno=====+++++++>"+pno);
+        Long plno = mainService.planRegister(planDTO);
+//        PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(pno).plnoByPartyDetail(plno).build();
     }
 
 //    @PostMapping("/planPopup")

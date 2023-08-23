@@ -11,11 +11,9 @@ public interface MainService {
 
     List<Map<String,Object>> getPlan(Long pno);
 
-    //plan
-    Long planRegister(PlanDTO planDTO);
-
     PlanDTO readOne(Long plno);
 
-    Long regist(PlanDTO planDTO, Long pno);
+    Long planRegister(PlanDTO planDTO);
+
 
 }

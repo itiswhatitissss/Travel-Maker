@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.dto.PlanDTO;
 import org.zerock.travelmaker.mapper.MybatisMapper;
@@ -41,12 +42,6 @@ public class MainServiceImpl implements MainService{
         return result;
     }
 
-    @Override
-    public Long planRegister(PlanDTO planDTO) {
-        Plan plan = modelMapper.map(planDTO, Plan.class);
-        Long plno = planRepository.save(plan).getPlno();
-        return plno;
-    }
 
     @Override
     public PlanDTO readOne(Long plno) {
@@ -57,10 +52,9 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
-    public Long regist(PlanDTO planDTO, Long pno) {
+    public Long planRegister(PlanDTO planDTO) {
         Plan plan = modelMapper.map(planDTO, Plan.class);
         Long plno = planRepository.save(plan).getPlno();
-
         return plno;
     }
 

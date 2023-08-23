@@ -49,6 +49,9 @@ public class Plan{
     @OneToOne(mappedBy = "plnoByVote",cascade = CascadeType.ALL)
     private Vote vote;
 
+    private String img;
+
+
     @PrePersist
     private void prePersist() {
         PartyDetail partyDetail = new PartyDetail();
