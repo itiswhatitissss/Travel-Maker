@@ -46,7 +46,7 @@ public class MapperTests {
 
     @Test
     public void testGetUser(){
-        Long result = loginService.getUno("pkmm", "1234");
+        Long result = loginService.getUno("pkmm");
         log.info("result=================>"+ result);
     }
 

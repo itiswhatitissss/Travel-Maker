@@ -17,9 +17,9 @@ public class LoginServiceImpl implements LoginService{
 //    private final ModelMapper modelMapper;
 //    private final SampleMapper sampleMapper;
     @Override
-    public Long getUno(String id, String password) {
+    public Long getUno(String username) {
 
-        Long uno = userRepository.findUno(id, password);
+        Long uno = userRepository.findUno(username);
         log.info("uno============>" + uno);
         return uno;
     }

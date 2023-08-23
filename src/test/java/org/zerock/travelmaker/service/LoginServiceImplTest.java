@@ -20,9 +20,7 @@ class LoginServiceImplTest {
     @Test
     public void getUNO(){
         String id = "pkmm";
-        String password = "1234";
-
-        Long result = userRepository.findUno(id, password);
+        Long result = userRepository.findUno(id);
         log.info("result.......>>{}", result);
 
     }
