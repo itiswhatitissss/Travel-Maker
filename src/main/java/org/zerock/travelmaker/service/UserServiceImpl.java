@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 @Log4j2
 @RequiredArgsConstructor
 @Transactional
-public class LoginServiceImpl implements LoginService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 //    private final ModelMapper modelMapper;

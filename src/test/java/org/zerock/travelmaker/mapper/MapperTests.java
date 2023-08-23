@@ -4,14 +4,10 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.zerock.travelmaker.domain.Friend;
-import org.zerock.travelmaker.domain.Users;
-import org.zerock.travelmaker.dto.FriendDTO;
-import org.zerock.travelmaker.service.LoginService;
+import org.zerock.travelmaker.service.UserService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @SpringBootTest
 @Log4j2
@@ -24,7 +20,7 @@ public class MapperTests {
     private SampleMapper sampleMapper;
 
     @Autowired
-    private LoginService loginService;
+    private UserService loginService;
 
 //    @Test
 //    public void testGetList() {

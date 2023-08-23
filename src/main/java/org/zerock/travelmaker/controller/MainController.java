@@ -7,23 +7,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.dto.PlanDTO;
-import org.zerock.travelmaker.repository.PlanRepository;
 import org.zerock.travelmaker.service.FriendService;
-import org.zerock.travelmaker.service.LoginService;
+import org.zerock.travelmaker.service.UserService;
 import org.zerock.travelmaker.service.MainService;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +26,7 @@ import java.util.Map;
 public class MainController {
 
     private final MainService mainService;
-    private final LoginService loginService;
+    private final UserService loginService;
     private final FriendService friendService;
 
 
