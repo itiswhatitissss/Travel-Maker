@@ -56,6 +56,19 @@ public class CustomSecurityConfig {
         repo.setDataSource(dataSource);
         return repo;
     }
+//
+//    @Bean
+//    public JdbcTokenRepositoryImpl tokenRepository() {
+//        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+//        tokenRepository.setCreateTableOnStartup(false); // 테이블 자동 생성 비활성화
+//        tokenRepository.setDataSource(dataSource); // DataSource 설정
+//        tokenRepository.setTokenRepositoryCustomization(new MyTokenRepositoryCustomization ()); // 토큰 저장소 커스터마이징
+//
+//        // 토큰 테이블명 변경
+//        tokenRepository.setTableName("my_persistent_logins");
+//
+//        return tokenRepository;
+//    }
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {

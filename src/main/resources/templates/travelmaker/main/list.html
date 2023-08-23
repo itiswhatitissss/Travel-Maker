@@ -55,7 +55,8 @@
     <div class="split-left">
         <ul th:each="party: ${partyDTO}">
             <li>
-                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}" th:text="${party.party_name}"></a>
+<!--                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}" th:text="${party.party_name}"></a>-->
+                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}" th:text="${party.party_name}"></a>
             </li>
         </ul>
     </div>

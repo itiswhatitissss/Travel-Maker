@@ -3,6 +3,8 @@ package org.zerock.travelmaker.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.dto.PlanDTO;
+import org.zerock.travelmaker.service.LoginService;
 import org.zerock.travelmaker.service.MainService;
 
 import javax.servlet.http.HttpSession;
@@ -28,19 +31,22 @@ import java.util.Map;
 public class MainController {
 
     private final MainService mainService;
+    private final LoginService loginService;
 
 
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/list")
-    public void mainList(HttpSession session, Model model, Long uno, Long pno){
+    public void mainList(Model model, Long uno, Long pno, Authentication authentication){
         List<Map<String,Object>> party =mainService.getParty(uno);
         model.addAttribute("partyDTO",party);
         List<Map<String,Object>> plan =mainService.getPlan(pno);
         model.addAttribute("planDTO",plan);
-//        Long uno = (Long) session.getAttribute("uno" );
-//        List<Map<String,Object>> partyList = mainService.getParty(uno);
-//        model.addAttribute("party",partyList);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Long uno2 = loginService.getUno(username);
+        model.addAttribute("uno", uno2);
     }
 
     @PostMapping("/createPlan")
