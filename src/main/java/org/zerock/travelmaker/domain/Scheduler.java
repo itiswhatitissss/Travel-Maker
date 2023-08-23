@@ -18,7 +18,7 @@ public class Scheduler{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sno;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="plno")
     private Plan plnoByScheduler;
 

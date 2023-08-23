@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,29 +28,35 @@ public class Plan{
     @Column(name="plno")
     private Long plno;
 
-    //    @Column(name="start", updatable = true)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDate start;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date start;
 
-    //    @Column(name="end", updatable = true)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private LocalDate end;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date end;
 
     @Column(length = 50, nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "plnoByPartyDetail")
+    @OneToMany(mappedBy = "plnoByPartyDetail", cascade = CascadeType.ALL)
     private List<PartyDetail> partyDetails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "plnoByGallery")
+    @OneToMany(mappedBy = "plnoByGallery", cascade = CascadeType.ALL)
     private List<Gallery> galleries = new ArrayList<>();
 
-    @OneToOne(mappedBy = "plnoByScheduler")
+    @OneToOne(mappedBy = "plnoByScheduler", cascade = CascadeType.ALL)
     private Scheduler scheduler;
 
-    @OneToOne(mappedBy = "plnoByVote")
+    @OneToOne(mappedBy = "plnoByVote",cascade = CascadeType.ALL)
     private Vote vote;
 
-    @Column
-    private String img;
+//    @NotNull
+//    private long planIdx;
+//
+//    @NotNull
+//    private String originalFileName;
+//
+//    @NotNull
+//    private String storedFileName;
+//
+//    private long fileSize;
 }

@@ -19,7 +19,7 @@ public class Vote{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vno;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="pno")
     private Party pnoByVote;
 
