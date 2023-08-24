@@ -21,11 +21,11 @@ public class Users{
     private Long uno;
 
     private String id;
-    private String name;
     private String password;
+    private String name;
     private String email;
     private String address;
-    private String phone;
+//    private String phone;
 
     @OneToMany(mappedBy = "unoByFriend")
     private List<Friend> unofriends = new ArrayList<>();
@@ -50,8 +50,5 @@ public class Users{
     }
     public void changeAddress(String address){
         this.address = address;
-    }
-    public void changePhone(String phone){
-        this.phone = phone;
     }
 }

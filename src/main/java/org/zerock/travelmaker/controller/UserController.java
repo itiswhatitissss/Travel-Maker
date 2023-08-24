@@ -7,7 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.travelmaker.dto.UserDTO;
 import org.zerock.travelmaker.service.UserService;
 
 @Controller
@@ -16,17 +19,13 @@ import org.zerock.travelmaker.service.UserService;
 @RequestMapping("/travelmaker")
 public class UserController {
 
-    private final UserService loginService;
+    private final UserService userService;
 
     //    @PreAuthorize("permitAll()")
     @GetMapping("/login")
     public void loginGET(String error, String logout){
         log.info("login get........");
         log.info("logout : "+logout);
-
-        if(logout != null){
-            log.info("user logout........");
-        }
     }
 
     @GetMapping("/loginSuccess")
@@ -34,10 +33,32 @@ public class UserController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
 
-        Long uno = loginService.getUno(username);
+        Long uno = userService.getUno(username);
         log.info("uno-------------------------------->" + uno);
         model.addAttribute("uno", uno);
 
         return "redirect:/travelmaker/main/list?uno=" + uno;
     }
+
+    @GetMapping("/signup")
+    public void signupGET() {};
+
+    @PostMapping("/signup")
+    public String signupPOST(UserDTO userDTO, RedirectAttributes rttr) {
+
+        log.info("signup post...");
+        log.info(userDTO);
+
+        try {
+            userService.join(userDTO);
+        } catch (UserService.IdExistException e) {
+
+            rttr.addFlashAttribute("error", "mid");
+            return "redirect:/travelmaker/signup";
+        }
+
+        rttr.addFlashAttribute("result", "success");
+
+        return "redirect:/travelmaker/login"; //회원 가입 후 로그인
+    };
 }

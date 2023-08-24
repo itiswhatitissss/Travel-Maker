@@ -34,8 +34,8 @@ public class UserDTO {
     @NotEmpty(message = "주소는 필수 입력 값입니다.")
     private String address;
 
-    @NotEmpty(message = "전화번호는 필수 입력 값입니다.")
-    private String phone;
+//    @NotEmpty(message = "전화번호는 필수 입력 값입니다.")
+//    private String phone;
 
 //    private Long uno;
 //
