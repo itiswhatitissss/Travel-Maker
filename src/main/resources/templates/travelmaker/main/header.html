@@ -8,44 +8,105 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<header class="p-3 mb-3 border-bottom">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/static" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                    <use xlink:href="#bootstrap"/>
-                </svg>
-            </a>
-
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-                <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
-                <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
-                <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
-            </ul>
-
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-            </form>
-
-            <div class="dropdown text-end">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+<header th:fragment="headerFragment">
+    <header class="p-3 mb-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/static"
+                   class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"/>
+                    </svg>
                 </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-secondary" data-bs-toggle="modal" data-bs-target="#friendModal">친구목록</a></li>
+                    <li><a href="#" class="nav-link px-2 link-body-emphasis">환경설정</a></li>
                 </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/309/59932b0eb046f9fa3e063b8875032edd_crop.jpeg" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">내 정보</a></li>
+                        <li><a class="dropdown-item" href="#">상태 메시지</a></li>
+                        <li><a class="dropdown-item" href="#">프로필 뮤직 설정</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+        <!-- 친구목록 모달 -->
+        <div class="modal fade" id="friendModal" tabindex="-1" aria-labelledby="friendModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="friendModalLabel">친구목록</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 체크박스를 추가하고자 하는 부분 -->
+                        <form th:action="@{/travelmaker/main/friend}" method="post" class="d-flex">
+                            <input type="search" class="form-control" name="searchText" id="friendSearchInput" placeholder="친구 검색..." aria-label="친구 검색">
+                            <button type="submit" class="btn btn-primary">검색</button>
+                        </form>
+                        <!-- 친구 목록 출력 부분 -->
+                        <form th:action="@{/travelmaker/main/friend}" method="post" class="d-flex">
+                            <div class="form-check">
+                                <div th:each="friend: ${friendDTO}">
+                                    <h7 th:text="${friend.name}"></h7>
+                                    <input class="form-check-input" type="checkbox" th:value="${friend.fno}" id="friendCheckbox">
+                                    <!--                                    <input type="hidden" th:value="${uno.uno}">-->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구삭제</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!---------친구끝---------->
+            <!---------친구script---------->
+            <script>
+                document.getElementById("friendCheckbox").addEventListener("click", function () {
+                    // 체크된 체크박스 가져오기
+                    var friendCheckboxes = document.querySelectorAll(".form-check-input:checked");
+
+                    // 체크된 체크박스의 값을 배열에 저장
+                    var selectedFriends = [];
+                    friendCheckboxes.forEach(function (checkbox) {
+                        selectedFriends.push(checkbox.value); // 체크된 체크박스의 값(친구의 ID 등)을 저장
+                    });
+
+                    // 서버로 선택한 친구 정보 전송
+                    // 예: AJAX를 사용하여 컨트롤러의 로직 호출
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/travelmaker/main/friend", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // 성공적으로 처리되었을 때의 로직
+                            console.log("친구 추가 완료");
+                        }
+                    };
+                    xhr.send(JSON.stringify(selectedFriends)); // 선택한 친구 정보를 JSON 형태로 전송
+                });
+            </script>
+            <!---------친구script 끝---------->
+    </header>
 </header>
+<!--header-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

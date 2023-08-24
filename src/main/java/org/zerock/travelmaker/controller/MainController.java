@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.domain.Party;
 import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.dto.PlanDTO;
@@ -18,6 +19,7 @@ import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.UserService;
 import org.zerock.travelmaker.service.MainService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.util.List;
 import java.util.Map;
@@ -83,5 +85,20 @@ public class MainController {
 //
 //        return "redirect:/travelmaker/main/plan";
 //    }
+@PostMapping("/friend")
+public String friendlogic(Long uno , Long fno, HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr){
 
+    String referer = request.getHeader("referer");
+    log.info("검색text : " +searchText);
+
+//    if(searchText==null) {
+//        log.info("Uno : " + uno);
+//        log.info("Fno : " + fno);
+//        friendService.deleteFriend(uno, fno);
+//    }else{
+//        List<Map<String, Object>> search =friendService.friendSearch(searchText);
+//        rttr.addAttribute("friendDTO",search);
+//    }
+    return "redirect:" + referer;
+}
 }
