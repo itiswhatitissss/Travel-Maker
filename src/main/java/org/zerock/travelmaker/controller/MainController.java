@@ -90,20 +90,30 @@ public class MainController {
 //
 //        return "redirect:/travelmaker/main/plan";
 //    }
-@PostMapping("/friend")
-public String friendlogic(Long uno , Long fno, HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr){
+@PostMapping("/friendSearch")
+public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr) {
 
     String referer = request.getHeader("referer");
     log.info("검색text : " +searchText);
 
-//    if(searchText==null) {
-//        log.info("Uno : " + uno);
-//        log.info("Fno : " + fno);
-//        friendService.deleteFriend(uno, fno);
-//    }else{
-//        List<Map<String, Object>> search =friendService.friendSearch(searchText);
-//        rttr.addAttribute("friendDTO",search);
-//    }
+    List<Map<String, Object>> search =friendService.friendSearch(searchText);
+    rttr.addAttribute("friendDTO",search);
+
     return "redirect:" + referer;
 }
+    @PostMapping("/friendDelete")
+    public String friendDelete(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+
+        Long uno = loginService.getUno(username);
+
+        String referer = request.getHeader("referer");
+
+        for (int i=0; i<selectedFriends.size();i++){
+            Long fno = selectedFriends.get(i);
+            friendService.deleteFriend(uno,fno);
+        }
+        return "redirect:" + referer;
+    }
 }

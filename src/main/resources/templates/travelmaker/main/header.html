@@ -54,20 +54,20 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- 체크박스를 추가하고자 하는 부분 -->
-                        <form th:action="@{/travelmaker/main/friend}" method="post" class="d-flex">
+                        <!-----검색기능------>
+                        <form th:action="@{/travelmaker/main//friendSearch}" method="post" class="d-flex">
                             <input type="search" class="form-control" name="searchText" id="friendSearchInput" placeholder="친구 검색..." aria-label="친구 검색">
                             <button type="submit" class="btn btn-primary">검색</button>
                         </form>
+
                         <!-- 친구 목록 출력 부분 -->
-                        <form th:action="@{/travelmaker/main/friend}" method="post" class="d-flex">
+                        <form th:action="@{/travelmaker/main/friendDelete}" method="post" class="d-flex">
                             <div class="form-check">
                                 <div th:each="friend: ${friendDTO}">
                                     <h7 th:text="${friend.name}"></h7>
-                                    <input class="form-check-input" type="checkbox" th:value="${friend.fno}" id="friendCheckbox">
-                                    <!--                                    <input type="hidden" th:value="${uno.uno}">-->
+                                    <input class="form-check-input" type="checkbox" th:value="${friend.fno}" name="selectedFriends" id="friendCheckbox">
                                 </div>
-                            </div>
+                            </div><br><br>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구삭제</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -78,35 +78,46 @@
             </div>
             <!---------친구끝---------->
             <!---------친구script---------->
-            <script>
-                document.getElementById("friendCheckbox").addEventListener("click", function () {
-                    // 체크된 체크박스 가져오기
-                    var friendCheckboxes = document.querySelectorAll(".form-check-input:checked");
+<!--            <script>-->
+<!--                document.getElementById("friendCheckbox").addEventListener("click", function () {-->
+<!--                    // 체크된 체크박스 가져오기-->
+<!--                    var friendCheckboxes = document.querySelectorAll(".form-check-input:checked");-->
 
-                    // 체크된 체크박스의 값을 배열에 저장
-                    var selectedFriends = [];
-                    friendCheckboxes.forEach(function (checkbox) {
-                        selectedFriends.push(checkbox.value); // 체크된 체크박스의 값(친구의 ID 등)을 저장
-                    });
+<!--                    // 체크된 체크박스의 값을 배열에 저장-->
+<!--                    var selectedFriends = [];-->
+<!--                    friendCheckboxes.forEach(function (checkbox) {-->
+<!--                        selectedFriends.push(checkbox.value); // 체크된 체크박스의 값(친구의 ID 등)을 저장-->
+<!--                    });-->
 
-                    // 서버로 선택한 친구 정보 전송
-                    // 예: AJAX를 사용하여 컨트롤러의 로직 호출
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/travelmaker/main/friend", true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            // 성공적으로 처리되었을 때의 로직
-                            console.log("친구 추가 완료");
-                        }
-                    };
-                    xhr.send(JSON.stringify(selectedFriends)); // 선택한 친구 정보를 JSON 형태로 전송
-                });
-            </script>
+<!--                    // 서버로 선택한 친구 정보 전송-->
+<!--                    // 예: AJAX를 사용하여 컨트롤러의 로직 호출-->
+<!--                    var xhr = new XMLHttpRequest();-->
+<!--                    xhr.open("POST", "/travelmaker/main/friend", true);-->
+<!--                    xhr.setRequestHeader("Content-Type", "application/json");-->
+<!--                    xhr.onreadystatechange = function () {-->
+<!--                        if (xhr.readyState === 4 && xhr.status === 200) {-->
+<!--                            // 성공적으로 처리되었을 때의 로직-->
+<!--                            console.log("친구 추가 완료");-->
+<!--                        }-->
+<!--                    };-->
+<!--                    xhr.send(JSON.stringify(selectedFriends)); // 선택한 친구 정보를 JSON 형태로 전송-->
+<!--                });-->
+<!--            </script>-->
             <!---------친구script 끝---------->
     </header>
 </header>
 <!--header-->
+<script>
+
+    //plan 추가(팝업페이지로 이동):
+    function click_add() {
+        var url = "planPopup";
+        var name = "planPopup";
+        var option = "width:=300, height=300, left=100, top=50, location=no";
+
+        window.open(url, name, option);
+    };
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
