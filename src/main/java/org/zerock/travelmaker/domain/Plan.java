@@ -51,27 +51,4 @@ public class Plan{
 
     private String img;
 
-
-    @PrePersist
-    private void prePersist() {
-        PartyDetail partyDetail = new PartyDetail();
-        partyDetail.setPlnoByPartyDetail(this);
-
-        partyDetails.add(partyDetail);
-
-        Gallery gallery = new Gallery();
-        gallery.setPlnoByGallery(this);
-
-        galleries.add(gallery);
-
-        Scheduler scheduler = new Scheduler();
-        scheduler.setPlnoByScheduler(this);
-
-        this.scheduler = scheduler;
-
-        Vote vote = new Vote();
-        vote.setPlnoByVote(this);
-
-        this.vote = vote;
-    }
 }

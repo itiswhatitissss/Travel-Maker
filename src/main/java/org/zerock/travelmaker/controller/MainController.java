@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.zerock.travelmaker.domain.Party;
+import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.dto.PlanDTO;
 import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.UserService;
 import org.zerock.travelmaker.service.MainService;
 
+import javax.servlet.http.Part;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +57,8 @@ public class MainController {
 //        model.addAttribute("planDTO",result);
 //    }
 
-//    @GetMapping("/plan")
-//    public void plan(){}
+    @GetMapping("/test")
+    public void plan(){}
 
     @GetMapping("/planPopup")
     public void planPopupGet(){
@@ -65,8 +68,7 @@ public class MainController {
     public void planPopupPost(PlanDTO planDTO, @RequestParam("pno") Long pno){
         log.info("planDTO=======> " + planDTO);
         log.info("pno=====+++++++>"+pno);
-        Long plno = mainService.planRegister(planDTO);
-//        PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(pno).plnoByPartyDetail(plno).build();
+        mainService.planRegister(planDTO,pno);
     }
 
 //    @PostMapping("/planPopup")

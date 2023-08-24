@@ -27,7 +27,5 @@ public class Party{
     @OneToMany(mappedBy = "pnoByPartyDetail")
     private List<PartyDetail> partyDetails = new ArrayList<>();
 
-    @OneToOne(mappedBy = "pnoByVote")
-    private Vote vote;
 
 }

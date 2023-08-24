@@ -36,8 +36,7 @@ class MainServiceImplTest {
                     .end(endDate)
                     .build();
             Long pno = 2L;
-            Long plno = mainService.planRegister(planDTO);
-            log.info("plno :" + plno);
+            mainService.planRegister(planDTO, pno);
 
         } catch (ParseException e) {
             e.printStackTrace();

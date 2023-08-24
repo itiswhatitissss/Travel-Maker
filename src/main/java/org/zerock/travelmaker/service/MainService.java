@@ -1,5 +1,7 @@
 package org.zerock.travelmaker.service;
 
+import org.zerock.travelmaker.domain.Party;
+import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.dto.PlanDTO;
 
 import java.util.List;
@@ -13,7 +15,11 @@ public interface MainService {
 
     PlanDTO readOne(Long plno);
 
-    Long planRegister(PlanDTO planDTO);
+    void planRegister(PlanDTO planDTO, Long pno);
+
+    Party findByPno(Long pno); //for planRegister
+
+    Plan findByPlno(Long plno); //for planRegister
 
 
 }

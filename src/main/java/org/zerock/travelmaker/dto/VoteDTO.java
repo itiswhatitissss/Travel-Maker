@@ -14,7 +14,6 @@ import java.util.Date;
 public class VoteDTO {
 
     private Long vno;
-    private Long pnoByVote;
     private Long plnoByVote;
     private String vTitle;
     private Date vEndDate;
