@@ -24,7 +24,8 @@ public class Users{
     private String password;
     private String name;
     private String email;
-    private String address;
+
+//    private String address;
 //    private String phone;
 
     @OneToMany(mappedBy = "unoByFriend")
@@ -47,8 +48,5 @@ public class Users{
     }
     public void changeEmail(String email){
         this.email = email;
-    }
-    public void changeAddress(String address){
-        this.address = address;
     }
 }

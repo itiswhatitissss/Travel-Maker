@@ -40,8 +40,8 @@ public class UserController {
         return "redirect:/travelmaker/main/list?uno=" + uno;
     }
 
-    @GetMapping("/signup")
-    public void signupGET() {};
+//    @GetMapping("/signup")
+//    public void signupGET() {};
 
     @PostMapping("/signup")
     public String signupPOST(UserDTO userDTO, RedirectAttributes rttr) {
@@ -59,6 +59,6 @@ public class UserController {
 
         rttr.addFlashAttribute("result", "success");
 
-        return "redirect:/travelmaker/login"; //회원 가입 후 로그인
+        return "redirect:/travelmaker/login"; //회원 가입 후 로그인페이지
     };
 }

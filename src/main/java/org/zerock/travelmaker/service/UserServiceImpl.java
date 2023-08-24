@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    //    private final SampleMapper sampleMapper;
     @Override
     public Long getUno(String username) {
 
@@ -32,8 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void join(UserDTO userDTO) throws IdExistException {
-        Long uno = userDTO.getUno();
-
+//        Long uno = userDTO.getUno();
 //        boolean exist = userRepository.existsById(uno);
 //        if(exist){
 //            throw new IdExistException();
@@ -42,8 +40,8 @@ public class UserServiceImpl implements UserService {
         Users users = modelMapper.map(userDTO, Users.class);
         users.changePassword(passwordEncoder.encode(userDTO.getPassword()));
 
-        log.info("=======================");
-        log.info(users);
+        log.info("================================================");
+        log.info(users.getUno());
 
         userRepository.save(users);
     }

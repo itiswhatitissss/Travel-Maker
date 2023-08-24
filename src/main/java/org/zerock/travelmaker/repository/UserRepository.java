@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<Users,Long> {
-    Optional<Users> findByIdAndPassword(String id, String password);
 
     @Query("select u.uno from Users u where u.id=:id")
     Long findUno(String id);
