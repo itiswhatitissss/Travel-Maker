@@ -53,7 +53,7 @@ public class UserController {
             userService.join(userDTO);
         } catch (UserService.IdExistException e) {
 
-            rttr.addFlashAttribute("error", "mid");
+            rttr.addFlashAttribute("error", "id");
             return "redirect:/travelmaker/signup";
         }
 
