@@ -34,7 +34,7 @@
             <div id="carousel">
                 <th:block th:each="plan : ${planDTO}">
                     <div id="carousel-item">
-                        <img th:src="${plan.img}" alt=""/>
+                        <img th:src="${plan.filepath}" alt=""/>
                         <div id="info">
                             <p th:text="${plan.title}"></p>
                             <p th:text="${plan.start}"></p>

@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.domain.Party;
 import org.zerock.travelmaker.domain.PartyDetail;
+import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.dto.PlanDTO;
 import org.zerock.travelmaker.service.FriendService;
+import org.zerock.travelmaker.service.PlanService;
 import org.zerock.travelmaker.service.UserService;
 import org.zerock.travelmaker.service.MainService;
 
@@ -33,6 +36,7 @@ public class MainController {
     private final MainService mainService;
     private final UserService loginService;
     private final FriendService friendService;
+    private final PlanService planService;
 
 
 
@@ -68,12 +72,20 @@ public class MainController {
         model.addAttribute("pno",pno);
     }
 
-    @PostMapping("/planPopup")
+//    @PostMapping("/planPopup")
+//    public void planPopupPost(PlanDTO planDTO, Long pno){
+//        log.info("planDTO=======> " + planDTO);
+//        log.info("pno=====+++++++>"+pno);
+//        mainService.planRegister(planDTO,pno);
+//    }
 
-    public void planPopupPost(PlanDTO planDTO, Long pno){
-        log.info("planDTO=======> " + planDTO);
-        log.info("pno=====+++++++>"+pno);
-        mainService.planRegister(planDTO,pno);
+    @PostMapping("/planPopup")
+    public void planPopup(Plan plan, Long pno, Model model, MultipartFile file)throws Exception{
+        planService.write(plan,file,pno);
+
+        //model.addAttribute("message","글작성이 완료되었습니다");
+        //model.addAttribute("searchUrl","/travelmaker/main/list");
+
     }
 
 

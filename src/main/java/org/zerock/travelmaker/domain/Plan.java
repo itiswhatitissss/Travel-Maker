@@ -18,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Builder
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "plno")
@@ -49,6 +49,8 @@ public class Plan{
     @OneToOne(mappedBy = "plnoByVote",cascade = CascadeType.ALL)
     private Vote vote;
 
-    private String img;
+    private String filename;
+
+    private String filepath;
 
 }

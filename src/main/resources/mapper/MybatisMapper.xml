@@ -8,7 +8,7 @@
     </select>
 
     <select id="getPlanList" resultType="map" parameterType="Long">
-        select plan.plno, plan.title, plan.start, plan.end, plan.img from party join party_detail on party.pno = party_detail.pno join plan on party_detail.plno = plan.plno where party.pno= #{pno}
+        select plan.plno, plan.title, plan.start, plan.end, plan.filepath from party join party_detail on party.pno = party_detail.pno join plan on party_detail.plno = plan.plno where party.pno= #{pno}
     </select>
 
     <select id="selectFriendList" resultType="map" parameterType="map">
