@@ -29,7 +29,7 @@
     <!--오른쪽 시작(plan)-->
 
     <div class="split-right">
-        <button class="add-button" type="button" th:onclick="click_add()">plan 추가</button>
+        <button class="add-button" type="button" th:each="party: ${partyDTO}" th:data-pno="${party.pno}" th:onclick="click_add(this.getAttribute('data-pno'))">plan 추가</button>
         <div id="carousel-wrapper">
             <div id="carousel">
                 <th:block th:each="plan : ${planDTO}">
@@ -56,13 +56,12 @@
 </body>
 <script>
 
-    //plan 추가(팝업페이지로 이동):
-    function click_add() {
-        var url = "planPopup";
+    function click_add(pno) {
+        var url = "planPopup?pno=" + pno;
         var name = "planPopup";
-        var option = "width:=300, height=300, left=100, top=50, location=no";
+        var option = "width=500, height=800, left=300, top=50, location=no";
 
         window.open(url, name, option);
-    };
+    }
 </script>
 </html>

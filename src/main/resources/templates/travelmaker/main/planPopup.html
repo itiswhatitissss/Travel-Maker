@@ -10,7 +10,7 @@
     <h1>Create New Party</h1>
     <form name="form" th:action="@{/travelmaker/main/planPopup}" method="post" enctype="multipart/form-data">
 
-        <input type="hidden" name="pno" value="">
+        <input type="hidden" name="pno" th:value="${pno}">
 
         <!-- 제목 입력 -->
         <div class="mb-3">

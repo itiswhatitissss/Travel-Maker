@@ -62,16 +62,21 @@ public class MainController {
     @GetMapping("/test")
     public void plan(){}
 
+
     @GetMapping("/planPopup")
-    public void planPopupGet(){
+    public void planPopupGet(@RequestParam("pno") Long pno,Model model){
+        model.addAttribute("pno",pno);
     }
 
     @PostMapping("/planPopup")
-    public void planPopupPost(PlanDTO planDTO, @RequestParam("pno") Long pno){
+
+    public void planPopupPost(PlanDTO planDTO, Long pno){
         log.info("planDTO=======> " + planDTO);
         log.info("pno=====+++++++>"+pno);
         mainService.planRegister(planDTO,pno);
     }
+
+
 
 //    @PostMapping("/planPopup")
 //    public String planPopupPost(PlanDTO planDTO, RedirectAttributes rttr, HttpSession session) {

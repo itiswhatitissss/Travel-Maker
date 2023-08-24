@@ -106,7 +106,7 @@ class TestRepositoryTest {
         SchedulerDetail schedulerDetail = SchedulerDetail.builder().snoBySchedulerDetail(scheduler).content("재밌게 놀자 !").build();
         scheudlerDetailRepository.save(schedulerDetail); //해병대전우회 첫여행 스케줄러 디테일 생성
 
-        Vote vote = Vote.builder().pnoByVote(party).plnoByVote(planRepository.findById(1L).get()).vTitle("술 몇 병 살래").vCheck(1).vComplete(1).vCount(3).build();
+        Vote vote = Vote.builder().plnoByVote(planRepository.findById(1L).get()).vTitle("술 몇 병 살래").vCheck(1).vComplete(1).vCount(3).build();
         voteRepository.save(vote); //해병대전우회 첫여행 투표시스템 사용
 
         VoteOption voteOption = VoteOption.builder().vnoByVoteOption(vote).unoByVoteOption(user).voOption("띠용").build();
