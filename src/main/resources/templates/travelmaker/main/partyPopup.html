@@ -19,11 +19,13 @@
     </div>
 
     <!-- 친구 추가 -->
-    <div class="mb-3">
-      <label for="friend" class="form-label">친구추가</label>
-      <input type="text" id="friend">
+    <div class="form-check">
+      <label for="title" class="form-label">파티 멤버 추가</label>
+      <div th:each="friend: ${friendDTO}">
+        <h7 th:text="${friend.name}"></h7>
+        <input class="form-check-input" type="checkbox" th:value="${friend.fno}" name="selectedFriends" id="friendCheckbox">
+      </div>
     </div>
-
 
     <button type="submit" id="submit" class="btn btn-primary">Create Party</button>
   </form>

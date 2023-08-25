@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.domain.Party;
 import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.domain.Plan;
+import org.zerock.travelmaker.dto.PartyDTO;
 import org.zerock.travelmaker.dto.PlanDTO;
 import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.PlanService;
@@ -59,11 +60,18 @@ public class MainController {
     @GetMapping("/partyPopup")
     public void partyPopupGet(@RequestParam("uno")Long uno,Model model){
         model.addAttribute("uno",uno);
+        List<Map<String,Object>> friend =friendService.friendList(uno);
+        model.addAttribute("friendDTO",friend);
     }
 
     @PostMapping("/partyPopup")
-    public void partyPopupPost(){
-
+    public void partyPopupPost(@RequestParam("uno")Long uno,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends,
+                               @RequestParam("title") String title){
+        PartyDTO partyDTO = PartyDTO.builder()
+                .partyName(title)
+                .build();
+        selectedFriends.add(uno);
+        mainService.PartyRegister(partyDTO,selectedFriends);
     }
 
     @GetMapping("/planPopup")
