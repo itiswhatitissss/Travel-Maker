@@ -5,7 +5,9 @@ import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.zerock.travelmaker.domain.*;
+import org.zerock.travelmaker.dto.PartyDTO;
 import org.zerock.travelmaker.dto.PlanDTO;
+import org.zerock.travelmaker.dto.UserPartyDTO;
 import org.zerock.travelmaker.mapper.MybatisMapper;
 import org.zerock.travelmaker.repository.*;
 
@@ -29,6 +31,8 @@ public class MainServiceImpl implements MainService{
     private final SchedulerRepositroy schedulerRepositroy;
     private final VoteRepository voteRepository;
     private final PartyRepository partyRepository;
+    private final UserPartyRepository userPartyRepository;
+    private final UserRepository userRepository;
 
 
     @Override
@@ -83,6 +87,27 @@ public class MainServiceImpl implements MainService{
         Optional<Plan> id = planRepository.findById(plno);
         Plan byPlno = id.orElseThrow();
         return byPlno;
+    }
+
+    @Override
+    public void PartyRegister(PartyDTO partyDTO, List<Long> member) {
+        Party party = modelMapper.map(partyDTO, Party.class);
+        partyRepository.save(party);
+        Long pno2= party.getPno();
+
+        for(int i=0;i< member.size();i++) {
+            Optional<Users> byId = userRepository.findById(member.get(i));
+            Users uno = byId.orElseThrow();
+            Optional<Party> byId2 = partyRepository.findById(pno2);
+            Party pno = byId2.orElseThrow();
+
+            UserParty userParty = UserParty.builder()
+                    .pnoByUserParty(pno)
+                    .unoByUserParty(uno)
+                    .build();
+
+            userPartyRepository.save(userParty);
+        }//문제!! controller에서 내 uno를 member List에 넣어줘야함
     }
 
 

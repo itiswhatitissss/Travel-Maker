@@ -2,7 +2,9 @@ package org.zerock.travelmaker.service;
 
 import org.zerock.travelmaker.domain.Party;
 import org.zerock.travelmaker.domain.Plan;
+import org.zerock.travelmaker.dto.PartyDTO;
 import org.zerock.travelmaker.dto.PlanDTO;
+import org.zerock.travelmaker.dto.UserPartyDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,8 @@ public interface MainService {
     Party findByPno(Long pno); //for planRegister
 
     Plan findByPlno(Long plno); //for planRegister
+
+    void PartyRegister(PartyDTO partyDTO, List<Long> member);
 
 
 }

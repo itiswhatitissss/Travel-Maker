@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.travelmaker.domain.Plan;
+import org.zerock.travelmaker.dto.PartyDTO;
 import org.zerock.travelmaker.dto.PlanDTO;
 import org.zerock.travelmaker.repository.PlanRepository;
 
@@ -13,6 +14,8 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @Log4j2
@@ -47,6 +50,19 @@ class MainServiceImplTest {
     public void testReadOne(){
         PlanDTO planDTO = mainService.readOne(1L);
         log.info("planDTO : " + planDTO);
+    }
+    @Test
+    public void testPatryRegister(){
+        List<Long> member = new ArrayList<Long>();
+        member.add(1L);
+        member.add(2L);
+        member.add(3L);
+
+        PartyDTO partyDTO =PartyDTO.builder()
+                .partyName("한신ㄱ")
+                .build();
+
+        mainService.PartyRegister(partyDTO,member);
     }
 
 }
