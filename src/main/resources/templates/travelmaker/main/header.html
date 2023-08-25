@@ -59,20 +59,39 @@
                             <input type="search" class="form-control" name="searchText" id="friendSearchInput" placeholder="친구 검색..." aria-label="친구 검색">
                             <button type="submit" class="btn btn-primary">검색</button>
                         </form>
+                        <div th:if="${list == 0}">
+                            <!-- 리스트 크기가 0일 때 처리할 내용 -->
+                            <form th:action="@{/travelmaker/main/friendDelete}" method="post" class="d-flex">
+                                <div class="form-check">
+                                    <div th:each="friend: ${friendDTO}">
+                                        <h7 th:text="${friend.name}"></h7>
+                                        <input class="form-check-input" type="checkbox" th:value="${friend.fno}" name="selectedFriends" id="friendCheckbox">
+                                    </div>
+                                </div><br><br>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구삭제</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div th:if="${list > 0}">
+                            <!-- 리스트가 1일 때 처리할 내용 -->
+                            <form th:action="@{/travelmaker/main/friendInsert}" method="post" class="d-flex">
+                                <div class="form-check">
+                                    <div th:each="friend: ${friendDTO}">
+                                        <h7 th:text="${friend.name}"></h7>
+                                        <input class="form-check-input" type="checkbox" th:value="${friend.fno}" name="selectedFriends" id="friendCheckbox">
+                                    </div>
+                                </div><br><br>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구추가</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                </div>
+                            </form>
+                        </div>
 
                         <!-- 친구 목록 출력 부분 -->
-                        <form th:action="@{/travelmaker/main/friendDelete}" method="post" class="d-flex">
-                            <div class="form-check">
-                                <div th:each="friend: ${friendDTO}">
-                                    <h7 th:text="${friend.name}"></h7>
-                                    <input class="form-check-input" type="checkbox" th:value="${friend.fno}" name="selectedFriends" id="friendCheckbox">
-                                </div>
-                            </div><br><br>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구삭제</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                            </div>
-                        </form>
+
                     </div>
                 </div>
             </div>

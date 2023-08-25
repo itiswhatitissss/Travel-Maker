@@ -24,6 +24,7 @@ import org.zerock.travelmaker.service.UserService;
 import org.zerock.travelmaker.service.MainService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +45,22 @@ public class MainController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/list")
-    public void mainList(Model model, Long uno, Long pno, Authentication authentication){
+    public void mainList(Model model, Long uno, Long pno, Authentication authentication, HttpSession session){
+        List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
+        if (friendDTO == null) {
+            List<Map<String,Object>> friend =friendService.friendList(uno);
+            model.addAttribute("friendDTO",friend);
+            model.addAttribute("list",0);
+        } else {
+            model.addAttribute("friendDTO",friendDTO);
+            model.addAttribute("list",1);
+            session.removeAttribute("friendSearchResult"); // 세션에서 검색 결과 제거
+        }
+
         List<Map<String,Object>> party =mainService.getParty(uno);
         model.addAttribute("partyDTO",party);
         List<Map<String,Object>> plan =mainService.getPlan(pno);
         model.addAttribute("planDTO",plan);
-        List<Map<String,Object>> friend =friendService.friendList(uno);
-        model.addAttribute("friendDTO",friend);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
@@ -95,13 +105,18 @@ public class MainController {
     }
 
 @PostMapping("/friendSearch")
-public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr) {
+public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr, HttpSession session) {
 
     String referer = request.getHeader("referer");
     log.info("검색text : " +searchText);
 
-    List<Map<String, Object>> search =friendService.friendSearch(searchText);
-    rttr.addAttribute("friendDTO",search);
+//    List<Map<String, Object>> search =friendService.friendSearch(searchText);
+//    rttr.addAttribute("friendDTO",search);
+//
+//    return "redirect:" + referer;
+
+    List<Map<String, Object>> search = friendService.friendSearch(searchText);
+    session.setAttribute("friendSearchResult", search);
 
     return "redirect:" + referer;
 }
