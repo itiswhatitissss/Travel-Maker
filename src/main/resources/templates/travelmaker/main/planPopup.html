@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Party Form</title>
+    <title>Create Plan Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-    <h1>Create New Party</h1>
+    <h1>Create New Plan</h1>
     <form name="form" th:action="@{/travelmaker/main/planPopup}" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="pno" th:value="${pno}">

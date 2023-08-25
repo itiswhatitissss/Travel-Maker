@@ -57,27 +57,11 @@ public class MainController {
     }
 
 
-//    @GetMapping("/list")
-//    public void plan(Long pno, Model model){
-//        List<Map<String,Object>> result = mainService.getPlan(pno);
-//        model.addAttribute("planDTO",result);
-//    }
-
-    @GetMapping("/test")
-    public void plan(){}
-
-
     @GetMapping("/planPopup")
     public void planPopupGet(@RequestParam("pno") Long pno,Model model){
         model.addAttribute("pno",pno);
     }
 
-//    @PostMapping("/planPopup")
-//    public void planPopupPost(PlanDTO planDTO, Long pno){
-//        log.info("planDTO=======> " + planDTO);
-//        log.info("pno=====+++++++>"+pno);
-//        mainService.planRegister(planDTO,pno);
-//    }
 
     @PostMapping("/planPopup")
     public void planPopup(Plan plan, Long pno, Model model, MultipartFile file)throws Exception{
@@ -88,20 +72,6 @@ public class MainController {
 
     }
 
-
-
-//    @PostMapping("/planPopup")
-//    public String planPopupPost(PlanDTO planDTO, RedirectAttributes rttr, HttpSession session) {
-//        log.info("planDTO=======> " + planDTO);
-//        long plno = mainService.planRegister(planDTO);
-//
-//        // 데이터를 세션에 저장
-//        session.setAttribute("planTitle", planDTO.getTitle());
-//        session.setAttribute("planStart", planDTO.getStart());
-//        session.setAttribute("planEnd", planDTO.getEnd());
-//
-//        return "redirect:/travelmaker/main/plan";
-//    }
 @PostMapping("/friendSearch")
 public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr) {
 
