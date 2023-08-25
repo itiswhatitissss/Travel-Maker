@@ -15,6 +15,7 @@
 <div class="split-container">
     <!--왼쪽 시작(party)-->
     <div class="split-left">
+        <button class="add-button" th:each="party: ${uno}" type="button" th:data-uno="${uno}" th:onclick="add_party(this.getAttribute('data-uno'))">party 추가</button>
         <ul th:each="party: ${partyDTO}">
             <li>
                 <!--                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}" th:text="${party.party_name}"></a>-->
@@ -29,7 +30,7 @@
     <!--오른쪽 시작(plan)-->
 
     <div class="split-right">
-        <button class="add-button" type="button" th:each="party: ${partyDTO}" th:data-pno="${party.pno}" th:onclick="click_add(this.getAttribute('data-pno'))">plan 추가</button>
+        <button class="add-button" type="button" th:each="party: ${partyDTO}" th:data-pno="${party.pno}" th:onclick="add_plan(this.getAttribute('data-pno'))">plan 추가</button>
         <div id="carousel-wrapper">
             <div id="carousel">
                 <th:block th:each="plan : ${planDTO}">
@@ -56,9 +57,17 @@
 </body>
 <script>
 
-    function click_add(pno) {
+    function add_plan(pno) {
         var url = "planPopup?pno=" + pno;
         var name = "planPopup";
+        var option = "width=500, height=800, left=300, top=50, location=no";
+
+        window.open(url, name, option);
+    }
+
+    function add_party(uno) {
+        var url = "partyPopup?uno="+ uno;
+        var name = "partyPopup";
         var option = "width=500, height=800, left=300, top=50, location=no";
 
         window.open(url, name, option);

@@ -56,6 +56,15 @@ public class MainController {
         model.addAttribute("uno", uno2);
     }
 
+    @GetMapping("/partyPopup")
+    public void partyPopupGet(@RequestParam("uno")Long uno,Model model){
+        model.addAttribute("uno",uno);
+    }
+
+    @PostMapping("/partyPopup")
+    public void partyPopupPost(){
+
+    }
 
     @GetMapping("/planPopup")
     public void planPopupGet(@RequestParam("pno") Long pno,Model model){
@@ -64,7 +73,7 @@ public class MainController {
 
 
     @PostMapping("/planPopup")
-    public void planPopup(Plan plan, Long pno, Model model, MultipartFile file)throws Exception{
+    public void planPopupPost(Plan plan, Long pno, Model model, MultipartFile file)throws Exception{
         planService.write(plan,file,pno);
 
         //model.addAttribute("message","글작성이 완료되었습니다");

@@ -8,31 +8,22 @@
 <body>
 <div class="container">
   <h1>Create New Party</h1>
-  <form name="form" th:action="@{/travelmaker/main/planPopup}" method="post" enctype="multipart/form-data">
+  <form name="form" th:action="@{/travelmaker/main/partyPopup}" method="post" enctype="multipart/form-data">
 
-    <input type="hidden" name="pno" th:value="${pno}">
+    <input type="hidden" name="uno" th:value="${uno}">
 
     <!-- 제목 입력 -->
     <div class="mb-3">
-      <label for="title" class="form-label">Plan Name</label>
+      <label for="title" class="form-label">Party Name</label>
       <input type="text" class="form-control" id="title" name="title" required>
     </div>
 
-    <!-- 사진 첨부 -->
+    <!-- 친구 추가 -->
     <div class="mb-3">
-      <input type="file" class="img"  name="file" accept="image/*" required>
+      <label for="friend" class="form-label">친구추가</label>
+      <input type="text" id="friend">
     </div>
 
-    <!-- 시작일과 종료일 선택 (달력) -->
-    <div class="mb-3">
-      <label for="start" class="form-label">Start Date</label>
-      <input type="date" class="form-control" id="start" name="start" required>
-    </div>
-
-    <div class="mb-3">
-      <label for="end" class="form-label">End Date</label>
-      <input type="date" class="form-control" id="end" name="end" required>
-    </div>
 
     <button type="submit" id="submit" class="btn btn-primary">Create Party</button>
   </form>
