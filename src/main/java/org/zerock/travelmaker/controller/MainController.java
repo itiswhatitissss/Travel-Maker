@@ -25,6 +25,7 @@ import org.zerock.travelmaker.service.MainService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +68,10 @@ public class MainController {
     @PostMapping("/partyPopup")
     public void partyPopupPost(@RequestParam("uno")Long uno,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends,
                                @RequestParam("title") String title){
+        if (selectedFriends == null) {
+            selectedFriends = new ArrayList<Long>(); // 빈 리스트로 초기화
+        }
+
         PartyDTO partyDTO = PartyDTO.builder()
                 .partyName(title)
                 .build();
