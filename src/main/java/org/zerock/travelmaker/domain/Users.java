@@ -20,7 +20,9 @@ public class Users{
     @Column(name="uno")
     private Long uno;
 
+    @Column(unique = true)
     private String id;
+
     private String password;
     private String name;
     private String email;
