@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.zerock.travelmaker.domain.*;
 import org.zerock.travelmaker.domain.VoteOption;
 import org.zerock.travelmaker.mapper.MybatisMapper;
@@ -43,6 +44,8 @@ class TestRepositoryTest {
     private VoteOptionRepository voteOptionRepository;
     @Autowired
     private MybatisMapper mybatisMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Test
     public void test() { //이거 하나로 끝내자
@@ -84,7 +87,7 @@ class TestRepositoryTest {
             e.printStackTrace();
         }
 
-        Users user = Users.builder().id("pkmm").name("이성진").password("1234").email("naver").build();
+        Users user = Users.builder().id("seunggin").name("이성진").password(passwordEncoder.encode("1234")).email("naver").build();
         userRepository.save(user); //이성진 회원가입
 
         Party party = Party.builder().partyName("해병대전우회").QR("QRcode").build();
@@ -112,13 +115,13 @@ class TestRepositoryTest {
         VoteOption voteOption = VoteOption.builder().vnoByVoteOption(vote).unoByVoteOption(user).voOption("띠용").build();
         voteOptionRepository.save(voteOption);
 
-        Users user1 = Users.builder().id("leehal").name("이하림").password("1234").email("naver").build();
+        Users user1 = Users.builder().id("harim").name("이하림").password(passwordEncoder.encode("1234")).email("naver").build();
         userRepository.save(user1); //이하림 회원가입
 
         UserParty userParty1 = UserParty.builder().unoByUserParty(user1).pnoByUserParty(partyRepository.findById(1L).get()).build();
         userPartyRepository.save(userParty1); // 이하림 "해병대전우회" 파티 합류
 
-        Users user2 = Users.builder().id("gkdms").name("노예은").password("1234").email("naver").build();
+        Users user2 = Users.builder().id("yeeun").name("노예은").password(passwordEncoder.encode("1234")).email("naver").build();
         userRepository.save(user2); //노에은 회원가입
 
         Party party2 = Party.builder().partyName("308호 모임").QR("QRcode").build();

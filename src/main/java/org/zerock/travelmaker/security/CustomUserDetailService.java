@@ -19,16 +19,10 @@ import java.util.Optional;
 @Service
 @Log4j2
 @Transactional
+@RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    private PasswordEncoder passwordEncoder;
-
-    public CustomUserDetailService() {
-        this.passwordEncoder = new BCryptPasswordEncoder();
-    }
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,7 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
         UserDetails userDetails = User.builder()
                 .username(users.getId())
-                .password(passwordEncoder.encode(users.getPassword()))
+                .password(users.getPassword())
                 .authorities("ROLE_USER")
                 .build();
 
