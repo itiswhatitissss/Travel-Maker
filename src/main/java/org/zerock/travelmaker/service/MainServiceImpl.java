@@ -116,5 +116,10 @@ public class MainServiceImpl implements MainService{
         }//문제!! controller에서 내 uno를 member List에 넣어줘야함
     }
 
+    @Override
+    public void deletePlan(Long plno) {
+        planRepository.deleteById(plno);
+    }
+
 
 }

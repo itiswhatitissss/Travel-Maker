@@ -27,5 +27,7 @@ public interface MainService {
 
     void PartyRegister(PartyDTO partyDTO, List<Long> member);
 
+    void deletePlan(Long plno);
+
 
 }

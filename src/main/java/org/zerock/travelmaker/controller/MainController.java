@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.domain.Party;
@@ -104,6 +102,11 @@ public class MainController {
         //model.addAttribute("message","글작성이 완료되었습니다");
         //model.addAttribute("searchUrl","/travelmaker/main/list");
 
+    }
+
+    @PostMapping("/deletePlan")
+    public void deletePLAN(@RequestParam("plno")Long plno){
+        mainService.deletePlan(plno);
     }
 
 @PostMapping("/friendSearch")

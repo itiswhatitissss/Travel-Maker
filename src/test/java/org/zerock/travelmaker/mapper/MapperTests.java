@@ -63,4 +63,5 @@ public class MapperTests {
         Long result = mybatisMapper.getPartyOne(1L);
         log.info("result========>"+result);
     }
+
 }
