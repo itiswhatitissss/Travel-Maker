@@ -11,6 +11,10 @@
         select plan.plno, plan.title, plan.start, plan.end, plan.filepath from party join party_detail on party.pno = party_detail.pno join plan on party_detail.plno = plan.plno where party.pno= #{pno}
     </select>
 
+    <select id="getPartyOne" resultType="Long">
+        select party.pno from party where pno = #{pno}
+    </select>
+
     <select id="selectFriendList" resultType="map" parameterType="map">
         select friend.uno, friend.fno, users.name from friend join users on friend.fno=users.uno where friend.uno=#{uno}
     </select>
@@ -18,6 +22,8 @@
     <select id="searchFriend" resultType="map" parameterType="map">
         select uno, name, id from users where id like CONCAT('%', #{id}, '%');
     </select>
+
+
 
 
 </mapper>

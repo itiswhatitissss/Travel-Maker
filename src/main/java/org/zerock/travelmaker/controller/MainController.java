@@ -57,10 +57,12 @@ public class MainController {
             session.removeAttribute("friendSearchResult"); // 세션에서 검색 결과 제거
         }
 
-        List<Map<String,Object>> party =mainService.getParty(uno);
-        model.addAttribute("partyDTO",party);
-        List<Map<String,Object>> plan =mainService.getPlan(pno);
-        model.addAttribute("planDTO",plan);
+        List<Map<String,Object>> partyList =mainService.getParty(uno);
+        model.addAttribute("partyDTO",partyList);
+        List<Map<String,Object>> planList =mainService.getPlan(pno);
+        model.addAttribute("planDTO",planList);
+        Long partyOne = mainService.getPartyOne(pno);
+        model.addAttribute("pno",partyOne);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();

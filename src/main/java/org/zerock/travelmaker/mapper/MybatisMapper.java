@@ -15,5 +15,5 @@ public interface MybatisMapper {
     public List<Map<String,Object>> getPlanList(Long pno);
     public List<Map<String,Object>> selectFriendList(Long uno);
     public List<Map<String,Object>> searchFriend(String id);
-
+    public Long getPartyOne(Long pno);
 }

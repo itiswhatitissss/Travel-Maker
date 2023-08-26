@@ -16,8 +16,6 @@ public class MapperTests {
     @Autowired
     private MybatisMapper mybatisMapper;
 
-    @Autowired
-    private SampleMapper sampleMapper;
 
     @Autowired
     private UserService loginService;
@@ -58,5 +56,11 @@ public class MapperTests {
     public void testFriendSearch(){
         List<Map<String,Object>> result = mybatisMapper.searchFriend("leehal");
         log.info("result==============>"+ result);
+    }
+
+    @Test
+    public void testGetPartyOne(){
+        Long result = mybatisMapper.getPartyOne(1L);
+        log.info("result========>"+result);
     }
 }

@@ -30,7 +30,7 @@
     <!--오른쪽 시작(plan)-->
 
     <div class="split-right">
-        <button class="add-button" type="button" th:each="party: ${partyDTO}" th:data-pno="${party.pno}" th:onclick="add_plan(this.getAttribute('data-pno'))">plan 추가</button>
+        <button class="add-button" type="button"  th:data-pno="${pno}" th:onclick="add_plan(this.getAttribute('data-pno'))">plan 추가</button>
         <div id="carousel-wrapper">
             <div id="carousel">
                 <th:block th:each="plan : ${planDTO}">

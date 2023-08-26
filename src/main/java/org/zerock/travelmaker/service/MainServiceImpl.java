@@ -47,6 +47,12 @@ public class MainServiceImpl implements MainService{
         return result;
     }
 
+    @Override
+    public Long getPartyOne(Long pno) {
+        Long result = mybatisMapper.getPartyOne(pno);
+        return result;
+    }
+
 
     @Override
     public PlanDTO readOne(Long plno) {
