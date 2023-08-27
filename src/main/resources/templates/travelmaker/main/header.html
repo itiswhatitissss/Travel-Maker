@@ -55,11 +55,11 @@
                     </div>
                     <div class="modal-body">
                         <!-----검색기능------>
-                        <form th:action="@{/travelmaker/main//friendSearch}" method="post" class="d-flex">
+                        <form th:action="@{/travelmaker/main/friendSearch}" method="post" class="d-flex">
                             <input type="search" class="form-control" name="searchText" id="friendSearchInput" placeholder="친구 검색..." aria-label="친구 검색">
                             <button type="submit" class="btn btn-primary">검색</button>
                         </form>
-                        <div th:if="${list == 0}">
+<!--                        <div th:if="${list == 0}">-->
                             <!-- 리스트 크기가 0일 때 처리할 내용 -->
                             <form th:action="@{/travelmaker/main/friendDelete}" method="post" class="d-flex">
                                 <div class="form-check">
@@ -73,56 +73,32 @@
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                                 </div>
                             </form>
-                        </div>
-                        <div th:if="${list > 0}">
+<!--                        </div>-->
+<!--                        <div th:if="${list == 1}">-->
                             <!-- 리스트가 1일 때 처리할 내용 -->
                             <form th:action="@{/travelmaker/main/friendInsert}" method="post" class="d-flex">
-                                <div class="form-check">
-                                    <div th:each="friend: ${friendDTO}">
-                                        <h7 th:text="${friend.name}"></h7>
-                                        <input class="form-check-input" type="checkbox" th:value="${friend.fno}" name="selectedFriends" id="friendCheckbox">
+                                <div th:if="${friendSearchResult != null}">
+                                    <div th:each="friends: ${friendSearchResult}">
+                                        <h7 th:text="${friends.name}"></h7>
+                                        <input class="form-check-input" type="checkbox" th:value="${friends.uno}" name="selectedFriends" id="friendCheckbox">
                                     </div>
-                                </div><br><br>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구추가</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구추가</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                    </div>
+                                </div>
+                                <div th:if="${#lists.isEmpty(friendSearchResult)}">
+                                    <p>검색 결과가 없습니다.</p>
                                 </div>
                             </form>
-                        </div>
+<!--                        </div>-->
 
                         <!-- 친구 목록 출력 부분 -->
-
+                    </div>
                     </div>
                 </div>
             </div>
             <!---------친구끝---------->
-            <!---------친구script---------->
-<!--            <script>-->
-<!--                document.getElementById("friendCheckbox").addEventListener("click", function () {-->
-<!--                    // 체크된 체크박스 가져오기-->
-<!--                    var friendCheckboxes = document.querySelectorAll(".form-check-input:checked");-->
-
-<!--                    // 체크된 체크박스의 값을 배열에 저장-->
-<!--                    var selectedFriends = [];-->
-<!--                    friendCheckboxes.forEach(function (checkbox) {-->
-<!--                        selectedFriends.push(checkbox.value); // 체크된 체크박스의 값(친구의 ID 등)을 저장-->
-<!--                    });-->
-
-<!--                    // 서버로 선택한 친구 정보 전송-->
-<!--                    // 예: AJAX를 사용하여 컨트롤러의 로직 호출-->
-<!--                    var xhr = new XMLHttpRequest();-->
-<!--                    xhr.open("POST", "/travelmaker/main/friend", true);-->
-<!--                    xhr.setRequestHeader("Content-Type", "application/json");-->
-<!--                    xhr.onreadystatechange = function () {-->
-<!--                        if (xhr.readyState === 4 && xhr.status === 200) {-->
-<!--                            // 성공적으로 처리되었을 때의 로직-->
-<!--                            console.log("친구 추가 완료");-->
-<!--                        }-->
-<!--                    };-->
-<!--                    xhr.send(JSON.stringify(selectedFriends)); // 선택한 친구 정보를 JSON 형태로 전송-->
-<!--                });-->
-<!--            </script>-->
-            <!---------친구script 끝---------->
     </header>
 </header>
 <!--header-->

@@ -15,8 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.domain.Party;
 import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.domain.Plan;
+import org.zerock.travelmaker.domain.Users;
+import org.zerock.travelmaker.dto.FriendDTO;
 import org.zerock.travelmaker.dto.PartyDTO;
 import org.zerock.travelmaker.dto.PlanDTO;
+import org.zerock.travelmaker.dto.UserDTO;
 import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.PlanService;
 import org.zerock.travelmaker.service.UserService;
@@ -49,10 +52,26 @@ public class MainController {
         if (friendDTO == null) {
             List<Map<String,Object>> friend =friendService.friendList(uno);
             model.addAttribute("friendDTO",friend);
-            model.addAttribute("list",0);
+//            model.addAttribute("list",0);
         } else {
-            model.addAttribute("friendDTO",friendDTO);
-            model.addAttribute("list",1);
+            for(int i=0;i<friendDTO.size();i++) {
+                Map<String, Object> userMap = friendDTO.get(0); // 첫 번째 검색 결과 사용
+
+                // 필드 값 추출
+                Long fno = (Long) userMap.get("uno");
+                String name = (String) userMap.get("name");
+                String id = (String) userMap.get("id");
+//            log.info("세션 : "+session);
+            Users users = Users.builder()
+                    .id(id)
+                    .uno(fno)
+                    .name(name)
+                    .build();
+                model.addAttribute("friendSearchResult", users);
+//            model.addAttribute("list",1);
+            }
+            List<Map<String, Object>> friend = friendService.friendList(uno);
+            model.addAttribute("friendDTO", friend);
             session.removeAttribute("friendSearchResult"); // 세션에서 검색 결과 제거
         }
 
@@ -110,23 +129,21 @@ public class MainController {
         mainService.deletePlan(plno);
         return ResponseEntity.ok("success");
     }
+    @PostMapping("/friendSearch")
+    public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr, HttpSession session) {
 
-@PostMapping("/friendSearch")
-public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr, HttpSession session) {
+        String referer = request.getHeader("referer");
+        log.info("검색text : " +searchText);
 
-    String referer = request.getHeader("referer");
-    log.info("검색text : " +searchText);
+        List<Map<String, Object>> search = friendService.friendSearch(searchText);
+        log.info("검색결과 : "+search);
 
-//    List<Map<String, Object>> search =friendService.friendSearch(searchText);
-//    rttr.addAttribute("friendDTO",search);
-//
-//    return "redirect:" + referer;
+        session.setAttribute("friendSearchResult", search);
+        List<Map<String, Object>> fri = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
+        log.info("세션 : "+fri);
 
-    List<Map<String, Object>> search = friendService.friendSearch(searchText);
-    session.setAttribute("friendSearchResult", search);
-
-    return "redirect:" + referer;
-}
+        return "redirect:" + referer;
+    }
     @PostMapping("/friendDelete")
     public String friendDelete(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -139,6 +156,22 @@ public String friendSearch(HttpServletRequest request, @RequestParam(name = "sea
         for (int i=0; i<selectedFriends.size();i++){
             Long fno = selectedFriends.get(i);
             friendService.deleteFriend(uno,fno);
+        }
+        return "redirect:" + referer;
+    }
+    @PostMapping("/friendInsert")
+    public String friendInsert(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+
+        Long uno = loginService.getUno(username);
+
+        String referer = request.getHeader("referer");
+
+        for (int i=0; i<selectedFriends.size();i++){
+            Long fno = selectedFriends.get(i);
+            FriendDTO friendDTO = new FriendDTO(uno,fno);
+            friendService.insertFriend(friendDTO);
         }
         return "redirect:" + referer;
     }
