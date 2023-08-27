@@ -2,6 +2,7 @@ package org.zerock.travelmaker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
@@ -105,8 +106,9 @@ public class MainController {
     }
 
     @PostMapping("/deletePlan")
-    public void deletePLAN(@RequestParam("plno")Long plno){
+    public ResponseEntity<String> deletePlan(@RequestParam("plno") Long plno) {
         mainService.deletePlan(plno);
+        return ResponseEntity.ok("success");
     }
 
 @PostMapping("/friendSearch")

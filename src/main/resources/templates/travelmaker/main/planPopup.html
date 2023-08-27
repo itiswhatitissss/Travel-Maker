@@ -20,7 +20,8 @@
 
         <!-- 사진 첨부 -->
         <div class="mb-3">
-            <input type="file" class="img"  name="file" accept="image/*" required>
+            <input type="file" class="img"  name="file" accept="image/*" onchange="setThumbnail(event);" required>
+            <div id="image_container"></div>
         </div>
 
         <!-- 시작일과 종료일 선택 (달력) -->
@@ -40,5 +41,18 @@
 
 <!-- 부트스트랩 스크립트 링크 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function setThumbnail(event) {
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+            var img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+            document.querySelector("div#image_container").appendChild(img);
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 </body>
 </html>

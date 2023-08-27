@@ -1,5 +1,6 @@
 package org.zerock.travelmaker.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,9 +16,7 @@ import java.util.Date;
 public class PlanDTO {
 
     private Long plno;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date start;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end;
     private String title;
     private String img;

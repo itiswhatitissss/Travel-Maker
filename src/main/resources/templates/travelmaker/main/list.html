@@ -97,6 +97,7 @@
         window.open(url, name, option);
     }
 
+    //plan 삭제 by AJAX
     var planToDelete = null;
 
     function showDeleteConfirmationModal(plno) {
@@ -107,23 +108,27 @@
     function deletePlan() {
         if (planToDelete !== null) {
             var url = "deletePlan?plno=" + planToDelete;
-            var name = "deletePlan";
-            var option = "width=500, height=800, left=300, top=50, location=no";
 
-            // 이 부분에서 실제 삭제 작업을 수행하는 서버 호출 등을 추가해야 합니다.
+            $.ajax({
+                type: "POST",
+                url: url,
+                success: function(response) {
+                    if (response === "success") {
+                        $('#deleteConfirmationModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert("삭제 실패");
+                    }
+                },
+                error: function() {
+                    alert("오류가 발생했습니다.");
+                }
+            });
 
             planToDelete = null;
         }
-        $('#deleteConfirmationModal').modal('hide');
-    }
+        //plan 삭제 by AJAX
 
-
-    function add_party(uno) {
-        var url = "partyPopup?uno="+ uno;
-        var name = "partyPopup";
-        var option = "width=500, height=800, left=300, top=50, location=no";
-
-        window.open(url, name, option);
     }
 
 </script>

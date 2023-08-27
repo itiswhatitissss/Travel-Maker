@@ -22,7 +22,7 @@ public class Scheduler{
     @JoinColumn(name="plno")
     private Plan plnoByScheduler;
 
-    @OneToMany(mappedBy = "snoBySchedulerDetail")
+    @OneToMany(mappedBy = "snoBySchedulerDetail", cascade = CascadeType.ALL)
     private List<SchedulerDetail> schedulerDetails = new ArrayList<>();
 
 }
