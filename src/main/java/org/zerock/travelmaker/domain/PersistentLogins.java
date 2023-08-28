@@ -9,7 +9,6 @@ public class PersistentLogins {
 
     @Id
     private String series;
-
     private String username;
     private String token;
     private LocalDateTime lastUsed;

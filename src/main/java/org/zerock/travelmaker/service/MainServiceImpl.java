@@ -137,5 +137,10 @@ public class MainServiceImpl implements MainService{
         return result;
     }
 
+    @Override
+    public List<Map<String, Object>>autocomplete(Map<String, Object> paramMap) throws Exception{
+        return mybatisMapper.autocomplete(paramMap);
+    }
+
 
 }

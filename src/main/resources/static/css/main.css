@@ -14,5 +14,5 @@
     background-color: #fff;
     padding: 20px;
     box-sizing: border-box;
-    overflow-y: auto; /* 스크롤 가능하도록 설정 */
+    overflow: hidden; /* 스크롤 숨김 */
 }

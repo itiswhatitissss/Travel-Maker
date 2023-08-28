@@ -16,18 +16,19 @@
 <div class="split-container">
     <!--왼쪽 시작(party)-->
     <div class="split-left">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPartyModal">
-            Party+
-        </button>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePartyModal">
-            Party-
-        </button>
-        <br>
-        <br>
-        <br>
+        <div class="d-flex align-items-center mb-3">
+            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
+                    data-bs-target="#createPartyModal">
+                Party+
+            </button>
+            <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
+                    data-bs-target="#deletePartyModal">
+                Party-
+            </button>
+            <input type="text" id="autoComplete">
+        </div>
         <ul th:each="party: ${partyDTO}">
             <li>
-                <!--                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno}}" th:text="${party.party_name}"></a>-->
                 <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
                    th:text="${party.party_name}"></a>
             </li>
@@ -39,7 +40,7 @@
     <!--오른쪽 시작(plan)-->
 
     <div class="split-right">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
             Plan+
         </button>
         <br>
@@ -55,8 +56,11 @@
                                th:text="${plan.title}"></a>
                             <p th:text="${plan.start}"></p>
                             <p th:text="${plan.end}"></p>
-                            <button class="add-button" th:type="button" th:onclick="modify_plan()">수정</button>
-                            <button class="add-button" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
+                            <button class="btn btn-outline-warning" th:type="button" th:onclick="modify_plan()">수정
+                            </button>
+                            <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}"
+                                    th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제
+                            </button>
                         </div>
                     </div>
                 </th:block>
@@ -249,15 +253,51 @@
         //plan 삭제 by AJAX
     }
 
-        function setThumbnail(event) {
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                var img = document.createElement("img");
-                img.setAttribute("src", event.target.result);
-                document.querySelector("div#image_container").appendChild(img);
-            };
-            reader.readAsDataURL(event.target.files[0]);
+    function setThumbnail(event) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+            document.querySelector("div#image_container").appendChild(img);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    $('#autoComplete').autocomplete({
+        source: function (request, response) { //source: 입력시 보일 목록
+            $.ajax({
+                url: "/ajax/autocomplete.do"
+                , type: "POST"
+                , dataType: "JSON"
+                , data: {value: request.term}	// 검색 키워드
+                , success: function (data) { 	// 성공
+                    response(
+                        $.map(data.resultList, function (item) {
+                            return {
+                                label: item.SEARCH_WORD    	// 목록에 표시되는 값
+                                , value: item.SEARCH_WORD 		// 선택 시 input창에 표시되는 값
+                                , idx: item.SEQ // index
+                            };
+                        })
+                    );    //response
+                }
+                , error: function () { //실패
+                    alert("오류가 발생했습니다.");
+                }
+            });
         }
+        , focus: function (event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌
+            return false;
+        }
+        , minLength: 1// 최소 글자수
+        , autoFocus: true // true == 첫 번째 항목에 자동으로 초점이 맞춰짐
+        , delay: 100	//autocomplete 딜레이 시간(ms)
+        , select: function (evt, ui) {
+            // 아이템 선택시 실행 ui.item 이 선택된 항목을 나타내는 객체, lavel/value/idx를 가짐
+            console.log(ui.item.label);
+            console.log(ui.item.idx);
+        }
+    });
 
 </script>
 </html>

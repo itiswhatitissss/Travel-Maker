@@ -178,4 +178,14 @@ public class MainController {
         }
         return "redirect:" + referer;
     }
+
+    @RequestMapping(value = "/ajax/autocomplete.do")
+    public @ResponseBody Map<String, Object> autocomplete
+            (@RequestParam Map<String, Object> paramMap) throws Exception{
+
+        List<Map<String, Object>> resultList = mainService.autocomplete(paramMap);
+        paramMap.put("resultList", resultList);
+
+        return paramMap;
+    }
 }
