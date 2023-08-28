@@ -59,11 +59,8 @@
                                th:text="${plan.title}"></a>
                             <p th:text="${plan.start}"></p>
                             <p th:text="${plan.end}"></p>
-                            <button class="btn btn-outline-warning" th:type="button" th:onclick="modify_plan()">수정
-                            </button>
-                            <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}"
-                                    th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제
-                            </button>
+                            <button type="button" class="btn btn-outline-warning" th:data-plno="${plan.plno}" th:onclick="showModifyModal(this.getAttribute('data-plno'))">수정</button>
+                            <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
                         </div>
                     </div>
                 </th:block>
@@ -196,6 +193,42 @@
 <!--플랜 생성 모달-->
 
 
+<!--플랜 수정 모달-->
+<div class="modal fade" id="modifyPlanModal" tabindex="-1" aria-labelledby="modifyPlanModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modifyPlanModalLabel">플랜 수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 수정 폼 -->
+                <form id="modifyPlanForm">
+                    <input type="hidden" id="modPlno" name="plno" value="$">
+                    <div class="mb-3">
+                        <label for="modTitle" class="form-label">Plan Name</label>
+                        <input type="text" class="form-control" id="modTitle" name="title" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modStart" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="modStart" name="start" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modEnd" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="modEnd" name="end" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modifySaveButton">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--플랜 수정 모달-->
+
+
 <!--플랜 삭제 확인 모달-->
 <div id="deleteConfirmationModal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
@@ -286,6 +319,53 @@
             },
             minLength: 1 // 자동완성 시작을 위한 최소 입력 길이
         });
+    });
+
+    $(document).ready(function() {
+        // 수정 모달을 띄우기 위한 이벤트 처리
+        $(".btn-outline-warning").on("click", function() {
+            var plno = $(this).data("plno");
+            $.ajax({
+                url: "/travelmaker/plan/getPlan", // 플랜 정보를 가져올 URL
+                type: "GET",
+                data: {
+                    plno: plno
+                },
+                success: function(plan) {
+                    $("#modPlno").val(plan.plno);
+                    $("#modTitle").val(plan.title);
+                    $("#modStart").val(plan.start);
+                    $("#modEnd").val(plan.end);
+                    $("#modifyPlanModal").modal("show");
+                },
+                error: function() {
+                    alert("플랜 정보를 가져오는 중 오류가 발생했습니다.");
+                }
+            });
+        });
+
+        // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
+        $("#modifySaveButton").on("click", function() {
+            var form = $("#modifyPlanForm");
+            $.ajax({
+                url: "/travelmaker/plan/modifyPlan", // 플랜 정보를 수정할 URL
+                type: "POST",
+                data: form.serialize(),
+                success: function(response) {
+                    if (response === "success") {
+                        $("#modifyPlanModal").modal("hide");
+                        location.reload(); // 화면 새로고침
+                    } else {
+                        alert("플랜 수정 실패");
+                    }
+                },
+                error: function() {
+                    alert("플랜 정보 수정 중 오류가 발생했습니다.");
+                }
+            });
+        });
+
+        // ... (이후 코드 생략) ...
     });
 </script>
 </html>

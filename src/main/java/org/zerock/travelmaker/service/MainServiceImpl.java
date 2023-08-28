@@ -150,6 +150,4 @@ public class MainServiceImpl implements MainService{
 
         return resultList;
     }
-
-
 }
