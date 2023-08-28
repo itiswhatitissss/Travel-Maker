@@ -48,16 +48,19 @@ public class CustomSecurityConfig {
 //                .defaultSuccessUrl("/travelmaker/loginSuccess", true);
         http
                 .authorizeRequests()
-                    .antMatchers("/travelmaker/login").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+                .antMatchers("/travelmaker/user/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .loginPage("/travelmaker/login")
-                    .defaultSuccessUrl("/travelmaker/loginSuccess", true)
-                    .permitAll()
-                    .and()
+                .loginPage("/travelmaker/user/login")
+                .defaultSuccessUrl("/travelmaker/user/loginSuccess", true)
+                .permitAll()
+                .and()
                 .logout()
-                    .permitAll();
+                .logoutUrl("/travelmaker/user/logout")
+                .logoutSuccessUrl("/travelmaker/user/login")
+                .deleteCookies("JSESSIONID", "remember-me")
+                .permitAll();
 
         http.csrf().disable(); //csrf토큰 비활성화
 
@@ -66,7 +69,7 @@ public class CustomSecurityConfig {
                 .key("12345678")
                 .tokenRepository(persistentTokenRepository())
                 .userDetailsService(userDetailService)
-                .tokenValiditySeconds(60*60*24*30);
+                .tokenValiditySeconds(60 * 60 * 24 * 30);
 
         http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()); //403
 

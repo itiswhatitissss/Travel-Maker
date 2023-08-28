@@ -25,6 +25,6 @@ public class Custom403Handler implements AccessDeniedHandler {
 
         //일반request (json Type이 아니면 실행):
         if(!jsonRequest)
-            response.sendRedirect("/travelmaker/login?error=ACCESS_DENIED");
+            response.sendRedirect("/travelmaker/user/login?error=ACCESS_DENIED");
     }
 }

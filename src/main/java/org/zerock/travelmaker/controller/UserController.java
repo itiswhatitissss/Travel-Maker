@@ -16,7 +16,7 @@ import org.zerock.travelmaker.service.UserService;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/travelmaker")
+@RequestMapping("/travelmaker/user")
 public class UserController {
 
     private final UserService userService;
@@ -54,11 +54,11 @@ public class UserController {
         } catch (UserService.IdExistException e) {
 
             rttr.addFlashAttribute("error", "id");
-            return "redirect:/travelmaker/signup";
+            return "redirect:/travelmaker/user/signup";
         }
 
         rttr.addFlashAttribute("result", "success");
 
-        return "redirect:/travelmaker/login"; //회원 가입 후 로그인페이지
+        return "redirect:/travelmaker/user/login"; //회원 가입 후 로그인페이지
     };
 }

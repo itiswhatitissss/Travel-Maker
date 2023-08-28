@@ -51,7 +51,7 @@
                 <h1>로그아웃...</h1>
             </th:block>
 <!--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
-            <form name="myForm" method="post" action="/travelmaker/login">
+            <form name="myForm" method="post" action="/travelmaker/user/login">
                 <h2>로그인</h2>
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-envelope'></i></span>
@@ -82,7 +82,7 @@
 
         <!-- Register Form start -->
         <div class="form-box register">
-            <form id="registerForm" action="/travelmaker/signup" method="post">
+            <form id="registerForm" action="/travelmaker/user/signup" method="post">
                 <h2>회원가입</h2>
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-user'></i></span>
