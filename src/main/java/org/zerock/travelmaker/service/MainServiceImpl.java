@@ -131,5 +131,11 @@ public class MainServiceImpl implements MainService{
         userPartyRepository.partyDelete(uno1, pno1);
     }
 
+    @Override
+    public List<Map<String, Object>> getPlanOne(Long pno, Long plno) {
+        List<Map<String, Object>> result = mybatisMapper.getPlanOne(pno, plno);
+        return result;
+    }
+
 
 }

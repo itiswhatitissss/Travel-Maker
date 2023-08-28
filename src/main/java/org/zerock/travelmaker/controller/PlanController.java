@@ -7,13 +7,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.service.FriendService;
+import org.zerock.travelmaker.service.MainService;
+import org.zerock.travelmaker.service.SchedulerService;
 import org.zerock.travelmaker.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,16 +28,22 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PlanController {
     private final FriendService friendService;
-    private final UserService loginService;
+    private final UserService userService;
+    private final MainService mainService;
+//    private final SchedulerService schedulerService;
 
     @GetMapping("/planDetail")
     public void planDetailGET(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Model model, Authentication authentication, HttpSession session) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
+        Long uno = userService.getUno(username);
+        model.addAttribute("uno", uno);
 
-        Long uno = loginService.getUno(username);
+        List<Map<String, Object>> planList = mainService.getPlanOne(pno, plno);
+        model.addAttribute("planDTO",planList);
 
-        log.info("plno ==================================> : " + plno);
+        List<Map<String,Object>> partyList = mainService.getParty(uno);
+        model.addAttribute("partyDTO",partyList);
 
         List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
         if (friendDTO == null) {
@@ -56,6 +67,21 @@ public class PlanController {
             List<Map<String, Object>> friend = friendService.friendList(uno);
             model.addAttribute("friendDTO", friend);
             session.removeAttribute("friendSearchResult"); // 세션에서 검색 결과 제거
+
         }
     };
+
+//    @PostMapping("/scheduler")
+//    public String processDateForm(@RequestParam Date startDate, @RequestParam Date endDate, Model model) {
+//        List<Date> datesBetween = schedulerService.getDatesBetween(startDate, endDate);
+//
+//        model.addAttribute("startTime", startDate);
+//        model.addAttribute("endTime", endDate);
+//        model.addAttribute("datesBetween", datesBetween);
+//
+//        return "redirect:/travelmaker/plan/planDetail";
+//    }
+
+
+
 }

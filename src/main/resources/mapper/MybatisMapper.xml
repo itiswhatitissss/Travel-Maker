@@ -23,7 +23,9 @@
         select uno, name, id from users where id like CONCAT('%', #{id}, '%');
     </select>
 
-
+    <select id="getPlanOne" resultType="map" parameterType="Long">
+        select plan.plno, plan.title, plan.start, plan.end, plan.filepath from party join party_detail on party.pno = party_detail.pno join plan on party_detail.plno = plan.plno where party.pno= #{pno} and party_detail.plno = #{plno}
+    </select>
 
 
 </mapper>

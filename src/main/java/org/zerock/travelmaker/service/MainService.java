@@ -31,5 +31,6 @@ public interface MainService {
 
     void deleteParty(Long uno, Long pno);
 
+    List<Map<String, Object>> getPlanOne(Long pno, Long plno);
 
 }
