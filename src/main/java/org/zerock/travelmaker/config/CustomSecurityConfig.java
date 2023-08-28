@@ -69,7 +69,7 @@ public class CustomSecurityConfig {
                 .key("12345678")
                 .tokenRepository(persistentTokenRepository())
                 .userDetailsService(userDetailService)
-                .tokenValiditySeconds(60 * 60 * 24 * 30);
+                .tokenValiditySeconds(60*60*24*30);
 
         http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()); //403
 
