@@ -38,7 +38,7 @@
                     <div id="carousel-item">
                         <img th:src="${plan.filepath}" alt=""/>
                         <div id="info">
-                            <a th:href="@{'/travelmaker/plan/planDetail?plno=' + ${plan.plno}}" th:text="${plan.title}"></a>
+                            <a th:href="@{'/travelmaker/plan/planDetail?plno=' + ${plan.plno}+ '&pno=' + ${pno}}" th:text="${plan.title}"></a>
                             <p th:text="${plan.start}"></p>
                             <p th:text="${plan.end}"></p>
                             <button class="add-button" th:type="button" th:onclick="modify_plan()">수정</button>

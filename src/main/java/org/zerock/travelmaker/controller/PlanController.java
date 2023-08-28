@@ -26,7 +26,7 @@ public class PlanController {
     private final UserService loginService;
 
     @GetMapping("/planDetail")
-    public void planDetailGET(@RequestParam("plno") Long plno, Model model, Authentication authentication, HttpSession session) {
+    public void planDetailGET(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Model model, Authentication authentication, HttpSession session) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
 
