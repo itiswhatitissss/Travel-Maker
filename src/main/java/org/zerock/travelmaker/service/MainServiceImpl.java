@@ -121,5 +121,15 @@ public class MainServiceImpl implements MainService{
         planRepository.deleteById(plno);
     }
 
+    @Override
+    public void deleteParty(Long uno, Long pno) {
+        Optional<Users> byId = userRepository.findById(uno);
+        Users uno1 = byId.orElseThrow();
+        Optional<Party> byId2 = partyRepository.findById(pno);
+        Party pno1 = byId2.orElseThrow();
+
+        userPartyRepository.partyDelete(uno1, pno1);
+    }
+
 
 }

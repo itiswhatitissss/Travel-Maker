@@ -149,6 +149,19 @@ public class MainController {
         }
         return "redirect:" + referer;
     }
+
+    @PostMapping("/deleteParty")
+    public String deleteParty(Long pno1,HttpServletRequest request,@RequestParam(name = "selectedParties", required = false) List<Long> selectedParties , Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Long uno = loginService.getUno(username);
+
+        for (int i=0; i<selectedParties.size();i++){
+            Long pno = selectedParties.get(i);
+            mainService.deleteParty(uno,pno);
+        }
+        return "redirect:list?pno="+pno1+"&uno="+uno;
+    }
     @PostMapping("/friendInsert")
     public String friendInsert(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();

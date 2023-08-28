@@ -29,5 +29,7 @@ public interface MainService {
 
     void deletePlan(Long plno);
 
+    void deleteParty(Long uno, Long pno);
+
 
 }
