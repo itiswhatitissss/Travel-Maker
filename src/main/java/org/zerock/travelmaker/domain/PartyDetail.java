@@ -21,7 +21,7 @@ public class PartyDetail{
     @JoinColumn(name = "pno")
     private Party pnoByPartyDetail;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "plno")
     private Plan plnoByPartyDetail;
 }

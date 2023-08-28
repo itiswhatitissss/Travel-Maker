@@ -88,15 +88,9 @@ public class MainController {
         model.addAttribute("uno", uno2);
     }
 
-    @GetMapping("/partyPopup")
-    public void partyPopupGet(@RequestParam("uno")Long uno,Model model){
-        model.addAttribute("uno",uno);
-        List<Map<String,Object>> friend =friendService.friendList(uno);
-        model.addAttribute("friendDTO",friend);
-    }
 
     @PostMapping("/partyPopup")
-    public void partyPopupPost(@RequestParam("uno")Long uno,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends,
+    public String partyPopupPost(Long uno, Long pno, @RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends,
                                @RequestParam("title") String title){
         if (selectedFriends == null) {
             selectedFriends = new ArrayList<Long>(); // 빈 리스트로 초기화
@@ -107,21 +101,17 @@ public class MainController {
                 .build();
         selectedFriends.add(uno);
         mainService.PartyRegister(partyDTO,selectedFriends);
+
+        return "redirect:list?pno="+pno+"&uno="+uno;
     }
 
-    @GetMapping("/planPopup")
-    public void planPopupGet(@RequestParam("pno") Long pno,Model model){
-        model.addAttribute("pno",pno);
-    }
 
 
     @PostMapping("/planPopup")
-    public void planPopupPost(Plan plan, Long pno, Model model, MultipartFile file)throws Exception{
+    public String planPopupPost(HttpServletRequest request,Plan plan, Long pno, Long uno, Model model, MultipartFile file)throws Exception{
         planService.write(plan,file,pno);
-
-        //model.addAttribute("message","글작성이 완료되었습니다");
-        //model.addAttribute("searchUrl","/travelmaker/main/list");
-
+        model.addAttribute("message","글작성이 완료되었습니다");
+        return "redirect:list?pno="+pno+"&uno="+uno;
     }
 
     @PostMapping("/deletePlan")

@@ -20,7 +20,7 @@ public class Vote{
     private Long vno;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="plno")
     private Plan plnoByVote;
 
