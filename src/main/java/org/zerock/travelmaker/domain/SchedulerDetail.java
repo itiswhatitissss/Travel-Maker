@@ -1,8 +1,10 @@
 package org.zerock.travelmaker.domain;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -22,9 +24,11 @@ public class SchedulerDetail {
 
     private String content;
 
-    private Date startTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime startTime;
 
-    private Date endTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime endTime;
 
 
 

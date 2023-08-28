@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -16,6 +17,6 @@ public class SchedulerDetailDTO {
     private Long schdetailPK;
     private Long snoBySchedulerDetail;
     private String content;
-    private Date startTime;
-    private Date endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
 }

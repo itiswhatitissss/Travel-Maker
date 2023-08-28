@@ -57,6 +57,9 @@ public class CustomSecurityConfig {
                     .permitAll()
                     .and()
                 .logout()
+                    .logoutUrl("/travelmaker/logout")
+                    .logoutSuccessUrl("/travelmaker/login")
+                    .deleteCookies("JSESSIONID", "remember-me")
                     .permitAll();
 
         http.csrf().disable(); //csrf토큰 비활성화
