@@ -30,6 +30,9 @@ public class SchedulerDetail {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime endTime;
 
-
-
+    public void change(String content, LocalTime startTime, LocalTime endTime) {
+        this.content = content;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 }

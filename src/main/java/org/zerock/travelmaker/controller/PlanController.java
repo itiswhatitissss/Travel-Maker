@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.zerock.travelmaker.domain.SchedulerDetail;
 import org.zerock.travelmaker.domain.Users;
+import org.zerock.travelmaker.dto.SchedulerDetailDTO;
 import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.MainService;
 import org.zerock.travelmaker.service.SchedulerService;
@@ -30,7 +32,7 @@ public class PlanController {
     private final FriendService friendService;
     private final UserService userService;
     private final MainService mainService;
-//    private final SchedulerService schedulerService;
+    private final SchedulerService schedulerService;
 
     @GetMapping("/planDetail")
     public void planDetailGET(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Model model, Authentication authentication, HttpSession session) {
@@ -71,18 +73,46 @@ public class PlanController {
         }
     };
 
-//    @PostMapping("/scheduler")
-//    public String processDateForm(@RequestParam Date startDate, @RequestParam Date endDate, Model model) {
-//        List<Date> datesBetween = schedulerService.getDatesBetween(startDate, endDate);
-//
-//        model.addAttribute("startTime", startDate);
-//        model.addAttribute("endTime", endDate);
-//        model.addAttribute("datesBetween", datesBetween);
-//
-//        return "redirect:/travelmaker/plan/planDetail";
-//    }
+
 
     @PostMapping("/scheduler")
     public void schedulerPost() {}
+
+
+    @GetMapping("/list")
+    public void list(Model model) {
+        List<SchedulerDetailDTO> list = schedulerService.listScheduler();
+        model.addAttribute("detailList", list);
+    }
+
+    @GetMapping("/register")
+    public void registerScheduler() {}
+
+    @PostMapping("/register")
+    public String registerScheduler(SchedulerDetailDTO schedulerDetailDTO){
+        Long schdetailPK = schedulerService.registerScheduler(schedulerDetailDTO);
+
+        return "redirect:/travelmaker/plan/list";
+    }
+
+    @GetMapping({"/detail", "/update"})
+    public void detail(Long schdetailPK, Model model) {
+        SchedulerDetailDTO schedulerDetailDTO = schedulerService.detail(schdetailPK);
+        model.addAttribute("dto", schedulerDetailDTO);
+    }
+
+
+    @PostMapping("/update")
+    public String updateScheduler(SchedulerDetailDTO schedulerDetailDTO){
+        schedulerService.updateScheduler(schedulerDetailDTO);
+        return "redirect:/travelmaker/plan/list";
+    }
+
+    @GetMapping("/delete")
+    public String deleteScheduler(Long schdetailPK){
+        schedulerService.deleteScheduler(schdetailPK);
+
+        return "redirect:/travelmaker/plan/list";
+    }
 
 }
