@@ -82,6 +82,7 @@ public class PlanController {
 //        return "redirect:/travelmaker/plan/planDetail";
 //    }
 
-
+    @PostMapping("/scheduler")
+    public void schedulerPost() {}
 
 }

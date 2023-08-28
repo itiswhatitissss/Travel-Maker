@@ -47,7 +47,13 @@
     </aside>
 
     <section>
-        <p>section1 부분입니다</p>
+        <br><br>
+        <h3>스케줄러</h3>
+        <form th:action="@{/travelmaker/plan/scheduler}" method="post">
+            <input name="content" placeholder="계획할 일을 적어보세요!"/>
+            <button>작성</button>
+        </form>
+<!--        <p>section1 부분입니다</p>-->
         <!--        <article>-->
         <!--            <form name="section_form" th:action="@{/travelmaker/plan/scheduler}" method="post">-->
         <!--            <div th:if="${datesBetween != null}">-->

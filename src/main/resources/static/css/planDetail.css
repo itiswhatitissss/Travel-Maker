@@ -2,16 +2,17 @@
 *{
     font-family: "poppins",sans-serif;
 }
+
 nav
 {
-    background-color:lightgrey;
+    /*background-color:lightgrey;*/
     height:100px;
 }
 #main
 {
-    width:100%;
+    width:90%;
     height:100%;
-    margin-top:20px;
+    margin:20px 80px;
     overflow:hidden;
     border:1px solid black;
 
@@ -19,7 +20,7 @@ nav
 section
 {
     width:70%;
-    background-color:lightgrey;
+    /*background-color:lightgrey;*/
     height:100%;
 }
 article
@@ -37,7 +38,7 @@ aside
     right:0;
     width:20%;
     margin-left:5px;
-    background-color:lightgrey;
+    /*background-color:lightgrey;*/
     height:1000px;
 }
 
