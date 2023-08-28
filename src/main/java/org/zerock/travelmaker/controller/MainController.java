@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -178,14 +179,14 @@ public class MainController {
         }
         return "redirect:" + referer;
     }
+    @PostMapping("/autocomplete")
+    @ResponseBody
+    public Map<String, Object> autocomplete(@RequestParam String value) {
+        List<Map<String, Object>> resultList = mainService.searchPartyByName(value);
 
-    @RequestMapping(value = "/ajax/autocomplete.do")
-    public @ResponseBody Map<String, Object> autocomplete
-            (@RequestParam Map<String, Object> paramMap) throws Exception{
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("resultList", resultList);
 
-        List<Map<String, Object>> resultList = mainService.autocomplete(paramMap);
-        paramMap.put("resultList", resultList);
-
-        return paramMap;
+        return resultMap;
     }
 }

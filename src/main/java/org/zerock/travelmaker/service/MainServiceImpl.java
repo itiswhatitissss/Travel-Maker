@@ -13,9 +13,7 @@ import org.zerock.travelmaker.repository.*;
 
 import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Log4j2
@@ -138,8 +136,19 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
-    public List<Map<String, Object>>autocomplete(Map<String, Object> paramMap) throws Exception{
-        return mybatisMapper.autocomplete(paramMap);
+    public List<Map<String, Object>> searchPartyByName(String value) {
+        List<Party> partyList = partyRepository.findByPartyNameContainingIgnoreCase(value);
+
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        for (Party party : partyList) {
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("label", party.getPartyName());
+            resultMap.put("value", party.getPartyName());
+            resultMap.put("idx", party.getPno());
+            resultList.add(resultMap);
+        }
+
+        return resultList;
     }
 
 

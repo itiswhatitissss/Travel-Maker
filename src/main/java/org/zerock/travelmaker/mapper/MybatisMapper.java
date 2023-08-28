@@ -18,6 +18,5 @@ public interface MybatisMapper {
     public List<Map<String,Object>> searchFriend(String id);
     public Long getPartyOne(Long pno);
     public List<Map<String, Object>> getPlanOne(Long pno, Long plno);
-    List<Map<String, Object>>autocomplete(Map<String, Object> paramMap) throws Exception;
 
 }

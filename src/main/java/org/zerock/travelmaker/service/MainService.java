@@ -33,6 +33,5 @@ public interface MainService {
 
     List<Map<String, Object>> getPlanOne(Long pno, Long plno);
 
-    List<Map<String, Object>>autocomplete(Map<String, Object> paramMap) throws Exception;
-
+    List<Map<String, Object>> searchPartyByName(String value);
 }
