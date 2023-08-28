@@ -28,8 +28,7 @@
                     data-bs-target="#deletePartyModal">
                 Party-
             </button>
-            <input type="text" id="autoCompleteInput" />
-            <div id="autoCompleteResults"></div>
+            <input type="text" class="form-control" id="autoCompleteInput" placeholder="Search Party"/>
         </div>
         <ul th:each="party: ${partyDTO}">
             <li>
