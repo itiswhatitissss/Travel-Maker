@@ -48,6 +48,11 @@ public class PlanController {
         List<Map<String,Object>> attendList = attendService.listAttend(plno);
         model.addAttribute("AttendDTO",attendList);
 
+        Long attendCheck = attendService.checkAttend(uno,plno);
+        if (attendCheck !=null){
+            model.addAttribute("attendCheck",attendCheck);
+        }
+
         List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
         if (friendDTO == null) {
             List<Map<String,Object>> friend =friendService.friendList(uno);
@@ -65,7 +70,6 @@ public class PlanController {
                         .name(name)
                         .build();
                 model.addAttribute("friendSearchResult", users);
-//            model.addAttribute("list",1);
             }
             List<Map<String, Object>> friend = friendService.friendList(uno);
             model.addAttribute("friendDTO", friend);
@@ -112,6 +116,26 @@ public class PlanController {
     @GetMapping("/delete")
     public String deleteScheduler(Long schdetailPK){
         schedulerService.deleteScheduler(schdetailPK);
+
+        return "redirect:/travelmaker/plan/list";
+    }
+    @PostMapping("/attend")
+    public String attendDo(@RequestParam("plno") Long plno, Authentication authentication,@RequestParam(name = "attend") Long attend){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Long uno = userService.getUno(username);
+
+        attendService.modifyAttend(uno,plno,attend);
+
+        return "redirect:/travelmaker/plan/list";
+    }
+    @PostMapping("/modifyattend")
+    public String modifyAttend(@RequestParam("plno") Long plno, Authentication authentication,@RequestParam(name = "attend") Long attend){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Long uno = userService.getUno(username);
+
+        attendService.modifyAttend(uno,plno,attend);
 
         return "redirect:/travelmaker/plan/list";
     }

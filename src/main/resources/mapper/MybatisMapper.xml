@@ -32,7 +32,7 @@
     </update>
 
     <select id="selectAttendList" resultType="map" parameterType="map">
-        select Attend.uno, users.name from Attend join users on Attend.uno=users.uno where Attend.plno=#{plno} and  Attend.attender=1
+        select Attend.uno, Attend.attender, users.name from Attend join users on Attend.uno=users.uno where Attend.plno=#{plno}
     </select>
 
 </mapper>

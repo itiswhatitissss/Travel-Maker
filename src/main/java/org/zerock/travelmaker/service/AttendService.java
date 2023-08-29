@@ -9,4 +9,6 @@ public interface AttendService {
     void modifyAttend(Long uno, Long plno ,Long attender);
 
     List<Map<String, Object>> listAttend(Long plno);
+
+    Long checkAttend(Long uno, Long plno);
 }
