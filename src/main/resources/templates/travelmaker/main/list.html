@@ -58,7 +58,7 @@
                                th:text="${plan.title}"></a>
                             <p th:text="${plan.start}"></p>
                             <p th:text="${plan.end}"></p>
-                            <button type="button" class="btn btn-outline-warning" th:data-plno="${plan.plno}" th:onclick="showModifyModal(this.getAttribute('data-plno'))">수정</button>
+                            <button type="button" id="modifyPlan" class="btn btn-outline-warning" th:data-plno="${plan.plno}" >수정</button>
                             <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
                         </div>
                     </div>
@@ -348,7 +348,7 @@
 
     $(document).ready(function() {
         // 수정 모달을 띄우기 위한 이벤트 처리
-        $(".btn-outline-warning").on("click", function() {
+        $("#modifyPlan").on("click", function() {
             var plno = $(this).data("plno");
             $.ajax({
                 url: "/travelmaker/main/getPlan", // 플랜 정보를 가져올 URL
