@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zerock.travelmaker.domain.Party;
 import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.domain.Plan;
+import org.zerock.travelmaker.domain.Scheduler;
+import org.zerock.travelmaker.mapper.MybatisMapper;
 import org.zerock.travelmaker.repository.PartyDetailRepository;
 import org.zerock.travelmaker.repository.PartyRepository;
 import org.zerock.travelmaker.repository.PlanRepository;
@@ -23,6 +25,7 @@ public class PlanService {
     private final PlanRepository planRepository;
     private final PartyRepository partyRepository;
     private final PartyDetailRepository partyDetailRepository;
+    private final MybatisMapper mybatisMapper;
 
     //글작성처리
     /*MultipartFile file 추가*//*예외처리*/
@@ -54,6 +57,11 @@ public class PlanService {
         Party byPno=findByPno(pno); //RequestParam 으로 받은 pno값 받기
         PartyDetail partyDetail = PartyDetail.builder().plnoByPartyDetail(byplno).pnoByPartyDetail(byPno).build();//partyDetail 따로 생성 why? prepersist로 생성하면 plno값만 던져주기 때문, pno도 필요
         partyDetailRepository.save(partyDetail);
+
+    }
+
+    public void planmodify(String title, String start, String end,Long plno){
+        mybatisMapper.planUpdate(title, start, end, plno);
     }
     public Party findByPno(Long pno) {
         Optional<Party> id = partyRepository.findById(pno);

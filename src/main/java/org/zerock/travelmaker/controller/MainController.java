@@ -21,6 +21,7 @@ import org.zerock.travelmaker.dto.FriendDTO;
 import org.zerock.travelmaker.dto.PartyDTO;
 import org.zerock.travelmaker.dto.PlanDTO;
 import org.zerock.travelmaker.dto.UserDTO;
+import org.zerock.travelmaker.repository.PlanRepository;
 import org.zerock.travelmaker.service.FriendService;
 import org.zerock.travelmaker.service.PlanService;
 import org.zerock.travelmaker.service.UserService;
@@ -29,10 +30,7 @@ import org.zerock.travelmaker.service.MainService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @Log4j2
@@ -44,6 +42,7 @@ public class MainController {
     private final UserService loginService;
     private final FriendService friendService;
     private final PlanService planService;
+    private final PlanRepository planRepository;
 
 
 
@@ -205,4 +204,20 @@ public class MainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @PostMapping("/modifyPlan")
+    @ResponseBody
+    public String modifyPlan(@RequestParam("plno") Long plno,
+                             @RequestParam("title") String title,
+                             @RequestParam("start") String start,
+                             @RequestParam("end") String end,
+                             Model model) {
+
+        planService.planmodify(title,start,end,plno);
+        return "success";
+
+        // 예시: 수정 작업 실패 시
+        // return "failure";
+    }
+
 }

@@ -27,4 +27,8 @@
         select plan.plno, plan.title, plan.start, plan.end, plan.filepath from party join party_detail on party.pno = party_detail.pno join plan on party_detail.plno = plan.plno where party.pno= #{pno} and party_detail.plno = #{plno}
     </select>
 
+    <update id="planUpdate">
+        update plan set title=#{title}, Start=#{start}, End=#{end} where plno=#{plno}
+    </update>
+
 </mapper>
