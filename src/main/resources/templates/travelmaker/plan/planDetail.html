@@ -34,6 +34,11 @@
 <div id="main">
     <aside>
         <div class="wrap">
+            <ul th:each="attend: ${AttendDTO}">
+                <li>
+                    <span th:text="${attend.name}"></span>
+                </li>
+            </ul>
             <ul th:each="party: ${partyDTO}">
                 <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}" class="back-button">뒤로가기</a>
                 <a href="#" class="button">Button</a>

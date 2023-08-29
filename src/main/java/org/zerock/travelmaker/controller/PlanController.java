@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.travelmaker.domain.SchedulerDetail;
 import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.SchedulerDetailDTO;
-import org.zerock.travelmaker.service.FriendService;
-import org.zerock.travelmaker.service.MainService;
-import org.zerock.travelmaker.service.SchedulerService;
-import org.zerock.travelmaker.service.UserService;
+import org.zerock.travelmaker.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -33,6 +30,7 @@ public class PlanController {
     private final UserService userService;
     private final MainService mainService;
     private final SchedulerService schedulerService;
+    private final AttendService attendService;
 
     @GetMapping("/planDetail")
     public void planDetailGET(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Model model, Authentication authentication, HttpSession session) {
@@ -46,6 +44,9 @@ public class PlanController {
 
         List<Map<String,Object>> partyList = mainService.getParty(uno);
         model.addAttribute("partyDTO",partyList);
+
+        List<Map<String,Object>> attendList = attendService.listAttend(plno);
+        model.addAttribute("AttendDTO",attendList);
 
         List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
         if (friendDTO == null) {
@@ -114,5 +115,4 @@ public class PlanController {
 
         return "redirect:/travelmaker/plan/list";
     }
-
 }
