@@ -18,7 +18,8 @@ import java.util.List;
 
 @Entity
 @Builder
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "plno")
@@ -48,6 +49,9 @@ public class Plan{
 
     @OneToOne(mappedBy = "plnoByVote",cascade = CascadeType.ALL)
     private Vote vote;
+
+    @OneToMany(mappedBy = "plnoByAttend",cascade = CascadeType.ALL)
+    private List<Attend> plnoAttend = new ArrayList<>();
 
     private String filename;
 

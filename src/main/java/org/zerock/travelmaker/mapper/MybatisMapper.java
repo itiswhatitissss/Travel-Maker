@@ -2,6 +2,7 @@ package org.zerock.travelmaker.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.FriendDTO;
 
@@ -19,5 +20,6 @@ public interface MybatisMapper {
     public Long getPartyOne(Long pno);
     public List<Map<String, Object>> getPlanOne(Long pno, Long plno);
     public void planUpdate(String title, String start, String end,Long plno);
+    public List<Map<String, Object>> selectAttendList(Plan plno);
 
 }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.travelmaker.domain.*;
 import org.zerock.travelmaker.domain.VoteOption;
 import org.zerock.travelmaker.mapper.MybatisMapper;
@@ -46,6 +47,8 @@ class TestRepositoryTest {
     private MybatisMapper mybatisMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AttendRepository attendRepository;
 
     @Test
     public void test() { //이거 하나로 끝내자
@@ -87,7 +90,7 @@ class TestRepositoryTest {
             e.printStackTrace();
         }
 
-        Users user = Users.builder().id("seunggin").name("이성진").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user = Users.builder().id("pkmm").name("이성진").password(passwordEncoder.encode("1234")).email("naver").build();
         userRepository.save(user); //이성진 회원가입
 
         Party party = Party.builder().partyName("해병대전우회").QR("QRcode").build();
@@ -157,5 +160,39 @@ class TestRepositoryTest {
         SchedulerDetail schedulerDetail2 = SchedulerDetail.builder().snoBySchedulerDetail(scheduler2).content("행복한 여행 보내자").build();
         scheudlerDetailRepository.save(schedulerDetail2); //"308호 모임" 여름휴가에 관한 스케줄러 디테일 생성
     }
+    @Test
+    public void testAttend(){
+        Optional<Users> byId = userRepository.findById(2L);
+        Users uno = byId.orElseThrow();
+        Optional<Plan> byId2 = planRepository.findById(1L);
+        Plan plno = byId2.orElseThrow();
 
+        Attend attend = Attend.builder()
+                .Attender(0L)
+                .unoByAttend(uno)
+                .plnoByAttend(plno)
+                .build();
+
+        attendRepository.save(attend);
+    }
+    @Test
+    public void testAttender(){
+        Optional<Users> byId = userRepository.findById(1L);
+        Users uno = byId.orElseThrow();
+        Optional<Plan> byId2 = planRepository.findById(1L);
+        Plan plno = byId2.orElseThrow();
+
+        Long result = attendRepository.selectAttend(uno,plno);
+        log.info("참석여부는 : "+result);
+    }
+    @Test
+    public void updateAttender(){
+        Optional<Users> byId = userRepository.findById(1L);
+        Users uno = byId.orElseThrow();
+        Optional<Plan> byId2 = planRepository.findById(1L);
+        Plan plno = byId2.orElseThrow();
+
+        Long result = attendRepository.selectAttend(uno,plno);
+        attendRepository.updateAttend(uno,plno,result,0L);
+    }
 }

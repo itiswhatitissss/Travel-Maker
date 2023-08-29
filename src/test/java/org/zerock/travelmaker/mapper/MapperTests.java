@@ -4,10 +4,13 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.zerock.travelmaker.domain.Plan;
+import org.zerock.travelmaker.repository.PlanRepository;
 import org.zerock.travelmaker.service.UserService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @SpringBootTest
 @Log4j2
@@ -15,7 +18,8 @@ public class MapperTests {
 
     @Autowired
     private MybatisMapper mybatisMapper;
-
+    @Autowired
+    private PlanRepository planRepository;
 
     @Autowired
     private UserService loginService;
@@ -62,6 +66,14 @@ public class MapperTests {
     public void testGetPartyOne(){
         Long result = mybatisMapper.getPartyOne(1L);
         log.info("result========>"+result);
+    }
+    @Test
+    public void testListAttend(){
+        Optional<Plan> byId2 = planRepository.findById(1L);
+        Plan pplno = byId2.orElseThrow();
+        List<Map<String, Object>> list =mybatisMapper.selectAttendList(pplno);
+
+        log.info("참가자 리스트 : "+list);
     }
 
 }
