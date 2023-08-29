@@ -18,11 +18,11 @@ public class Scheduler{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sno;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="plno")
     private Plan plnoByScheduler;
 
-    @OneToMany(mappedBy = "snoBySchedulerDetail", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "snoBySchedulerDetail")
     private List<SchedulerDetail> schedulerDetails = new ArrayList<>();
 
 }

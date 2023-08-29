@@ -82,7 +82,7 @@ class TestRepositoryTest {
             planRepository.save(plan1);
             planRepository.save(plan2);
 
-        } catch (ParseException e) {
+        } catch (Exception e) {
             // 예외 처리
             e.printStackTrace();
         }
@@ -95,7 +95,6 @@ class TestRepositoryTest {
 
         UserParty userParty = UserParty.builder().unoByUserParty(user).pnoByUserParty(party).build();
         userPartyRepository.save(userParty); // 이성진 + "해병대전우회" 파티 참가
-
 
         PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(party).plnoByPartyDetail(planRepository.findById(1L).get()).build();
         partyDetailRepository.save(partyDetail); //"해병대전우회" 파티에 "해병대전우회 첫여행" 플랜 생성
