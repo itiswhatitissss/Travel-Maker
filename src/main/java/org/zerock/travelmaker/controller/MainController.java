@@ -195,6 +195,7 @@ public class MainController {
     public ResponseEntity<PlanDTO> getPlan(@RequestParam("plno") Long plno) {
         try {
             PlanDTO plan = mainService.readOne(plno); // plno에 해당하는 플랜 정보 가져오기
+            log.info("planDTO======================>"+plan);
             if (plan != null) {
                 return ResponseEntity.ok(plan);
             } else {

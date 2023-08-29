@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TravelMaker</title>
 </head>
 <body>
 
+<h1>[ UPDATE PAGE ]</h1>
+
+<form th:action="@{/travelmaker/plan/update}" method="post">
+
+    <span>pk    :</span>
+    <input type="text" name="pk" th:value="${dto.fno}" readonly><br>
+
+    <span>content   :</span>
+    <input type="text" name="content" th:value="${dto.name}" readonly><br>
+
+    <span>startTime  :</span>
+    <input type="time" name="startTime" th:value="${dto.phone}"><br>
+
+    <span>endTime:</span>
+    <input type="time" name="endTime" th:value="${dto.address}"><br>
+
+
+    <hr />
+
+    <div>
+        <button>
+            <a th:href="@{/board/list}">LIST</a>
+        </button>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </div>
+</form>
 </body>
 </html>

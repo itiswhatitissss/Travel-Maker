@@ -19,5 +19,6 @@ public class PlanDTO {
     private Date start;
     private Date end;
     private String title;
-    private String img;
+    private String filename;
+    private String filepath;
 }

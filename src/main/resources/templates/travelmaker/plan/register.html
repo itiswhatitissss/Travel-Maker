@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TravelMaker</title>
 </head>
 <body>
 
+<h1>[ REGISTER FORM ]</h1>
+
+<form action="/travelmaker/plan/register" method="post">
+
+    <span>content</span>
+    <input name="content" placeholder="계획할 일을 적어보세요!"/>
+
+    <span>startTime</span>
+    <input type="time" name="startTime"><br>
+
+    <span>endTime</span>
+    <input type="time" name="endTime"><br>
+
+    <br><br>
+    <div>
+        <button>
+            <a th:href="@{/travelmaker/plan/list}">LIST</a>
+        </button>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </div>
+</form>
 </body>
 </html>

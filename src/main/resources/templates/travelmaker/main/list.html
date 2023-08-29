@@ -217,6 +217,10 @@
                         <label for="modEnd" class="form-label">End Date</label>
                         <input type="date" class="form-control" id="modEnd" name="end" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="modFilepath" class="form-label">Filepath</label>
+                        <input type="file" class="form-control" id="modFilepath" name="filepath" accept="image/*" onchange="setThumbnail(event);" required>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -326,7 +330,7 @@
         $(".btn-outline-warning").on("click", function() {
             var plno = $(this).data("plno");
             $.ajax({
-                url: "/travelmaker/plan/getPlan", // 플랜 정보를 가져올 URL
+                url: "/travelmaker/main/getPlan", // 플랜 정보를 가져올 URL
                 type: "GET",
                 data: {
                     plno: plno
@@ -354,7 +358,7 @@
                 success: function(response) {
                     if (response === "success") {
                         $("#modifyPlanModal").modal("hide");
-                        location.reload(); // 화면 새로고침
+                        location.reload();
                     } else {
                         alert("플랜 수정 실패");
                     }

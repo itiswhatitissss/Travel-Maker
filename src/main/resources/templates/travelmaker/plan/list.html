@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>TravelMaker</title>
 </head>
 <body>
 
+<h1>[ LIST PAGE ]</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>-    pk      -</th>
+    <th>-    content     -</th>
+    <th>-    startTime    -</th>
+    <th>-    endTime  -</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr th:each="list: ${detailList}">
+    <td>
+      <a th:href="@{/travelmaker/plan/detail(schdetailPK=${list.schdetailPK})}">
+        <span th:text="${list.schdetailPK}"></span>
+      </a>
+    </td>
+    <td>
+      <a th:href="@{/travelmaker/plan/detail(schdetailPK=${list.schdetailPK})}">
+        <span th:text="${list.content}"></span>
+      </a>
+    </td>
+    <td>
+      <span th:text="${list.startTime}"></span>
+    </td>
+    <td>
+      <span th:text="${list.endTime}"></span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<div>
+  <button>
+    <a th:href="@{/travelmaker/plan/register}">REGISTER</a>
+  </button>
+</div>
 </body>
 </html>
