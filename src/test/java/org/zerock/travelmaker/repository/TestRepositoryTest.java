@@ -177,7 +177,7 @@ class TestRepositoryTest {
     }
     @Test
     public void testAttender(){
-        Optional<Users> byId = userRepository.findById(1L);
+        Optional<Users> byId = userRepository.findById(3L);
         Users uno = byId.orElseThrow();
         Optional<Plan> byId2 = planRepository.findById(1L);
         Plan plno = byId2.orElseThrow();
