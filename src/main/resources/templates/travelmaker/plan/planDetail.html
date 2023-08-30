@@ -57,30 +57,29 @@
 
     </aside>
 
+
+    <!--달력-->
     <section>
         <div id="map" style="width:100%;height:800px;"></div>
         <input type="hidden" id="plno" th:value="${plnno}">
+        <button type="button" class="btn btn-outline-danger me-2" onclick="deleteMarker()"> Reset </button>
     </section>
+    <!--달력-->
 
-    <!--    <section>-->
-    <!--        <p>section2 부분입니다람쥐</p>-->
-    <!--        <article>-->
-    <!--            <p>article2 부분입니다람쥐</p>-->
-    <!--        </article>-->
-    <!--    </section>-->
+
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee26f1fb7bd8c053dc49854ce7b2d099"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            center: new kakao.maps.LatLng(37.265642537105556, 127.00007891675567), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 
-    // 마커를 추가하는 함수
+    //-----------------마커 찍고 DB저장-------------------------//
     function addMarkerAndSaveToServer(position) {
         var marker = new kakao.maps.Marker({
             position: position
@@ -88,22 +87,22 @@
 
         marker.setMap(map);
 
-        // 생성된 마커의 좌표를 서버로 전송
+        // DB 던져줄 Data(lat,lng,plno)
         var lat = position.getLat();
         var lng = position.getLng();
         var plno = document.getElementById("plno").value;
 
-        // AJAX 요청 보내기
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "saveMarker", // 해당 URL은 실제 컨트롤러에서 처리할 URL로 변경해야 합니다.
+            url: "saveMarker",
             data: { lat: lat, lng: lng, plno: plno },
             success: function(response) {
-                console.log("마커 좌표가 서버에 저장되었습니다.");
+                console.log("성공");
             },
             error: function(error) {
-                console.error("마커 좌표 저장 중 오류가 발생했습니다.");
+                console.error("실패");
+                console.log("오류정보:",error)
                 console.log("Lat:", lat);
                 console.log("Lng:", lng);
                 console.log("Plno:", plno);
@@ -116,6 +115,54 @@
         // 클릭한 위치에 마커를 추가하고 좌표를 서버로 전송
         addMarkerAndSaveToServer(mouseEvent.latLng);
     });
+    //-----------------마커 찍고 DB저장-------------------------//
+
+
+
+
+    //-----------------찍혀있는 마커 보여주기-------------------------//
+    function addMarker(position) {
+        var marker = new kakao.maps.Marker({
+            position: position
+        });
+        marker.setMap(map);
+    }
+
+    var plno = document.getElementById("plno").value;
+    fetchAndDisplayMarkers(plno);
+    function fetchAndDisplayMarkers(plno) {
+        $.ajax({
+            type: "GET",
+            url: "getMarkers",
+            data: { plno: plno },
+            dataType: "json",
+            success: function(data) {
+                data.forEach(function(markerData) {
+                    var position = new kakao.maps.LatLng(markerData.lat, markerData.lng);
+                    addMarker(position);
+                });
+            },
+            error: function(error) {
+                console.error("에러:",error);
+            }
+        });
+    }
+    //-----------------찍혀있는 마커 보여주기-------------------------//
+    var plno = document.getElementById("plno").value;
+    deleteMarker(plno);
+    function deleteMarker(plno){
+        $.ajax({
+            type:"POST",
+            url:"deleteMarkers",
+            data: {plno:plno},
+            dataType : "json",
+            success:function(response){
+                location.reload();
+            },
+            error:function(error){
+            }
+        });
+    }
 
 </script>
 <script src="/js/index.js"></script>
