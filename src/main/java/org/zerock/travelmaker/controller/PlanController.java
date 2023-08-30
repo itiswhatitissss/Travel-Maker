@@ -47,12 +47,16 @@ public class PlanController {
 
         List<Map<String,Object>> attendList = attendService.listAttend(plno);
         model.addAttribute("AttendDTO",attendList);
+        model.addAttribute("plnno",plno);
+        model.addAttribute("ppno",pno);
 
         Long attendCheck = attendService.checkAttend(uno,plno);
         if (attendCheck !=null){
             model.addAttribute("attendCheck",attendCheck);
+            model.addAttribute("att",1);
+        }else {
+            model.addAttribute("att",0);
         }
-
         List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
         if (friendDTO == null) {
             List<Map<String,Object>> friend =friendService.friendList(uno);
@@ -120,23 +124,23 @@ public class PlanController {
         return "redirect:/travelmaker/plan/list";
     }
     @PostMapping("/attend")
-    public String attendDo(@RequestParam("plno") Long plno, Authentication authentication,@RequestParam(name = "attend") Long attend){
+    public String attendDo(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Authentication authentication,@RequestParam(name = "attendance") Long attend){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         Long uno = userService.getUno(username);
 
-        attendService.modifyAttend(uno,plno,attend);
+        attendService.doAttend(uno,plno,attend);
 
-        return "redirect:/travelmaker/plan/list";
+        return "redirect:/travelmaker/plan/planDetail?plno="+plno+"&pno="+pno;
     }
     @PostMapping("/modifyattend")
-    public String modifyAttend(@RequestParam("plno") Long plno, Authentication authentication,@RequestParam(name = "attend") Long attend){
+    public String modifyAttend(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Authentication authentication,@RequestParam(name = "attendance") Long attend){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         Long uno = userService.getUno(username);
 
         attendService.modifyAttend(uno,plno,attend);
 
-        return "redirect:/travelmaker/plan/list";
+        return "redirect:/travelmaker/plan/planDetail?plno="+plno+"&pno="+pno;
     }
 }

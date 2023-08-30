@@ -33,15 +33,19 @@
 
 <div id="main">
     <aside>
-        <div class="wrap">
-            <ul th:each="attend: ${AttendDTO}">
-                <li>
-                    <span th:text="${attend.name}"></span>
-                </li>
-            </ul>
+        <h6>참가자 명단</h6>
+        <ul th:each="attend: ${AttendDTO}">
+            <li th:if="${attend.attender == 1}" >
+                <span th:text="${attend.name}" th:style="${'color: green;'}"></span>
+            </li>
+            <li th:if="${attend.attender == 0}" >
+                <span th:text="${attend.name}" th:style="${'color: red;'}"></span>
+            </li>
+        </ul>
+        <div class="wrap" >
             <ul th:each="party: ${partyDTO}">
                 <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}" class="back-button">뒤로가기</a>
-                <a href="#" class="button">Button</a>
+                <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#myModal">참석투표</a>
                 <a href="#" class="button2">button2</a>
                 <a href="#" class="button">Button</a>
                 <a href="#" class="button2">button2</a>
@@ -49,6 +53,7 @@
                 <a href="#" class="button2">button2</a>
             </ul>
         </div>
+
     </aside>
 
     <section>
@@ -123,6 +128,71 @@
 <script src="/js/index.js"></script>
 <script src="/js/planDetail.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<!----참가 모달----->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">참석 투표</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div th:if="${att == 0}">
+                    <form method="post" th:action="@{/travelmaker/plan/attend}" >
+                        <input type="hidden" th:value="${plnno}" name="plno">
+                        <input type="hidden" th:value="${ppno}" name="pno">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="attendance" th:value="1">
+                            <label class="form-check-label">참석</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="attendance" th:value="0">
+                            <label class="form-check-label">불참</label>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">투표하기</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    </form>
+                </div>
+                <div th:if="${att == 1}">
+                    <form method="post" th:action="@{/travelmaker/plan/modifyattend}" >
+                        <input type="hidden" th:value="${plnno}" name="plno">
+                        <input type="hidden" th:value="${ppno}" name="pno">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="attendance" th:value="1" th:checked="${attendCheck == 1}">
+                            <label class="form-check-label">참석</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="attendance" th:value="0" th:checked="${attendCheck == 0}">
+                            <label class="form-check-label">불참</label>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">투표하기</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!----참가 모달 끝----->
+<!----참가 모달 스크립트----->
+    <script>
+        // "참석" 체크박스를 선택하면 "불참" 체크박스 선택 해제
+        document.querySelector('input[name="attendance"][value="1"]').addEventListener('change', function() {
+        if (this.checked) {
+        document.querySelector('input[name="attendance"][value="0"]').checked = false;
+        }
+    });
 
+        // "불참" 체크박스를 선택하면 "참석" 체크박스 선택 해제
+        document.querySelector('input[name="attendance"][value="0"]').addEventListener('change', function() {
+        if (this.checked) {
+        document.querySelector('input[name="attendance"][value="1"]').checked = false;
+    }
+    });
+    </script>
+<!----참가 모달 스크립트  끝----->
 </body>
 </html>
