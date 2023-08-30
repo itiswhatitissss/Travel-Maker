@@ -53,6 +53,9 @@ public class Plan{
     @OneToMany(mappedBy = "plnoByAttend",cascade = CascadeType.ALL)
     private List<Attend> plnoAttend = new ArrayList<>();
 
+    @OneToMany(mappedBy = "plnoByMarker",cascade = CascadeType.ALL)
+    private List<Marker> marker;
+
     private String filename;
 
     private String filepath;

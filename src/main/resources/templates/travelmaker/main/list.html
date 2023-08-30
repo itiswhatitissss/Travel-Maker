@@ -328,14 +328,14 @@
         $("#autoCompleteInput").autocomplete({
             source: function(request, response) {
                 $.ajax({
-                    url: "/travelmaker/main/autocomplete", // 컨트롤러에서 처리하는 URL
+                    url: "/travelmaker/main/autocomplete",
                     type: "POST",
                     dataType: "json",
                     data: {
                         value: request.term
                     },
                     success: function(data) {
-                        response(data.resultList); // 자동완성 결과 표시
+                        response(data.resultList);
                     },
                     error: function() {
                         alert("검색 중 오류가 발생했습니다.");

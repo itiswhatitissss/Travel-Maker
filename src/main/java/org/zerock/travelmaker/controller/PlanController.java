@@ -2,17 +2,20 @@ package org.zerock.travelmaker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.zerock.travelmaker.domain.Marker;
+import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.domain.SchedulerDetail;
 import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.SchedulerDetailDTO;
+import org.zerock.travelmaker.repository.MarkerRepository;
 import org.zerock.travelmaker.service.*;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +26,7 @@ import java.util.Map;
 
 @Controller
 @Log4j2
+@Slf4j
 @RequestMapping("/travelmaker/plan/*")
 @RequiredArgsConstructor
 public class PlanController {
@@ -31,6 +35,8 @@ public class PlanController {
     private final MainService mainService;
     private final SchedulerService schedulerService;
     private final AttendService attendService;
+    private final MarkerRepository markerRepository;
+    private final MarkerService markerService;
 
     @GetMapping("/planDetail")
     public void planDetailGET(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Model model, Authentication authentication, HttpSession session) {
@@ -142,5 +148,24 @@ public class PlanController {
         attendService.modifyAttend(uno,plno,attend);
 
         return "redirect:/travelmaker/plan/planDetail?plno="+plno+"&pno="+pno;
+    }
+
+    @PostMapping("/saveMarker")
+    @ResponseBody
+    public ResponseEntity<String> saveMarker(@RequestParam double lat, @RequestParam double lng, @RequestParam Long plno) {
+        try {
+            //Long값으로 받은 plno를 Plan으로 형변환
+            Plan plan =markerService.LongToPlan(plno);
+            log.info("lat : {}", lat);
+            log.info("lng : {}", lng);
+            log.info("plNo : {}", plno);
+            // 받은 좌표로 마커 정보를 생성하여 저장
+            Marker marker = Marker.builder().plnoByMarker(plan).lat(lat).lng(lng).build();
+            log.info("marker : {}", marker.getPlnoByMarker().getPlno());
+            markerRepository.save(marker);
+            return ResponseEntity.ok("마커 좌표가 저장되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("마커 좌표 저장 중 오류가 .");
+        }
     }
 }
