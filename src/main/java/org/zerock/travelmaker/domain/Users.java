@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,8 +28,12 @@ public class Users{
     private String name;
     private String email;
 
-//    private String address;
-//    private String phone;
+    private boolean del;
+    private boolean social;
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<MemberRole> roleSet = new HashSet<>();
+
 
     @OneToMany(mappedBy = "unoByFriend")
     private List<Friend> unofriends = new ArrayList<>();
@@ -42,13 +47,26 @@ public class Users{
     @OneToMany(mappedBy = "unoByVoteOption")
     private List<VoteOption> voteOptions = new ArrayList<>();
 
-    public void changePassword(String password){
+    public void changePassword(String password ){
         this.password = password;
     }
-    public void changeName(String name){
-        this.name = name;
-    }
+
     public void changeEmail(String email){
         this.email = email;
     }
+
+    public void changeDel(boolean del){
+        this.del = del;
+    }
+
+    public void addRole(MemberRole memberRole){
+        this.roleSet.add(memberRole);
+    }
+
+    public void clearRoles() {
+        this.roleSet.clear();
+    }
+
+    public void changeSocial(boolean social){this.social = social;}
+
 }

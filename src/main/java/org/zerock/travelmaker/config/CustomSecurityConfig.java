@@ -15,8 +15,10 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
 import org.zerock.travelmaker.security.CustomUserDetailService;
 import org.zerock.travelmaker.security.handler.Custom403Handler;
+import org.zerock.travelmaker.security.handler.CustomSocialLoginSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -34,18 +36,17 @@ public class CustomSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-//        return new CustomSocialLoginSuccessHandler(passwordEncoder());
-//    }
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomSocialLoginSuccessHandler(passwordEncoder());
+    }
+
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("----------------------configure 인증/인가권한 설정 ---------------------------");
 
-//        http
-//                .formLogin().loginPage("/travelmaker/login")
-//                .defaultSuccessUrl("/travelmaker/loginSuccess", true);
         http
                 .authorizeRequests()
                 .antMatchers("/travelmaker/user/login", "/travelmaker/user/signup").permitAll()
@@ -53,16 +54,22 @@ public class CustomSecurityConfig {
                 .and()
                 .formLogin()
                 .loginPage("/travelmaker/user/login")
-                .defaultSuccessUrl("/travelmaker/user/loginSuccess", true)
-                .permitAll()
+                .defaultSuccessUrl("/travelmaker/user/loginSuccess")
                 .and()
                 .logout()
                 .logoutUrl("/travelmaker/user/logout")
                 .logoutSuccessUrl("/travelmaker/user/login")
-                .deleteCookies("JSESSIONID", "remember-me")
-                .permitAll();
+                .deleteCookies("JSESSIONID", "remember-me");
 
-        http.csrf().disable(); //csrf토큰 비활성화
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        http.csrf().disable();
+
+        http
+                .oauth2Login()
+                .loginPage("/travelmaker/user/login")
+                .defaultSuccessUrl("/travelmaker/user/loginSuccess")
+                .successHandler(authenticationSuccessHandler())
+                .userInfoEndpoint();
 
         http
                 .rememberMe() //자동로그인
