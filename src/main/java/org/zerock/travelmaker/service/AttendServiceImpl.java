@@ -66,6 +66,7 @@ public class AttendServiceImpl implements AttendService{
     public Long checkAttend(Long uno, Long plno) {
         Optional<Users> byId = userRepository.findById(uno);
         Users uuno = byId.orElseThrow();
+
         Optional<Plan> byId2 = planRepository.findById(plno);
         Plan pplno = byId2.orElseThrow();
 

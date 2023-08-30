@@ -22,7 +22,7 @@ public class FriendServiceImplTest {
 
     @Test
     public void testRegisterFriend(){
-        Long uno = 2L;
+        Long uno = 3L;
         Long fno = 1L;
         FriendDTO friendDTO = FriendDTO.builder()
                 .fno(fno)
