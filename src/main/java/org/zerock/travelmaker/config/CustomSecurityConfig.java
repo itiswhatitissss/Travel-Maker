@@ -48,7 +48,7 @@ public class CustomSecurityConfig {
 //                .defaultSuccessUrl("/travelmaker/loginSuccess", true);
         http
                 .authorizeRequests()
-                .antMatchers("/travelmaker/user/login").permitAll()
+                .antMatchers("/travelmaker/user/login", "/travelmaker/user/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
