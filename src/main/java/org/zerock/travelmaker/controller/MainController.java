@@ -183,8 +183,10 @@ public class MainController {
     }
     @PostMapping("/autocomplete")
     @ResponseBody
-    public Map<String, Object> autocomplete(@RequestParam String value) {
-        List<Map<String, Object>> resultList = mainService.searchPartyByName(value);
+    public Map<String, Object> autocomplete(@RequestParam String keyword, @RequestParam Long uno) {
+        List<Map<String, Object>> resultList = mainService.searchPartyByName(keyword, uno);
+        log.info("keyword==============>"+keyword);
+        log.info("uno==============>"+uno);
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("resultList", resultList);

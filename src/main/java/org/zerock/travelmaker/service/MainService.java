@@ -33,6 +33,6 @@ public interface MainService {
 
     List<Map<String, Object>> getPlanOne(Long pno, Long plno, Long uno);
 
-    List<Map<String, Object>> searchPartyByName(String value);
+    List<Map<String, Object>> searchPartyByName(String keyword, Long uno);
 
 }

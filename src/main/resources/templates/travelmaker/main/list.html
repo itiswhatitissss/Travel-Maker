@@ -28,6 +28,7 @@
                 Party-
             </button>
             <input type="text" class="form-control" id="autoCompleteInput" placeholder="Search Party"/>
+            <input type="hidden" th:value="${uno}" id="autoCompleteUno">
         </div>
         <ul th:each="party: ${partyDTO}">
             <li>
@@ -335,6 +336,8 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 
+    var uno = encodeURIComponent($("#autoCompleteUno").val());
+
     $(document).ready(function() {
         $("#autoCompleteInput").autocomplete({
             source: function(request, response) {
@@ -343,7 +346,7 @@
                     type: "POST",
                     dataType: "json",
                     data: {
-                        value: request.term
+                        value: request.term, uno:uno
                     },
                     success: function(data) {
                         response(data.resultList);

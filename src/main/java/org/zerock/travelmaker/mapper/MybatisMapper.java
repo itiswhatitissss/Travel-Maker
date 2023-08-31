@@ -24,5 +24,6 @@ public interface MybatisMapper {
     public List<Map<String, Object>> selectAttendList(Plan plno);
     public List<MarkerDTO> getMarkersByPlno(Long plno);
     public void deleteMarker(Long plno);
+    public List<Map<String,Object>> searchParty(String keyword,Long uno);
     public List<Map<String,Object>> selectUserList(Long uno);
 }

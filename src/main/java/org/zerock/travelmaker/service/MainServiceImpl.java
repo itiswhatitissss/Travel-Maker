@@ -136,18 +136,8 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
-    public List<Map<String, Object>> searchPartyByName(String value) {
-        List<Party> partyList = partyRepository.findByPartyNameContainingIgnoreCase(value);
-
-        List<Map<String, Object>> resultList = new ArrayList<>();
-        for (Party party : partyList) {
-            Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("label", party.getPartyName());
-            resultMap.put("value", party.getPartyName());
-            resultMap.put("idx", party.getPno());
-            resultList.add(resultMap);
-        }
-
-        return resultList;
+    public List<Map<String, Object>> searchPartyByName(String keyword, Long uno) {
+        List<Map<String, Object>> partyList = mybatisMapper.searchParty(keyword,uno);
+        return partyList;
     }
 }
