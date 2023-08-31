@@ -36,35 +36,35 @@
     <aside>
         <h6>참가자 명단</h6>
         <ul th:each="attend: ${AttendDTO}">
-            <li th:if="${attend.attender == 1}" >
+            <li th:if="${attend.attender == 1}">
                 <span th:text="${attend.name}" th:style="${'color: green;'}"></span>
             </li>
-            <li th:if="${attend.attender == 0}" >
+            <li th:if="${attend.attender == 0}">
                 <span th:text="${attend.name}" th:style="${'color: red;'}"></span>
             </li>
         </ul>
-        <div class="wrap" >
+        <div class="wrap">
             <ul th:each="party: ${partyDTO}">
-                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}" class="back-button">뒤로가기</a>
-                <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#myModal">참석투표</a>
-                <a href="#" class="button2">button2</a>
+                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
+                   class="back-button">뒤로가기</a>
+                <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#attendmodal">참석투표</a>
+                <a href="#" class="button2">button3</a>
                 <a href="#" class="button">Button</a>
                 <a href="#" class="button2">button2</a>
                 <a href="#" class="button">Button</a>
                 <a href="#" class="button2">button2</a>
             </ul>
         </div>
-
     </aside>
 
 
-    <!--달력-->
+    <!--지도-->
     <section>
         <div id="map" style="width:100%;height:800px;"></div>
         <input type="hidden" id="plno" th:value="${plnno}">
-        <button type="button" class="btn btn-outline-danger me-2" onclick="deleteMarker()"> Reset </button>
+        <button type="button" id="deleteMarker" class="btn btn-outline-danger me-2"> Reset</button>
     </section>
-    <!--달력-->
+    <!--지도-->
 
 
 </div>
@@ -96,28 +96,20 @@
             type: "POST",
             dataType: "json",
             url: "saveMarker",
-            data: { lat: lat, lng: lng, plno: plno },
-            success: function(response) {
-                console.log("성공");
+            data: {lat: lat, lng: lng, plno: plno},
+            success: function () {
             },
-            error: function(error) {
-                console.error("실패");
-                console.log("오류정보:",error)
-                console.log("Lat:", lat);
-                console.log("Lng:", lng);
-                console.log("Plno:", plno);
+            error: function () {
             }
         });
     }
 
     // 클릭 이벤트 리스너 등록
-    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
         // 클릭한 위치에 마커를 추가하고 좌표를 서버로 전송
         addMarkerAndSaveToServer(mouseEvent.latLng);
     });
     //-----------------마커 찍고 DB저장-------------------------//
-
-
 
 
     //-----------------찍혀있는 마커 보여주기-------------------------//
@@ -130,36 +122,46 @@
 
     var plno = document.getElementById("plno").value;
     fetchAndDisplayMarkers(plno);
+
     function fetchAndDisplayMarkers(plno) {
         $.ajax({
             type: "GET",
             url: "getMarkers",
-            data: { plno: plno },
+            data: {plno: plno},
             dataType: "json",
-            success: function(data) {
-                data.forEach(function(markerData) {
+            success: function (data) {
+                data.forEach(function (markerData) {
                     var position = new kakao.maps.LatLng(markerData.lat, markerData.lng);
                     addMarker(position);
                 });
             },
-            error: function(error) {
-                console.error("에러:",error);
+            error: function (error) {
+                console.error("에러:", error);
             }
         });
     }
+
     //-----------------찍혀있는 마커 보여주기-------------------------//
-    var plno = document.getElementById("plno").value;
-    deleteMarker(plno);
-    function deleteMarker(plno){
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var resetButton = document.querySelector('#deleteMarker');
+        resetButton.addEventListener('click', function () {
+            var plno = document.getElementById("plno").value;
+            deleteMarker(plno);
+        });
+    });
+
+    function deleteMarker(plno) {
         $.ajax({
-            type:"POST",
-            url:"deleteMarkers",
-            data: {plno:plno},
-            dataType : "json",
-            success:function(response){
-                location.reload();
+            type: "POST",
+            url: "deleteMarkers",
+            data: {plno: plno},
+            dataType: "json",
+            success: function () {
             },
-            error:function(error){
+            error: function () {
+                location.reload();
             }
         });
     }
@@ -171,7 +173,7 @@
 
 
 <!----참가 모달----->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="attendmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -180,7 +182,7 @@
             </div>
             <div class="modal-body">
                 <div th:if="${att == 0}">
-                    <form method="post" th:action="@{/travelmaker/plan/attend}" >
+                    <form method="post" th:action="@{/travelmaker/plan/attend}">
                         <input type="hidden" th:value="${plnno}" name="plno">
                         <input type="hidden" th:value="${ppno}" name="pno">
                         <div class="form-check">
@@ -196,15 +198,17 @@
                     </form>
                 </div>
                 <div th:if="${att == 1}">
-                    <form method="post" th:action="@{/travelmaker/plan/modifyattend}" >
+                    <form method="post" th:action="@{/travelmaker/plan/modifyattend}">
                         <input type="hidden" th:value="${plnno}" name="plno">
                         <input type="hidden" th:value="${ppno}" name="pno">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="attendance" th:value="1" th:checked="${attendCheck == 1}">
+                            <input type="checkbox" class="form-check-input" name="attendance" th:value="1"
+                                   th:checked="${attendCheck == 1}">
                             <label class="form-check-label">참석</label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="attendance" th:value="0" th:checked="${attendCheck == 0}">
+                            <input type="checkbox" class="form-check-input" name="attendance" th:value="0"
+                                   th:checked="${attendCheck == 0}">
                             <label class="form-check-label">불참</label>
                         </div>
                         <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">투표하기</button>
@@ -220,21 +224,21 @@
 </div>
 <!----참가 모달 끝----->
 <!----참가 모달 스크립트----->
-    <script>
-        // "참석" 체크박스를 선택하면 "불참" 체크박스 선택 해제
-        document.querySelector('input[name="attendance"][value="1"]').addEventListener('change', function() {
+<script>
+    // "참석" 체크박스를 선택하면 "불참" 체크박스 선택 해제
+    document.querySelector('input[name="attendance"][value="1"]').addEventListener('change', function () {
         if (this.checked) {
-        document.querySelector('input[name="attendance"][value="0"]').checked = false;
+            document.querySelector('input[name="attendance"][value="0"]').checked = false;
         }
     });
 
-        // "불참" 체크박스를 선택하면 "참석" 체크박스 선택 해제
-        document.querySelector('input[name="attendance"][value="0"]').addEventListener('change', function() {
+    // "불참" 체크박스를 선택하면 "참석" 체크박스 선택 해제
+    document.querySelector('input[name="attendance"][value="0"]').addEventListener('change', function () {
         if (this.checked) {
-        document.querySelector('input[name="attendance"][value="1"]').checked = false;
-    }
+            document.querySelector('input[name="attendance"][value="1"]').checked = false;
+        }
     });
-    </script>
+</script>
 <!----참가 모달 스크립트  끝----->
 </body>
 </html>
