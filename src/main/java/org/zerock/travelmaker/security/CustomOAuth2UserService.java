@@ -47,7 +47,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         String email = null;
 
         switch (clientName){
-            case "kakao":
+            case "Kakao":
                 email = getKakaoEmail(paramMap);
                 break;
         }

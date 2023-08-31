@@ -3,7 +3,7 @@ package org.zerock.travelmaker.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Vote{
     private Plan plnoByVote;
 
     private String vTitle;
-    private Date vEndDate;
+    private LocalDate vEndDate;
     private int vCount;
     private int vComplete;
     private int vCheck;

@@ -30,10 +30,10 @@ public class Plan{
     private Long plno;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date start;
+    private LocalDate  start;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date end;
+    private LocalDate  end;
 
     @Column(length = 50, nullable = false)
     private String title;
