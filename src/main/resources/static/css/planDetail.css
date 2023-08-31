@@ -20,14 +20,12 @@ nav
 section
 {
     width:70%;
-    /*background-color:lightgrey;*/
     height:100%;
 }
 article
 {
     width:60%;
     margin-left:100px;
-    background-color:yellow;
     height:500px;
 }
 aside

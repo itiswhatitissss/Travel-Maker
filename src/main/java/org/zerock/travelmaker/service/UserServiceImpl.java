@@ -7,9 +7,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.UserDTO;
+import org.zerock.travelmaker.mapper.MybatisMapper;
 import org.zerock.travelmaker.repository.UserRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Log4j2
@@ -20,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final MybatisMapper mybatisMapper;
 
     @Override
     public Long getUno(String username) {
@@ -45,4 +49,11 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(users);
     }
+
+    @Override
+    public List<Map<String, Object>> userList(Long uno) {
+        List<Map<String, Object>> result = mybatisMapper.selectUserList(uno);
+        return result;
+    }
+
 }

@@ -130,8 +130,8 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
-    public List<Map<String, Object>> getPlanOne(Long pno, Long plno) {
-        List<Map<String, Object>> result = mybatisMapper.getPlanOne(pno, plno);
+    public List<Map<String, Object>> getPlanOne(Long pno, Long plno, Long uno) {
+        List<Map<String, Object>> result = mybatisMapper.getPlanOne(pno, plno, uno);
         return result;
     }
 

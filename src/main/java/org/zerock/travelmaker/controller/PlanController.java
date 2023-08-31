@@ -34,7 +34,6 @@ public class PlanController {
     private final FriendService friendService;
     private final UserService userService;
     private final MainService mainService;
-    private final SchedulerService schedulerService;
     private final AttendService attendService;
     private final MarkerRepository markerRepository;
     private final MarkerService markerService;
@@ -45,8 +44,12 @@ public class PlanController {
         String username = userDetails.getUsername();
         Long uno = userService.getUno(username);
         model.addAttribute("uno", uno);
+        model.addAttribute("username", username);
 
-        List<Map<String, Object>> planList = mainService.getPlanOne(pno, plno);
+        List<Map<String, Object>> usersDTO = userService.userList(uno);
+        model.addAttribute("usersDTO", usersDTO);
+
+        List<Map<String, Object>> planList = mainService.getPlanOne(pno, plno, uno);
         model.addAttribute("planDTO",planList);
 
         List<Map<String,Object>> partyList = mainService.getParty(uno);
@@ -89,47 +92,6 @@ public class PlanController {
         }
     };
 
-
-
-    @PostMapping("/scheduler")
-    public void schedulerPost() {}
-
-
-    @GetMapping("/list")
-    public void list(Model model) {
-        List<SchedulerDetailDTO> list = schedulerService.listScheduler();
-        model.addAttribute("detailList", list);
-    }
-
-    @GetMapping("/register")
-    public void registerScheduler() {}
-
-    @PostMapping("/register")
-    public String registerScheduler(SchedulerDetailDTO schedulerDetailDTO){
-        Long schdetailPK = schedulerService.registerScheduler(schedulerDetailDTO);
-
-        return "redirect:/travelmaker/plan/list";
-    }
-
-    @GetMapping({"/detail", "/update"})
-    public void detail(Long schdetailPK, Model model) {
-        SchedulerDetailDTO schedulerDetailDTO = schedulerService.detail(schdetailPK);
-        model.addAttribute("dto", schedulerDetailDTO);
-    }
-
-
-    @PostMapping("/update")
-    public String updateScheduler(SchedulerDetailDTO schedulerDetailDTO){
-        schedulerService.updateScheduler(schedulerDetailDTO);
-        return "redirect:/travelmaker/plan/list";
-    }
-
-    @GetMapping("/delete")
-    public String deleteScheduler(Long schdetailPK){
-        schedulerService.deleteScheduler(schdetailPK);
-
-        return "redirect:/travelmaker/plan/list";
-    }
     @PostMapping("/attend")
     public String attendDo(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Authentication authentication,@RequestParam(name = "attendance") Long attend){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();

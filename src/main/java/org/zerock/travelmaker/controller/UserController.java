@@ -61,4 +61,7 @@ public class UserController {
 
         return "redirect:/travelmaker/user/login"; //회원 가입 후 로그인페이지
     };
+
+    @GetMapping("/modify")
+    public void modifyGET() {};
 }

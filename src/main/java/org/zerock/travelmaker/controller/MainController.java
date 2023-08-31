@@ -39,14 +39,12 @@ import java.util.*;
 public class MainController {
 
     private final MainService mainService;
-    private final UserService loginService;
+    private final UserService userService;
     private final FriendService friendService;
     private final PlanService planService;
     private final PlanRepository planRepository;
 
 
-
-    @PreAuthorize("hasRole('USER')")
     @GetMapping("/list")
     public void mainList(Model model, Long uno, Long pno, Authentication authentication, HttpSession session){
         List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
@@ -85,8 +83,12 @@ public class MainController {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
-        Long uno2 = loginService.getUno(username);
+        Long uno2 = userService.getUno(username);
         model.addAttribute("uno", uno2);
+        model.addAttribute("username", username);
+
+        List<Map<String, Object>> usersDTO = userService.userList(uno);
+        model.addAttribute("usersDTO", usersDTO);
     }
 
 
@@ -140,7 +142,7 @@ public class MainController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
 
-        Long uno = loginService.getUno(username);
+        Long uno = userService.getUno(username);
 
         String referer = request.getHeader("referer");
 
@@ -155,7 +157,7 @@ public class MainController {
     public String deleteParty(Long pno1,HttpServletRequest request,@RequestParam(name = "selectedParties", required = false) List<Long> selectedParties , Authentication authentication){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
-        Long uno = loginService.getUno(username);
+        Long uno = userService.getUno(username);
 
         for (int i=0; i<selectedParties.size();i++){
             Long pno = selectedParties.get(i);
@@ -168,7 +170,7 @@ public class MainController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
 
-        Long uno = loginService.getUno(username);
+        Long uno = userService.getUno(username);
 
         String referer = request.getHeader("referer");
 

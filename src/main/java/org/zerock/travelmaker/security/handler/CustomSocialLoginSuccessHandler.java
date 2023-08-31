@@ -20,28 +20,17 @@ public class CustomSocialLoginSuccessHandler implements AuthenticationSuccessHan
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        log.info("----------------------------------------------------------");
-        log.info("CustomLoginSuccessHandler onAuthenticationSuccess ..........");
-        log.info(authentication.getPrincipal());
+
+        log.info("=======================================");
+        log.info("CustomLoginSuccessHandler onAuthenticationSuccess");
+        log.info("authentication.getPrincipal : {}", authentication.getPrincipal());
 
         MemberSecurityDTO memberSecurityDTO = (MemberSecurityDTO) authentication.getPrincipal();
 
         String encodedPw = memberSecurityDTO.getPassword();
 
-        //소셜로그인이고 회원의 패스워드가 1111이라면
-        if (memberSecurityDTO.isSocial()
-                && (memberSecurityDTO.getPassword().equals("1111")
-                ||  passwordEncoder.matches("1111", memberSecurityDTO.getPassword())
-        )) {
-            log.info("Should Change Password");
+        response.sendRedirect("/travelmaker/user/loginSuccess");
 
-            log.info("Redirect to Member Modify ");
-            response.sendRedirect("/travelmaker/user/loginSuccess");
 
-            return;
-        } else {
-
-            response.sendRedirect("/travelmaker/user/loginSuccess");
-        }
     }
 }

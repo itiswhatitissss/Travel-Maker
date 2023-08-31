@@ -19,10 +19,10 @@ public interface MybatisMapper {
     public List<Map<String,Object>> selectFriendList(Long uno);
     public List<Map<String,Object>> searchFriend(String id);
     public Long getPartyOne(Long pno);
-    public List<Map<String, Object>> getPlanOne(Long pno, Long plno);
+    public List<Map<String, Object>> getPlanOne(Long pno, Long plno, Long uno);
     public void planUpdate(String title, String start, String end,Long plno);
     public List<Map<String, Object>> selectAttendList(Plan plno);
     public List<MarkerDTO> getMarkersByPlno(Long plno);
     public void deleteMarker(Long plno);
-
+    public List<Map<String,Object>> selectUserList(Long uno);
 }
