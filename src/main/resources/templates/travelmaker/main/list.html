@@ -279,6 +279,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const startInput = document.getElementById('start');
+        const endInput = document.getElementById('end');
+
+        startInput.addEventListener('change', function() {
+            const selectedDate = startInput.value;
+            const localDate = new Date(selectedDate);
+            const formattedDate = localDate.toISOString().substring(0, 10); // YYYY-MM-DD
+            endInput.min = formattedDate; // Set the minimum value for endInput
+        });
+    });
 
     //plan 삭제 by AJAX
     var planToDelete = null;
@@ -391,7 +402,6 @@
             });
         });
     });
-
-
 </script>
+
 </html>

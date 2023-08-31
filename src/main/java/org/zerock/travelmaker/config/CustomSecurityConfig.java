@@ -49,7 +49,7 @@ public class CustomSecurityConfig {
 
         http
                 .authorizeRequests()
-                .antMatchers("/travelmaker/user/login", "/travelmaker/user/signup").permitAll()
+                .antMatchers("/travelmaker/user/login", "/travelmaker/user/signup", "/travelmaker/user/loginSuccess").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

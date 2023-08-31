@@ -13,6 +13,7 @@ import org.zerock.travelmaker.mapper.MybatisMapper;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -55,12 +56,12 @@ class TestRepositoryTest {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
-            Date startDate = new Date(dateFormat.parse("2022-08-20").getTime());
-            Date endDate = new Date(dateFormat.parse("2022-08-21").getTime());
-            Date startDate1 = new Date(dateFormat.parse("2022-07-15").getTime());
-            Date endDate1 = new Date(dateFormat.parse("2022-07-21").getTime());
-            Date startDate2 = new Date(dateFormat.parse("2022-09-29").getTime());
-            Date endDate2 = new Date(dateFormat.parse("2022-09-30").getTime());
+            LocalDate startDate = new Date(dateFormat.parse("2022-08-20").getTime()).toLocalDate();
+            LocalDate  endDate = new Date(dateFormat.parse("2022-08-21").getTime()).toLocalDate();
+            LocalDate  startDate1 = new Date(dateFormat.parse("2022-07-15").getTime()).toLocalDate();
+            LocalDate  endDate1 = new Date(dateFormat.parse("2022-07-21").getTime()).toLocalDate();
+            LocalDate  startDate2 = new Date(dateFormat.parse("2022-09-29").getTime()).toLocalDate();
+            LocalDate  endDate2 = new Date(dateFormat.parse("2022-09-30").getTime()).toLocalDate();
 
             Plan plan = Plan.builder()
                     .title("해병대정기모임 1회")
