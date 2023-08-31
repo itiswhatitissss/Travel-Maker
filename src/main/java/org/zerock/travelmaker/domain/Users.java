@@ -30,6 +30,7 @@ public class Users{
 
     private boolean del;
     private boolean social;
+
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private Set<MemberRole> roleSet = new HashSet<>();

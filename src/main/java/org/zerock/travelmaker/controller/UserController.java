@@ -13,6 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.dto.UserDTO;
 import org.zerock.travelmaker.service.UserService;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @Log4j2
 @RequiredArgsConstructor
@@ -64,4 +67,14 @@ public class UserController {
 
     @GetMapping("/modify")
     public void modifyGET() {};
+
+    @PostMapping("/modify")
+    public void modifyPOST(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Long uno = userService.getUno(username);
+
+        List<Map<String, Object>> usersDTO = userService.userList(uno);
+        model.addAttribute("usersDTO", usersDTO);
+    };
 }
