@@ -47,40 +47,62 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("----------------------configure 인증/인가권한 설정 ---------------------------");
 
-        http
-                .authorizeRequests()
-                .antMatchers("/travelmaker/user/login", "/travelmaker/user/signup", "/travelmaker/user/loginSuccess").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/travelmaker/user/login")
-                .defaultSuccessUrl("/travelmaker/user/loginSuccess")
-                .and()
-                .logout()
-                .logoutUrl("/travelmaker/user/logout")
-                .logoutSuccessUrl("/travelmaker/user/login")
-                .deleteCookies("JSESSIONID", "remember-me");
+        // 커스텀 로그인 기능
+        http.formLogin().loginPage("/travelmaker/user/login").defaultSuccessUrl("/travelmaker/user/loginSuccess",true);  //formLogin() --> 스프링부트가 제공하는 로그인창이 뜸
+        // CSRF 비활성화 --> (Cross-Site Request Forgery 크로스 사이트 요청 위조)
+        http.csrf().disable(); //login.html을 띄우기 위해선 비활성화를 안해놓으면 로그인이 안됨.
 
-        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
-        http.csrf().disable();
-
-        http
-                .oauth2Login()
-                .loginPage("/travelmaker/user/login")
-                .defaultSuccessUrl("/travelmaker/user/loginSuccess")
-                .successHandler(authenticationSuccessHandler())
-                .userInfoEndpoint();
-
-        http
-                .rememberMe() //자동로그인
+        http.rememberMe()
                 .key("12345678")
                 .tokenRepository(persistentTokenRepository())
                 .userDetailsService(userDetailService)
                 .tokenValiditySeconds(60*60*24*30);
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()); //403
+        http.oauth2Login().loginPage("/travelmaker/user/login").defaultSuccessUrl("/travelmaker/user/loginSuccess").successHandler(authenticationSuccessHandler());
+
+        //로그아웃
+        http.logout()
+                .logoutUrl("/travelmaker/user/logout")
+                .logoutSuccessUrl("/travelmaker/user/login")
+                .deleteCookies("JSESSIONID", "remember-me");
 
         return http.build();
+
+
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/travelmaker/user/login", "/travelmaker/user/signup", "/travelmaker/user/loginSuccess").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/travelmaker/user/login")
+//                .defaultSuccessUrl("/travelmaker/user/loginSuccess")
+//                .and()
+//                .logout()
+//                .logoutUrl("/travelmaker/user/logout")
+//                .logoutSuccessUrl("/travelmaker/user/login")
+//                .deleteCookies("JSESSIONID", "remember-me");
+//
+//        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+//        http.csrf().disable();
+//
+//        http
+//                .oauth2Login()
+//                .defaultSuccessUrl("/travelmaker/user/loginSuccess")
+//                .successHandler(authenticationSuccessHandler())
+//                .userInfoEndpoint();
+//
+//        http
+//                .rememberMe() //자동로그인
+//                .key("12345678")
+//                .tokenRepository(persistentTokenRepository())
+//                .userDetailsService(userDetailService)
+//                .tokenValiditySeconds(60*60*24*30);
+//
+//        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()); //403
+//
+//        return http.build();
     }
 
     @Bean
@@ -95,10 +117,10 @@ public class CustomSecurityConfig {
         return new Custom403Handler();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        log.info("------------web configure-------------------");
-
-        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-    }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        log.info("------------web configure-------------------");
+//
+//        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+//    }
 }

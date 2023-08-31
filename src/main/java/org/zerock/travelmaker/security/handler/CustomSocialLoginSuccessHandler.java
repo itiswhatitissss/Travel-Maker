@@ -36,7 +36,7 @@ public class CustomSocialLoginSuccessHandler implements AuthenticationSuccessHan
             log.info("Should Change Password");
 
             log.info("Redirect to Member Modify ");
-            response.sendRedirect("/travelmaker/user/login");
+            response.sendRedirect("/travelmaker/user/loginSuccess");
 
             return;
         } else {
