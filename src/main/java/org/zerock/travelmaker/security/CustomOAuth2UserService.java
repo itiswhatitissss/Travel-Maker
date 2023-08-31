@@ -53,7 +53,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             case "Naver" :
                 email = getNaverEmail(paramMap);
                 break;
-            case "google" :
+            case "Google" :
                 email = getGoogleEmail(paramMap);
                 break;
         }
@@ -123,6 +123,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private String getNaverEmail(Map<String, Object> paramMap) {
+
+        log.info("NAVER-----------------------------------------");
+
         Object value = paramMap.get("naver_account");
         LinkedHashMap accountMap = (LinkedHashMap) value;
         String email = (String)accountMap.get("email");
@@ -130,11 +133,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private String getGoogleEmail(Map<String, Object> paramMap) {
-        Object value = paramMap.get("google_account");
-        LinkedHashMap accountMap = (LinkedHashMap) value;
-        String email = (String)accountMap.get("email");
+
+        log.info("GOOGLE-----------------------------------------");
+
+        String email = (String) paramMap.get("email");
+        log.info("email..." + email);
+
         return email;
     }
-
 
 }

@@ -61,7 +61,7 @@
                                     <form th:action="@{/travelmaker/user/modify}" method="post" class="d-flex">
                                         <div th:each="user: ${usersDTO}">
                                             아이디 <input type="text" class="form-control" name="modify" th:value="${username}" id="modifyinput" readonly>
-                                            이름 <input type="text" class="form-control" name="modify" th:value="${user.name}" id="modifyinput">
+<!--                                            이름 <input type="text" class="form-control" name="modify" th:value="${user.name}" id="modifyinput">-->
 <!--                                            비밀번호 <input type="text" class="form-control" name="modify" th:value="${user.password}" id="modifyinput">-->
 <!--                                            이메일 <input type="text" class="form-control" name="modify" th:value="${user.email}" id="modifyinput">-->
                                         </div>
