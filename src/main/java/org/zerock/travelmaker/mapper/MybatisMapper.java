@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.FriendDTO;
+import org.zerock.travelmaker.dto.MarkerDTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,5 +22,7 @@ public interface MybatisMapper {
     public List<Map<String, Object>> getPlanOne(Long pno, Long plno);
     public void planUpdate(String title, String start, String end,Long plno);
     public List<Map<String, Object>> selectAttendList(Plan plno);
+    public List<MarkerDTO> getMarkersByPlno(Long plno);
+    public void deleteMarker(Long plno);
 
 }

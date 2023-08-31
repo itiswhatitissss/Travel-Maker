@@ -14,6 +14,7 @@ import org.zerock.travelmaker.domain.Marker;
 import org.zerock.travelmaker.domain.Plan;
 import org.zerock.travelmaker.domain.SchedulerDetail;
 import org.zerock.travelmaker.domain.Users;
+import org.zerock.travelmaker.dto.MarkerDTO;
 import org.zerock.travelmaker.dto.SchedulerDetailDTO;
 import org.zerock.travelmaker.repository.MarkerRepository;
 import org.zerock.travelmaker.service.*;
@@ -163,13 +164,33 @@ public class PlanController {
             Marker marker = Marker.builder().plnoByMarker(plan).lat(lat).lng(lng).build();
             log.info("marker : {}", marker.getPlnoByMarker().getPlno());
             markerRepository.save(marker);
-            return ResponseEntity.ok("마커 좌표가 저장되었습니다.");
+            return ResponseEntity.ok("성공");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("마커 좌표 저장 중 오류가 .");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
         }
     }
+    @GetMapping("/getMarkers")
+    @ResponseBody
+    public List<MarkerDTO> getMarkers(@RequestParam("plno") Long plno) {
+        List<MarkerDTO> markers = markerService.getMarkersByPlno(plno);
+        return markers;
+    }
+
+    @PostMapping("/deleteMarkers")
+    @ResponseBody
+    public ResponseEntity<String> deleteMarkers(@RequestParam Long plno){
+        try{
+            markerService.deleteMarker(plno);
+            return ResponseEntity.ok("성공");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
+        }
+    }
+
     @GetMapping("/calendar")
     public void carlendarlist(){
 
     }
+
+
 }
