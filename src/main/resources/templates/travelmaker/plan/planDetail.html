@@ -64,6 +64,26 @@
         <input type="hidden" id="plno" th:value="${plnno}">
         <button type="button" id="deleteMarker" class="btn btn-outline-danger me-2"> Reset</button>
     </section>
+
+    <div class="modal fade" id="writeTitle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Enter Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="markerTitle" class="form-control" placeholder="Enter Title">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--지도-->
 
 
@@ -80,14 +100,46 @@
 
 
     //-----------------마커 찍고 DB저장-------------------------//
-    function addMarkerAndSaveToServer(position) {
+    // 클릭 이벤트 리스너 등록
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+        // 좌표 저장
+        var position = mouseEvent.latLng;
+
+        // 모달 열기
+        $('#writeTitle').modal('show');
+
+        // 모달 "Save" 버튼 클릭 이벤트 리스너 등록
+        $('#saveButton').off('click').on('click', function () {
+            // 입력된 title 가져오기
+            var title = $('#markerTitle').val();
+
+            // DB에 데이터 저장
+            addMarkerAndSaveToServer(position, title);
+
+            // 모달 닫기
+            $('#writeTitle').modal('hide');
+        });
+
+        // 인포윈도우 열기
+        var title = ''; // 기본값은 빈 문자열
         var marker = new kakao.maps.Marker({
             position: position
         });
 
-        marker.setMap(map);
+        // 마커 클릭 시 인포윈도우 열기
+        kakao.maps.event.addListener(marker, 'click', function () {
+            var infowindow = new kakao.maps.InfoWindow({
+                content: title // 인포윈도우 내용에 title 추가
+            });
+            infowindow.open(map, marker);
+        });
 
-        // DB 던져줄 Data(lat,lng,plno)
+        // 마커를 지도에 표시
+        marker.setMap(map);
+    });
+
+    function addMarkerAndSaveToServer(position, title) {
+        // 좌표 및 title 전송
         var lat = position.getLat();
         var lng = position.getLng();
         var plno = document.getElementById("plno").value;
@@ -96,30 +148,16 @@
             type: "POST",
             dataType: "json",
             url: "saveMarker",
-            data: {lat: lat, lng: lng, plno: plno},
+            data: { lat: lat, lng: lng, plno: plno, title: title },
             success: function () {
+                // 성공적으로 저장되면 아무 작업 없음
             },
             error: function () {
             }
         });
     }
 
-    // 클릭 이벤트 리스너 등록
-    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-        // 클릭한 위치에 마커를 추가하고 좌표를 서버로 전송
-        addMarkerAndSaveToServer(mouseEvent.latLng);
-    });
-    //-----------------마커 찍고 DB저장-------------------------//
-
-
-    //-----------------찍혀있는 마커 보여주기-------------------------//
-    function addMarker(position) {
-        var marker = new kakao.maps.Marker({
-            position: position
-        });
-        marker.setMap(map);
-    }
-
+    // 기존의 찍혀있는 마커 보여주기 코드
     var plno = document.getElementById("plno").value;
     fetchAndDisplayMarkers(plno);
 
@@ -127,16 +165,38 @@
         $.ajax({
             type: "GET",
             url: "getMarkers",
-            data: {plno: plno},
+            data: { plno: plno },
             dataType: "json",
             success: function (data) {
                 data.forEach(function (markerData) {
                     var position = new kakao.maps.LatLng(markerData.lat, markerData.lng);
-                    addMarker(position);
+                    var title = markerData.title;
+                    console.log("title" + title); // console.log로 수정
+
+                    // addMarker 함수 정의
+                    function addMarker(position, title) {
+                        var marker = new kakao.maps.Marker({
+                            position: position
+                        });
+
+                        var infowindow = new kakao.maps.InfoWindow({
+                            content: title // 인포윈도우 내용에 title 추가
+                        });
+
+                        // 마커를 지도에 표시
+                        marker.setMap(map);
+
+                        // 마커 클릭 시 인포윈도우 열기
+                        kakao.maps.event.addListener(marker, 'click', function () {
+                            infowindow.open(map, marker);
+                        });
+                    }
+
+                    addMarker(position, title); // title 추가
                 });
             },
-            error: function (error) {
-                console.error("에러:", error);
+            error: function (xhrError) { // error 대신 xhrError로 변경
+                console.error("에러:", xhrError);
             }
         });
     }
@@ -223,6 +283,7 @@
     </div>
 </div>
 <!----참가 모달 끝----->
+
 <!----참가 모달 스크립트----->
 <script>
     // "참석" 체크박스를 선택하면 "불참" 체크박스 선택 해제

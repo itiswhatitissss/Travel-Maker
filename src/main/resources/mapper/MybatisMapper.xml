@@ -40,7 +40,7 @@
     </select>
 
     <select id="getMarkersByPlno" resultType="org.zerock.travelmaker.dto.MarkerDTO">
-        select lat, lng from Marker where plno=#{plno}
+        select lat, lng, title from Marker where plno=#{plno}
     </select>
 
     <select id="selectUserList" resultType="map" parameterType="map">

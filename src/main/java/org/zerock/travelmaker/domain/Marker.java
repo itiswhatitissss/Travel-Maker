@@ -21,4 +21,5 @@ public class Marker {
 
     private double lat;
     private double lng;
+    private String title;
 }

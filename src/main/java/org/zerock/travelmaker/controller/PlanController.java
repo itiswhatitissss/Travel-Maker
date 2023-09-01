@@ -115,15 +115,16 @@ public class PlanController {
 
     @PostMapping("/saveMarker")
     @ResponseBody
-    public ResponseEntity<String> saveMarker(@RequestParam double lat, @RequestParam double lng, @RequestParam Long plno) {
+    public ResponseEntity<String> saveMarker(@RequestParam double lat, @RequestParam double lng, @RequestParam Long plno, @RequestParam String title) {
         try {
             //Long값으로 받은 plno를 Plan으로 형변환
             Plan plan =markerService.LongToPlan(plno);
             log.info("lat : {}", lat);
             log.info("lng : {}", lng);
             log.info("plNo : {}", plno);
+            log.info("title : {}", title);
             // 받은 좌표로 마커 정보를 생성하여 저장
-            Marker marker = Marker.builder().plnoByMarker(plan).lat(lat).lng(lng).build();
+            Marker marker = Marker.builder().plnoByMarker(plan).lat(lat).lng(lng).title(title).build();
             log.info("marker : {}", marker.getPlnoByMarker().getPlno());
             markerRepository.save(marker);
             return ResponseEntity.ok("성공");
@@ -135,6 +136,7 @@ public class PlanController {
     @ResponseBody
     public List<MarkerDTO> getMarkers(@RequestParam("plno") Long plno) {
         List<MarkerDTO> markers = markerService.getMarkersByPlno(plno);
+        log.info("MarkerDTO==========>",markers);
         return markers;
     }
 
