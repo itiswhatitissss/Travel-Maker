@@ -137,6 +137,8 @@ public class MainServiceImpl implements MainService{
 
     @Override
     public List<Map<String, Object>> searchPartyByName(String keyword, Long uno) {
+        log.info("keyword=============="+keyword);
+        log.info("uno================="+uno);
         List<Map<String, Object>> partyList = mybatisMapper.searchParty(keyword,uno);
         return partyList;
     }

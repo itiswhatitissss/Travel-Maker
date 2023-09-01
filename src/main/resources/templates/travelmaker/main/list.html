@@ -336,17 +336,22 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 
-    var uno = encodeURIComponent($("#autoCompleteUno").val());
+    var uno = document.getElementById("autoCompleteUno").value;
 
     $(document).ready(function() {
         $("#autoCompleteInput").autocomplete({
             source: function(request, response) {
+
+                console.log("request", request)
+                console.log("response", response)
+                console.log("uno",uno)
+
                 $.ajax({
                     url: "/travelmaker/main/autocomplete",
                     type: "POST",
                     dataType: "json",
                     data: {
-                        value: request.term, uno:uno
+                        keyword: request.term,uno:uno
                     },
                     success: function(data) {
                         response(data.resultList);
