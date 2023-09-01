@@ -231,7 +231,7 @@ public class MainController {
 
     @GetMapping("/calendar")
     @ResponseBody
-    public JSONArray carlendarlist(Model model){
+    public void carlendarlist(Model model){
         Long pno =1L;
 
         List<Map<String,Object>> planList =mainService.getPlan(pno);
@@ -249,7 +249,6 @@ public class MainController {
             jsonObj = new JSONObject(hash); //중괄호 {key:value , key:value, key:value}
             jsonArr.add(jsonObj); // 대괄호 안에 넣어주기[{key:value , key:value, key:value},{key:value , key:value, key:value}]
         }
-        return jsonArr;
     }
 
 
