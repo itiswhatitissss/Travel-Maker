@@ -2,6 +2,8 @@ package org.zerock.travelmaker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -221,5 +223,29 @@ public class MainController {
         // 예시: 수정 작업 실패 시
         // return "failure";
     }
+    //    @RequestMapping(value="/calendar", method = RequestMethod.GET)
+    @GetMapping("/calendar")
+    @ResponseBody
+    public JSONArray carlendarlist(Model model){
+        Long pno =1L;
+
+        List<Map<String,Object>> planList =mainService.getPlan(pno);
+        model.addAttribute("planDTO",planList);
+
+        JSONObject jsonObj = new JSONObject();
+        JSONArray jsonArr = new JSONArray();
+        HashMap<String, Object> hash = new HashMap<String, Object>();
+
+        for(int i=0; i < planList.size(); i++) {
+            hash.put("title", planList.get(i).get("title")); //제목
+            hash.put("start", planList.get(i).get("start")); //시작일자
+            hash.put("end", planList.get(i).get("end")); //종료일자
+
+            jsonObj = new JSONObject(hash); //중괄호 {key:value , key:value, key:value}
+            jsonArr.add(jsonObj); // 대괄호 안에 넣어주기[{key:value , key:value, key:value},{key:value , key:value, key:value}]
+        }
+        return jsonArr;
+    }
+
 
 }

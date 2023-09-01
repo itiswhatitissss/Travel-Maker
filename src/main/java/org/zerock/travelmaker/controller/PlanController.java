@@ -149,10 +149,4 @@ public class PlanController {
         }
     }
 
-    @GetMapping("/calendar")
-    public void carlendarlist(){
-
-    }
-
-
 }
