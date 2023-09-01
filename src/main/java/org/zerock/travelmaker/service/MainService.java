@@ -35,4 +35,6 @@ public interface MainService {
 
     List<String> searchPartyByName(String keyword, Long uno);
 
+    Long searchPartyOne(String partyname);
+
 }

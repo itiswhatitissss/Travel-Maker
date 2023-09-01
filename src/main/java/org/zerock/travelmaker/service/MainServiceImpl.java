@@ -142,4 +142,10 @@ public class MainServiceImpl implements MainService{
         List<String> partyList = mybatisMapper.searchParty(keyword, uno);
         return partyList;
     }
+
+    @Override
+    public Long searchPartyOne(String partyname) {
+        Long pno=mybatisMapper.searchPartyOne(partyname);
+        return pno;
+    }
 }

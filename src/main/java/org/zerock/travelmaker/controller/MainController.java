@@ -223,7 +223,12 @@ public class MainController {
         // 예시: 수정 작업 실패 시
         // return "failure";
     }
-    //    @RequestMapping(value="/calendar", method = RequestMethod.GET)
+    @GetMapping("/searchParty")
+    public String searchPartyOne(@RequestParam("partyName")String partyname, @RequestParam("uno")Long uno){
+        Long pno = mainService.searchPartyOne(partyname);
+        return "redirect:list?pno="+pno+"&uno="+uno;
+    }
+
     @GetMapping("/calendar")
     @ResponseBody
     public JSONArray carlendarlist(Model model){

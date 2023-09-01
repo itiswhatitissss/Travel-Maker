@@ -361,7 +361,14 @@
                     }
                 });
             },
-            minLength: 1 // 자동완성 시작을 위한 최소 입력 길이
+            minLength: 1
+            , // 자동완성 시작을 위한 최소 입력 길이
+            select: function(event, ui) {
+                var selectedPartyName = ui.item.value; //ui.item.value => partyname이 들어있음
+                console.log("selectedPartyname",selectedPartyName)
+                var encodedPartyName = encodeURIComponent(selectedPartyName);//인코딩
+                location.href = "/travelmaker/main/searchParty?partyName=" + encodedPartyName +"&uno="+uno;
+            }
         });
     });
 

@@ -26,4 +26,5 @@ public interface MybatisMapper {
     public void deleteMarker(Long plno);
     public List<String> searchParty(String keyword,Long uno);
     public List<Map<String,Object>> selectUserList(Long uno);
+    public Long searchPartyOne(String partyname);
 }

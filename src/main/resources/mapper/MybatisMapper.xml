@@ -50,4 +50,9 @@
     <select id="searchParty" resultType="String">
         select party_name from party join user_party on party.pno = user_party.pno where party_name like concat('%', #{keyword}, '%') and uno=#{uno};
     </select>
+
+    <select id="searchPartyOne" resultType="Long">
+        select pno from party where party_name=#{partyname}
+    </select>
+
 </mapper>
