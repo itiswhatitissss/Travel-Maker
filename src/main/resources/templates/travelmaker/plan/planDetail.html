@@ -65,21 +65,18 @@
         <button type="button" id="deleteMarker" class="btn btn-outline-danger me-2"> Reset</button>
     </section>
 
+    <!--지도 클릭시 생성되는 모달창-->
     <div class="modal fade" id="writeTitle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel1">Enter Title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
                     <input type="text" id="markerTitle" class="form-control" placeholder="Enter Title">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="saveButton">Save</button>
                 </div>
             </div>
@@ -142,7 +139,6 @@
             url: "saveMarker",
             data: {lat: lat, lng: lng, plno: plno, title: title},
             success: function () {
-                // 성공적으로 저장되면 아무 작업 없음
             },
             error: function () {
             }
@@ -153,13 +149,15 @@
 
 
     //-----------------찍혀있는 마커 보여주기 시작-------------------------//
-    function addMarker(position, title) {
+    function addMarker(position, title,lat,lng) {
         var marker = new kakao.maps.Marker({
             position: position
         });
 
+        var iwContent = '<div style="padding:5px;">' + title + ' <br><a href="https://map.kakao.com/link/map/' + title + ',' + lat + ',' + lng + '" style="color:blue" target="_blank">카카오맵</a> <a href="https://map.kakao.com/link/to/' + title + ',' + lat + ',' + lng + '" style="color:blue" target="_blank">길찾기</a></div>';
+
         var infowindow = new kakao.maps.InfoWindow({
-            content: title, // 인포윈도우 내용에 title 추가
+            content: iwContent
         });
 
         // 마커를 지도에 표시
@@ -180,7 +178,7 @@
                     var position = new kakao.maps.LatLng(markerData.lat, markerData.lng);
                     var title = markerData.title;
 
-                    addMarker(position, title); // title 추가
+                    addMarker(position, title, markerData.lat, markerData.lng); // title 추가
                 });
             },
             error: function () {
