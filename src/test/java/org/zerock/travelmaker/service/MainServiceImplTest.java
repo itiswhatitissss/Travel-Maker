@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 @Log4j2
@@ -63,6 +64,12 @@ class MainServiceImplTest {
                 .build();
 
         mainService.PartyRegister(partyDTO,member);
+    }
+    @Test
+    public void testccCalendar(){
+        Long pno =2L;
+        List<Map<String, Object>> list = mainService.readCalendar(pno);
+        log.info("달력보이기 : ",list);
     }
 
 }

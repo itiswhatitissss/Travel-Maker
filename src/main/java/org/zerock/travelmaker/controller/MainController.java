@@ -231,17 +231,16 @@ public class MainController {
 
     @GetMapping("/calendar")
     @ResponseBody
-    public void carlendarlist(Model model){
-        Long pno =1L;
+    public JSONArray carlendarlist(Model model) {
+        Long pno = 1L;
 
-        List<Map<String,Object>> planList =mainService.getPlan(pno);
-        model.addAttribute("planDTO",planList);
+        List<Map<String, Object>> planList = mainService.getPlan(pno);
 
         JSONObject jsonObj = new JSONObject();
         JSONArray jsonArr = new JSONArray();
         HashMap<String, Object> hash = new HashMap<String, Object>();
 
-        for(int i=0; i < planList.size(); i++) {
+        for (int i = 0; i < planList.size(); i++) {
             hash.put("title", planList.get(i).get("title")); //제목
             hash.put("start", planList.get(i).get("start")); //시작일자
             hash.put("end", planList.get(i).get("end")); //종료일자
@@ -249,7 +248,16 @@ public class MainController {
             jsonObj = new JSONObject(hash); //중괄호 {key:value , key:value, key:value}
             jsonArr.add(jsonObj); // 대괄호 안에 넣어주기[{key:value , key:value, key:value},{key:value , key:value, key:value}]
         }
+        return jsonArr;
     }
-
-
+//@GetMapping("/calendar")
+//@ResponseBody
+//public List<Map<String, Object>> carlendarlist(Model model) {
+//    Long pno = 1L;
+//
+//    List<Map<String, Object>> planList = mainService.getPlan(pno);
+//
+//    return planList;
+//
+//    }
 }

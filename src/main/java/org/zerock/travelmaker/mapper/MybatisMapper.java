@@ -27,4 +27,5 @@ public interface MybatisMapper {
     public List<String> searchParty(String keyword,Long uno);
     public List<Map<String,Object>> selectUserList(Long uno);
     public Long searchPartyOne(String partyname);
+    public List<Map<String,Object>> calenderView(Long pno);
 }

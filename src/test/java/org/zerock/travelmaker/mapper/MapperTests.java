@@ -75,5 +75,11 @@ public class MapperTests {
 
         log.info("참가자 리스트 : "+list);
     }
+    @Test
+    public void testCalender(){
+        Long pno=1L;
+        List<Map<String, Object>> list =mybatisMapper.calenderView(pno);
+        log.info("달력 내놔 : ",list);
+    }
 
 }

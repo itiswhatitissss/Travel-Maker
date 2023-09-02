@@ -37,4 +37,6 @@ public interface MainService {
 
     Long searchPartyOne(String partyname);
 
+    List<Map<String, Object>> readCalendar(Long pno);
+
 }

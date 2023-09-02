@@ -55,4 +55,9 @@
         select pno from party where party_name=#{partyname}
     </select>
 
+    <select id="calenderView" resultType="map">
+        select pl.title as title, pl.start, pl.end from Party p join Party_Detail on p.pno=party_detail.pno join Plan pl on pl.plno=party_detail.plno
+        where p.pno=#{pno}
+    </select>
+
 </mapper>

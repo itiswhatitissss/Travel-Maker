@@ -2,22 +2,34 @@
 <html lang='en'>
 <head>
   <meta charset='utf-8' />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-  <script src='ko.js'></script>
   <script>
 
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale:'ko'
+      var jsonArr;
+
+      // Ajax를 사용하여 JSON 데이터를 가져옵니다.
+      $.ajax({
+        url: '/calendar', // Spring 컨트롤러의 엔드포인트 URL을 입력하세요.
+        method: 'GET', // HTTP 메소드 (GET, POST 등)을 선택하세요.
+        dataType: 'json',
+        success: function (data) {
+          jsonArr = data; // 성공적으로 데이터를 받아와서 jsonArr 변수에 저장
+
+          // FullCalendar를 초기화하고 이벤트 데이터를 설정합니다.
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: jsonArr
+          });
+
+          calendar.render();
+        },
+        error: function (error) {
+          console.error('Failed to retrieve JSON data:', error);
+        }
       });
-      var request = $.ajax({
-        url: "/travelmaker/main/calendar",
-        method: "GET",
-        events: []
-      });
-      calendar.render();
     });
 
   </script>
