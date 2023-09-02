@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class MarkerDTO {
     private Long markerPK;
     private Long plnoByMarker;
+    private String title;
     private double lat;
     private double lng;
 }

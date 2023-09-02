@@ -65,7 +65,8 @@
         <button type="button" id="deleteMarker" class="btn btn-outline-danger me-2"> Reset</button>
     </section>
 
-    <div class="modal fade" id="writeTitle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal fade" id="writeTitle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,9 +99,13 @@
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+    document.addEventListener('DOMContentLoaded', function () {
+        var plno = document.getElementById("plno").value;
+        fetchAndDisplayMarkers(plno);
+    });
 
-    //-----------------마커 찍고 DB저장-------------------------//
-    // 클릭 이벤트 리스너 등록
+
+    //-----------------마커 찍고 DB저장 시작-------------------------//
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
         // 좌표 저장
         var position = mouseEvent.latLng;
@@ -108,7 +113,6 @@
         // 모달 열기
         $('#writeTitle').modal('show');
 
-        // 모달 "Save" 버튼 클릭 이벤트 리스너 등록
         $('#saveButton').off('click').on('click', function () {
             // 입력된 title 가져오기
             var title = $('#markerTitle').val();
@@ -118,26 +122,14 @@
 
             // 모달 닫기
             $('#writeTitle').modal('hide');
-        });
 
-        // 인포윈도우 열기
-        var title = ''; // 기본값은 빈 문자열
-        var marker = new kakao.maps.Marker({
-            position: position
+            location.reload();
         });
-
-        // 마커 클릭 시 인포윈도우 열기
-        kakao.maps.event.addListener(marker, 'click', function () {
-            var infowindow = new kakao.maps.InfoWindow({
-                content: title // 인포윈도우 내용에 title 추가
-            });
-            infowindow.open(map, marker);
-        });
-
-        // 마커를 지도에 표시
-        marker.setMap(map);
     });
+    //-----------------마커 찍고 DB저장  끝-------------------------//
 
+
+    //-----------------DB 저장 post 시작-------------------------//
     function addMarkerAndSaveToServer(position, title) {
         // 좌표 및 title 전송
         var lat = position.getLat();
@@ -148,7 +140,7 @@
             type: "POST",
             dataType: "json",
             url: "saveMarker",
-            data: { lat: lat, lng: lng, plno: plno, title: title },
+            data: {lat: lat, lng: lng, plno: plno, title: title},
             success: function () {
                 // 성공적으로 저장되면 아무 작업 없음
             },
@@ -157,51 +149,46 @@
         });
     }
 
-    // 기존의 찍혀있는 마커 보여주기 코드
-    var plno = document.getElementById("plno").value;
-    fetchAndDisplayMarkers(plno);
+    //-----------------DB 저장 post 끝-------------------------//
+
+
+    //-----------------찍혀있는 마커 보여주기 시작-------------------------//
+    function addMarker(position, title) {
+        var marker = new kakao.maps.Marker({
+            position: position
+        });
+
+        var infowindow = new kakao.maps.InfoWindow({
+            content: title, // 인포윈도우 내용에 title 추가
+        });
+
+        // 마커를 지도에 표시
+        marker.setMap(map);
+
+        // 마커 클릭 시 인포윈도우 열기
+        infowindow.open(map, marker);
+    }
 
     function fetchAndDisplayMarkers(plno) {
         $.ajax({
             type: "GET",
-            url: "getMarkers",
-            data: { plno: plno },
+            url: "getMarkers", // 서버의 엔드포인트를 지정해야 합니다.
+            data: {plno: plno},
             dataType: "json",
             success: function (data) {
                 data.forEach(function (markerData) {
                     var position = new kakao.maps.LatLng(markerData.lat, markerData.lng);
                     var title = markerData.title;
-                    console.log("title" + title); // console.log로 수정
-
-                    // addMarker 함수 정의
-                    function addMarker(position, title) {
-                        var marker = new kakao.maps.Marker({
-                            position: position
-                        });
-
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content: title // 인포윈도우 내용에 title 추가
-                        });
-
-                        // 마커를 지도에 표시
-                        marker.setMap(map);
-
-                        // 마커 클릭 시 인포윈도우 열기
-                        kakao.maps.event.addListener(marker, 'click', function () {
-                            infowindow.open(map, marker);
-                        });
-                    }
 
                     addMarker(position, title); // title 추가
                 });
             },
-            error: function (xhrError) { // error 대신 xhrError로 변경
-                console.error("에러:", xhrError);
+            error: function () {
             }
         });
     }
 
-    //-----------------찍혀있는 마커 보여주기-------------------------//
+    //-----------------찍혀있는 마커 보여주기 끝-------------------------//
 
 
     document.addEventListener('DOMContentLoaded', function () {
