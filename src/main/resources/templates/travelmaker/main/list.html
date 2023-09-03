@@ -49,6 +49,7 @@
         <br>
         <br>
         <br>
+
         <div id="carousel-wrapper">
             <div id="carousel">
                 <th:block th:each="plan : ${planDTO}">
@@ -59,15 +60,15 @@
                                th:text="${plan.title}"></a>
                             <p th:text="${plan.start}"></p>
                             <p th:text="${plan.end}"></p>
-                            <button type="button" id="modifyPlan" class="btn btn-outline-warning" th:data-plno="${plan.plno}" >수정</button>
+                            <button type="button" class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}">수정</button>
                             <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
                         </div>
                     </div>
                 </th:block>
             </div>
+            <button id="prev" type="button"></button>
+            <button id="next" type="button"></button>
         </div>
-        <button id="prev" type="button">prev</button>
-        <button id="next" type="button">next</button>
     </div>
     <!--오른쪽 끝(plan)-->
 </div>
@@ -204,7 +205,7 @@
             <div class="modal-body">
                 <!-- 수정 폼 -->
                 <form id="modifyPlanForm">
-                    <input type="hidden" id="modPlno" name="plno" value="$">
+                    <input type="hidden" id="modPlno" name="plno" value="">
                     <div class="mb-3">
                         <label for="modTitle" class="form-label">Plan Name</label>
                         <input type="text" class="form-control" id="modTitle" name="title" placeholder="" required>
@@ -374,7 +375,7 @@
 
     $(document).ready(function() {
         // 수정 모달을 띄우기 위한 이벤트 처리
-        $("#modifyPlan").on("click", function() {
+        $(".modify-plan").on("click", function() {
             var plno = $(this).data("plno");
             $.ajax({
                 url: "/travelmaker/main/getPlan", // 플랜 정보를 가져올 URL
@@ -417,6 +418,7 @@
             });
         });
     });
+
 
 </script>
 
