@@ -5,13 +5,13 @@
 }
 .split-left {
     width: 30%;
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
     padding: 20px;
     overflow-y: auto; /* 스크롤 가능하도록 설정 */
 }
 .split-right {
     width: 70%;
-    background-color: #fff;
+    /*background-color: #fff;*/
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden; /* 스크롤 숨김 */

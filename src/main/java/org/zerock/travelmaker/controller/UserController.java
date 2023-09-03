@@ -40,7 +40,7 @@ public class UserController {
         log.info("uno-------------------------------->" + uno);
         model.addAttribute("uno", uno);
 
-        return "redirect:/travelmaker/main/list?uno=" + uno;
+        return "redirect:/travelmaker/main/list2?uno=" + uno;
     }
 
 //    @GetMapping("/signup")

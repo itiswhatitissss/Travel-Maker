@@ -47,7 +47,7 @@ public class MainController {
     private final PlanRepository planRepository;
 
 
-    @GetMapping("/list")
+    @GetMapping("/list2")
     public void mainList(Model model, Long uno, Long pno, Authentication authentication, HttpSession session){
         List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
         if (friendDTO == null) {
@@ -107,7 +107,7 @@ public class MainController {
         selectedFriends.add(uno);
         mainService.PartyRegister(partyDTO,selectedFriends);
 
-        return "redirect:list?pno="+pno+"&uno="+uno;
+        return "redirect:list2?pno="+pno+"&uno="+uno;
     }
 
 
@@ -116,7 +116,7 @@ public class MainController {
     public String planPopupPost(HttpServletRequest request,Plan plan, Long pno, Long uno, Model model, MultipartFile file)throws Exception{
         planService.write(plan,file,pno);
         model.addAttribute("message","글작성이 완료되었습니다");
-        return "redirect:list?pno="+pno+"&uno="+uno;
+        return "redirect:list2?pno="+pno+"&uno="+uno;
     }
 
     @PostMapping("/deletePlan")
@@ -165,7 +165,7 @@ public class MainController {
             Long pno = selectedParties.get(i);
             mainService.deleteParty(uno,pno);
         }
-        return "redirect:list?pno="+pno1+"&uno="+uno;
+        return "redirect:list2?pno="+pno1+"&uno="+uno;
     }
     @PostMapping("/friendInsert")
     public String friendInsert(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
@@ -226,7 +226,7 @@ public class MainController {
     @GetMapping("/searchParty")
     public String searchPartyOne(@RequestParam("partyName")String partyname, @RequestParam("uno")Long uno){
         Long pno = mainService.searchPartyOne(partyname);
-        return "redirect:list?pno="+pno+"&uno="+uno;
+        return "redirect:list2?pno="+pno+"&uno="+uno;
     }
 
     @GetMapping("/calendar")
