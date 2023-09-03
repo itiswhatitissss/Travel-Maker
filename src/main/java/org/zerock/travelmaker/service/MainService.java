@@ -39,4 +39,7 @@ public interface MainService {
 
     List<Map<String, Object>> readCalendar(Long pno);
 
+    void modifyParty(String name, Long pno );
+
+    void userPartySave(Long pno, Long fno);
 }

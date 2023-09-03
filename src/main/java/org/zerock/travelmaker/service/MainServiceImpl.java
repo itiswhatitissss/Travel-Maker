@@ -154,4 +154,24 @@ public class MainServiceImpl implements MainService{
         List<Map<String, Object>> list =mybatisMapper.calenderView(pno);
         return list;
     }
+
+    @Override
+    public void modifyParty(String name, Long pno) {
+        partyRepository.updateParty(name, pno);
+    }
+
+    @Override
+    public void userPartySave(Long pno, Long fno) {
+        Optional<Users> byId = userRepository.findById(fno);
+        Users uno = byId.orElseThrow();
+        Optional<Party> byId2 = partyRepository.findById(pno);
+        Party pno1 = byId2.orElseThrow();
+
+        UserParty userParty= UserParty.builder()
+                .pnoByUserParty(pno1)
+                .unoByUserParty(uno)
+                .build();
+
+        userPartyRepository.save(userParty);
+    }
 }

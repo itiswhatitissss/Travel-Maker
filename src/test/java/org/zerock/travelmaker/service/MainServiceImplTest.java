@@ -71,5 +71,13 @@ class MainServiceImplTest {
         List<Map<String, Object>> list = mainService.readCalendar(pno);
         log.info("달력보이기 : ",list);
     }
+    @Test
+    public void testModifyParty(){
+        mainService.modifyParty("다시!!!",3L);
+    }
+    @Test
+    public void insertUserParty(){
+        mainService.userPartySave(3L,1L);
+    }
 
 }

@@ -260,4 +260,17 @@ public class MainController {
 //    return planList;
 //
 //    }
+    @PostMapping("/partyModify")
+    public String partyModify(@RequestParam("pno") Long pno, @RequestParam("uno") Long uno, @RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends, @RequestParam(name = "title") String title){
+
+        mainService.modifyParty(title,pno);
+
+        if(selectedFriends !=null) {
+            for (int i = 0; i < selectedFriends.size(); i++) {
+                Long fno = selectedFriends.get(i);
+                mainService.userPartySave(pno,fno);
+            }
+        }
+        return "redirect:list?pno="+pno+"&uno="+uno;
+    }
 }

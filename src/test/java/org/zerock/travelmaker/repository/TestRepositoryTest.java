@@ -196,4 +196,8 @@ class TestRepositoryTest {
         Long result = attendRepository.selectAttend(uno,plno);
         attendRepository.updateAttend(uno,plno,result,0L);
     }
+    @Test
+    public void updatePartyname(){
+        partyRepository.updateParty("다시",3L);
+    }
 }
