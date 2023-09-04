@@ -2,74 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Split Screen Example</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <title>TravelMaker</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
+<!--header-->
+<div th:replace="/travelmaker/main/header :: header"></div>
+<!--header-->
+
 <body>
-<!--header-->
-<div th:insert="~{/travelmaker/main/header :: headerFragment}"></div>
-<!--header-->
+<div class="background"></div>
 
-<div class="split-container">
-    <!--왼쪽 시작(party)-->
-    <div class="split-left">
-        <div class="d-flex align-items-center mb-3">
-            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
-                    data-bs-target="#createPartyModal">
-                Party+
-            </button>
-            <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
-                    data-bs-target="#deletePartyModal">
-                Party-
-            </button>
-            <input type="text" class="form-control" id="autoCompleteInput" placeholder="Search Party"/>
-            <input type="hidden" th:value="${uno}" id="autoCompleteUno">
-        </div>
-        <ul th:each="party: ${partyDTO}">
-            <li>
-                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
-                   th:text="${party.party_name}"></a>
-            </li>
-        </ul>
-    </div>
-    <!--왼쪽 끝(party)-->
-
-
-
-    <!--오른쪽 시작(plan)-->
-    <div class="split-right">
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
-            Plan+
-        </button>
-        <br>
-        <br>
-        <br>
-        <div id="carousel-wrapper">
-            <div id="carousel">
-                <th:block th:each="plan : ${planDTO}">
-                    <div id="carousel-item">
-                        <img th:src="${plan.filepath}" alt=""/>
-                        <div id="info">
-                            <a th:href="@{'/travelmaker/plan/planDetail?plno=' + ${plan.plno}+ '&pno=' + ${pno}}"
-                               th:text="${plan.title}"></a>
-                            <p th:text="${plan.start}"></p>
-                            <p th:text="${plan.end}"></p>
-                            <button type="button" id="modifyPlan" class="btn btn-outline-warning" th:data-plno="${plan.plno}" >수정</button>
-                            <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
-                        </div>
+<div id="container2">
+    <div class="split-container">
+        <!--왼쪽 시작(party)-->
+        <div class="split-left">
+            <div class="d-flex align-items-center mb-3">
+                <button style="font-weight: bold" type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
+                        data-bs-target="#createPartyModal">
+                    Party+
+                </button>
+                <button style="font-weight: bold" type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
+                        data-bs-target="#deletePartyModal">
+                    Party-
+                </button>
+                <input type="text" class="form-control" id="autoCompleteInput" placeholder="Search Party"/>
+                <input type="hidden" th:value="${uno}" id="autoCompleteUno">
+            </div>
+            <br><br>
+<!--            <div class="jb-division-line"></div>-->
+            <ul th:each="party: ${partyDTO}">
+                <li>
+                    <div id="partyleft">
+                    <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
+                       th:text="${party.party_name}"></a>
                     </div>
-                </th:block>
+                    <div class="jb-division-line"></div>
+                </li>
+            </ul>
+        </div>
+        <!--왼쪽 끝(party)-->
+
+        <!--오른쪽 시작(plan)-->
+        <div class="split-right">
+            <button style="font-weight: bold"
+                    type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
+                Plan+
+            </button>
+            <br><br><br>
+            <div id="carousel-wrapper">
+                <div id="carousel">
+                    <th:block th:each="plan : ${planDTO}">
+                        <div id="carousel-item">
+                            <img th:src="${plan.filepath}" alt=""/>
+                            <div id="info">
+                                <a th:href="@{'/travelmaker/plan/planDetail?plno=' + ${plan.plno}+ '&pno=' + ${pno}}"
+                                th:text="${plan.title}"></a>
+                                <br><br>
+                                <p>
+                                    <span th:text="${plan.start}"></span>
+                                    ~
+                                    <span th:text="${plan.end}"></span>
+                                </p>
+                            </div>
+                            <div id="buttondiv">
+                                <button style="font-weight: bold" type="button" class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}">수정</button>
+                                <button style="font-weight: bold" class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+                <button id="prev" type="button"></button>
+                <button id="next" type="button"></button>
             </div>
         </div>
-        <button id="prev" type="button">prev</button>
-        <button id="next" type="button">next</button>
+        <!--오른쪽 끝(plan)-->
     </div>
-    <!--오른쪽 끝(plan)-->
 </div>
 
 <!--파티 생성 모달-->
@@ -147,7 +160,6 @@
 </div>
 <!--파티 삭제 모달-->
 
-
 <!--플랜 생성 모달-->
 <div class="modal fade" id="createPlanModal" tabindex="-1" aria-labelledby="createPlanModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -217,10 +229,6 @@
                         <label for="modEnd" class="form-label">End Date</label>
                         <input type="date" class="form-control" id="modEnd" name="end" required>
                     </div>
-<!--                    <div class="mb-3">-->
-<!--                        <label for="modFilepath" class="form-label">Filepath</label>-->
-<!--                        <input type="file" class="form-control" id="modFilepath" name="filepath" accept="image/*" onchange="setThumbnail(event);" required>-->
-<!--                    </div>-->
                 </form>
             </div>
             <div class="modal-footer">
@@ -275,149 +283,8 @@
 </div>
 <!--작업완료 모달-->
 
-
 <script src="/js/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const startInput = document.getElementById('start');
-        const endInput = document.getElementById('end');
-
-        startInput.addEventListener('change', function() {
-            const selectedDate = startInput.value;
-            const localDate = new Date(selectedDate);
-            const formattedDate = localDate.toISOString().substring(0, 10); // YYYY-MM-DD
-            endInput.min = formattedDate; // Set the minimum value for endInput
-        });
-    });
-
-    //plan 삭제 by AJAX
-    var planToDelete = null;
-
-    function showDeleteConfirmationModal(plno) {
-        planToDelete = plno;
-        $('#deleteConfirmationModal').modal('show');
-    }
-
-    function deletePlan() {
-        if (planToDelete !== null) {
-            var url = "deletePlan?plno=" + planToDelete;
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                success: function (response) {
-                    if (response === "success") {
-                        $('#deleteConfirmationModal').modal('hide');
-                        location.reload();
-                        $('#successModal').modal('show');
-                    } else {
-                        alert("삭제 실패");
-                    }
-                },
-                error: function () {
-                    alert("오류가 발생했습니다.");
-                }
-            });
-
-            planToDelete = null;
-        }
-        //plan 삭제 by AJAX
-    }
-
-    function setThumbnail(event) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-            var img = document.createElement("img");
-            img.setAttribute("src", event.target.result);
-            document.querySelector("div#image_container").appendChild(img);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
-    var uno = document.getElementById("autoCompleteUno").value;
-
-    $(document).ready(function() {
-        $("#autoCompleteInput").autocomplete({
-            source: function(request, response) {
-
-                console.log("request", request)
-                console.log("response", response)
-                console.log("uno",uno)
-
-                $.ajax({
-                    url: "/travelmaker/main/autocomplete",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        keyword: request.term,uno:uno
-                    },
-                    success: function(data) {
-                        response(data.resultList);
-                    },
-                    error: function() {
-                        alert("검색 중 오류가 발생했습니다.");
-                    }
-                });
-            },
-            minLength: 1
-            , // 자동완성 시작을 위한 최소 입력 길이
-            select: function(event, ui) {
-                var selectedPartyName = ui.item.value; //ui.item.value => partyname이 들어있음
-                console.log("selectedPartyname",selectedPartyName)
-                var encodedPartyName = encodeURIComponent(selectedPartyName);//인코딩
-                location.href = "/travelmaker/main/searchParty?partyName=" + encodedPartyName +"&uno="+uno;
-            }
-        });
-    });
-
-    $(document).ready(function() {
-        // 수정 모달을 띄우기 위한 이벤트 처리
-        $("#modifyPlan").on("click", function() {
-            var plno = $(this).data("plno");
-            $.ajax({
-                url: "/travelmaker/main/getPlan", // 플랜 정보를 가져올 URL
-                type: "GET",
-                data: {
-                    plno: plno
-                },
-                success: function(plan) {
-                    $("#modPlno").val(plan.plno);
-                    $("#modTitle").val(plan.title);
-                    $("#modStart").val(plan.start);
-                    $("#modEnd").val(plan.end);
-                    $("#modifyPlanModal").modal("show");
-                },
-                error: function() {
-                    alert("플랜 정보를 가져오는 중 오류가 발생했습니다.");
-                }
-            });
-        });
-
-        // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
-        $("#modifySaveButton").on("click", function() {
-            var form = $("#modifyPlanForm");
-            $.ajax({
-                url: "/travelmaker/main/modifyPlan", // 플랜 정보를 수정할 URL
-                type: "POST",
-                data: form.serialize(),
-                success: function(response) {
-                    if (response === "success") {
-                        $("#modifyPlanModal").modal("hide");
-                        location.reload();
-                        $('#successModal').modal('show');
-                    } else {
-                        alert("플랜 수정 실패");
-                    }
-                },
-                error: function() {
-                    alert("플랜 정보 수정 중 오류가 발생했습니다.");
-                }
-            });
-        });
-    });
-
-</script>
 
 </html>

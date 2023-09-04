@@ -18,10 +18,10 @@
     </nav>
 
     <nav class="navbar" style="display: flex; justify-content: space-between;">
-        <h5>
+        <a>
             <span th:text="${username}" style="margin-left: auto;"></span> 님 안녕하세요!
             &nbsp;&nbsp;&nbsp;&nbsp;
-        </h5>
+        </a>
         <a href="/travelmaker/user/logout">로그아웃</a>
     </nav>
     <!-- 친구목록 모달 -->
@@ -54,8 +54,7 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                         </div>
                     </form>
-                    <!--                        </div>-->
-                    <!--                        <div th:if="${list == 1}">-->
+
                     <!-- 리스트가 1일 때 처리할 내용 -->
                     <form th:action="@{/travelmaker/main/friendInsert}" method="post" class="d-flex">
                         <div th:if="${friendSearchResult != null}">
