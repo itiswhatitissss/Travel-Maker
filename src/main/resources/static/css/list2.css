@@ -1,6 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap');
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 *{
-    font-family: "poppins",sans-serif;
+    font-family: "Stylish", sans-serif;
+}
+
+li, li a{
+    font-size: 25px;
+    text-decoration: none;
+    list-style-type: none;
+    font-weight: bold;
+    color: #f72d7a;
+}
+
+.jb-division-line {
+    border-top: 1px solid #f72d7a;
+    margin: 30px 0px;
 }
 
 #container2 {
@@ -16,6 +29,7 @@
     /*background-size:cover ;*/
     backdrop-filter: blur(50px);
     border-radius: 20px;
+    border: 1px solid #f72d7a;
     overflow: hidden;
 }
 
@@ -38,10 +52,22 @@
     overflow: hidden; /* 스크롤 숨김 */
 }
 
+#partyleft a {
+    box-shadow: inset 0 0 0 0 #f72d7a;
+    color: #f72d7a;
+    margin: 0 -.25rem;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+#partyleft a:hover {
+    box-shadow: inset 300px 0 0 0 #f72d7a;
+    color: white;
+}
 
 #carousel-wrapper {
     position: relative;
-    width: 500px;
+    width: 600px;
     overflow: hidden;
     margin: 0 auto;
     text-align: center;
@@ -53,17 +79,24 @@
 }
 
 #carousel img {
-    width: 500px;
+    width: 600px;
     height: 400px;
 }
 
 #info {
     text-align: center;
     margin-top: 10px;
-    font-size: 14px;
 }
 
-#carousel-item {
+#info a {
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #f72d7a;
+}
+
+#buttondiv {
+    align-content: center;
 }
 
 /* 캐러셀 좌우 화살표 스타일 */

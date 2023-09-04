@@ -23,22 +23,25 @@
         <!--왼쪽 시작(party)-->
         <div class="split-left">
             <div class="d-flex align-items-center mb-3">
-                <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
+                <button style="font-weight: bold" type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal"
                         data-bs-target="#createPartyModal">
                     Party+
                 </button>
-                <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
+                <button style="font-weight: bold" type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
                         data-bs-target="#deletePartyModal">
                     Party-
                 </button>
                 <input type="text" class="form-control" id="autoCompleteInput" placeholder="Search Party"/>
                 <input type="hidden" th:value="${uno}" id="autoCompleteUno">
             </div>
-
+            <div class="jb-division-line"></div>
             <ul th:each="party: ${partyDTO}">
                 <li>
+                    <div id="partyleft">
                     <a th:href="@{'/travelmaker/main/list2?pno=' + ${party.pno} + '&uno=' + ${uno}}"
                        th:text="${party.party_name}"></a>
+                    </div>
+                    <div class="jb-division-line"></div>
                 </li>
             </ul>
         </div>
@@ -47,7 +50,8 @@
 
         <!--오른쪽 시작(plan)-->
         <div class="split-right">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
+            <button style="font-weight: bold"
+                    type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
                 Plan+
             </button>
             <br><br><br>
@@ -58,11 +62,14 @@
                             <img th:src="${plan.filepath}" alt=""/>
                             <div id="info">
                                 <a th:href="@{'/travelmaker/plan/planDetail?plno=' + ${plan.plno}+ '&pno=' + ${pno}}"
-                                   th:text="${plan.title}"></a>
-                                <p th:text="${plan.start}"></p>
-                                <p th:text="${plan.end}"></p>
-                                <button type="button" class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}">수정</button>
-                                <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
+                                th:text="${plan.title}"></a>
+                                <br><br>
+                                <p style="white-space: nowrap;">계획 시작: &nbsp;&nbsp;<span th:text="${plan.start}"></span></p>
+                                <p style="white-space: nowrap;">계획 종료: &nbsp;&nbsp;<span th:text="${plan.end}"></span></p>
+                            </div>
+                            <div id="buttondiv">
+                                <button style="font-weight: bold" type="button" class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}">수정</button>
+                                <button style="font-weight: bold" class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
                             </div>
                         </div>
                     </th:block>

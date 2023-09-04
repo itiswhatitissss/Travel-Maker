@@ -19,6 +19,7 @@
 <div id="container2">
     <th:block th:each="plan : ${planDTO}">
         <div style="text-align: center">
+            <br>
             <h3>
                 [
                 <span th:text="${plan.title}"></span>
@@ -48,10 +49,10 @@
                 <ul>
                     <a th:href="@{'/travelmaker/main/list2?pno=' + ${ppno} + '&uno=' + ${uno}}" class="button">뒤로가기</a><br>
                     <a href="#" class="button2" data-bs-toggle="modal" data-bs-target="#attendmodal">참석투표</a><br>
-                    <a href="#" class="button">Button</a><br>
-                    <a href="#" class="button2">button2</a><br>
-                    <a href="#" class="button">Button</a><br>
-                    <a href="#" class="button2">button2</a><br>
+<!--                    <a href="#" class="button">Button</a><br>-->
+<!--                    <a href="#" class="button2">button2</a><br>-->
+<!--                    <a href="#" class="button">Button</a><br>-->
+<!--                    <a href="#" class="button2">button2</a><br>-->
                 </ul>
             </div>
         </div>

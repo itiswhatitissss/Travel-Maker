@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap');*/
+/**{*/
+/*    font-family: "poppins", sans-serif;*/
+/*}*/
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 *{
-    font-family: "poppins", sans-serif;
+    font-family: "Stylish", sans-serif;
 }
 
 #container2 {
@@ -16,6 +20,7 @@
     /*background-size:cover ;*/
     backdrop-filter: blur(50px);
     border-radius: 20px;
+    border: 1px solid #f72d7a;
     overflow: hidden;
 }
 

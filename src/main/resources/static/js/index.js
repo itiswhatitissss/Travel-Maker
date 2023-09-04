@@ -16,7 +16,7 @@ nextButton.addEventListener("click", () => {
 });
 
 function updateCarousel() {
-    const slideAmount = -currentIndex * 500;
+    const slideAmount = -currentIndex * 600;
     carousel.style.transform = `translateX(${slideAmount}px)`;
 }
 
