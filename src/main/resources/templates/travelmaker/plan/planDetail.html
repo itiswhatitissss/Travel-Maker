@@ -76,10 +76,10 @@
             </button>
             <br><br><br>
             <div id="gallery-wrapper">
-                <div id="gallerydiv">
-                    <th:block th:each="gallery : ${gallery}">
-                        <img th:src="${gallery.filepath}" alt=""/>
-                    </th:block>
+                <div id="gallerydiv" th:each="gallery : ${gallery}">
+                    <div class="image-container">
+                        <img class="image-zoom" th:src="${gallery.filepath}" alt=""/>
+                    </div>
                 </div>
             </div>
         </section>
