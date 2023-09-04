@@ -30,4 +30,5 @@ public interface MybatisMapper {
     public Long searchPartyOne(String partyname);
     public List<Map<String,Object>> calenderView(Long pno);
     public List<GalleryDTO> plnoByGallery(Long plno);
+    public List<Map<String,Object>> partymodifyView(Long pno);
 }

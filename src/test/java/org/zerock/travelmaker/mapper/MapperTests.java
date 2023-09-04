@@ -79,7 +79,12 @@ public class MapperTests {
     public void testCalender(){
         Long pno=1L;
         List<Map<String, Object>> list =mybatisMapper.calenderView(pno);
-        log.info("달력 내놔 : ",list);
+        log.info("달력 내놔 : "+list);
+    }
+    @Test
+    public void testPartymodifyView(){
+        List<Map<String, Object>> list =mybatisMapper.partymodifyView(1L);
+        log.info("다시하기 : "+list);
     }
 
 }

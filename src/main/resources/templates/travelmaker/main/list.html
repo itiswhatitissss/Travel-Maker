@@ -34,49 +34,11 @@
             <li>
                 <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
                    th:text="${party.party_name}"></a>
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modifyPartyModal">
+                <button type="button" class="btn btn-outline-primary modify-pno" th:data-pno="${party.pno}">
                     Party 수정
                 </button>
             </li>
-            <!--파티수정 모달-->
-            <div class="modal fade" id="modifyPartyModal" tabindex="-1" aria-labelledby="modifyPartyModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modifyPartyModalLabel">Party 수정</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form name="form" th:action="@{/travelmaker/main/partyModify}" method="post"
-                                  enctype="multipart/form-data">
-                                <div class="modal-body">
-                                    <input type="hidden" name="uno" th:value="${uno}">
-                                    <input type="hidden" name="pno" th:value=" ${party.pno}">
-                                    <!-- 제목 입력 -->
-                                    <div class="mb-3">
-                                        <label for="title" class="form-label">Party Name</label>
-                                        <input type="text" class="form-control" id="title" name="title" required th:placeholder="${party.party_name}">
-                                    </div>
-                                    <!-- 친구 추가 -->
-                                    <div class="form-check">
-                                        <label for="title" class="form-label">Add Party Members</label>
-                                        <div th:each="friend: ${friendDTO}">
-                                            <h7 th:text="${friend.name}"></h7>
-                                            <input class="form-check-input" type="checkbox" th:value="${friend.fno}"
-                                                   name="selectedFriends" id="friendCheckbox">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" id="submit" class="btn btn-primary">Party 수정</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--파티수정 모달-->
+
         </ul>
     </div>
     <!--왼쪽 끝(party)-->
@@ -318,6 +280,51 @@
 </div>
 <!--작업완료 모달-->
 
+<!--파티수정 모달-->
+<div class="modal fade" id="modifyPartyModal" tabindex="-1" aria-labelledby="modifyPartyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modifyPartyModalLabel">파티 수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 수정 폼 -->
+                <form id="modifyPartyForm">
+                    <input type="hidden" id="modiPno" name="pno" value="">
+                    <input type="hidden" id="modiUno" name="uno" value="">
+                    <div class="mb-3">
+                        <label for="modTitle" class="form-label">Plan Name</label>
+                        <input type="text" class="form-control" id="modiTitle" name="title" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modStart" class="form-label">파티 참가 목록</label>
+                        <input type="date" class="form-control" id="modStart" name="start" required>
+                        <ul th:each="${}">
+                            <li>
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modEnd" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="modEnd" name="end" required>
+                    </div>
+                    <!--                    <div class="mb-3">-->
+                    <!--                        <label for="modFilepath" class="form-label">Filepath</label>-->
+                    <!--                        <input type="file" class="form-control" id="modFilepath" name="filepath" accept="image/*" onchange="setThumbnail(event);" required>-->
+                    <!--                    </div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modifySaveButton">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--파티수정 모달-->
+
 
 
 <script src="/js/index.js"></script>
@@ -431,6 +438,54 @@
                     $("#modTitle").val(plan.title);
                     $("#modStart").val(plan.start);
                     $("#modEnd").val(plan.end);
+                    $("#modifyPlanModal").modal("show");
+                },
+                error: function() {
+                    alert("플랜 정보를 가져오는 중 오류가 발생했습니다.");
+                }
+            });
+        });
+
+        // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
+        $("#modifySaveButton").on("click", function() {
+            var form = $("#modifyPlanForm");
+            $.ajax({
+                url: "/travelmaker/main/modifyPlan", // 플랜 정보를 수정할 URL
+                type: "POST",
+                data: form.serialize(),
+                success: function(response) {
+                    if (response === "success") {
+                        $("#modifyPlanModal").modal("hide");
+                        location.reload();
+                        $('#successModal').modal('show');
+                    } else {
+                        alert("플랜 수정 실패");
+                    }
+                },
+                error: function() {
+                    alert("플랜 정보 수정 중 오류가 발생했습니다.");
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+        // 수정 모달을 띄우기 위한 이벤트 처리
+        $(".modify-pno").on("click", function() {
+            var pno = $(this).data("pno");
+            console.log("pno======>",pno);
+            var uno = document.getElementById("autoCompleteUno").value;
+            console.log("uno======>",uno);
+            $.ajax({
+                url: "/travelmaker/main/getPartyModify", // 플랜 정보를 가져올 URL
+                type: "GET",
+                data: {
+                    pno: pno,
+                    uno: uno
+                },
+                success: function(plan) {
+                    $("#modiPno").val(partylist.pno);
+                    $("#modTitle").val(partylist.title);
+                    $("#modStart").val(partylist.fno);
                     $("#modifyPlanModal").modal("show");
                 },
                 error: function() {

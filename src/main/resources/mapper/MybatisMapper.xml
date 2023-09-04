@@ -64,4 +64,8 @@
         select filepath from Gallery where plno=#{plno}
     </select>
 
+    <select id="partymodifyView" resultType="map">
+        select p.party_name as title, up.uno, p.pno from Party p join user_party up on p.pno=up.pno where p.pno=#{pno}
+    </select>
+
 </mapper>

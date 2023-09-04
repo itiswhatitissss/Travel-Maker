@@ -273,4 +273,20 @@ public class MainController {
         }
         return "redirect:list?pno="+pno+"&uno="+uno;
     }
+    @GetMapping("/getPartyModify")
+    public ResponseEntity<List<Map<String, Object>>> patryModifyView(@RequestParam("pno") Long pno, @RequestParam("uno") Long uno){
+        List<Map<String, Object>> partylist = mainService.getPartymodifyView(pno);
+        List<Map<String, Object>> friendlist = friendService.friendList(uno);
+
+        for(int i=0; i<partylist.size(); i++){
+            for (int j=0; j<friendlist.size(); j++){
+                if(partylist.get(i).get("uno")==friendlist.get(j).get("fno")){
+                    friendlist.remove(j);
+                }
+            }
+        }
+        partylist.addAll(friendlist);
+
+        return ResponseEntity.ok(partylist);
+    }
 }

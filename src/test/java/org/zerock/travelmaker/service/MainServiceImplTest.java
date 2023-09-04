@@ -24,6 +24,8 @@ class MainServiceImplTest {
 
     @Autowired
     private MainService mainService;
+    @Autowired
+    private FriendService friendService;
 
     @Test
     public void testplanRegister() {
@@ -78,6 +80,22 @@ class MainServiceImplTest {
     @Test
     public void insertUserParty(){
         mainService.userPartySave(3L,1L);
+    }
+    @Test
+    public void getListPartyModify(){
+        Long pno =1L;
+        Long uno =1L;
+        List<Map<String, Object>> partylist = mainService.getPartymodifyView(pno);
+        List<Map<String, Object>> friendlist = friendService.friendList(uno);
+
+        for(int i=0; i<partylist.size(); i++){
+            for (int j=0; j<friendlist.size(); j++){
+                if(partylist.get(i).get("uno")==friendlist.get(j).get("fno")){
+                    friendlist.remove(j);
+                }
+            }
+        }
+        partylist.addAll(friendlist);
     }
 
 }

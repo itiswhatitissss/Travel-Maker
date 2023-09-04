@@ -42,4 +42,6 @@ public interface MainService {
     void modifyParty(String name, Long pno );
 
     void userPartySave(Long pno, Long fno);
+
+    List<Map<String, Object>> getPartymodifyView(Long pno);
 }

@@ -174,4 +174,11 @@ public class MainServiceImpl implements MainService{
 
         userPartyRepository.save(userParty);
     }
+
+    @Override
+    public List<Map<String, Object>> getPartymodifyView(Long pno) {
+        List<Map<String, Object>> list =mybatisMapper.partymodifyView(pno);
+
+        return list;
+    }
 }
