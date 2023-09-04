@@ -10,15 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.zerock.travelmaker.domain.Marker;
-import org.zerock.travelmaker.domain.Plan;
-import org.zerock.travelmaker.domain.SchedulerDetail;
-import org.zerock.travelmaker.domain.Users;
+import org.springframework.web.multipart.MultipartFile;
+import org.zerock.travelmaker.domain.*;
+import org.zerock.travelmaker.dto.GalleryDTO;
 import org.zerock.travelmaker.dto.MarkerDTO;
 import org.zerock.travelmaker.dto.SchedulerDetailDTO;
 import org.zerock.travelmaker.repository.MarkerRepository;
 import org.zerock.travelmaker.service.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,6 +37,7 @@ public class PlanController {
     private final AttendService attendService;
     private final MarkerRepository markerRepository;
     private final MarkerService markerService;
+    private final GalleryService galleryService;
 
     @GetMapping("/planDetail")
     public void planDetailGET(@RequestParam("plno") Long plno, @RequestParam("pno") Long pno, Model model, Authentication authentication, HttpSession session) {
@@ -59,6 +60,9 @@ public class PlanController {
         model.addAttribute("AttendDTO",attendList);
         model.addAttribute("plnno",plno);
         model.addAttribute("ppno",pno);
+
+        List<GalleryDTO> galleryDTO =galleryService.galleryView(plno);
+        model.addAttribute("gallery",galleryDTO);
 
         Long attendCheck = attendService.checkAttend(uno,plno);
         if (attendCheck !=null){
@@ -88,7 +92,6 @@ public class PlanController {
             List<Map<String, Object>> friend = friendService.friendList(uno);
             model.addAttribute("friendDTO", friend);
             session.removeAttribute("friendSearchResult"); // 세션에서 검색 결과 제거
-
         }
     };
 
@@ -149,6 +152,12 @@ public class PlanController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
         }
+    }
+
+    @PostMapping("/galleryPost")
+    public String galleryPopupPost(Gallery gallery, Long plno, MultipartFile file, @RequestParam("pno")Long pno)throws Exception{
+        galleryService.galleryPlus(gallery,file,plno);
+        return "redirect:/travelmaker/plan/planDetail?plno="+plno+"&pno="+pno;
     }
 
 }

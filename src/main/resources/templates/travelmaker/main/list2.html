@@ -15,7 +15,7 @@
 <div th:replace="/travelmaker/main/header :: header"></div>
 <!--header-->
 
-
+<body>
 <div class="background"></div>
 
 <div id="container2">
@@ -34,7 +34,8 @@
                 <input type="text" class="form-control" id="autoCompleteInput" placeholder="Search Party"/>
                 <input type="hidden" th:value="${uno}" id="autoCompleteUno">
             </div>
-            <div class="jb-division-line"></div>
+            <br><br>
+<!--            <div class="jb-division-line"></div>-->
             <ul th:each="party: ${partyDTO}">
                 <li>
                     <div id="partyleft">

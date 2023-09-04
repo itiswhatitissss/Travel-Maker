@@ -46,7 +46,6 @@ public class MainController {
     private final PlanService planService;
     private final PlanRepository planRepository;
 
-
     @GetMapping("/list2")
     public void mainList(Model model, Long uno, Long pno, Authentication authentication, HttpSession session){
         List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
@@ -93,7 +92,6 @@ public class MainController {
         model.addAttribute("usersDTO", usersDTO);
     }
 
-
     @PostMapping("/partyPopup")
     public String partyPopupPost(Long uno, Long pno, @RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends,
                                @RequestParam("title") String title){
@@ -110,10 +108,8 @@ public class MainController {
         return "redirect:list2?pno="+pno+"&uno="+uno;
     }
 
-
-
     @PostMapping("/planPopup")
-    public String planPopupPost(HttpServletRequest request,Plan plan, Long pno, Long uno, Model model, MultipartFile file)throws Exception{
+    public String planPopupPost(Plan plan, Long pno, Long uno, Model model, MultipartFile file)throws Exception{
         planService.write(plan,file,pno);
         model.addAttribute("message","글작성이 완료되었습니다");
         return "redirect:list2?pno="+pno+"&uno="+uno;
@@ -124,6 +120,7 @@ public class MainController {
         mainService.deletePlan(plno);
         return ResponseEntity.ok("success");
     }
+
     @PostMapping("/friendSearch")
     public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr, HttpSession session) {
 
@@ -139,6 +136,7 @@ public class MainController {
 
         return "redirect:" + referer;
     }
+
     @PostMapping("/friendDelete")
     public String friendDelete(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -167,6 +165,7 @@ public class MainController {
         }
         return "redirect:list2?pno="+pno1+"&uno="+uno;
     }
+
     @PostMapping("/friendInsert")
     public String friendInsert(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -183,6 +182,7 @@ public class MainController {
         }
         return "redirect:" + referer;
     }
+
     @PostMapping("/autocomplete")
     @ResponseBody
     public Map<String, Object> autocomplete(@RequestParam String keyword, @RequestParam Long uno) {
@@ -223,6 +223,7 @@ public class MainController {
         // 예시: 수정 작업 실패 시
         // return "failure";
     }
+
     @GetMapping("/searchParty")
     public String searchPartyOne(@RequestParam("partyName")String partyname, @RequestParam("uno")Long uno){
         Long pno = mainService.searchPartyOne(partyname);
@@ -250,6 +251,5 @@ public class MainController {
             jsonArr.add(jsonObj); // 대괄호 안에 넣어주기[{key:value , key:value, key:value},{key:value , key:value, key:value}]
         }
     }
-
 
 }

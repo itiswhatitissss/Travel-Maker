@@ -134,3 +134,16 @@ document.querySelector('input[name="attendance"][value="0"]').addEventListener('
         document.querySelector('input[name="attendance"][value="1"]').checked = false;
     }
 });
+
+//지도 + 갤러리
+document.querySelector('#photo').addEventListener('click', function () {
+    // 지도 섹션 숨김
+    document.getElementById('map-section').style.display = 'none';
+
+    // 갤러리 섹션 표시
+    document.getElementById('gallery-section').style.display = 'block';
+});
+
+document.getElementById('galleryPlus').addEventListener('click', function () {
+    $('#addPhotoModal').modal('show');
+});
