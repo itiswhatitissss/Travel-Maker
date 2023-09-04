@@ -64,8 +64,11 @@
                                 <a th:href="@{'/travelmaker/plan/planDetail?plno=' + ${plan.plno}+ '&pno=' + ${pno}}"
                                 th:text="${plan.title}"></a>
                                 <br><br>
-                                <p style="white-space: nowrap;">계획 시작: &nbsp;&nbsp;<span th:text="${plan.start}"></span></p>
-                                <p style="white-space: nowrap;">계획 종료: &nbsp;&nbsp;<span th:text="${plan.end}"></span></p>
+                                <p>
+                                    <span th:text="${plan.start}"></span>
+                                    ~
+                                    <span th:text="${plan.end}"></span>
+                                </p>
                             </div>
                             <div id="buttondiv">
                                 <button style="font-weight: bold" type="button" class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}">수정</button>
