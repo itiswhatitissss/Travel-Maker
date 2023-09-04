@@ -103,7 +103,7 @@ class TestRepositoryTest {
         PartyDetail partyDetail = PartyDetail.builder().pnoByPartyDetail(party).plnoByPartyDetail(planRepository.findById(1L).get()).build();
         partyDetailRepository.save(partyDetail); //"해병대전우회" 파티에 "해병대전우회 첫여행" 플랜 생성
 
-        Gallery gallery = Gallery.builder().title("전우회단체사진").plnoByGallery(planRepository.findById(1L).get()).build();
+        Gallery gallery = Gallery.builder().filepath("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg").plnoByGallery(planRepository.findById(1L).get()).build();
         galleryRepository.save(gallery); //"해병대전우회" + "강원도삼척여행" 전우회단체사진 게시
 
         Scheduler scheduler = Scheduler.builder().plnoByScheduler(planRepository.findById(1L).get()).build();
@@ -139,7 +139,7 @@ class TestRepositoryTest {
         PartyDetail partyDetail1 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(2L).get()).build();
         partyDetailRepository.save(partyDetail1); //"308호 모임" 파티에 "308호 인계동 정모" 플랜 생성
 
-        Gallery gallery1 = Gallery.builder().title("인계동 단체사진").plnoByGallery(planRepository.findById(2L).get()).build();
+        Gallery gallery1 = Gallery.builder().filepath("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg").plnoByGallery(planRepository.findById(2L).get()).build();
         galleryRepository.save(gallery1); //"308호 모임" + "인계동 정모" 단체사진 게시
 
         Scheduler scheduler1 = Scheduler.builder().plnoByScheduler(planRepository.findById(2L).get()).build();
@@ -152,7 +152,7 @@ class TestRepositoryTest {
         PartyDetail partyDetail2 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(3L).get()).build();
         partyDetailRepository.save(partyDetail2); //"308호 모임" 파티에 "308호 여름휴가" 플랜 생성
 
-        Gallery gallery2 = Gallery.builder().title("인계동 단체사진").plnoByGallery(planRepository.findById(3L).get()).build();
+        Gallery gallery2 = Gallery.builder().filepath("https://www.ilyosisa.co.kr/data/photos/201403/60777_956_2743.jpg").plnoByGallery(planRepository.findById(3L).get()).build();
         galleryRepository.save(gallery2); //"308호 모임" + "여름휴가" 단체사진 게시
 
         Scheduler scheduler2 = Scheduler.builder().plnoByScheduler(planRepository.findById(3L).get()).build();

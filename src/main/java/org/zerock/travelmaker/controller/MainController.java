@@ -113,7 +113,7 @@ public class MainController {
 
 
     @PostMapping("/planPopup")
-    public String planPopupPost(HttpServletRequest request,Plan plan, Long pno, Long uno, Model model, MultipartFile file)throws Exception{
+    public String planPopupPost(Plan plan, Long pno, Long uno, Model model, MultipartFile file)throws Exception{
         planService.write(plan,file,pno);
         model.addAttribute("message","글작성이 완료되었습니다");
         return "redirect:list?pno="+pno+"&uno="+uno;

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class GalleryDTO {
 
     private Long galleryPK;
-    private String title;
     private String filename;
     private String filepath;
     private Long plnoByGallery;

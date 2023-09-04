@@ -5,6 +5,7 @@
     <title>TravelMaker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/planDetail.css">
+    <link rel="stylesheet" href="/css/gallery.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -44,22 +45,18 @@
             </li>
         </ul>
         <div class="wrap">
-            <ul th:each="party: ${partyDTO}">
-                <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
+                <a th:href="@{'/travelmaker/main/list?pno=' + ${ppno} + '&uno=' + ${uno}}"
                    class="back-button">뒤로가기</a>
                 <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#attendmodal">참석투표</a>
-                <a href="#" class="button2">button3</a>
-                <a href="#" class="button">Button</a>
-                <a href="#" class="button2">button2</a>
-                <a href="#" class="button">Button</a>
-                <a href="#" class="button2">button2</a>
+                <a href="###" class="button2">사진첩</a>
+                <a class="button" th:href="@{'/travelmaker/plan/planDetail?plno='+${plnno}+'&pno='+${ppno}}">만남장소</a>
             </ul>
         </div>
     </aside>
 
 
-    <!--지도-->
-    <section>
+    <!--지도 시작-->
+    <section id="map-section">
         <div id="map" style="width:100%;height:800px;"></div>
         <input type="hidden" id="plno" th:value="${plnno}">
         <button type="button" id="deleteMarker" class="btn btn-outline-danger me-2"> Reset</button>
@@ -82,10 +79,58 @@
             </div>
         </div>
     </div>
-    <!--지도-->
+    <!--지도 끝-->
+
+
+    <!--gallery-->
+    <section id="gallery-section">
+        <div id="carousel-wrapper">
+            <div id="carousel">
+                <th:block th:each="gallery : ${gallery}">
+                    <div id="carousel-item">
+                        <img th:src="${gallery.filepath}" alt=""/>
+                    </div>
+                </th:block>
+            </div>
+            <button id="prev" type="button"></button>
+            <button id="next" type="button"></button>
+        </div>
+        <button type="button" id="galleryPlus">사진추가</button>
+    </section>
+
+    <!--사진추가 모달-->
+    <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">사진 추가</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 사진 추가 폼 -->
+                    <form id="photoForm" enctype="multipart/form-data" th:action="@{/travelmaker/plan/galleryPost}" method="post">
+                        <div class="mb-3">
+                            <label for="photoFile" class="form-label">사진 업로드</label>
+                            <input type="file" class="form-control" id="photoFile" name="file" accept="image/*"
+                                   required>
+                            <input type="hidden" name="plno" th:value="${plnno}">
+                            <input type="hidden" name="pno" th:value="${ppno}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">업로드</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--사진추가 모달-->
+
+    <!--gallery-->
 
 
 </div>
+
+<script src="/js/index.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ee26f1fb7bd8c053dc49854ce7b2d099"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -149,7 +194,7 @@
 
 
     //-----------------찍혀있는 마커 보여주기 시작-------------------------//
-    function addMarker(position, title,lat,lng) {
+    function addMarker(position, title, lat, lng) {
         var marker = new kakao.maps.Marker({
             position: position
         });
@@ -214,6 +259,19 @@
 </script>
 <script src="/js/index.js"></script>
 <script src="/js/planDetail.js"></script>
+<script>
+    document.querySelector('.button2').addEventListener('click', function () {
+        // 지도 섹션 숨김
+        document.getElementById('map-section').style.display = 'none';
+
+        // 갤러리 섹션 표시
+        document.getElementById('gallery-section').style.display = 'block';
+    });
+
+    document.getElementById('galleryPlus').addEventListener('click', function () {
+        $('#addPhotoModal').modal('show');
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
 

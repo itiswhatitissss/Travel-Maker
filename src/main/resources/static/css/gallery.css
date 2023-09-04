@@ -1,16 +1,76 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+/* CSS */
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap');
+*{
+    font-family: "poppins", sans-serif;
+    /*font-family: Arial, sans-serif;*/
 }
 
-.image-viewer {
+#carousel-wrapper {
+    position: relative;
+    width: 500px;
+    overflow: hidden;
+    margin: 0 auto;
     text-align: center;
 }
 
-.nav-btn {
+#carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+#carousel img {
+    width: 500px;
+    height: 400px;
+}
+
+#info {
+    text-align: center;
     margin-top: 10px;
+    font-size: 14px;
+}
+
+#carousel-item {
+    /* 추가 스타일을 여기에 적용할 수 있습니다. */
+}
+
+/* 캐러셀 좌우 화살표 스타일 */
+#prev,
+#next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px; /* 화살표 아이콘 크기 설정 */
+    background-color: rgba(255, 255, 255, 0.5); /* 배경 색상 설정 */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50%; /* 원 형태로 버튼 스타일링 */
+    cursor: pointer;
+    z-index: 1;
+}
+
+#prev {
+    left: 10px;
+}
+
+#next {
+
+    right: 10px;
+}
+
+/* 화살표 아이콘 추가 */
+#prev::before,
+#next::before {
+    content: "❮"; /* 왼쪽 화살표 아이콘 */
+}
+
+#next::before {
+    content: "❯"; /* 오른쪽 화살표 아이콘 */
+}
+
+/* 화살표 아이콘 색상 및 효과 설정 */
+#prev:hover,
+#next:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* 호버 시 배경 색상 변경 */
+    color: #ff6600; /* 아이콘 색상 변경 */
 }

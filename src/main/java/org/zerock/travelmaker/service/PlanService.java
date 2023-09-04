@@ -75,20 +75,5 @@ public class PlanService {
         return byPlno;
     }
 
-    //게시글리스트처리
-    public List<Plan> planList(){
-        //findAll : 테스트보드라는 클래스가 담긴 List를 반환하는것을 확인할수있다
-        return planRepository.findAll();
-    }
-
-    //특정 게시글 불러오기
-    public Plan planview(Long id){
-        return planRepository.findById(id).get(); //어떤게시글을 불러올지 지정을해주어야한다 (Integer값으로)
-    }
-
-    //특정게시글삭제
-    public void planDelete(Long id){ /*id값 1번을 넣어주면 1번을 삭제한다*/
-        planRepository.deleteById(id);
-    }
 
 }

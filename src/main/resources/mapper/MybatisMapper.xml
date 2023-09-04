@@ -60,4 +60,8 @@
         where p.pno=#{pno}
     </select>
 
+    <select id="plnoByGallery" resultType="map">
+        select filepath from Gallery where plno=#{plno}
+    </select>
+
 </mapper>
