@@ -23,22 +23,22 @@
         <!--왼쪽 시작(party)-->
         <div class="split-left">
             <div class="d-flex align-items-center mb-3">
-                <button style="font-weight: bold" type="button" class="btn btn-outline-primary me-2" data-bs-toggle="tooltip" title="파티 추가">
+                <button style="font-weight: bold" type="button" class="btn btn-outline-primary me-2" data-bs-toggle="tooltip" title="파티를 추가해보세요" data-bs-target="#createPartyModal">
                     Party+
                 </button>
-                <button style="font-weight: bold" type="button" class="btn btn-outline-danger me-2" data-bs-toggle="tooltip" title="파티 삭제">
+                <button style="font-weight: bold" type="button" class="btn btn-outline-danger me-2" data-bs-toggle="tooltip" title="파티를 삭제해보세요" data-bs-target="#deletePartyModal">
                     Party-
                 </button>
                 <input type="text" class="form-control" id="autoCompleteInput" placeholder="Search Party"/>
                 <input type="hidden" th:value="${uno}" id="autoCompleteUno">
             </div>
             <br><br>
-<!--            <div class="jb-division-line"></div>-->
+            <!--            <div class="jb-division-line"></div>-->
             <ul th:each="party: ${partyDTO}">
                 <li>
                     <div id="partyleft">
-                    <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
-                       th:text="${party.party_name}"></a>
+                        <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
+                           th:text="${party.party_name}"></a>
                     </div>
                     <div class="jb-division-line"></div>
                 </li>
@@ -48,11 +48,11 @@
 
         <!--오른쪽 시작(plan)-->
         <div class="split-right">
-            <button style="font-weight: bold"
-                    type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
+            <button style="font-weight: bold" type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="플랜을 추가해보세요" data-bs-target="#createPlanModal">
                 Plan+
             </button>
             <br><br><br>
+            <button id="prev" type="button"></button>
             <div id="carousel-wrapper">
                 <div id="carousel">
                     <th:block th:each="plan : ${planDTO}">
@@ -60,7 +60,7 @@
                             <img th:src="${plan.filepath}" alt=""/>
                             <div id="info">
                                 <a th:href="@{'/travelmaker/plan/planDetail?plno=' + ${plan.plno}+ '&pno=' + ${pno}}"
-                                th:text="${plan.title}"></a>
+                                   th:text="${plan.title}"></a>
                                 <br><br>
                                 <p>
                                     <span th:text="${plan.start}"></span>
@@ -75,9 +75,8 @@
                         </div>
                     </th:block>
                 </div>
-                <button id="prev" type="button"></button>
-                <button id="next" type="button"></button>
             </div>
+            <button id="next" type="button"></button>
         </div>
         <!--오른쪽 끝(plan)-->
     </div>
