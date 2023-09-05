@@ -532,24 +532,25 @@
 
         // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
         $("#modifyPartySaveButton").on("click", function () {
-            var form = $("#modifyPartyForm");
+            // var form = $("#modifyPartyForm");
             var pno = $("#modiPno").val();
-            var uno = $("#modiUno").val();
+            // var uno = $("#modiUno").val();
             var title = $("#modiTitle").val();
             var fnoList = [];
             console.log("title===============>",title)
             $("input[name='selectedFriends']:checked").each(function () {
                 fnoList.push($(this).val());
             });
+            var fnoListString = fnoList.join(",");
             console.log("fnolist===============>",fnoList)
             $.ajax({
-                url: "/partyModify", // 플랜 정보를 수정할 URL
+                url: "partyModify", // 플랜 정보를 수정할 URL
                 type: "POST",
                 data: {
                     pno: pno,
-                    uno: uno,
+                    // uno: uno,
                     title: title,
-                    fnoList: fnoList
+                    fnoList: fnoListString
                 },
                 success: function (response) {
                     console.log("response==============>",response)

@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @Log4j2
@@ -261,11 +262,18 @@ public class MainController {
 //
 //    }
     @PostMapping("/partyModify")
-    public ResponseEntity<String> partyModify(@RequestParam("pno") Long pno, @RequestParam("uno") Long uno, @RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends, @RequestParam(name = "title") String title){
+    public ResponseEntity<String> partyModify(@RequestParam("pno") Long pno,
+                                              @RequestParam(name = "fnoList") String fnoListString,
+                                              @RequestParam(name = "title") String title){
 
         mainService.modifyParty(title,pno);
 
-        if(selectedFriends !=null) {
+        if(fnoListString.isEmpty()) {
+        }else {
+            List<Long> selectedFriends = Arrays.stream(fnoListString.split(","))
+                    .map(Long::parseLong)
+                    .collect(Collectors.toList());
+
             for (int i = 0; i < selectedFriends.size(); i++) {
                 Long fno = selectedFriends.get(i);
                 mainService.userPartySave(pno,fno);
