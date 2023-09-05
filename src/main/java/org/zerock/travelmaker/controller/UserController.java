@@ -2,17 +2,23 @@ package org.zerock.travelmaker.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.travelmaker.dto.UserDTO;
+import org.zerock.travelmaker.service.MailSendService;
 import org.zerock.travelmaker.service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +29,7 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final MailSendService mailSendService;
 
     //    @PreAuthorize("permitAll()")
     @GetMapping("/login")
@@ -77,4 +84,12 @@ public class UserController {
         List<Map<String, Object>> usersDTO = userService.userList(uno);
         model.addAttribute("usersDTO", usersDTO);
     };
+    @PostMapping("/mailcheck")
+    public ResponseEntity<String> mailCheck(@RequestBody HashMap<String, Object> user){
+
+        String username = (String) user.get("username");
+        String authNum = mailSendService.joinEmail(username);
+
+        return ResponseEntity.status(HttpStatus.OK).body(authNum);
+    }
 }

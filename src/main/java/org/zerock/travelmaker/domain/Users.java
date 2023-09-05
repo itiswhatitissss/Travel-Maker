@@ -27,6 +27,8 @@ public class Users{
     private String password;
     private String name;
     private String email;
+    private String code;
+
 
     private boolean del;
     private boolean social;
