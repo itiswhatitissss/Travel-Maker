@@ -157,11 +157,12 @@ $(document).ready(function() {
         });
     });
 });
+
+//툴팁이랑 모달 호환하기
 $(document).ready(function () {
     $('[data-bs-toggle="tooltip"]').tooltip();
 });
 
-// 버튼 클릭 시 해당 모달을 나타냅니다.
 document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (button) {
     button.addEventListener('click', function () {
         const targetModalId = button.getAttribute('data-bs-target');
