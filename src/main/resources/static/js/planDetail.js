@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var plno = document.getElementById("plno").value;
     fetchAndDisplayMarkers(plno);
 });
+//------------------------------------------------------------------api-----------------------------------------------------------------------//
+
+//------------------------------------------------------------------api-----------------------------------------------------------------------//
+
+
 
 
 //-----------------마커 찍고 DB저장 시작-------------------------//
@@ -99,6 +104,9 @@ function fetchAndDisplayMarkers(plno) {
 //-----------------찍혀있는 마커 보여주기 끝-------------------------//
 
 
+//-----------------마커 지우기 시작-------------------------//
+
+
 document.addEventListener('DOMContentLoaded', function () {
     var resetButton = document.querySelector('#deleteMarker');
     resetButton.addEventListener('click', function () {
@@ -120,6 +128,9 @@ function deleteMarker(plno) {
         }
     });
 }
+//-----------------마커 지우기 끝-------------------------//
+
+
 
 // "참석" 체크박스를 선택하면 "불참" 체크박스 선택 해제
 document.querySelector('input[name="attendance"][value="1"]').addEventListener('change', function () {

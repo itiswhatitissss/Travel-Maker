@@ -88,7 +88,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createPartyModalLabel">파티 추가</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form name="form" th:action="@{/travelmaker/main/partyPopup}" method="post"
                   enctype="multipart/form-data">
@@ -126,7 +125,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deletePartyModalLabel">파티 삭제</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form name="form" th:action="@{/travelmaker/main/deleteParty}" method="post"
                   enctype="multipart/form-data">
@@ -163,7 +161,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createPlanModalLabel">플랜 추가</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form name="form" th:action="@{/travelmaker/main/planPopup}" method="post"
@@ -208,7 +205,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modifyPlanModalLabel">플랜 수정</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- 수정 폼 -->
@@ -244,7 +240,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">삭제 확인</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

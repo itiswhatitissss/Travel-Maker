@@ -95,13 +95,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Enter Title</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">마커 입력</h5>
             </div>
             <div class="modal-body">
-                <input type="text" id="markerTitle" class="form-control" placeholder="Enter Title">
+                <input type="text" id="markerTitle" class="form-control" placeholder="약속 장소명을 입력하세요">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButton">저장</button>
             </div>
         </div>
     </div>
@@ -114,7 +114,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">참석 투표</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div th:if="${att == 0}">
