@@ -69,7 +69,7 @@ function addMarker(position, title,lat,lng) {
         position: position
     });
 
-    var iwContent = '<div style="padding:5px;">' + title + ' <br><a href="https://map.kakao.com/link/map/' + title + ',' + lat + ',' + lng + '" style="color:blue" target="_blank">카카오맵</a> <a href="https://map.kakao.com/link/to/' + title + ',' + lat + ',' + lng + '" style="color:blue" target="_blank">길찾기</a></div>';
+    var iwContent = '<div style="padding:5px; color: #151e27">' + title + ' <br><a href="https://map.kakao.com/link/map/' + title + ',' + lat + ',' + lng + '" style="color:blue" target="_blank">카카오맵</a> <a href="https://map.kakao.com/link/to/' + title + ',' + lat + ',' + lng + '" style="color:blue" target="_blank">길찾기</a></div>';
 
     var infowindow = new kakao.maps.InfoWindow({
         content: iwContent

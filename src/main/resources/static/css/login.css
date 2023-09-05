@@ -245,3 +245,29 @@ body{
 .create-account p a:hover{
     text-decoration: underline;
 }
+
+/* 아이디 입력란 스타일 */
+input[name="username"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
+
+/* 비밀번호 입력란 스타일 */
+input[name="password"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
+input[name="id"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
+/* 비밀번호 입력란 스타일 */
+input[name="name"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
+input[name="email"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
+input[name="mail-check-btn"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
+input[name="confirmNumber"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
