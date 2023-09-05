@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>TravelMaker</title>
-    <link rel="stylesheet" th:href="@{/css/header.css}" />
-    <link rel="stylesheet" th:href="@{/css/list.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/list.css}"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -23,13 +23,16 @@
         <!--왼쪽 시작(party)-->
         <div class="split-left">
             <div class="d-flex align-items-center mb-3">
-                <button style="font-weight: bold" type="button" class="btn btn-secondary me-2" data-bs-toggle="tooltip" title="친구와 파티 시작하기" data-bs-target="#createPartyModal">
+                <button style="font-weight: bold" type="button" class="btn btn-secondary me-2" data-bs-toggle="tooltip"
+                        title="친구와 파티 시작하기" data-bs-target="#createPartyModal">
                     Party+
                 </button>
-                <button style="font-weight: bold" type="button" class="btn btn-light me-2" data-bs-toggle="tooltip" title="파티에서 나가기" data-bs-target="#deletePartyModal">
+                <button style="font-weight: bold" type="button" class="btn btn-light me-2" data-bs-toggle="tooltip"
+                        title="파티에서 나가기" data-bs-target="#deletePartyModal">
                     Party-
                 </button>
-                <input type="text" class="form-control" id="autoCompleteInput" data-bs-toggle="tooltip" title="파티명 입력하여 검색하기" placeholder="Search Party"/>
+                <input type="text" class="form-control" id="autoCompleteInput" data-bs-toggle="tooltip"
+                       title="파티명 입력하여 검색하기" placeholder="Search Party"/>
                 <input type="hidden" th:value="${uno}" id="autoCompleteUno">
             </div>
             <br><br>
@@ -48,7 +51,8 @@
 
         <!--오른쪽 시작(plan)-->
         <div class="split-right">
-            <button style="font-weight: bold" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="해당 파티의 일정 추가하기" data-bs-target="#createPlanModal">
+            <button style="font-weight: bold" type="button" class="btn btn-secondary" data-bs-toggle="tooltip"
+                    title="해당 파티의 일정 추가하기" data-bs-target="#createPlanModal">
                 Plan+
             </button>
             <br><br><br>
@@ -69,8 +73,14 @@
                                 </p>
                             </div>
                             <div id="buttondiv">
-                                <button style="font-weight: bold" type="button" class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}" data-bs-target="#modifyPlanModal" >수정</button>
-                                <button style="font-weight: bold" class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
+                                <button style="font-weight: bold" type="button"
+                                        class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}"
+                                        data-bs-target="#modifyPlanModal">수정
+                                </button>
+                                <button style="font-weight: bold" class="btn btn-outline-info" type="button"
+                                        th:data-plno="${plan.plno}"
+                                        th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제
+                                </button>
                             </div>
                         </div>
                     </th:block>
@@ -96,12 +106,12 @@
                     <input type="hidden" name="pno" th:value="${pno}">
                     <!-- 제목 입력 -->
                     <div class="mb-3">
-                        <label for="title" class="form-label">Party Name</label>
+                        <label for="title" class="form-label">파티 이름</label>
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <!-- 친구 추가 -->
                     <div class="form-check">
-                        <label for="title" class="form-label">Add Party Members</label>
+                        <label for="title" class="form-label">친구 초대</label>
                         <div th:each="friend: ${friendDTO}">
                             <h7 th:text="${friend.name}"></h7>
                             <input class="form-check-input" type="checkbox" th:value="${friend.fno}"
@@ -110,8 +120,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="submit" class="btn btn-primary">Add Party</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="submit" class="btn btn-primary">생성</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </form>
         </div>
@@ -146,8 +156,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="submit2" class="btn btn-danger">삭제하기</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="submit2" class="btn btn-danger">삭제</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </form>
         </div>
@@ -169,7 +179,7 @@
                     <input type="hidden" name="uno" th:value="${uno}">
                     <!-- 제목 입력 -->
                     <div class="mb-3">
-                        <label for="title" class="form-label">Plan Name</label>
+                        <label for="title" class="form-label">플랜 이름</label>
                         <input type="text" class="form-control" id="title1" name="title" required>
                     </div>
                     <!-- 사진 첨부 -->
@@ -180,21 +190,20 @@
                     </div>
                     <!-- 시작일과 종료일 선택 (달력) -->
                     <div class="mb-3">
-                        <label for="start" class="form-label">Start Date</label>
+                        <label for="start" class="form-label">시작일</label>
                         <input type="date" class="form-control" id="start" name="start" required>
                     </div>
                     <div class="mb-3">
-                        <label for="end" class="form-label">End Date</label>
+                        <label for="end" class="form-label">종료일</label>
                         <input type="date" class="form-control" id="end" name="end" required>
                     </div>
-                    <button type="submit" id="submit1" class="btn btn-primary">Add Plan</button>
+                    <button type="submit" id="submit1" class="btn btn-primary" data-bs-toggle="tooltip" title="⚠️플랜 대표사진은 수정이 불가합니다" >생성</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!--플랜 생성 모달-->
 
@@ -211,22 +220,22 @@
                 <form id="modifyPlanForm">
                     <input type="hidden" id="modPlno" name="plno" value="$">
                     <div class="mb-3">
-                        <label for="modTitle" class="form-label">Plan Name</label>
+                        <label for="modTitle" class="form-label">플랜 이름</label>
                         <input type="text" class="form-control" id="modTitle" name="title" placeholder="" required>
                     </div>
                     <div class="mb-3">
-                        <label for="modStart" class="form-label">Start Date</label>
+                        <label for="modStart" class="form-label">시작일</label>
                         <input type="date" class="form-control" id="modStart" name="start" required>
                     </div>
                     <div class="mb-3">
-                        <label for="modEnd" class="form-label">End Date</label>
+                        <label for="modEnd" class="form-label">종료일</label>
                         <input type="date" class="form-control" id="modEnd" name="end" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="modifySaveButton">Save</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="modifySaveButton">수정</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
             </div>
         </div>
     </div>
@@ -240,7 +249,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">삭제 확인</h5>
-                    <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -255,25 +264,6 @@
 </div>
 <!--플랜삭제 확인 모달-->
 
-
-<!--작업완료 모달-->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">작업 완료</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="successMessage">작업이 성공적으로 완료되었습니다.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--작업완료 모달-->
 
 <script src="/js/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
