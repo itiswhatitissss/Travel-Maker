@@ -8,11 +8,11 @@ li, li a{
     text-decoration: none;
     list-style-type: none;
     font-weight: bold;
-    color: darkslategrey;
+    color: #fff;
 }
 
 .jb-division-line {
-    border-top: 1px solid darkslategrey;
+    border-top: 1px solid #fff;
     margin: 30px 0px;
 }
 
@@ -20,18 +20,19 @@ li, li a{
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 1600px;
     height: 700px;
     margin-top: 20px;
     /*background: url("../images/background2.png") no-repeat;*/
     background-position: center;
-    /*background-size:cover ;*/
+    /*background-size: cover;*/
     backdrop-filter: blur(50px);
     border-radius: 20px;
-    /*border: 1px solid #f72d7a;*/
-    box-shadow: 0px 0px 30px #000;
+    border: 7px solid #f72d7a; /* 테두리의 두께와 색상을 설정합니다. */
+    /*box-shadow: 0px 0px 30px #fff;*/
     overflow: hidden;
+    color: #f72d7a;
 }
 
 /* 스플릿 레이아웃 스타일 */
@@ -41,28 +42,31 @@ li, li a{
 }
 .split-left {
     width: 30%;
-    /*background-color: #f1f1f1;*/
+    background-color: #f72d7a;
     padding: 20px;
     overflow-y: auto; /* 스크롤 가능하도록 설정 */
+    color:#fff;
 }
 .split-right {
     width: 70%;
-    /*background-color: #fff;*/
+    background-color: #141744;
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden; /* 스크롤 숨김 */
+    color:#fff;
+
 }
 
 #partyleft a {
-    box-shadow: inset 0 0 0 0 darkslategrey;
-    color: darkslategrey;
+    box-shadow: inset 0 0 0 0 #fff;
+    color: #fff;
     margin: 0 -.25rem;
     padding: 0 .25rem;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
 #partyleft a:hover {
-    box-shadow: inset 500px 0 0 0 darkslategrey;
+    box-shadow: inset 500px 0 0 0 #f72d7a;
     color: white;
 }
 
@@ -93,18 +97,18 @@ li, li a{
     font-size: 20px;
     text-decoration: none;
     font-weight: bold;
-    color: darkslategrey;
+    color: #fff;
 
-    box-shadow: inset 0 0 0 0 darkslategrey;
-    color: darkslategrey;
+    box-shadow: inset 0 0 0 0 #f72d7a;
+    color: #fff;
     margin: 0 -.25rem;
     padding: 0 .25rem;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
 #info a:hover {
-    box-shadow: inset 500px 0 0 0 darkslategrey;
-    color: white;
+    box-shadow: inset 500px 0 0 0 #f72d7a;
+    color: #fff;
 }
 
 #buttondiv {
@@ -148,5 +152,5 @@ li, li a{
 #prev:hover,
 #next:hover {
     background-color: rgba(255, 255, 255, 0.8); /* 호버 시 배경 색상 변경 */
-    color: darkturquoise; /* 아이콘 색상 변경 */
+    color: #f72d7a; /* 아이콘 색상 변경 */
 }
