@@ -127,11 +127,11 @@ li, li a{
 }
 
 #prev {
-    left: 10px;
+    left: 550px;
 }
 
 #next {
-    right: 10px;
+    right: 100px;
 }
 
 /* 화살표 아이콘 추가 */
