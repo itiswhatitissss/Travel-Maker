@@ -261,7 +261,7 @@ public class MainController {
 //
 //    }
     @PostMapping("/partyModify")
-    public String partyModify(@RequestParam("pno") Long pno, @RequestParam("uno") Long uno, @RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends, @RequestParam(name = "title") String title){
+    public ResponseEntity<String> partyModify(@RequestParam("pno") Long pno, @RequestParam("uno") Long uno, @RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends, @RequestParam(name = "title") String title){
 
         mainService.modifyParty(title,pno);
 
@@ -271,21 +271,33 @@ public class MainController {
                 mainService.userPartySave(pno,fno);
             }
         }
-        return "redirect:list?pno="+pno+"&uno="+uno;
+        String result = "success"; // 성공 시 "success", 실패 시 다른 값을 설정
+
+        return ResponseEntity.ok(result);
     }
     @GetMapping("/getPartyModify")
     public ResponseEntity<List<Map<String, Object>>> patryModifyView(@RequestParam("pno") Long pno, @RequestParam("uno") Long uno){
         List<Map<String, Object>> partylist = mainService.getPartymodifyView(pno);
         List<Map<String, Object>> friendlist = friendService.friendList(uno);
 
-        for(int i=0; i<partylist.size(); i++){
-            for (int j=0; j<friendlist.size(); j++){
-                if(partylist.get(i).get("uno")==friendlist.get(j).get("fno")){
-                    friendlist.remove(j);
+        Iterator<Map<String, Object>> partyIterator = partylist.iterator();
+        while (partyIterator.hasNext()) {
+            Map<String, Object> party = partyIterator.next();
+            String partyMember = (String) party.get("member");
+
+            Iterator<Map<String, Object>> friendIterator = friendlist.iterator();
+            while (friendIterator.hasNext()) {
+                Map<String, Object> friend = friendIterator.next();
+                String friendName = (String) friend.get("name");
+
+                if (partyMember != null && partyMember.equals(friendName)) {
+                    friendIterator.remove();
                 }
             }
         }
         partylist.addAll(friendlist);
+
+        log.info("partylist.get(1).get('member')  : "+partylist.get(0).get("member"));
 
         return ResponseEntity.ok(partylist);
     }

@@ -65,7 +65,7 @@
     </select>
 
     <select id="partymodifyView" resultType="map">
-        select p.party_name as title, up.uno, p.pno from Party p join user_party up on p.pno=up.pno where p.pno=#{pno}
+        select p.party_name as title, u.name as member, p.pno from Party p join user_party up on p.pno=up.pno join Users u on u.uno=up.uno where p.pno=#{pno}
     </select>
 
 </mapper>

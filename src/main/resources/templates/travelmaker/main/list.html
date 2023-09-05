@@ -44,7 +44,6 @@
     <!--왼쪽 끝(party)-->
 
 
-
     <!--오른쪽 시작(plan)-->
     <div class="split-right">
         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createPlanModal">
@@ -64,8 +63,12 @@
                                th:text="${plan.title}"></a>
                             <p th:text="${plan.start}"></p>
                             <p th:text="${plan.end}"></p>
-                            <button type="button" class="btn btn-outline-warning modify-plan" th:data-plno="${plan.plno}">수정</button>
-                            <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}" th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제</button>
+                            <button type="button" class="btn btn-outline-warning modify-plan"
+                                    th:data-plno="${plan.plno}">수정
+                            </button>
+                            <button class="btn btn-outline-info" type="button" th:data-plno="${plan.plno}"
+                                    th:onclick="showDeleteConfirmationModal(this.getAttribute('data-plno'))">삭제
+                            </button>
                         </div>
                     </div>
                 </th:block>
@@ -222,10 +225,10 @@
                         <label for="modEnd" class="form-label">End Date</label>
                         <input type="date" class="form-control" id="modEnd" name="end" required>
                     </div>
-<!--                    <div class="mb-3">-->
-<!--                        <label for="modFilepath" class="form-label">Filepath</label>-->
-<!--                        <input type="file" class="form-control" id="modFilepath" name="filepath" accept="image/*" onchange="setThumbnail(event);" required>-->
-<!--                    </div>-->
+                    <!--                    <div class="mb-3">-->
+                    <!--                        <label for="modFilepath" class="form-label">Filepath</label>-->
+                    <!--                        <input type="file" class="form-control" id="modFilepath" name="filepath" accept="image/*" onchange="setThumbnail(event);" required>-->
+                    <!--                    </div>-->
                 </form>
             </div>
             <div class="modal-footer">
@@ -290,58 +293,48 @@
             </div>
             <div class="modal-body">
                 <!-- 수정 폼 -->
-                <form id="modifyPartyForm">
+                <form id="modifyPartyForm" >
                     <input type="hidden" id="modiPno" name="pno" value="">
                     <input type="hidden" id="modiUno" name="uno" value="">
                     <div class="mb-3">
-                        <label for="modTitle" class="form-label">Plan Name</label>
+                        <label for="modiTitle" class="form-label">Party Name</label>
                         <input type="text" class="form-control" id="modiTitle" name="title" placeholder="" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="modStart" class="form-label">파티 참가 목록</label>
-                        <input type="date" class="form-control" id="modStart" name="start" required>
-                        <ul th:each="${}">
-                            <li>
-
-                            </li>
-                        </ul>
+                    <div >
+                        <label class="form-label">파티 멤버</label>
+                        <ul class="partyMemberList"></ul>
                     </div>
                     <div class="mb-3">
-                        <label for="modEnd" class="form-label">End Date</label>
-                        <input type="date" class="form-control" id="modEnd" name="end" required>
+                        <label class="form-label">친구목록</label>
+                        <div class="partyFriendList"></div>
                     </div>
-                    <!--                    <div class="mb-3">-->
-                    <!--                        <label for="modFilepath" class="form-label">Filepath</label>-->
-                    <!--                        <input type="file" class="form-control" id="modFilepath" name="filepath" accept="image/*" onchange="setThumbnail(event);" required>-->
-                    <!--                    </div>-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="modifyPartySaveButton">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="modifySaveButton">Save</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
-<!--파티수정 모달-->
+    <!--파티수정 모달-->
 
 
-
-<script src="/js/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const startInput = document.getElementById('start');
         const endInput = document.getElementById('end');
 
-        startInput.addEventListener('change', function() {
+        startInput.addEventListener('change', function () {
             const selectedDate = startInput.value;
             const localDate = new Date(selectedDate);
             const formattedDate = localDate.toISOString().substring(0, 10); // YYYY-MM-DD
             endInput.min = formattedDate; // Set the minimum value for endInput
         });
     });
+
 
     //plan 삭제 by AJAX
     var planToDelete = null;
@@ -389,43 +382,43 @@
 
     var uno = document.getElementById("autoCompleteUno").value;
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#autoCompleteInput").autocomplete({
-            source: function(request, response) {
+            source: function (request, response) {
 
                 console.log("request", request)
                 console.log("response", response)
-                console.log("uno",uno)
+                console.log("uno", uno)
 
                 $.ajax({
                     url: "/travelmaker/main/autocomplete",
                     type: "POST",
                     dataType: "json",
                     data: {
-                        keyword: request.term,uno:uno
+                        keyword: request.term, uno: uno
                     },
-                    success: function(data) {
+                    success: function (data) {
                         response(data.resultList);
                     },
-                    error: function() {
+                    error: function () {
                         alert("검색 중 오류가 발생했습니다.");
                     }
                 });
             },
             minLength: 1
             , // 자동완성 시작을 위한 최소 입력 길이
-            select: function(event, ui) {
+            select: function (event, ui) {
                 var selectedPartyName = ui.item.value; //ui.item.value => partyname이 들어있음
-                console.log("selectedPartyname",selectedPartyName)
+                console.log("selectedPartyname", selectedPartyName)
                 var encodedPartyName = encodeURIComponent(selectedPartyName);//인코딩
-                location.href = "/travelmaker/main/searchParty?partyName=" + encodedPartyName +"&uno="+uno;
+                location.href = "/travelmaker/main/searchParty?partyName=" + encodedPartyName + "&uno=" + uno;
             }
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // 수정 모달을 띄우기 위한 이벤트 처리
-        $(".modify-plan").on("click", function() {
+        $(".modify-plan").on("click", function () {
             var plno = $(this).data("plno");
             $.ajax({
                 url: "/travelmaker/main/getPlan", // 플랜 정보를 가져올 URL
@@ -433,27 +426,27 @@
                 data: {
                     plno: plno
                 },
-                success: function(plan) {
+                success: function (plan) {
                     $("#modPlno").val(plan.plno);
                     $("#modTitle").val(plan.title);
                     $("#modStart").val(plan.start);
                     $("#modEnd").val(plan.end);
                     $("#modifyPlanModal").modal("show");
                 },
-                error: function() {
+                error: function () {
                     alert("플랜 정보를 가져오는 중 오류가 발생했습니다.");
                 }
             });
         });
 
         // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
-        $("#modifySaveButton").on("click", function() {
+        $("#modifySaveButton").on("click", function () {
             var form = $("#modifyPlanForm");
             $.ajax({
                 url: "/travelmaker/main/modifyPlan", // 플랜 정보를 수정할 URL
                 type: "POST",
                 data: form.serialize(),
-                success: function(response) {
+                success: function (response) {
                     if (response === "success") {
                         $("#modifyPlanModal").modal("hide");
                         location.reload();
@@ -462,55 +455,113 @@
                         alert("플랜 수정 실패");
                     }
                 },
-                error: function() {
+                error: function () {
                     alert("플랜 정보 수정 중 오류가 발생했습니다.");
                 }
             });
         });
     });
-    $(document).ready(function() {
+
+    let partyMemberList = document.querySelector(".partyMemberList");
+    let partyFriendList = document.querySelector(".partyFriendList");
+
+    $(document).ready(function () {
         // 수정 모달을 띄우기 위한 이벤트 처리
-        $(".modify-pno").on("click", function() {
+        $(".modify-pno").on("click", function () {
+
+            let str = '';
+            let str1= '';
+
             var pno = $(this).data("pno");
-            console.log("pno======>",pno);
+            console.log("pno======>", pno);
             var uno = document.getElementById("autoCompleteUno").value;
-            console.log("uno======>",uno);
+            console.log("uno======>", uno);
+
             $.ajax({
-                url: "/travelmaker/main/getPartyModify", // 플랜 정보를 가져올 URL
+                url: "getPartyModify", // 플랜 정보를 가져올 URL
                 type: "GET",
                 data: {
                     pno: pno,
                     uno: uno
                 },
-                success: function(plan) {
-                    $("#modiPno").val(partylist.pno);
-                    $("#modTitle").val(partylist.title);
-                    $("#modStart").val(partylist.fno);
-                    $("#modifyPlanModal").modal("show");
+                success: function (partylist) {
+                    if (partylist.length > 0) {
+                        // partylist 배열에서 원하는 값들을 추출하여 사용
+                        for (var i = 0; i < partylist.length; i++) {
+                            var Party = partylist[i];
+                            if (Party.title !== undefined) {
+                                $("#modiTitle").val(Party.title);
+                                console.log("title=========>", Party.title);
+                            }
+                            if (Party.pno !== undefined) {
+                                $("#modiPno").val(Party.pno);
+                            }
+                            if (Party.fno !== undefined) {
+                                $("#modifno").val(Party.fno);
+                                str1 += '<input type="checkbox" name="selectedFriends" value="' + Party.fno + '" required>';
+                            }
+                            if (Party.name !== undefined) {
+                                $("#modiname").val(Party.name);
+                                console.log("Party.........NAME =========>", Party.name)
+                                str1 += '<h7>'+ Party.name +'</h7><br>';
+                            }
+                            if (Party.member !== undefined){
+                                $("#modiuser").val(Party.member);
+                                console.log("Party.............MEMBER ==============>", Party.member)
+                                str += '<li >' + Party.member + '</li>';
+                            }
+                            // if (Party.member !== undefined) {
+                            //     str += '<input type="text" class="form-control" value="' + Party.member + '" required>';
+                            // }
+
+                        }
+
+                        partyMemberList.innerHTML = str;
+                        partyFriendList.innerHTML = str1;
+
+                        $("#modifyPartyModal").modal("show");
+                    } else {
+                        alert("파티 정보가 없습니다.");
+                    }
                 },
-                error: function() {
-                    alert("플랜 정보를 가져오는 중 오류가 발생했습니다.");
+                error: function () {
+                    alert("파티 정보를 가져오는 중 오류가 발생했습니다.");
                 }
             });
         });
 
         // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
-        $("#modifySaveButton").on("click", function() {
-            var form = $("#modifyPlanForm");
+        $("#modifyPartySaveButton").on("click", function () {
+            var form = $("#modifyPartyForm");
+            var pno = $("#modiPno").val();
+            var uno = $("#modiUno").val();
+            var title = $("#modiTitle").val();
+            var fnoList = [];
+            console.log("title===============>",title)
+            $("input[name='selectedFriends']:checked").each(function () {
+                fnoList.push($(this).val());
+            });
+            console.log("fnolist===============>",fnoList)
             $.ajax({
-                url: "/travelmaker/main/modifyPlan", // 플랜 정보를 수정할 URL
+                url: "/partyModify", // 플랜 정보를 수정할 URL
                 type: "POST",
-                data: form.serialize(),
-                success: function(response) {
+                data: {
+                    pno: pno,
+                    uno: uno,
+                    title: title,
+                    fnoList: fnoList
+                },
+                success: function (response) {
+                    console.log("response==============>",response)
                     if (response === "success") {
-                        $("#modifyPlanModal").modal("hide");
+                        $("#modifyPartyModal").modal("hide");
                         location.reload();
                         $('#successModal').modal('show');
                     } else {
                         alert("플랜 수정 실패");
                     }
                 },
-                error: function() {
+                error: function () {
                     alert("플랜 정보 수정 중 오류가 발생했습니다.");
                 }
             });

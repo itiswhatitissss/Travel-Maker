@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -83,19 +84,33 @@ class MainServiceImplTest {
     }
     @Test
     public void getListPartyModify(){
-        Long pno =1L;
-        Long uno =1L;
+
+        Long pno = 2L;
+        Long uno = 1L;
         List<Map<String, Object>> partylist = mainService.getPartymodifyView(pno);
         List<Map<String, Object>> friendlist = friendService.friendList(uno);
 
-        for(int i=0; i<partylist.size(); i++){
-            for (int j=0; j<friendlist.size(); j++){
-                if(partylist.get(i).get("uno")==friendlist.get(j).get("fno")){
-                    friendlist.remove(j);
+        Iterator<Map<String, Object>> partyIterator = partylist.iterator();
+        while (partyIterator.hasNext()) {
+            Map<String, Object> party = partyIterator.next();
+            String partyMember = (String) party.get("member");
+
+            Iterator<Map<String, Object>> friendIterator = friendlist.iterator();
+            while (friendIterator.hasNext()) {
+                Map<String, Object> friend = friendIterator.next();
+                String friendName = (String) friend.get("name");
+
+                if (partyMember != null && partyMember.equals(friendName)) {
+                    friendIterator.remove();
+                    log.info("친구 리스트에서 삭제: " + friendName);
                 }
             }
         }
+
         partylist.addAll(friendlist);
+        log.info("리스트는: " + partylist);
+        log.info("친구 리스트는: " + friendlist);
+
     }
 
 }
