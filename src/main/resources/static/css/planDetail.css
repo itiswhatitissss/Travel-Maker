@@ -93,8 +93,8 @@
 }
 
 .wrap2 a.button2:hover {
-    color: #fff;
-    box-shadow: #f72d7a 0 0px 0px 40px inset;
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
 }
 
 #map-section {
@@ -107,41 +107,18 @@
 
 #gallery-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-    overflow-x: auto; /* 세로 스크롤 허용 */
+    /*overflow-y: scroll;*/
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
-#gallerydiv {
-    display: inline-block; /* 이미지를 가로로 나열 */
-    margin-right: 10px; /* 이미지 사이 간격 설정 */
-}
-
-/* gallery */
-#gallerydiv img {
-    width: 200px;
-    height: 200px;
-    transform: scale(1.0); /* 이미지 확대 */
-    transition: transform .5s; /* 시간 설정 */
-}
-
-/* 이미지 컨테이너 스타일 */
 .image-container {
-    flex: 0 0 25%; /* 5개의 열을 만듭니다. */
-    margin: 10px; /* 이미지 간격 설정 */
-    position: relative;
+    margin-right: 20px; /* 이미지 간격 조절 */
 }
 
-/* 이미지 확대 효과 스타일 */
 .image-zoom {
-    transition: transform 0.3s ease;
-}
-
-.image-container:hover .image-zoom {
-    transform: scale(50); /* 이미지를 1.2배 확대 */
-}
-
-#gallerydiv img:hover {
-    transform: scale(1.5);   /* 이미지 확대 */
-    transition: transform .5s;  /* 시간 설정 */
+    max-width: 300px; /* 이미지 최대 너비 조절 */
+    height: auto;
+    width: 300px;
+    height: 300px;
 }
