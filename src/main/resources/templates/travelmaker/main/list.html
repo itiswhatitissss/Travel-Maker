@@ -42,6 +42,9 @@
                     <div id="partyleft">
                         <a th:href="@{'/travelmaker/main/list?pno=' + ${party.pno} + '&uno=' + ${uno}}"
                            th:text="${party.party_name}"></a>
+                        <button type="button" class="btn btn-outline-secondary modify-pno" th:data-pno="${party.pno}">
+                            수정
+                        </button>
                     </div>
                     <div class="jb-division-line"></div>
                 </li>
@@ -197,7 +200,9 @@
                         <label for="end" class="form-label">종료일</label>
                         <input type="date" class="form-control" id="end" name="end" required>
                     </div>
-                    <button type="submit" id="submit1" class="btn btn-primary" data-bs-toggle="tooltip" title="⚠️플랜 대표사진은 수정이 불가합니다" >생성</button>
+                    <button type="submit" id="submit1" class="btn btn-primary" data-bs-toggle="tooltip"
+                            title="⚠️플랜 대표사진은 수정이 불가합니다">생성
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </form>
             </div>
@@ -264,9 +269,43 @@
 </div>
 <!--플랜삭제 확인 모달-->
 
+<!--파티수정 모달-->
+<div class="modal fade" id="modifyPartyModal" tabindex="-1" aria-labelledby="modifyPartyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modifyPartyModalLabel">파티 수정</h5>
+            </div>
+            <div class="modal-body">
+                <!-- 수정 폼 -->
+                <form id="modifyPartyForm">
+                    <input type="hidden" id="modiPno" name="pno" value="">
+                    <input type="hidden" id="modiUno" name="uno" value="">
+                    <div class="mb-3">
+                        <label for="modiTitle" class="form-label">Party Name</label>
+                        <input type="text" class="form-control" id="modiTitle" name="title" placeholder="" required>
+                    </div>
+                    <div>
+                        <label class="form-label">파티 멤버</label>
+                        <ul class="partyMemberList"></ul>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">친구목록</label>
+                        <div class="partyFriendList"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="modifyPartySaveButton">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--파티수정 모달-->
 
-<script src="/js/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
