@@ -32,14 +32,6 @@ class TestRepositoryTest {
     @Autowired
     private GalleryRepository galleryRepository;
     @Autowired
-    private SchedulerRepositroy schedulerRepositroy;
-    @Autowired
-    private ScheudlerDetailRepository scheudlerDetailRepository;
-    @Autowired
-    private VoteRepository voteRepository;
-    @Autowired
-    private VoteOptionRepository voteOptionRepository;
-    @Autowired
     private MybatisMapper mybatisMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -101,18 +93,6 @@ class TestRepositoryTest {
         Gallery gallery = Gallery.builder().filepath("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg").plnoByGallery(planRepository.findById(1L).get()).build();
         galleryRepository.save(gallery); //"해병대전우회" + "강원도삼척여행" 전우회단체사진 게시
 
-        Scheduler scheduler = Scheduler.builder().plnoByScheduler(planRepository.findById(1L).get()).build();
-        schedulerRepositroy.save(scheduler); //해병대전우회 첫여행에 관한 스케줄러 생성
-
-        SchedulerDetail schedulerDetail = SchedulerDetail.builder().snoBySchedulerDetail(scheduler).content("재밌게 놀자 !").build();
-        scheudlerDetailRepository.save(schedulerDetail); //해병대전우회 첫여행 스케줄러 디테일 생성
-
-        Vote vote = Vote.builder().plnoByVote(planRepository.findById(1L).get()).vTitle("술 몇 병 살래").vCheck(1).vComplete(1).vCount(3).build();
-        voteRepository.save(vote); //해병대전우회 첫여행 투표시스템 사용
-
-        VoteOption voteOption = VoteOption.builder().vnoByVoteOption(vote).unoByVoteOption(user).voOption("띠용").build();
-        voteOptionRepository.save(voteOption);
-
         Users user1 = Users.builder().id("harim").name("이하림").password(passwordEncoder.encode("1234")).email("naver").build();
         userRepository.save(user1); //이하림 회원가입
 
@@ -137,24 +117,12 @@ class TestRepositoryTest {
         Gallery gallery1 = Gallery.builder().filepath("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg").plnoByGallery(planRepository.findById(2L).get()).build();
         galleryRepository.save(gallery1); //"308호 모임" + "인계동 정모" 단체사진 게시
 
-        Scheduler scheduler1 = Scheduler.builder().plnoByScheduler(planRepository.findById(2L).get()).build();
-        schedulerRepositroy.save(scheduler1); //"308호 모임" 첫 정모에 관한 스케줄러 생성
-
-        SchedulerDetail schedulerDetail1 = SchedulerDetail.builder().snoBySchedulerDetail(scheduler1).content("먹고죽어").build();
-        scheudlerDetailRepository.save(schedulerDetail1); //"308호 모임" 첫 정모에 관한 스케줄러 디테일 생성
-
 
         PartyDetail partyDetail2 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(3L).get()).build();
         partyDetailRepository.save(partyDetail2); //"308호 모임" 파티에 "308호 여름휴가" 플랜 생성
 
         Gallery gallery2 = Gallery.builder().filepath("https://www.ilyosisa.co.kr/data/photos/201403/60777_956_2743.jpg").plnoByGallery(planRepository.findById(3L).get()).build();
         galleryRepository.save(gallery2); //"308호 모임" + "여름휴가" 단체사진 게시
-
-        Scheduler scheduler2 = Scheduler.builder().plnoByScheduler(planRepository.findById(3L).get()).build();
-        schedulerRepositroy.save(scheduler2); //"308호 모임" "여름휴가"에 관한 스케줄러 생성
-
-        SchedulerDetail schedulerDetail2 = SchedulerDetail.builder().snoBySchedulerDetail(scheduler2).content("행복한 여행 보내자").build();
-        scheudlerDetailRepository.save(schedulerDetail2); //"308호 모임" 여름휴가에 관한 스케줄러 디테일 생성
     }
     @Test
     public void testAttend(){
