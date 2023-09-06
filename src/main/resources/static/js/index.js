@@ -112,6 +112,7 @@ $(document).ready(function() {
     });
 });
 
+
 $(document).ready(function() {
     // 수정 모달을 띄우기 위한 이벤트 처리
     $(".modify-plan").on("click", function() {
