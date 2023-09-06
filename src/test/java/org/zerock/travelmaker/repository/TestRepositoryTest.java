@@ -103,22 +103,22 @@ class TestRepositoryTest {
         userRepository.save(user3); //노에은 회원가입
 
         Users user4 = Users.builder().id("sam").name("박종진").password(passwordEncoder.encode("1234")).email("naver").build();
-        userRepository.save(user4); //노에은 회원가입
+        userRepository.save(user4); //종진 회원가입
 
         Users user5 = Users.builder().id("soso").name("김소휘").password(passwordEncoder.encode("1234")).email("naver").build();
-        userRepository.save(user5); //노에은 회원가입
+        userRepository.save(user5); //소휘 회원가입
 
         Users user6 = Users.builder().id("jimin").name("김지민").password(passwordEncoder.encode("1234")).email("naver").build();
-        userRepository.save(user6); //노에은 회원가입
+        userRepository.save(user6); //지민 회원가입
 
         Users user7 = Users.builder().id("kium").name("김기은").password(passwordEncoder.encode("1234")).email("naver").build();
-        userRepository.save(user7); //노에은 회원가입
+        userRepository.save(user7); //기은 회원가입
         Users user8 = Users.builder().id("leeseu").name("서연주").password(passwordEncoder.encode("1234")).email("naver").build();
-        userRepository.save(user8); //노에은 회원가입
+        userRepository.save(user8); //연주 회원가입
         Users user9 = Users.builder().id("michu").name("추명선").password(passwordEncoder.encode("1234")).email("naver").build();
-        userRepository.save(user9); //노에은 회원가입
+        userRepository.save(user9); //명선 회원가입
         Users user10 = Users.builder().id("yuen").name("강연재").password(passwordEncoder.encode("1234")).email("naver").build();
-        userRepository.save(user10); //노에은 회원가입
+        userRepository.save(user10); //연재 회원가입
 
         Party party2 = Party.builder().partyName("308호 모임").QR("QRcode").build();
         partyRepository.save(party2); //"308호 모임" 파티 생성
@@ -143,22 +143,22 @@ class TestRepositoryTest {
 
 
         UserParty userParty3 = UserParty.builder().unoByUserParty(user4).pnoByUserParty(partyRepository.findById(2L).get()).build();
-        userPartyRepository.save(userParty3); //이성진이 "308호 모임" 파티(pno=2) 참가
+        userPartyRepository.save(userParty3); //종진이 "308호 모임" 파티(pno=2) 참가
 
         UserParty userParty4 = UserParty.builder().unoByUserParty(user5).pnoByUserParty(partyRepository.findById(2L).get()).build();
-        userPartyRepository.save(userParty4); //이성진이 "308호 모임" 파티(pno=2) 참가
+        userPartyRepository.save(userParty4); //소휘 "308호 모임" 파티(pno=2) 참가
 
         UserParty userParty5 = UserParty.builder().unoByUserParty(user6).pnoByUserParty(partyRepository.findById(2L).get()).build();
-        userPartyRepository.save(userParty5); //이성진이 "308호 모임" 파티(pno=2) 참가
+        userPartyRepository.save(userParty5); //지민 "308호 모임" 파티(pno=2) 참가
 
         UserParty userParty6 = UserParty.builder().unoByUserParty(user7).pnoByUserParty(partyRepository.findById(2L).get()).build();
-        userPartyRepository.save(userParty6); //이성진이 "308호 모임" 파티(pno=2) 참가
+        userPartyRepository.save(userParty6); //기은 "308호 모임" 파티(pno=2) 참가
 
         UserParty userParty7 = UserParty.builder().unoByUserParty(user9).pnoByUserParty(partyRepository.findById(1L).get()).build();
-        userPartyRepository.save(userParty7); //이성진이 "308호 모임" 파티(pno=2) 참가
+        userPartyRepository.save(userParty7); //명선 "308호 모임" 파티(pno=2) 참가
 
-        UserParty userParty8 = UserParty.builder().unoByUserParty(user7).pnoByUserParty(partyRepository.findById(1L).get()).build();
-        userPartyRepository.save(userParty8); //이성진이 "308호 모임" 파티(pno=2)
+        UserParty userParty8 = UserParty.builder().unoByUserParty(user10).pnoByUserParty(partyRepository.findById(1L).get()).build();
+        userPartyRepository.save(userParty8); //연재 "308호 모임" 파티(pno=2)
 
         UserParty userParty9 = UserParty.builder().unoByUserParty(user4).pnoByUserParty(partyRepository.findById(1L).get()).build();
         userPartyRepository.save(userParty9); //이성진이 "308호 모임" 파티(pno=2) 참가
@@ -167,11 +167,11 @@ class TestRepositoryTest {
         partyDetailRepository.save(partyDetail1); //"308호 모임" 파티에 "308호 인계동 정모" 플랜 생성
 
         Attend attend = Attend.builder().Attender(1L).unoByAttend(user4).plnoByAttend(planRepository.findById(2L).get()).build();
-        attendRepository.save(attend);
+        attendRepository.save(attend);//종진이가 308호 인계동 정모에 참가
         Attend attend1 = Attend.builder().Attender(1L).unoByAttend(user5).plnoByAttend(planRepository.findById(2L).get()).build();
-        attendRepository.save(attend1);
+        attendRepository.save(attend1);//소휘가 308호 인계동 정모에 참가
         Attend attend2 = Attend.builder().Attender(1L).unoByAttend(user9).plnoByAttend(planRepository.findById(2L).get()).build();
-        attendRepository.save(attend2);
+        attendRepository.save(attend2);//명선님이 308호 인계동 정모에 참가
 
         Gallery gallery1 = Gallery.builder().filepath("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg").plnoByGallery(planRepository.findById(2L).get()).build();
         galleryRepository.save(gallery1); //"308호 모임" + "인계동 정모" 단체사진 게시
