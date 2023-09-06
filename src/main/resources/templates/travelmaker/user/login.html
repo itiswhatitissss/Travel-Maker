@@ -93,10 +93,10 @@
                 </div>
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-envelope'></i></span>
-                    <input type="email" class="form-control" id="username" name="email" required>
+                    <input type="email" id="username" name="email" required>
                     <label >이메일</label>
+                    <input type="button" class="btn" id="mail-Check-btn" value="메일인증" width="300px" height="200px" style="text-align: right">
                 </div>
-                <input type="button" class="btn btn-primary" id="mail-Check-btn" value="메일인증">
                 <div class="input-box">
                     <input class="form-control mail-check-input" placeholder="인증번호" disabled="disabled" maxlength="7" onkeyup="checkAuthNumFn()">
                 </div>
@@ -107,7 +107,6 @@
                 </div>
             </form>
         </div>
-
         <!-- Register Form end -->
     </div>
 </div>
