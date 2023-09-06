@@ -47,15 +47,11 @@ public class Users{
     @OneToMany(mappedBy = "unoByUserParty")
     private List<UserParty> userParties = new ArrayList<>();
 
-    @OneToMany(mappedBy = "unoByVoteOption")
-    private List<VoteOption> voteOptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "unoByAttend")
     private List<Attend> unoAttend = new ArrayList<>();
 
-    public void changePassword(String password){
-        this.password = password;
-    }
+    public void changePassword(String password){this.password = password;}
 
     public void changeEmail(String email){
         this.email = email;

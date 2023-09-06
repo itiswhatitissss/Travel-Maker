@@ -26,8 +26,6 @@ public class MainServiceImpl implements MainService{
     private final PartyDetailRepository partyDetailRepository;
     private final PlanRepository planRepository;
     private final GalleryRepository galleryRepository;
-    private final SchedulerRepositroy schedulerRepositroy;
-    private final VoteRepository voteRepository;
     private final PartyRepository partyRepository;
     private final UserPartyRepository userPartyRepository;
     private final UserRepository userRepository;
@@ -73,10 +71,6 @@ public class MainServiceImpl implements MainService{
         //갤러리,스케줄러,보트 plno값만 던져주고 나머지 null값으로 생성
         Gallery gallery = Gallery.builder().plnoByGallery(byplno).build();
         galleryRepository.save(gallery);
-        Scheduler scheduler = Scheduler.builder().plnoByScheduler(byplno).build();
-        schedulerRepositroy.save(scheduler);
-        Vote vote = Vote.builder().plnoByVote(byplno).build();
-        voteRepository.save(vote);
     }
 
     @Override
