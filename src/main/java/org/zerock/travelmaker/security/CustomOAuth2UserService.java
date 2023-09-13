@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.zerock.travelmaker.domain.MemberRole;
 import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.repository.UserRepository;
 import org.zerock.travelmaker.security.dto.MemberSecurityDTO;
@@ -70,20 +71,29 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         Optional<Users> result = userRepository.findByEmail(email);
 
+        String name = (String) params.get("name");
+
+        if(name == null){
+            name = (String) params.get("nickname");
+        }
+
         //데이터베이스에 해당 이메일을 사용자가 없다면
         if(result.isEmpty()){
-            //회원 추가 -- mid는 이메일 주소/ 패스워드는 1111
+            //회원 추가 -- id는 이메일 주소/ 패스워드는 1111
             Users users = Users.builder()
                     .id(email)
                     .password(passwordEncoder.encode("1111"))
                     .email(email)
+                    .name(name)
                     .social(true)
                     .build();
+            users.addRole(MemberRole.USER);
             userRepository.save(users);
 
             //MemberSecurityDTO 구성 및 반환
             MemberSecurityDTO memberSecurityDTO =
-                    new MemberSecurityDTO(email, "1111",email,false, true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+                    new MemberSecurityDTO(email, "1111",email, name, false, true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+
             memberSecurityDTO.setProps(params);
 
             return memberSecurityDTO;
@@ -94,6 +104,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                             users.getId(),
                             users.getPassword(),
                             users.getEmail(),
+                            users.getName(),
                             users.isDel(),
                             users.isSocial(),
                             users.getRoleSet()
@@ -111,13 +122,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         log.info("KAKAO-----------------------------------------");
 
         Object value = paramMap.get("kakao_account");
-
         log.info(value);
 
         LinkedHashMap accountMap = (LinkedHashMap) value;
 
         String email = (String)accountMap.get("email");
-
         log.info("email..." + email);
 
         return email;

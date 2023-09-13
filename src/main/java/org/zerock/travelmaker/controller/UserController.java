@@ -31,11 +31,14 @@ public class UserController {
     private final UserService userService;
     private final MailSendService mailSendService;
 
-    //    @PreAuthorize("permitAll()")
     @GetMapping("/login")
     public void loginGET(String error, String logout){
         log.info("login get........");
-        log.info("logout : "+logout);
+        log.info("logout : "+ logout);
+
+        if(logout != null){
+            log.info("user logout.......................");
+        }
     }
 
     @GetMapping("/loginSuccess")

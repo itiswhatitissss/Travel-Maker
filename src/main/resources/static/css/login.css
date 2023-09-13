@@ -217,7 +217,7 @@ body{
 .remember-password a:hover{
     text-decoration: underline;
 }
-.btn{
+.btn {
     background: #fff;
     width: 100%;
     height: 45px;
@@ -254,6 +254,9 @@ input[name="username"] {
 input[name="password"] {
     color: #f72d7a; /* 텍스트 색상 설정 */
 }
+input[name="password2"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
 input[name="id"] {
     color: #f72d7a; /* 텍스트 색상 설정 */
 }
@@ -268,5 +271,8 @@ input[name="mail-check-btn"] {
     color: #f72d7a; /* 텍스트 색상 설정 */
 }
 input[name="confirmNumber"] {
+    color: #f72d7a; /* 텍스트 색상 설정 */
+}
+input[name="code"] {
     color: #f72d7a; /* 텍스트 색상 설정 */
 }

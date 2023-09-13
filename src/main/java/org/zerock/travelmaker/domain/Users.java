@@ -24,12 +24,15 @@ public class Users{
     @Column(unique = true)
     private String id;
 
+    @Column(nullable = false)
     private String password;
+
     private String name;
+
+    @Column(unique = true)
     private String email;
+
     private String code;
-
-
     private boolean del;
     private boolean social;
 
