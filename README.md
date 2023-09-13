@@ -66,7 +66,14 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 <br>
 
 ## ⌨️ 사용방법
-TravelMakerApplication 실행
+
+TravelMakerApplication 실행 전
+<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/ccba53f4-004f-4bdc-8c0b-0be017acda50">
+Port번호와 DB설정은 다음 사진을 참고!
+<br>
+
+
+
 
 
 
