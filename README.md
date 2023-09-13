@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/0b79fc9f-2ef5-4712-bd23-784ce9fdfbb2")
+<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/0b79fc9f-2ef5-4712-bd23-784ce9fdfbb2")>
 </div>
 
 <br>
@@ -28,7 +28,7 @@
  - 팀원1 : 채현우 - 로그인, 회원가입, ID찾기, PW찾기, 마이 페이지,메인 페이지, 통합 및 형상관리, PPT제작, 발표
  - 팀원2 : 이종원 - 메인 페이지, 메인 CSS
 
-<div align=center>
+<div align=left>
 	<h3>📚 Tech Stack 📚</h3>
 	<p>✨ Platforms & Languages ✨</p>
 </div>
