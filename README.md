@@ -1,5 +1,7 @@
 <div align=center>
-	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Travel%20Maker!&fontSize=90" />	
+	<h2  background-color: #f72d7a;
+    color: #fff;
+    font-size: 200px;>TraveMaker.</h2>
 </div>
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
