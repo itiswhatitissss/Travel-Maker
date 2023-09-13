@@ -63,7 +63,7 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 <br>
 
 ## ⌨️ 사용방법
-
+TravelMakerApplication 실행
 
 
 
