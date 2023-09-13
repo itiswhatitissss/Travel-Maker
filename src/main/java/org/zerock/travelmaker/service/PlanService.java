@@ -1,20 +1,17 @@
 package org.zerock.travelmaker.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.travelmaker.domain.Party;
 import org.zerock.travelmaker.domain.PartyDetail;
 import org.zerock.travelmaker.domain.Plan;
-import org.zerock.travelmaker.domain.Scheduler;
 import org.zerock.travelmaker.mapper.MybatisMapper;
 import org.zerock.travelmaker.repository.PartyDetailRepository;
 import org.zerock.travelmaker.repository.PartyRepository;
 import org.zerock.travelmaker.repository.PlanRepository;
 
 import java.io.File;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

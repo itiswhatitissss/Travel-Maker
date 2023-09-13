@@ -14,14 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zerock.travelmaker.domain.*;
 import org.zerock.travelmaker.dto.GalleryDTO;
 import org.zerock.travelmaker.dto.MarkerDTO;
-import org.zerock.travelmaker.dto.SchedulerDetailDTO;
 import org.zerock.travelmaker.repository.MarkerRepository;
 import org.zerock.travelmaker.service.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

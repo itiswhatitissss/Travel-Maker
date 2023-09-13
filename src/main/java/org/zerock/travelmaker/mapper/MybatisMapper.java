@@ -29,4 +29,6 @@ public interface MybatisMapper {
     public List<Map<String,Object>> selectUserList(Long uno);
     public Long searchPartyOne(String partyname);
     public List<GalleryDTO> plnoByGallery(Long plno);
+    List<Map<String,Object>> partymodifyView(Long pno);
+
 }

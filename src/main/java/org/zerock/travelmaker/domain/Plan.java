@@ -44,12 +44,6 @@ public class Plan{
     @OneToMany(mappedBy = "plnoByGallery", cascade = CascadeType.ALL)
     private List<Gallery> galleries = new ArrayList<>();
 
-    @OneToOne(mappedBy = "plnoByScheduler", cascade = CascadeType.ALL)
-    private Scheduler scheduler;
-
-    @OneToOne(mappedBy = "plnoByVote",cascade = CascadeType.ALL)
-    private Vote vote;
-
     @OneToMany(mappedBy = "plnoByAttend",cascade = CascadeType.ALL)
     private List<Attend> plnoAttend = new ArrayList<>();
 

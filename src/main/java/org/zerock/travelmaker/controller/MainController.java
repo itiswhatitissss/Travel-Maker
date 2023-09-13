@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @Log4j2
@@ -230,26 +231,53 @@ public class MainController {
         return "redirect:list?pno="+pno+"&uno="+uno;
     }
 
-    @GetMapping("/calendar")
-    @ResponseBody
-    public void carlendarlist(Model model){
-        Long pno =1L;
+    @PostMapping("/partyModify")
+    public ResponseEntity<String> partyModify(@RequestParam("pno") Long pno,
+                                              @RequestParam(name = "fnoList") String fnoListString,
+                                              @RequestParam(name = "title") String title){
 
-        List<Map<String,Object>> planList =mainService.getPlan(pno);
-        model.addAttribute("planDTO",planList);
+        mainService.modifyParty(title,pno);
 
-        JSONObject jsonObj = new JSONObject();
-        JSONArray jsonArr = new JSONArray();
-        HashMap<String, Object> hash = new HashMap<String, Object>();
+        if(fnoListString.isEmpty()) {
+        }else {
+            List<Long> selectedFriends = Arrays.stream(fnoListString.split(","))
+                    .map(Long::parseLong)
+                    .collect(Collectors.toList());
 
-        for(int i=0; i < planList.size(); i++) {
-            hash.put("title", planList.get(i).get("title")); //제목
-            hash.put("start", planList.get(i).get("start")); //시작일자
-            hash.put("end", planList.get(i).get("end")); //종료일자
-
-            jsonObj = new JSONObject(hash); //중괄호 {key:value , key:value, key:value}
-            jsonArr.add(jsonObj); // 대괄호 안에 넣어주기[{key:value , key:value, key:value},{key:value , key:value, key:value}]
+            for (int i = 0; i < selectedFriends.size(); i++) {
+                Long fno = selectedFriends.get(i);
+                mainService.userPartySave(pno,fno);
+            }
         }
+        String result = "success"; // 성공 시 "success", 실패 시 다른 값을 설정
+
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/getPartyModify")
+    public ResponseEntity<List<Map<String, Object>>> patryModifyView(@RequestParam("pno") Long pno, @RequestParam("uno") Long uno){
+        List<Map<String, Object>> partylist = mainService.getPartymodifyView(pno);
+        List<Map<String, Object>> friendlist = friendService.friendList(uno);
+
+        Iterator<Map<String, Object>> partyIterator = partylist.iterator();
+        while (partyIterator.hasNext()) {
+            Map<String, Object> party = partyIterator.next();
+            String partyMember = (String) party.get("member");
+
+            Iterator<Map<String, Object>> friendIterator = friendlist.iterator();
+            while (friendIterator.hasNext()) {
+                Map<String, Object> friend = friendIterator.next();
+                String friendName = (String) friend.get("name");
+
+                if (partyMember != null && partyMember.equals(friendName)) {
+                    friendIterator.remove();
+                }
+            }
+        }
+        partylist.addAll(friendlist);
+
+        log.info("partylist.get(1).get('member')  : "+partylist.get(0).get("member"));
+
+        return ResponseEntity.ok(partylist);
     }
 
 }

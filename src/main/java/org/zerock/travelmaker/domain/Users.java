@@ -24,12 +24,15 @@ public class Users{
     @Column(unique = true)
     private String id;
 
+    @Column(nullable = false)
     private String password;
+
     private String name;
+
+    @Column(unique = true)
     private String email;
+
     private String code;
-
-
     private boolean del;
     private boolean social;
 
@@ -47,15 +50,11 @@ public class Users{
     @OneToMany(mappedBy = "unoByUserParty")
     private List<UserParty> userParties = new ArrayList<>();
 
-    @OneToMany(mappedBy = "unoByVoteOption")
-    private List<VoteOption> voteOptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "unoByAttend")
     private List<Attend> unoAttend = new ArrayList<>();
 
-    public void changePassword(String password){
-        this.password = password;
-    }
+    public void changePassword(String password){this.password = password;}
 
     public void changeEmail(String email){
         this.email = email;

@@ -37,4 +37,10 @@ public interface MainService {
 
     Long searchPartyOne(String partyname);
 
+    List<Map<String, Object>> getPartymodifyView(Long pno);
+
+    void userPartySave(Long pno, Long fno);
+
+    void modifyParty(String name, Long pno );
+
 }

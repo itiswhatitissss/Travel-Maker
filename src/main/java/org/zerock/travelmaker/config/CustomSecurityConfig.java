@@ -81,10 +81,9 @@ public class CustomSecurityConfig {
         return new Custom403Handler();
     }
 
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        log.info("------------web configure-------------------");
-//
-//        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-//    }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        // 정적 자원에 스프링 시큐리티 필터 규칙을 적용하지 않도록 설정
+        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
 }
