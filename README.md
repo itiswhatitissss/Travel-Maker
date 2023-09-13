@@ -1,6 +1,9 @@
 <div align="center">
-<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/0b79fc9f-2ef5-4712-bd23-784ce9fdfbb2")>
+<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/b616eabd-8a7b-44bf-b580-03f951c46d45")>
 </div>
+
+
+
 
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
