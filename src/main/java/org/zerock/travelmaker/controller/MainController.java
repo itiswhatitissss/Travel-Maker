@@ -106,7 +106,7 @@ public class MainController {
         selectedFriends.add(uno);
         mainService.PartyRegister(partyDTO,selectedFriends);
 
-        return "redirect:list?&uno="+uno;
+        return "redirect:list?&uno="+uno; //pno값 없을 때 400에러 버그 수정
     }
 
     @PostMapping("/planPopup")
