@@ -29,6 +29,7 @@
  - 팀원 : 노예은 -
 
 <br>
+***
 
 <div align=left>
 	<h3>📚 Tech Stack 📚</h3>
