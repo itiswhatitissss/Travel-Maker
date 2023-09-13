@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
 <header class="header">
     <nav class="navbar">
         <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="친구 추가 및 검색" data-bs-target="#friendModal">친구목록</a>
@@ -21,12 +20,25 @@
 <!-- 로고가 들어갈 곳       <img src="/images/logo.png" alt="logo" width="200" height="50">-->
     </nav>
 
-    <nav class="navbar" style="display: flex; justify-content: space-between; color: #fff;">
-        <a>
-            <span th:text="${username}" style="margin-left: auto;"></span> 님 안녕하세요!
-            &nbsp;&nbsp;&nbsp;&nbsp;
-        </a>
-        <a href="/travelmaker/user/logout">로그아웃</a>
+<!--    <nav class="navbar" style="display: flex; justify-content: space-between; color: #fff;">-->
+<!--        <a>-->
+<!--            <span th:text="${username}" style="margin-left: auto;"></span> 님 안녕하세요!-->
+<!--            &nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--        </a>-->
+<!--        <a href="/travelmaker/user/logout">로그아웃</a>-->
+<!--    </nav>-->
+
+    <nav class="navbar2" style="display: flex; justify-content: space-between; color: #fff;">
+        <div class="dropdown">
+            <a>
+                <span th:text="${username}" style="margin-left: auto;"></span> 님 안녕하세요!
+            </a>
+            <div class="dropdown-content">
+                <p><a href="/travelmaker/user/edit">회원수정</a></p>
+                <p><a href="/travelmaker/user/logout">로그아웃</a></p>
+                <p><a href="">회원탈퇴</a></p>
+            </div>
+        </div>
     </nav>
     <!-- 친구목록 모달 -->
     <div class="modal fade" id="friendModal" tabindex="-1" aria-labelledby="friendModalLabel" aria-hidden="true">

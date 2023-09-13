@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.UserDTO;
 import org.zerock.travelmaker.service.MailSendService;
 import org.zerock.travelmaker.service.UserService;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,4 +97,32 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(authNum);
     }
+
+    @GetMapping("/edit")
+    public void editGET(Principal principal, Model model) {
+        String username = principal.getName();
+        Users users = userService.findByUsername(username);
+
+        if(users != null){
+            model.addAttribute("name", users.getName());
+            model.addAttribute("email", users.getEmail());
+        }
+
+    }
+
+    @PostMapping("/edit")
+    public String editPOST(UserDTO userDTO, RedirectAttributes redirectAttributes) {
+
+        try {
+            userService.modifyInformation(userDTO);
+        } catch (UserService.IdExistException e){
+            redirectAttributes.addFlashAttribute("error", "회원가입 실패");
+            return "redirect:/travelmaker/user/edit";
+        }
+        redirectAttributes.addFlashAttribute("result", "success");
+
+        return "redirect:/travelmaker/user/logout";
+    }
+
+
 }

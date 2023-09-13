@@ -78,7 +78,7 @@ class TestRepositoryTest {
             e.printStackTrace();
         }
 
-        Users user1 = Users.builder().id("pkmm").name("이성진").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user1 = Users.builder().id("pkmm").name("이성진").password(passwordEncoder.encode("1234")).email("test@naver.com").build();
         userRepository.save(user1); //이성진 회원가입
 
         Party party = Party.builder().partyName("러블리펜션").QR("QRcode").build();
@@ -93,31 +93,31 @@ class TestRepositoryTest {
         Gallery gallery = Gallery.builder().filepath("https://pds.skyedaily.com/news_data/1439896367RfRDoDi9x6cXvg46stCDK.jpg").plnoByGallery(planRepository.findById(1L).get()).build();
         galleryRepository.save(gallery); //"해병대전우회" + "강원도삼척여행" 전우회단체사진 게시
 
-        Users user2 = Users.builder().id("harim").name("이하림").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user2 = Users.builder().id("harim2").name("이하림").password(passwordEncoder.encode("1234")).email("test2@naver.com").build();
         userRepository.save(user2); //이하림 회원가입
 
         UserParty userParty1 = UserParty.builder().unoByUserParty(user2).pnoByUserParty(partyRepository.findById(1L).get()).build();
         userPartyRepository.save(userParty1); // 이하림 "해병대전우회" 파티 합류
 
-        Users user3 = Users.builder().id("yeeun").name("노예은").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user3 = Users.builder().id("yeeun2").name("노예은").password(passwordEncoder.encode("1234")).email("test3@naver.com").build();
         userRepository.save(user3); //노에은 회원가입
 
-        Users user4 = Users.builder().id("sam").name("박종진").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user4 = Users.builder().id("sam").name("박종진").password(passwordEncoder.encode("1234")).email("test4@naver.com").build();
         userRepository.save(user4); //종진 회원가입
 
-        Users user5 = Users.builder().id("soso").name("김소휘").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user5 = Users.builder().id("soso").name("김소휘").password(passwordEncoder.encode("1234")).email("test5@naver.com").build();
         userRepository.save(user5); //소휘 회원가입
 
-        Users user6 = Users.builder().id("jimin").name("김지민").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user6 = Users.builder().id("jimin").name("김지민").password(passwordEncoder.encode("1234")).email("test6@naver.com").build();
         userRepository.save(user6); //지민 회원가입
 
-        Users user7 = Users.builder().id("kium").name("김기은").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user7 = Users.builder().id("kium").name("김기은").password(passwordEncoder.encode("1234")).email("test7@naver.com").build();
         userRepository.save(user7); //기은 회원가입
-        Users user8 = Users.builder().id("leeseu").name("서연주").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user8 = Users.builder().id("leeseu").name("서연주").password(passwordEncoder.encode("1234")).email("test8@naver.com").build();
         userRepository.save(user8); //연주 회원가입
-        Users user9 = Users.builder().id("michu").name("추명선").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user9 = Users.builder().id("michu").name("추명선").password(passwordEncoder.encode("1234")).email("test9@naver.com").build();
         userRepository.save(user9); //명선 회원가입
-        Users user10 = Users.builder().id("yuen").name("강연재").password(passwordEncoder.encode("1234")).email("naver").build();
+        Users user10 = Users.builder().id("yuen").name("강연재").password(passwordEncoder.encode("1234")).email("test10@naver.com").build();
         userRepository.save(user10); //연재 회원가입
 
         Party party2 = Party.builder().partyName("308호 모임").QR("QRcode").build();

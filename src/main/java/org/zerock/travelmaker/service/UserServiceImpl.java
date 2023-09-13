@@ -2,6 +2,7 @@ package org.zerock.travelmaker.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.catalina.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.zerock.travelmaker.repository.UserRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -55,5 +57,33 @@ public class UserServiceImpl implements UserService {
         List<Map<String, Object>> result = mybatisMapper.selectUserList(uno);
         return result;
     }
+
+    @Override
+    public Users findByUsername(String username) {
+
+        Users nameById = userRepository.findById(username);
+
+        return nameById;
+    }
+
+    @Override
+    @Transactional
+    public void modifyInformation(UserDTO userDTO) throws IdExistException {
+        String usersID = userDTO.getId();
+
+        boolean exist = userRepository.existsById(Long.valueOf(usersID));
+
+        if(!exist){
+            throw new IdExistException();
+        }
+
+        Optional<Users> usersbyID = Optional.ofNullable(userRepository.findById(usersID));
+
+        Users users = usersbyID.orElseThrow();
+        users.changeName(userDTO.getName());
+        users.changePassword(passwordEncoder.encode(userDTO.getPassword()));
+        userRepository.save(users);
+    }
+
 
 }

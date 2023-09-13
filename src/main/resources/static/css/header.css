@@ -34,7 +34,7 @@ body{
     z-index: 10000;
 
 }
-.navbar a, .navbar h5{
+.navbar2, .navbar a, .navbar h5{
     position: relative;
     font-size: 16px;
     color: #fff;
@@ -60,4 +60,28 @@ body{
     transform: translateY(0);
     opacity: 1;
     font-weight: bold;
+}
+
+.navbar2 .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar2 .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.navbar2 .dropdown-content p a{
+    text-decoration: none;
+    color: #f72d7a;
+}
+
+.navbar2 .dropdown:hover .dropdown-content {
+    display: block;
 }

@@ -1,5 +1,6 @@
 package org.zerock.travelmaker.service;
 
+import org.zerock.travelmaker.domain.Users;
 import org.zerock.travelmaker.dto.UserDTO;
 
 import java.util.List;
@@ -13,4 +14,9 @@ public interface UserService {
     void join(UserDTO userDTO) throws IdExistException;
 
     List<Map<String, Object>> userList(Long uno);
+
+    Users findByUsername(String username);
+
+    default void modifyInformation(UserDTO userDTO) throws IdExistException {};
+
 }

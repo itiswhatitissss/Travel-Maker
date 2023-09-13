@@ -1,6 +1,7 @@
 package org.zerock.travelmaker.domain;
 
 import lombok.*;
+import org.zerock.travelmaker.dto.UserDTO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -56,8 +57,8 @@ public class Users{
 
     public void changePassword(String password){this.password = password;}
 
-    public void changeEmail(String email){
-        this.email = email;
+    public void changeName(String name){
+        this.name = name;
     }
 
     public void changeDel(boolean del){
@@ -73,5 +74,4 @@ public class Users{
     }
 
     public void changeSocial(boolean social){this.social = social;}
-
 }
