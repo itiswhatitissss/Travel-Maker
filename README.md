@@ -1,5 +1,5 @@
 <div align="center">
-	<h2 style="background-color: #f72d7a; color: #fff; font-size: 100px;">TraveMaker.</h2>
+	<h2 style="background-color: #f72d7a; color: #fff; font-size: 100px; text-align: center;">TraveMaker.</h2>
 </div>
 
 <br>
