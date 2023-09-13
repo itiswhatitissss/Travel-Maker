@@ -106,7 +106,7 @@ public class MainController {
         selectedFriends.add(uno);
         mainService.PartyRegister(partyDTO,selectedFriends);
 
-        return "redirect:list?pno="+pno+"&uno="+uno;
+        return "redirect:list?&uno="+uno;
     }
 
     @PostMapping("/planPopup")
