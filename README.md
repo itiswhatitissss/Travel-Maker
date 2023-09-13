@@ -1,5 +1,5 @@
 <div align="center">
-	<h2 style="background-color: #f72d7a; color: #fff; font-size: 100px; text-align: center;">TraveMaker.</h2>
+![TravelMaker](https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/0b79fc9f-2ef5-4712-bd23-784ce9fdfbb2)
 </div>
 
 <br>
