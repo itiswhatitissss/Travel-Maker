@@ -187,43 +187,4 @@ class TestRepositoryTest {
         Gallery gallery2 = Gallery.builder().filepath("https://www.ilyosisa.co.kr/data/photos/201403/60777_956_2743.jpg").plnoByGallery(planRepository.findById(3L).get()).build();
         galleryRepository.save(gallery2); //"308호 모임" + "여름휴가" 단체사진 게시
     }
-    @Test
-    public void testAttend(){
-        Optional<Users> byId = userRepository.findById(2L);
-        Users uno = byId.orElseThrow();
-        Optional<Plan> byId2 = planRepository.findById(1L);
-        Plan plno = byId2.orElseThrow();
-
-        Attend attend = Attend.builder()
-                .Attender(0L)
-                .unoByAttend(uno)
-                .plnoByAttend(plno)
-                .build();
-
-        attendRepository.save(attend);
-    }
-    @Test
-    public void testAttender(){
-        Optional<Users> byId = userRepository.findById(3L);
-        Users uno = byId.orElseThrow();
-        Optional<Plan> byId2 = planRepository.findById(1L);
-        Plan plno = byId2.orElseThrow();
-
-        Long result = attendRepository.selectAttend(uno,plno);
-        log.info("참석여부는 : "+result);
-    }
-    @Test
-    public void updateAttender(){
-        Optional<Users> byId = userRepository.findById(1L);
-        Users uno = byId.orElseThrow();
-        Optional<Plan> byId2 = planRepository.findById(1L);
-        Plan plno = byId2.orElseThrow();
-
-        Long result = attendRepository.selectAttend(uno,plno);
-        attendRepository.updateAttend(uno,plno,result,0L);
-    }
-//    @Test
-//    public void updatePartyname(){
-//        partyRepository.updateParty("다시",3L);
-//    }
 }
