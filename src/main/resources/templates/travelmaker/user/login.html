@@ -113,19 +113,20 @@
 
 <script src="/js/login.js"></script>
 
+<!--<script th:inline="javascript">-->
+
+<!--    const error = [[${error}]]-->
+
+<!--    if(error && error === 'id'){-->
+<!--        alert("동일한 ID를 가진 계정이 존재합니다.")-->
+<!--    }-->
+<!--</script>-->
+
 <script th:inline="javascript">
 
-    const error = [[${error}]]
-
-    if(error && error === 'id'){
-        alert("동일한 ID를 가진 계정이 존재합니다.")
-    }
-</script>
-<script>
+    //메일 인증코드
     const mailCheck = document.querySelector('#mail-Check-btn');
-
     mailCheck.addEventListener("click", () => {
-
         const email = document.querySelector('#username').value;
 
         const user = {
@@ -153,6 +154,8 @@
                 }
             });
     });
+
+    //메일 인증코드 유효성검사1
     function checkAuthNumFn() {
         const mailCheckInput = document.querySelector('.mail-check-input').value;
         const mailCheckWarn = document.getElementById('mail-check-warn');
@@ -164,13 +167,61 @@
         if (mailCheckInput != authNum) {
             mailCheckWarn.textContent = "  인증번호가 다릅니다.";
             mailCheckWarn.style.color = 'white';
-            return;
+            return false;
         } else {
             mailCheckWarn.textContent = "  인증되었습니다.";
             mailCheckWarn.style.color = 'green';
             authResult = true;
-            return;
+            return true;
         }
+    }
+
+    //메일 인증코드 유효성검사2
+    document.querySelector('form#registerForm').addEventListener("submit", function (event) {
+        if (!validateRegisterForm() || !checkAuthNumFn()) {
+            event.preventDefault(); // 폼 제출을 중지
+            alert("인증번호가 일치하지 않습니다. 다시 입력해주세요.");
+
+            window.location.href = window.location.href;
+        }
+    });
+
+    //유효성 검사 함수
+    function validateRegisterForm() {
+        const id = document.querySelector('input[name="id"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+        const name = document.querySelector('input[name="name"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const code = document.querySelector('input[name="code"]').value;
+
+        // 아이디 유효성 검사 (예: 최소 4자 이상)
+        if (id.length < 4) {
+            alert("아이디는 최소 4자 이상이어야 합니다.");
+            return false;
+        }
+
+        // 이름 유효성 검사 (예: 비어 있지 않아야 함)
+        if (!name) {
+            alert("이름을 입력하세요.");
+            return false;
+        }
+
+        // 이메일 유효성 검사
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(email)) {
+            alert("올바른 이메일 주소를 입력하세요.");
+            return false;
+        }
+
+        // 코드(인증번호) 유효성 검사 (예: 7자리)
+        if (code.length !== 7) {
+            alert("인증번호를 7자리로 입력하세요.");
+            return false;
+        }
+
+
+        // 모든 유효성 검사를 통과한 경우
+        return true;
     }
 </script>
 </body>
