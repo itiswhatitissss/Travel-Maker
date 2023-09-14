@@ -284,14 +284,11 @@ $(document).ready(function () {
 $(document).ready(function () {
 
     // 수정 모달을 띄우기 위한 이벤트 처리
-    $(".modify-fno").on("click", function () {
-
+    $("a[data-bs-target='#friendModal']").on("click", function () {
         // 현재 페이지 URL을 가져옵니다.
         var currentUrl = window.location.href;
-
 // URL에서 파라미터를 추출합니다.
         var urlParams = new URLSearchParams(currentUrl.split('?')[1]);
-
 // "uno" 파라미터의 값을 가져옵니다.
         var uno = urlParams.get("uno");
         console.log("uno 값:", uno);
@@ -332,39 +329,31 @@ $(document).ready(function () {
     });
 
     // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
-    $("#modifyPartySaveButton").on("click", function () {
-        // var form = $("#modifyPartyForm");
-        var pno = $("#modiPno").val();
-        // var uno = $("#modiUno").val();
-        var title = $("#modiTitle").val();
+    $("#friendDeleteButton").on("click", function () {
         var fnoList = [];
-        console.log("title===============>",title)
         $("input[name='selectedFriends']:checked").each(function () {
             fnoList.push($(this).val());
         });
         var fnoListString = fnoList.join(",");
         console.log("fnolist===============>",fnoList)
         $.ajax({
-            url: "partyModify", // 플랜 정보를 수정할 URL
+            url: "friendDelete",
             type: "POST",
             data: {
-                pno: pno,
-                // uno: uno,
-                title: title,
+                uno:uno,
                 fnoList: fnoListString
             },
             success: function (response) {
                 console.log("response==============>",response)
                 if (response === "success") {
-                    $("#modifyPartyModal").modal("hide");
                     location.reload();
                     $('#successModal').modal('show');
                 } else {
-                    alert("플랜 수정 실패");
+                    alert("친구 삭제 실패");
                 }
             },
             error: function () {
-                alert("플랜 정보 수정 중 오류가 발생했습니다.");
+                alert("친구 삭제 중 오류가 발생했습니다.");
             }
         });
     });

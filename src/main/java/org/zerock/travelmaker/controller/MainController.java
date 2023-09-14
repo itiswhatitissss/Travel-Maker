@@ -137,19 +137,22 @@ public class MainController {
     }
 
     @PostMapping("/friendDelete")
-    public String friendDelete(HttpServletRequest request,@RequestParam(name = "selectedFriends", required = false) List<Long> selectedFriends , Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String username = userDetails.getUsername();
+    public ResponseEntity<String> friendDelete(@RequestParam(name = "fnoList") String fnoListString, @RequestParam(name = "uno") Long uno) {
 
-        Long uno = userService.getUno(username);
+        if(fnoListString.isEmpty()) {
+        }else {
+            List<Long> selectedFriends = Arrays.stream(fnoListString.split(","))
+                    .map(Long::parseLong)
+                    .collect(Collectors.toList());
 
-        String referer = request.getHeader("referer");
-
-        for (int i=0; i<selectedFriends.size();i++){
-            Long fno = selectedFriends.get(i);
-            friendService.deleteFriend(uno,fno);
+            for (int i = 0; i < selectedFriends.size(); i++) {
+                Long fno = selectedFriends.get(i);
+                friendService.deleteFriend(uno,fno);;
+            }
         }
-        return "redirect:" + referer;
+        String result = "success"; // 성공 시 "success", 실패 시 다른 값을 설정
+
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/deleteParty")
@@ -213,8 +216,7 @@ public class MainController {
     public String modifyPlan(@RequestParam("plno") Long plno,
                              @RequestParam("title") String title,
                              @RequestParam("start") String start,
-                             @RequestParam("end") String end,
-                             Model model) {
+                             @RequestParam("end") String end) {
 
         planService.planmodify(title,start,end,plno);
         return "success";
