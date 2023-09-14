@@ -29,13 +29,12 @@
     </nav>
 
     </nav>
-    <!-- 친구목록 모달 -->
     <div class="modal fade" id="friendModal" tabindex="-1" aria-labelledby="friendModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="friendModalLabel">친구목록</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!--                    <button type="button" class="btn btn-outline-secondary modify-fno" >-->
                 </div>
                 <div class="modal-body">
                     <!-----검색기능------>
@@ -45,37 +44,31 @@
                     </form>
                     <!--                        <div th:if="${list == 0}">-->
                     <!-- 리스트 크기가 0일 때 처리할 내용 -->
-                    <form th:action="@{/travelmaker/main/friendDelete}" method="post" class="d-flex">
-                        <div class="form-check">
-                            <div th:each="friend: ${friendDTO}">
-                                <h7 th:text="${friend.name}"></h7>
-                                <input class="form-check-input" type="checkbox" th:value="${friend.fno}" name="selectedFriends" id="friendCheckbox">
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구삭제</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        </div>
-                    </form>
+                    <div class="mb-3">
+                        <label class="form-label">친구목록</label>
+                        <div class="viewFriendList"></div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구삭제</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    </div>
 
                     <!-- 리스트가 1일 때 처리할 내용 -->
-                    <form th:action="@{/travelmaker/main/friendInsert}" method="post" class="d-flex">
-                        <div th:if="${friendSearchResult != null}">
-                            <div th:each="friends: ${friendSearchResult}">
-                                <input class="form-check-input" type="checkbox" th:value="${friends.uno}" name="selectedFriends" id="friendCheckbox">
-                                <h7 th:text="${friends.name}"></h7>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구추가</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                            </div>
-                        </div>
-                        <div th:if="${#lists.isEmpty(friendSearchResult)}">
-                            <p>검색 결과가 없습니다.</p>
-                        </div>
-                    </form>
+                    <!--                    <form th:action="@{/travelmaker/main/friendInsert}" method="post" class="d-flex">-->
+                    <!--                        <div th:if="${friendSearchResult != null}">-->
+                    <!--                            <div th:each="friends: ${friendSearchResult}">-->
+                    <!--                                <input class="form-check-input" type="checkbox" th:value="${friends.uno}" name="selectedFriends" id="friendCheckbox">-->
+                    <!--                                <h7 th:text="${friends.name}"></h7>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="modal-footer">-->
+                    <!--                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">친구추가</button>-->
+                    <!--                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                        <div th:if="${#lists.isEmpty(friendSearchResult)}">-->
+                    <!--                            <p>검색 결과가 없습니다.</p>-->
+                    <!--                        </div>-->
+                    <!--                    </form>-->
                     <!-- 친구 목록 출력 부분 -->
                 </div>
             </div>

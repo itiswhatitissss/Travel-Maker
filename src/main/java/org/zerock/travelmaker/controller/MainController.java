@@ -48,33 +48,31 @@ public class MainController {
     private final PlanRepository planRepository;
 
     @GetMapping("/list")
-    public void mainList(Model model, Long uno, Long pno, Authentication authentication, HttpSession session){
-        List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
-        if (friendDTO == null) {
-            List<Map<String,Object>> friend =friendService.friendList(uno);
-            model.addAttribute("friendDTO",friend);
-//            model.addAttribute("list",0);
-        } else {
-            for(int i=0;i<friendDTO.size();i++) {
-                Map<String, Object> userMap = friendDTO.get(0); // 첫 번째 검색 결과 사용
-
-                // 필드 값 추출
-                Long fno = (Long) userMap.get("uno");
-                String name = (String) userMap.get("name");
-                String id = (String) userMap.get("id");
-//            log.info("세션 : "+session);
-            Users users = Users.builder()
-                    .id(id)
-                    .uno(fno)
-                    .name(name)
-                    .build();
-                model.addAttribute("friendSearchResult", users);
-//            model.addAttribute("list",1);
-            }
-            List<Map<String, Object>> friend = friendService.friendList(uno);
-            model.addAttribute("friendDTO", friend);
-            session.removeAttribute("friendSearchResult"); // 세션에서 검색 결과 제거
-        }
+    public void mainList(Model model, Long uno, Long pno, Authentication authentication){
+//        List<Map<String, Object>> friendDTO = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
+//        if (friendDTO == null) {
+//            List<Map<String,Object>> friend =friendService.friendList(uno);
+//        } else {
+//            for(int i=0;i<friendDTO.size();i++) {
+//                Map<String, Object> userMap = friendDTO.get(0); // 첫 번째 검색 결과 사용
+//
+//                // 필드 값 추출
+//                Long fno = (Long) userMap.get("uno");
+//                String name = (String) userMap.get("name");
+//                String id = (String) userMap.get("id");
+////            log.info("세션 : "+session);
+//            Users users = Users.builder()
+//                    .id(id)
+//                    .uno(fno)
+//                    .name(name)
+//                    .build();
+//                model.addAttribute("friendSearchResult", users);
+////            model.addAttribute("list",1);
+//            }
+//            List<Map<String, Object>> friend = friendService.friendList(uno);
+//            model.addAttribute("friendDTO", friend);
+//            session.removeAttribute("friendSearchResult"); // 세션에서 검색 결과 제거
+//        }
 
         List<Map<String,Object>> partyList =mainService.getParty(uno);
         model.addAttribute("partyDTO",partyList);
@@ -278,6 +276,16 @@ public class MainController {
         log.info("partylist.get(1).get('member')  : "+partylist.get(0).get("member"));
 
         return ResponseEntity.ok(partylist);
+    }
+    @GetMapping("/getFriend")
+    public ResponseEntity<List<Map<String, Object>>> getFriend(Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Long uno = userService.getUno(username);
+
+        List<Map<String,Object>> friendList =friendService.friendList(uno);
+
+        return ResponseEntity.ok(friendList);
     }
 
 }
