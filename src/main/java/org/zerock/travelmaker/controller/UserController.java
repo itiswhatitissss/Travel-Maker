@@ -98,31 +98,4 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(authNum);
     }
 
-    @GetMapping("/edit")
-    public void editGET(Principal principal, Model model) {
-        String username = principal.getName();
-        Users users = userService.findByUsername(username);
-
-        if(users != null){
-            model.addAttribute("name", users.getName());
-            model.addAttribute("email", users.getEmail());
-        }
-
-    }
-
-    @PostMapping("/edit")
-    public String editPOST(UserDTO userDTO, RedirectAttributes redirectAttributes) {
-
-        try {
-            userService.modifyInformation(userDTO);
-        } catch (UserService.IdExistException e){
-            redirectAttributes.addFlashAttribute("error", "회원가입 실패");
-            return "redirect:/travelmaker/user/edit";
-        }
-        redirectAttributes.addFlashAttribute("result", "success");
-
-        return "redirect:/travelmaker/user/logout";
-    }
-
-
 }
