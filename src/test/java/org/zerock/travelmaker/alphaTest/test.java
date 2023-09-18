@@ -106,93 +106,87 @@ public class test {
         userRepository.save(user1); //user1 회원가입
 
         Party party1 = Party.builder().partyName("고려대학교 축구동아리").QR("QRcode").build();
-        partyRepository.save(party1); // 모임1 파티 생성 (파티를 생성하면서 user값을 UserParty에 바로 넣을 수 있게 해야 될 듯?)
+        partyRepository.save(party1); // '고려대학교 축구동아리'고려대학교 축구동아리 파티 생성 
 
         UserParty userParty = UserParty.builder().unoByUserParty(user1).pnoByUserParty(party1).build();
-        userPartyRepository.save(userParty); // user1이 모임1이 참가
+        userPartyRepository.save(userParty); // user1이 '고려대학교 축구동아리' 파티 참가
 
         PartyDetail partyDetail1 = PartyDetail.builder().pnoByPartyDetail(party1).plnoByPartyDetail(planRepository.findById(1L).get()).build();
-        partyDetailRepository.save(partyDetail1); // 모임1에 플랜1 생성
+        partyDetailRepository.save(partyDetail1); // '고려대학교 축구동아리' 파티에 'VS 한양대' 플랜 생성
 
         Users user2 = Users.builder().id("user2").name("김영희").password(passwordEncoder.encode("1234")).email("test2@naver.com").build();
-        userRepository.save(user2); //이하림 회원가입
+        userRepository.save(user2); //user2 회원가입
 
         UserParty userParty1 = UserParty.builder().unoByUserParty(user2).pnoByUserParty(partyRepository.findById(1L).get()).build();
-        userPartyRepository.save(userParty1); // 이하림 "해병대전우회" 파티 합류
+        userPartyRepository.save(userParty1); // user2 '고려대학교 축구동아리' 파티 합류
 
         Users user3 = Users.builder().id("user3").name("홍길동").password(passwordEncoder.encode("1234")).email("test3@naver.com").build();
-        userRepository.save(user3); //노에은 회원가입
+        userRepository.save(user3); //user3 회원가입
 
         Users user4 = Users.builder().id("user4").name("이행복").password(passwordEncoder.encode("1234")).email("test4@naver.com").build();
-        userRepository.save(user4); //종진 회원가입
+        userRepository.save(user4); //user4 회원가입
 
         Users user5 = Users.builder().id("user5").name("박믿음").password(passwordEncoder.encode("1234")).email("test5@naver.com").build();
-        userRepository.save(user5); //소휘 회원가입
+        userRepository.save(user5); //user5 회원가입
 
         Party party2 = Party.builder().partyName("독서토론동아리").QR("QRcode").build();
-        partyRepository.save(party2); //"308호 모임" 파티 생성
+        partyRepository.save(party2); //'독서토론동아리' 파티 생성
 
         UserParty userParty2 = UserParty.builder().unoByUserParty(user1).pnoByUserParty(party2).build();
-        userPartyRepository.save(userParty2); //노예은 + "308호 모임" 파티 참가
+        userPartyRepository.save(userParty2); //user1 + '독서토론동아리' 파티 참가
 
         UserParty userParty3 = UserParty.builder().unoByUserParty(user3).pnoByUserParty(party2).build();
-        userPartyRepository.save(userParty3); //노예은 + "308호 모임" 파티 참가
+        userPartyRepository.save(userParty3); //user3 + '독서토론동아리' 파티 참가
 
         UserParty userParty4 = UserParty.builder().unoByUserParty(user4).pnoByUserParty(party2).build();
-        userPartyRepository.save(userParty4); //노예은 + "308호 모임" 파티 참가
+        userPartyRepository.save(userParty4); //user4 + '독서토론동아리' 파티 참가
 
         Friend friend= Friend.builder().unoByFriend(user1).fnoByFriend(user2).build();
-        friendRepository.save(friend); //이성진 친구목록에 이하림 등록
+        friendRepository.save(friend); //user1 친구목록에 user2 등록
 
         Friend friend1= Friend.builder().unoByFriend(user2).fnoByFriend(user1).build();
-        friendRepository.save(friend1); //이성진 친구목록에 노예은 등록
+        friendRepository.save(friend1); //user2 친구목록에 user1 등록
 
-        Friend friend2= Friend.builder().unoByFriend(user2).fnoByFriend(user3).build();
-        friendRepository.save(friend2); //이하림 친구목록에 노예은 등록
+        Friend friend2= Friend.builder().unoByFriend(user1).fnoByFriend(user3).build();
+        friendRepository.save(friend2); //user1 친구목록에 user3 등록
 
-        Friend friend3= Friend.builder().unoByFriend(user3).fnoByFriend(user2).build();
-        friendRepository.save(friend3); //이하림 친구목록에 노예은 등록
-
-        Friend friend4= Friend.builder().unoByFriend(user4).fnoByFriend(user5).build();
-        friendRepository.save(friend4); //이하림 친구목록에 노예은 등록
-
-        Friend friend5= Friend.builder().unoByFriend(user5).fnoByFriend(user4).build();
-        friendRepository.save(friend5); //이하림 친구목록에 노예은 등록
+        Friend friend3= Friend.builder().unoByFriend(user3).fnoByFriend(user1).build();
+        friendRepository.save(friend3); //user3 친구목록에 user1 등록
 
         PartyDetail partyDetail2 = PartyDetail.builder().pnoByPartyDetail(party1).plnoByPartyDetail(planRepository.findById(2L).get()).build();
-        partyDetailRepository.save(partyDetail2); //"308호 모임" 파티에 "308호 인계동 정모" 플랜 생성
+        partyDetailRepository.save(partyDetail2); //'고려대학교 축구동아리' 파티에 'VS 홍익대' 플랜 생성
 
         Attend attend = Attend.builder().Attender(1L).unoByAttend(user1).plnoByAttend(planRepository.findById(1L).get()).build();
-        attendRepository.save(attend);//종진이가 308호 인계동 정모에 참가
+        attendRepository.save(attend);//user1이 'VS한양대'에 계획에 참가
         Attend attend1 = Attend.builder().Attender(0L).unoByAttend(user2).plnoByAttend(planRepository.findById(1L).get()).build();
-        attendRepository.save(attend1);//소휘가 308호 인계동 정모에 참가
-        Attend attend2 = Attend.builder().Attender(1L).unoByAttend(user3).plnoByAttend(planRepository.findById(2L).get()).build();
-        attendRepository.save(attend2);//명선님이 308호 인계동 정모에 참가
-        Attend attend3 = Attend.builder().Attender(0L).unoByAttend(user4).plnoByAttend(planRepository.findById(2L).get()).build();
-        attendRepository.save(attend3);//명선님이 308호 인계동 정모에 참가
+        attendRepository.save(attend1);//user2이 'VS한양대'에 계획에 불참
+        Attend attend2 = Attend.builder().Attender(1L).unoByAttend(user3).plnoByAttend(planRepository.findById(3L).get()).build();
+        attendRepository.save(attend2);//user3이 '주제: 총균쇠'에 계획에 참가
+        Attend attend3 = Attend.builder().Attender(0L).unoByAttend(user4).plnoByAttend(planRepository.findById(3L).get()).build();
+        attendRepository.save(attend3);//user4이 '주제: 총균쇠'에 계획에 불참
 
 
         PartyDetail partyDetail3 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(3L).get()).build();
-        partyDetailRepository.save(partyDetail3); //"308호 모임" 파티에 "308호 여름휴가" 플랜 생성
+        partyDetailRepository.save(partyDetail3); //'독서토론모임'에 '주제: 총균쇠' 플랜 생성
 
         PartyDetail partyDetail4 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(4L).get()).build();
-        partyDetailRepository.save(partyDetail4); //"308호 모임" 파티에 "308호 여름휴가" 플랜 생성
+        partyDetailRepository.save(partyDetail4); //'독서토론모임'에 '주제: 정의란 무엇인가' 플랜 생성
 
         PartyDetail partyDetail5 = PartyDetail.builder().pnoByPartyDetail(party2).plnoByPartyDetail(planRepository.findById(5L).get()).build();
-        partyDetailRepository.save(partyDetail5); //"308호 모임" 파티에 "308호 여름휴가" 플랜 생성
+        partyDetailRepository.save(partyDetail5); //'독서토론모임'에 '주제: 이기적유전자' 플랜 생성
 
 
         Gallery gallery1 = Gallery.builder().filepath("https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/307022876_583004696950835_4275590593869122080_n.jpg?stp=dst-jpg_p640x640&_nc_cat=104&ccb=1-7&_nc_sid=52f669&_nc_ohc=yq04hAILAQ4AX9NZFcP&_nc_ht=scontent-ssn1-1.xx&oh=00_AfBpjYhCNqpXHhu-FRG1k7RITRtu4Yo-Try13xagd9_MHA&oe=650DC2C6").plnoByGallery(planRepository.findById(1L).get()).build();
-        galleryRepository.save(gallery1); //"308호 모임" + "인계동 정모" 단체사진 게시
+        galleryRepository.save(gallery1); //'고려대학교 축구동아리'의 플랜 'VS한양대'에 단체사진 게시
 
         Gallery gallery2 = Gallery.builder().filepath("https://scontent-ssn1-1.xx.fbcdn.net/v/t39.30808-6/309467234_583004700284168_4470626865001347527_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=YJVOpURCNk4AX9zzFw4&_nc_ht=scontent-ssn1-1.xx&oh=00_AfAOXVaBqY7eaoIVegCwr7rjyRYCe6ZwQ7b16C771e4tAg&oe=650BEB96").plnoByGallery(planRepository.findById(1L).get()).build();
-        galleryRepository.save(gallery2); //"308호 모임" + "여름휴가" 단체사진 게시
+        galleryRepository.save(gallery2); //'고려대학교 축구동아리'의 플랜 'VS한양대'에 단체사진 게시
 
         Gallery gallery4 = Gallery.builder().filepath("https://external-ssn1-1.xx.fbcdn.net/emg1/v/t13/3617018928027790884?url=https%3A%2F%2Fblogthumb.pstatic.net%2FMjAyMzA4MjRfMjYy%2FMDAxNjkyODY4NTMxODM0.iyrxR9cBI9YF9XJhhvepbcaXBgKChWbq9-HGIEqGivog.ZR_omIdGyV1AkXw4L-saE5y2sdICtvGFDf1HTqkD1bkg.JPEG.sportsku%2FIMG_6966.JPG%3Ftype%3Dw2&fb_obo=1&utld=pstatic.net&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&ccb=13-1&oh=06_AbGzoMo5D9Ae59aGEbOJhOdLwYOU4Hz3yCXZ615_d6aJTw&oe=65099553&_nc_sid=dbad39").plnoByGallery(planRepository.findById(1L).get()).build();
-        galleryRepository.save(gallery4); //"308호 모임" + "여름휴가" 단체사진 게시
+        galleryRepository.save(gallery4); //'고려대학교 축구동아리'의 플랜 'VS홍익대'에 단체사진 게시
 
         Gallery gallery3 = Gallery.builder().filepath("https://external-ssn1-1.xx.fbcdn.net/emg1/v/t13/2433360969693680343?url=https%3A%2F%2Fblogthumb.pstatic.net%2FMjAyMzA4MjBfODYg%2FMDAxNjkyNTAyNDU5NTQ5.Gr93s6OfRe5kT_EmjSiqbUtK0ikapERh7FFLCiZhAMcg.bQewFAyrY3hiYwLqcfYYMYytZ0HgzEoe8nQXlgp-z4Qg.JPEG.sportsku%2F%25C7%25D1%25BE%25E7%25B4%25EB%25C0%25FC_%25BB%25E7%25C1%25F8.jpg%3Ftype%3Dw2&fb_obo=1&utld=pstatic.net&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&ccb=13-1&oh=06_AbFbYDMspe57HonL7ptWm2oDEMUqP6HV2bVpFACpgiTiqA&oe=65097A36&_nc_sid=dbad39").plnoByGallery(planRepository.findById(2L).get()).build();
-        galleryRepository.save(gallery3); //"해병대전우회" + "강원도삼척여행" 전우회단체사진 게시
+        galleryRepository.save(gallery3); //'고려대학교 축구동아리'의 플랜 'VS홍익대'에 단체사진 게시
 
     }
 
