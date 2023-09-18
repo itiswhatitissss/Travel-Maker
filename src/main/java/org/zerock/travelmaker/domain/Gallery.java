@@ -16,7 +16,9 @@ public class Gallery{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long galleryPK;
 
+    @Column(length = 1000)
     private String filename;
+    @Column(length = 1000)
     private String filepath;
 
     @ManyToOne

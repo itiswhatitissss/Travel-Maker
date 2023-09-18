@@ -50,8 +50,10 @@ public class Plan{
     @OneToMany(mappedBy = "plnoByMarker",cascade = CascadeType.ALL)
     private List<Marker> marker;
 
+    @Column(length = 1000)
     private String filename;
 
+    @Column(length = 1000)
     private String filepath;
 
 }
