@@ -96,7 +96,7 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 :exclamation: id = user1, password = 1234 가 사용자의 아이디 비밀번호이며, 나머지 아이디는 user2,3,4,5이며 비밀번호는1234로 동일하다:exclamation:
 
-3번까지 완료가 됐다면 이제 TravelMakerApplication을 실행시켜주고 주소창에 http://localhost:8383/travelmaker/user/login 다음과 같이 입력하여 접속해보자✈️
+3번까지 완료가 됐다면 이제 TravelMakerApplication을 실행시켜주고 http://localhost:8383/travelmaker/user/login 링크를 통해 TravelMaker에 접속해보자✈️
 <br>
 <br>
 
