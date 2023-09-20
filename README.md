@@ -71,18 +71,15 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 ## ⌨️ 사용방법
 
 :one: 본격적으로 서버 (TravelMakerApplication) 실행 전
+
 <img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/ccba53f4-004f-4bdc-8c0b-0be017acda50">
+
 :heavy_check_mark: port번호
 <br>
-
 :heavy_check_mark: mysql의 travel이라는 이름의 schema 생성
-
 <br>
-
 :heavy_check_mark: datasource의 username, password 체크
-
 <br>
-
 <br>
 
 :two:  Travel-Maker -> src -> test -> java -> org.zerock.travelmaker -> BetaTest -> test파일 안에 있는 TravelMaker_Test를 실행
@@ -90,9 +87,7 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 <img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/6862e1c2-0e4c-433f-8d2e-2f6b5393af44">
 
 :exclamation: 해당 테스트 코드는 사용자에게 가상의 온라인 환경을 편하게 구현하기 위해 제작된 코드로써, 사용하지 않아도 무방하다:exclamation:
-
 <br>
-
 <br>
 
 :three: 테스트 파일 실행 후 생성된 데이터
@@ -102,9 +97,7 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 :exclamation: id = user1, password = 1234 가 사용자의 아이디 비밀번호이며, 나머지 아이디는 user2,3,4,5이며 비밀번호는1234로 동일하다:exclamation:
 
 작성중
-
 <br>
-
 <br>
 
 
