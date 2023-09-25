@@ -120,20 +120,16 @@ public class MainController {
         return ResponseEntity.ok("success");
     }
 
-    @PostMapping("/friendSearch")
-    public String friendSearch(HttpServletRequest request, @RequestParam(name = "searchText", required = false) String searchText, RedirectAttributes rttr, HttpSession session) {
+    @GetMapping("/friendSearch")
+    public ResponseEntity<List<Map<String, Object>>> friendSearch(@RequestParam(name = "searchText", required = false) String searchText) {
 
-        String referer = request.getHeader("referer");
         log.info("검색text : " +searchText);
 
         List<Map<String, Object>> search = friendService.friendSearch(searchText);
         log.info("검색결과 : "+search);
 
-        session.setAttribute("friendSearchResult", search);
-        List<Map<String, Object>> fri = (List<Map<String, Object>>) session.getAttribute("friendSearchResult");
-        log.info("세션 : "+fri);
+        return ResponseEntity.ok(search);
 
-        return "redirect:" + referer;
     }
 
     @PostMapping("/friendDelete")

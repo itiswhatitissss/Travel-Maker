@@ -297,6 +297,12 @@ $(document).ready(function () {
         FriendList = document.querySelector(".viewFriendList");
         console.log("FriendList=======>", FriendList)
 
+        // // searchText 값을 가져옵니다.
+        // var searchText = $("#friendSearchInput").val();
+        //
+        // // searchList 모달에 searchText를 전달합니다.
+        // $("#friendSearchModal").data("searchText", searchText);
+
         let str2= '';
 
         $.ajax({
@@ -328,7 +334,90 @@ $(document).ready(function () {
         });
     });
 
-    // 수정 모달의 'Save' 버튼 클릭 이벤트 처리
+    // 수정 모달의 '삭제' 버튼 클릭 이벤트 처리
+    $("#friendDeleteButton").on("click", function () {
+        var fnoList = [];
+        $("input[name='selectedFriends']:checked").each(function () {
+            fnoList.push($(this).val());
+        });
+        var fnoListString = fnoList.join(",");
+        console.log("fnolist===============>",fnoList)
+        $.ajax({
+            url: "friendDelete",
+            type: "POST",
+            data: {
+                uno:uno,
+                fnoList: fnoListString
+            },
+            success: function (response) {
+                console.log("response==============>",response)
+                if (response === "success") {
+                    location.reload();
+                    $('#successModal').modal('show');
+                } else {
+                    alert("친구 삭제 실패");
+                }
+            },
+            error: function () {
+                alert("친구 삭제 중 오류가 발생했습니다.");
+            }
+        });
+    });
+});
+
+// 친구 검색
+$(document).ready(function () {
+
+    // 서치 모달을 띄우기 위한 이벤트 처리
+    $(".friend-search").on("click", function () {
+
+        var searchText = $("#SearchInput").val(); // 검색어 가져오기
+
+        // searchText 값을 가져옵니다.
+        // var searchText = $(this).data("searchText");
+        console.log("searchText : ",searchText)
+
+        $("#friendModal").modal("hide");
+
+        let FriendList ="";
+        FriendList = document.querySelector(".viewFriendList");
+        console.log("FriendList=======>", FriendList)
+
+        let str3= '';
+        //서치텍스트 가져오기
+
+        $.ajax({
+            url: "friendSearch", // 플랜 정보를 가져올 URL
+            type: "GET",
+            data: {
+                searchText : searchText
+            },
+            success: function (search) {
+                if (search.length > 0) {
+                    console.log("searchList : ",search);
+
+                    for (var i = 0; i < search.length; i++) {
+                        var friend = search[i];
+                        console.log("friend : ",friend)
+
+                        str3 += '<input type="checkbox" name="selectedFriends" value="' + friend.uno + '" required>'+'<h7>'+ friend.name +'</h7><br>';
+                    }
+
+                    FriendList.innerHTML = str3;
+                    console.log("FriendList str3 =======>", FriendList)
+
+                    $("#friendSearchModal").modal("show");
+                } else {
+                    alert("검색 결과가 없습니다.");
+                }
+            },
+            error: function () {
+                alert("검색 결고를 가져오는 중 오류가 발생했습니다.");
+            }
+        });
+    });
+
+    // 수정 모달의 '삭제' 버튼 클릭 이벤트 처리
     $("#friendDeleteButton").on("click", function () {
         var fnoList = [];
         $("input[name='selectedFriends']:checked").each(function () {
