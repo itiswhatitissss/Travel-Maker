@@ -58,6 +58,23 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 ## 💡 주요 기능 소개
 
+### 1. 로그인 페이지 (첫화면 페이지)
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/597b7e00-a0f3-4543-b785-ab19c0b9199f)
+
+#### 1.1 로그인
+- spring security를 사용한 로그인 구현
+- 소셜 로그인 기능 구현 (카카오, 구글, 네이)
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/dabd67d2-a5c2-4be5-926e-df2b30972a3b)
+
+#### 1.2 회원가입
+- spring security를 사용한 회원가입 구현
+- 회원가입시 이메일 인증 구현
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/7b1bc81a-20f6-48ad-a6b2-1c1d24c433e3)
+
+
 
 <br>
 
