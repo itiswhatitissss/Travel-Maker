@@ -74,6 +74,42 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/7b1bc81a-20f6-48ad-a6b2-1c1d24c433e3)
 
+<br/> 
+
+### 2. 메인 페이지
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/9eb9eb39-632f-4e80-97b1-870443464478)
+
+
+#### 2.1 파티와 플랜 목록
+- 파티 추가/수정/삭제 가능
+- 파티목록과 플랜목록으로 나누어져 스크롤 가능 (화면 분활 효)
+- 플랜 추가/수정/삭제 가능
+- 페이징 처리를 통해 파티별로 하나씩 보이는 기능 (플랜목록)
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/85db2858-891f-43fe-b506-79b1a52af6ba)
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/841edf14-727b-42e8-a48e-54e827635067)
+
+#### 2.2 친구 목록
+- 친구 추가/삭제 가능
+- 파티목록에서 친구 초대 가능
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/67ee4440-4dac-4def-b7ce-d10152a9ac97)
+
+
+<br/> 
+
+### 3. 상세 페이지
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/a62b6923-cb6f-46f5-bfe2-aae6873789bf)
+
+#### 3.1 참석 투표
+
+#### 3.2 만남 장소
+
+#### 3.3 사진
+
 
 
 <br>
