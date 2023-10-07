@@ -62,11 +62,13 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/597b7e00-a0f3-4543-b785-ab19c0b9199f)
 
+
 #### 1.1 로그인
 - spring security를 사용한 로그인 구현
 - 소셜 로그인 기능 구현 (카카오, 구글, 네이버)
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/dabd67d2-a5c2-4be5-926e-df2b30972a3b)
+
 
 #### 1.2 회원가입
 - spring security를 사용한 회원가입 구현
@@ -86,17 +88,20 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 - 파티목록과 플랜목록으로 나누어져 스크롤 가능 (화면 분활 효과)
 - 플랜 추가/수정/삭제 가능
 - 페이징 처리를 통해 파티별로 하나씩 보이는 기능 (플랜목록)
+- 자동 검색 가능 
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/85db2858-891f-43fe-b506-79b1a52af6ba)
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/841edf14-727b-42e8-a48e-54e827635067)
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/b25c627c-db9d-4d08-9b47-7c3b613b0b88)
+
 
 #### 2.2 친구 목록
 - 친구 추가/삭제 가능
 - 파티목록에서 친구 초대 가능
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/67ee4440-4dac-4def-b7ce-d10152a9ac97)
-
 
 <br/> 
 
@@ -106,7 +111,9 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 #### 3.1 참석 투표
 
+
 #### 3.2 만남 장소
+
 
 #### 3.3 사진
 
