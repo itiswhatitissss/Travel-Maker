@@ -64,15 +64,15 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 
 #### 1.1 로그인
-- spring security를 사용한 로그인 구현
-- 소셜 로그인 기능 구현 (카카오, 구글, 네이버)
+- spring security를 사용한 로그인/로그아웃
+- 소셜 로그인 가능(카카오, 구글, 네이버)
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/dabd67d2-a5c2-4be5-926e-df2b30972a3b)
 
 
 #### 1.2 회원가입
-- spring security를 사용한 회원가입 구현
-- 회원가입시 이메일 인증 구현
+- spring security를 사용한 회원가입
+- 회원가입시 이메일 인증
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/7b1bc81a-20f6-48ad-a6b2-1c1d24c433e3)
 
@@ -89,7 +89,8 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 - 플랜 추가/수정/삭제 가능
 - 페이징 처리를 통해 파티별로 하나씩 보이는 기능 (플랜목록)
 - 자동 검색 가능 
-
+- Tool-tip 기능 사용 (마우스를 올리면 추가적인 정보가 나타나게하는 기능)
+  
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/85db2858-891f-43fe-b506-79b1a52af6ba)
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/841edf14-727b-42e8-a48e-54e827635067)
@@ -109,15 +110,25 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/a62b6923-cb6f-46f5-bfe2-aae6873789bf)
 
+
 #### 3.1 참석 투표
+- 본인 참석 가능/불가능 표시 가능
+
 
 
 #### 3.2 만남 장소
+- 장소 마커 추가/삭제 가능
+- 카카오맵을 활용한 길찾기 및 대중교통 정보 이용 가능
 
 
-#### 3.3 사진
+#### 3.3 사진첩
+- 사진 추가 가능
+- 사진 스크롤 가능 (가로) 
 
-
+#### 3.4 기타
+- Tool-tip 기능 사용 (마우스를 올리면 추가적인 정보가 나타나게하는 기능)
+- 
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/3b779825-2467-4d02-8767-f5bfb1d91f82)
 
 <br>
 
@@ -129,7 +140,7 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
  - 자동 검색 기능 구현
  - 디테일페이지(만남장소, 사진첩)
  - 카카오 지도API 사용
- - CSS(버튼 툴팁, 홈페이지 테마)
+ - CSS(버튼 Tool-tip, 홈페이지 테마)
 
  😎 팀원 : 노예은
  - DB 설계
