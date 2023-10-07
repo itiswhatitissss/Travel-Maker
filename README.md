@@ -56,7 +56,39 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 <br>
 
-## 💡 주요 기능 소개
+## ⌨️ 사용방법
+
+:one: 본격적으로 서버 (TravelMakerApplication) 실행 전
+
+<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/ccba53f4-004f-4bdc-8c0b-0be017acda50">
+
+:heavy_check_mark: port번호
+<br>
+:heavy_check_mark: mysql의 travel이라는 이름의 schema 생성
+<br>
+:heavy_check_mark: datasource의 username, password 체크
+<br>
+<br>
+
+:two:  Travel-Maker -> src -> test -> java -> org.zerock.travelmaker -> BetaTest -> test파일 안에 있는 TravelMaker_Test를 실행
+
+<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/6862e1c2-0e4c-433f-8d2e-2f6b5393af44">
+
+:exclamation: 해당 테스트 코드는 사용자에게 가상의 온라인 환경을 편하게 구현하기 위해 제작된 코드로써, 사용하지 않아도 무방하다:exclamation:
+<br>
+<br>
+
+:three: 테스트 파일 실행 후 생성된 데이터
+
+<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/b64c3a2d-0783-4d10-af81-40f2c4c13177">
+
+:exclamation: id = user1, password = 1234 가 사용자의 아이디 비밀번호이며, 나머지 아이디는 user2,3,4,5이며 비밀번호는1234로 동일하다:exclamation:
+
+3번까지 완료가 됐다면 이제 TravelMakerApplication을 실행시켜주고 http://localhost:8383/travelmaker/user/login 링크를 통해 TravelMaker에 접속해보자✈️
+<br>
+<br>
+
+## 💡 기능 소개
 
 ### 1. 로그인 페이지 (첫화면 페이지)
 
@@ -138,15 +170,33 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 
 <br>
 
+## 💭 ER Diagram
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/cbaa2023-998a-45bb-8c24-579e799fc2b7)
+
+<br>
+
+## 💭 Class Diagram
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/dc33f313-cf42-48da-9320-224c2734d641)
+
+<br>
+
 ## 🧑‍🤝‍🧑 멤버구성
 
  😎 팀장 : 이성진 
- - DB 설계 및 구현
+ - DB 구현
  - 메인페이지(파티추가/수정/삭제, 플랜추가/수정/삭제)
  - 자동 검색 기능 구현
  - 상세 페이지(만남장소, 사진첩)
  - 카카오 지도API 사용
  - CSS(버튼 Tool-tip, 홈페이지 테마)
+
+ 😎 팀원 : 이하림
+ - DB 설계
+ - 메인페이지(친구 추가/삭제) 
+ - 파티목록에서 친구 초대 기능 구현
+ - 상세페이지(참석 투표) 
 
  😎 팀원 : 노예은
  - DB 설계
@@ -155,43 +205,4 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
  - 소셜 로그인 API 사용 (카카오, 네이버, 구글)
  - HTML/CSS/JavaScript 를 활용한 전반적인 웹 페이지 디자인 설계
 
- 😎 팀원 : 이하림
-
 <br>
-
-## ⌨️ 사용방법
-
-:one: 본격적으로 서버 (TravelMakerApplication) 실행 전
-
-<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/ccba53f4-004f-4bdc-8c0b-0be017acda50">
-
-:heavy_check_mark: port번호
-<br>
-:heavy_check_mark: mysql의 travel이라는 이름의 schema 생성
-<br>
-:heavy_check_mark: datasource의 username, password 체크
-<br>
-<br>
-
-:two:  Travel-Maker -> src -> test -> java -> org.zerock.travelmaker -> BetaTest -> test파일 안에 있는 TravelMaker_Test를 실행
-
-<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/6862e1c2-0e4c-433f-8d2e-2f6b5393af44">
-
-:exclamation: 해당 테스트 코드는 사용자에게 가상의 온라인 환경을 편하게 구현하기 위해 제작된 코드로써, 사용하지 않아도 무방하다:exclamation:
-<br>
-<br>
-
-:three: 테스트 파일 실행 후 생성된 데이터
-
-<img src="https://github.com/itiswhatitissss/Travel-Maker/assets/125197433/b64c3a2d-0783-4d10-af81-40f2c4c13177">
-
-:exclamation: id = user1, password = 1234 가 사용자의 아이디 비밀번호이며, 나머지 아이디는 user2,3,4,5이며 비밀번호는1234로 동일하다:exclamation:
-
-3번까지 완료가 됐다면 이제 TravelMakerApplication을 실행시켜주고 http://localhost:8383/travelmaker/user/login 링크를 통해 TravelMaker에 접속해보자✈️
-<br>
-<br>
-
-
-
-
-
