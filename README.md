@@ -88,8 +88,8 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 - 파티목록과 플랜목록으로 나누어져 스크롤 가능 (화면 분활 효과)
 - 플랜 추가/수정/삭제 가능
 - 페이징 처리를 통해 파티별로 하나씩 보이는 기능 (플랜목록)
-- 자동 검색 가능 
-- Tool-tip 기능 사용 (마우스를 올리면 추가적인 정보가 나타나게하는 기능)
+- 플랜 이름 클릭시 상세페이지로 이동
+- 자동 검색 가능
   
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/85db2858-891f-43fe-b506-79b1a52af6ba)
 
@@ -114,20 +114,26 @@ CRUD를 기반으로 한 '정보공유 웹사이트' 보다는, 유기적으로 
 #### 3.1 참석 투표
 - 본인 참석 가능/불가능 표시 가능
 
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/2b878e92-da4c-42c3-b9cb-6b3e13302f0c)
 
 
 #### 3.2 만남 장소
 - 장소 마커 추가/삭제 가능
 - 카카오맵을 활용한 길찾기 및 대중교통 정보 이용 가능
 
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/175dc0ec-af66-4180-986b-e534a719866e)
+
 
 #### 3.3 사진첩
 - 사진 추가 가능
-- 사진 스크롤 가능 (가로) 
+- 사진 스크롤 가능 (가로)
+
+![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/5c458ec3-29b6-4650-9c72-4aa0e93d2576)
+
 
 #### 3.4 기타
 - Tool-tip 기능 사용 (마우스를 올리면 추가적인 정보가 나타나게하는 기능)
-- 
+
 ![image](https://github.com/itiswhatitissss/Travel-Maker/assets/129915325/3b779825-2467-4d02-8767-f5bfb1d91f82)
 
 <br>
